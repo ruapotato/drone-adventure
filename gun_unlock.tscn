@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ck5euxkvoqu6u"]
+
+[ext_resource type="Script" path="res://gun_unlock.gd" id="1_1j0xp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_olwxo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3h4rv"]
+resource_local_to_scene = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkk88"]
+shading_mode = 0
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.081
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qulrl"]
+next_pass = SubResource("StandardMaterial3D_xkk88")
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.419608)
+emission_enabled = true
+emission = Color(0.665604, 3.60981e-08, 6.257e-07, 1)
+emission_energy_multiplier = 30.0
+
+[node name="gun_unlock" type="Area3D"]
+script = ExtResource("1_1j0xp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_olwxo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3h4rv")
+surface_material_override/0 = SubResource("StandardMaterial3D_qulrl")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

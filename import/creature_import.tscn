@@ -1,0 +1,123 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8xl13xan2f7p"]
+
+[ext_resource type="PackedScene" uid="uid://bm82rqawv7j4j" path="res://import/creature.glb" id="1_2q7hf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kgnjo"]
+noise_type = 4
+frequency = 0.1825
+fractal_type = 3
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_attat"]
+seamless = true
+noise = SubResource("FastNoiseLite_kgnjo")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0u4mv"]
+albedo_color = Color(0.290196, 0.545098, 0.717647, 1)
+albedo_texture = SubResource("NoiseTexture2D_attat")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ent2k"]
+transparency = 4
+albedo_color = Color(1, 1, 1, 0.113725)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_71ayq"]
+animation = &"LP_RIGCTR_001|LP_RIGCTR|idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_nllcd"]
+animation = &"LP_RIGCTR_001|LP_RIGCTR|run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pwx1f"]
+animation = &"LP_RIGCTR_001|LP_RIGCTR|walk"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_p5p11"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_71ayq")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_nllcd")
+blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_pwx1f")
+blend_point_2/pos = 0.0
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_oj870"]
+graph_offset = Vector2(-469, 112)
+nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_p5p11")
+nodes/BlendSpace1D/position = Vector2(-100, 140)
+node_connections = [&"output", 0, &"BlendSpace1D"]
+
+[node name="creature2" instance=ExtResource("1_2q7hf")]
+
+[node name="Skeleton3D" parent="LP_RIGCTR_001" index="0"]
+bones/0/rotation = Quaternion(-0.707107, 8.42937e-08, -8.42937e-08, 0.707107)
+bones/1/position = Vector3(0.00722015, 0.00861241, 0.161216)
+bones/1/rotation = Quaternion(0.714531, -0.0322466, -0.0288054, 0.698266)
+bones/2/rotation = Quaternion(-0.0840666, -0.000371826, -0.00435511, 0.996451)
+bones/3/rotation = Quaternion(0.167917, -0.000321582, 0.0116738, 0.985732)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/rotation = Quaternion(-0.0329765, 0.000634748, 0.0123461, 0.99938)
+bones/5/rotation = Quaternion(-0.0718946, 0.00112374, 0.00250074, 0.997409)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/rotation = Quaternion(0.044393, 1.37474e-10, 1.11418e-08, 0.999014)
+bones/7/rotation = Quaternion(0.764041, 0.00334162, 0.00281581, 0.645153)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/rotation = Quaternion(0.0456919, 0.998952, -0.00269643, 0.000310333)
+bones/10/rotation = Quaternion(-0.447347, 0.00970204, -0.00612847, 0.894287)
+bones/10/scale = Vector3(1, 1, 1)
+bones/11/position = Vector3(0.202899, -0.00788807, 0.0101455)
+bones/11/rotation = Quaternion(-0.0625542, 0.125954, 0.166775, 0.975914)
+bones/11/scale = Vector3(1.00493, 0.987339, 1.00493)
+bones/12/rotation = Quaternion(-0.0940216, 0.202707, 0.342265, 0.912647)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(-0.206331, -0.00829836, 0.00133805)
+bones/14/rotation = Quaternion(-0.0453337, -0.141737, -0.17188, 0.973814)
+bones/14/scale = Vector3(0.995163, 1.01309, 0.995163)
+bones/16/rotation = Quaternion(-0.140927, -0.264331, -0.517755, 0.801373)
+bones/16/scale = Vector3(1, 1, 1)
+bones/17/position = Vector3(0.00437021, 0.0918438, -0.131417)
+bones/17/scale = Vector3(0.1, 0.1, 0.1)
+bones/18/rotation = Quaternion(0.00590668, 0.921061, 0.389189, 0.0119697)
+bones/18/scale = Vector3(1, 1, 1)
+bones/19/position = Vector3(0.205994, 0.00682704, -0.0122283)
+bones/19/rotation = Quaternion(-0.130732, 0.814366, 0.134403, 0.549229)
+bones/19/scale = Vector3(0.992431, 1.01704, 0.992431)
+bones/20/rotation = Quaternion(-0.237658, 0.574653, 0.31596, 0.716562)
+bones/20/scale = Vector3(0.994855, 1.01037, 0.994855)
+bones/21/position = Vector3(0.100142, 0.175448, -0.0015003)
+bones/21/rotation = Quaternion(-0.245682, 0.368796, 0.51006, 0.737203)
+bones/21/scale = Vector3(0.994072, 1.01196, 0.994071)
+bones/22/position = Vector3(-0.203228, 0.00702919, -0.00199064)
+bones/22/rotation = Quaternion(-0.140492, -0.805576, -0.118732, 0.563216)
+bones/22/scale = Vector3(1.00606, 0.984103, 1.00606)
+bones/23/rotation = Quaternion(-0.23891, -0.564045, -0.306576, 0.728551)
+bones/24/rotation = Quaternion(-0.251846, -0.358009, -0.500325, 0.747046)
+bones/25/position = Vector3(0.000484276, 0.0830617, -0.101964)
+bones/25/rotation = Quaternion(0.0447012, -0.00428487, -0.000564559, 0.998991)
+bones/25/scale = Vector3(0.1, 0.1, 0.1)
+bones/27/rotation = Quaternion(8.39914e-07, 7.78091e-07, 0.732731, 0.680518)
+bones/28/scale = Vector3(1, 1, 0.999999)
+bones/29/rotation = Quaternion(0.441832, 0.00193528, 0.00391937, 0.897087)
+bones/30/rotation = Quaternion(-0.822592, -0.00359304, 0.00248881, 0.568615)
+bones/30/scale = Vector3(1, 1, 1)
+bones/31/rotation = Quaternion(0.857839, -0.00378334, -0.0991686, 0.504246)
+bones/32/rotation = Quaternion(0.430626, -3.5577e-08, -1.71079e-06, 0.90253)
+bones/32/scale = Vector3(1, 0.95729, 1)
+bones/33/rotation = Quaternion(-0.551936, 0.0219101, -0.0468824, 0.832279)
+bones/33/scale = Vector3(1.00029, 1.00689, 1.03755)
+bones/34/rotation = Quaternion(-0.378959, -7.90261e-08, 1.10152e-07, 0.925413)
+bones/34/scale = Vector3(1, 1, 1)
+bones/35/rotation = Quaternion(0.87022, -0.250892, 0.119897, -0.406689)
+bones/36/rotation = Quaternion(0.227742, 1.09827e-07, 1.20832e-06, 0.973721)
+bones/36/scale = Vector3(1, 0.991748, 1)
+bones/37/rotation = Quaternion(-0.665299, -0.133934, -0.244688, 0.692507)
+bones/37/scale = Vector3(0.999334, 1.00122, 1.01055)
+bones/38/rotation = Quaternion(-0.506244, -1.36364e-07, -1.9242e-07, 0.86239)
+bones/38/scale = Vector3(1, 1, 1)
+
+[node name="lil_peeker_mesh_body_LOD0_001" parent="LP_RIGCTR_001/Skeleton3D" index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0u4mv")
+
+[node name="lil_peeker_scalera_mesh_LOD0_001" parent="LP_RIGCTR_001/Skeleton3D" index="4"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ent2k")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="8"]
+tree_root = SubResource("AnimationNodeBlendTree_oj870")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendSpace1D/blend_position = 0.0

@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://5ti8gwrj7tha"]
+
+[ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
+[ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
+emission_enabled = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w6lls"]
+top_radius = 0.07
+bottom_radius = 0.07
+height = 0.055
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8d16w"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 300.0
+dof_blur_far_transition = 50.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n3w36"]
+margin = 0.0
+size = Vector3(0.12, 0.07, 0.12)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vpqhs"]
+height = 0.07
+radius = 0.068
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xm54y"]
+radius = 0.078
+
+[node name="drone" type="RigidBody3D"]
+mass = 0.22
+angular_damp = 100.0
+script = ExtResource("1_qapsr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_fpre2")
+mesh = SubResource("CylinderMesh_w6lls")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, 0.0160727, 0)
+attributes = SubResource("CameraAttributesPractical_8d16w")
+current = true
+
+[node name="VoxelViewer" type="VoxelViewer" parent="Camera3D"]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_n3w36")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(0.025, 0, 0, 0, 0.025, 0, 0, 0, 0.025, 0, 0.001, -0.057)
+text = "."
+
+[node name="shoot_from" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0717006, -0.193481)
+
+[node name="back_cam_mount" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.307721)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.954543, 0, 0.298075, 0, 1, 0, -0.298075, 0, 0.954543, 0, 0, 0)
+shape = SubResource("CylinderShape3D_vpqhs")
+
+[node name="speedCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xm54y")
+
+[node name="mesh" parent="." instance=ExtResource("2_ns1cx")]
+transform = Transform3D(-0.999506, 0, 0.0314283, 0, 1, 0, -0.0314283, 0, -0.999506, 0.000589579, -0.00212165, 0.00688297)

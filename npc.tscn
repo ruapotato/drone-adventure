@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://bompn6iaxi1hd"]
+
+[ext_resource type="Script" path="res://npc.gd" id="1_wldse"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qit12"]
+friction = 0.44
+rough = true
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_jeuws"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_msqlt"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_gr1ie"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_pdp6j"]
+radius = 0.16
+height = 0.27
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mbgjw"]
+size = Vector3(1, 1, 0.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dk53e"]
+size = Vector3(1, 0.175, 1)
+
+[node name="NPCCLASS_NAME" type="RigidBody3D"]
+mass = 70.0
+physics_material_override = SubResource("PhysicsMaterial_qit12")
+script = ExtResource("1_wldse")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_jeuws")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_msqlt")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+
+[node name="head" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.82709, -0.315407)
+mesh = SubResource("SphereMesh_gr1ie")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.506704)
+mesh = SubResource("SphereMesh_pdp6j")
+
+[node name="BlockedArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0820339, 0.430302)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockedArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.484537, -0.955042)
+shape = SubResource("BoxShape3D_mbgjw")
+
+[node name="FloorArea3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorArea3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00753725, 0)
+shape = SubResource("BoxShape3D_dk53e")
+
+[connection signal="area_entered" from="BlockedArea" to="." method="_on_blocked_area_area_entered"]
+[connection signal="body_shape_entered" from="BlockedArea" to="." method="_on_blocked_area_body_shape_entered"]

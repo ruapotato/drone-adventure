@@ -1,0 +1,159 @@
+[gd_scene load_steps=14 format=3 uid="uid://c6mxna5e72f5c"]
+
+[ext_resource type="Script" path="res://addons/src/scripts/line_renderer.gd" id="3_hnrfe"]
+[ext_resource type="Material" uid="uid://d33aomc1mqhjj" path="res://addons/src/materials/lines.tres" id="4_jynqk"]
+[ext_resource type="Script" path="res://addons/src/scripts/player.gd" id="5_bbgkt"]
+[ext_resource type="Script" path="res://addons/src/scripts/portal.gd" id="6_po85p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilqnf"]
+resource_name = "Material.004"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.906332, 0.0186099, 0, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_tq116"]
+_surfaces = [{
+"aabb": AABB(-0.350332, -1, -0.372583, 0.700664, 2, 0.745177),
+"format": 34359742465,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 3, 0, 1, 0, 0, 0, 2, 0, 3, 0, 2, 0, 7, 0, 3, 0, 2, 0, 6, 0, 7, 0, 6, 0, 5, 0, 7, 0, 6, 0, 4, 0, 5, 0, 4, 0, 1, 0, 5, 0, 4, 0, 0, 0, 1, 0, 2, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0, 7, 0, 1, 0, 3, 0, 7, 0, 5, 0, 1, 0),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 190)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_y1jeg"]
+resource_name = "room_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.350332, -1, -0.372583, 0.700664, 2, 0.745177),
+"attribute_data": PackedByteArray(0, 0, 192, 62, 0, 0, 128, 63, 0, 0, 0, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 0, 0, 0, 32, 63, 0, 0, 128, 63, 0, 0, 32, 63, 0, 0, 0, 0, 0, 0, 96, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 0, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 32, 63, 0, 0, 64, 63, 0, 0, 96, 63, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 32, 63, 0, 0, 128, 62, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 192, 62, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63, 0, 0, 32, 63, 0, 0, 0, 63),
+"format": 34359742487,
+"index_count": 36,
+"index_data": PackedByteArray(0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 9, 0, 8, 0, 21, 0, 10, 0, 8, 0, 19, 0, 21, 0, 20, 0, 17, 0, 23, 0, 20, 0, 14, 0, 17, 0, 13, 0, 4, 0, 15, 0, 13, 0, 2, 0, 4, 0, 7, 0, 12, 0, 18, 0, 7, 0, 1, 0, 12, 0, 22, 0, 5, 0, 11, 0, 22, 0, 16, 0, 5, 0),
+"material": SubResource("StandardMaterial3D_ilqnf"),
+"name": "Material.004",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray(176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 190, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 62, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 191, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 190, 176, 94, 179, 62, 0, 0, 128, 63, 64, 195, 190, 190, 0, 0, 255, 127, 255, 127, 255, 255, 255, 127, 0, 0, 255, 255, 255, 191, 255, 127, 255, 127, 255, 127, 255, 255, 0, 0, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 191, 0, 0, 255, 127, 255, 127, 255, 255, 255, 127, 0, 0, 255, 255, 255, 191, 255, 255, 255, 255, 255, 127, 255, 255, 0, 0, 255, 127, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 191, 255, 127, 0, 0, 255, 255, 255, 191, 255, 127, 255, 127, 255, 127, 255, 255, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 191, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 0, 0, 255, 255, 255, 191, 255, 255, 255, 255, 255, 127, 255, 255, 255, 255, 255, 127, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 0, 0, 255, 191, 255, 255, 255, 127, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_tq116")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7ub3"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rc17g"]
+_surfaces = [{
+"aabb": AABB(-1.02429, -1.3, 0, 2.04857, 2.60001, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 1, 0, 0, 0, 3, 0, 0, 0, 2, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(214, 27, 131, 191, 100, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 191, 102, 102, 166, 191, 0, 0, 0, 128, 214, 27, 131, 63, 102, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 63, 102, 102, 166, 191, 0, 0, 0, 128)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_elhom"]
+resource_name = "room_Plane_001"
+_surfaces = [{
+"aabb": AABB(-1.02429, -1.3, 0, 2.04857, 2.60001, 1e-05),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 1, 0, 0, 0, 3, 0, 0, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_k7ub3"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(214, 27, 131, 191, 100, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 191, 102, 102, 166, 191, 0, 0, 0, 128, 214, 27, 131, 63, 102, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 63, 102, 102, 166, 191, 0, 0, 0, 128, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rc17g")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0cgtj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gfqij"]
+_surfaces = [{
+"aabb": AABB(-1.02429, -1.3, 0, 2.04857, 2.60001, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 1, 0, 0, 0, 3, 0, 0, 0, 2, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(214, 27, 131, 191, 100, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 191, 102, 102, 166, 191, 0, 0, 0, 128, 214, 27, 131, 63, 102, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 63, 102, 102, 166, 191, 0, 0, 0, 128)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_essa0"]
+resource_name = "room_Plane_002"
+_surfaces = [{
+"aabb": AABB(-1.02429, -1.3, 0, 2.04857, 2.60001, 1e-05),
+"attribute_data": PackedByteArray(0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63, 0, 0, 0, 0, 0, 0, 128, 63),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray(3, 0, 1, 0, 0, 0, 3, 0, 0, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_0cgtj"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(214, 27, 131, 191, 100, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 191, 102, 102, 166, 191, 0, 0, 0, 128, 214, 27, 131, 63, 102, 102, 166, 63, 0, 0, 0, 128, 210, 27, 131, 63, 102, 102, 166, 191, 0, 0, 0, 128, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 255, 255, 63)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gfqij")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="LineRenderer" type="MeshInstance3D" parent="."]
+script = ExtResource("3_hnrfe")
+material = ExtResource("4_jynqk")
+
+[node name="portal_player" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.00502, 0)
+visible = false
+mesh = SubResource("ArrayMesh_y1jeg")
+skeleton = NodePath("")
+script = ExtResource("5_bbgkt")
+
+[node name="Camera" type="Camera3D" parent="portal_player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.494978, 0)
+fov = 60.0
+
+[node name="PipViewport1" type="SubViewport" parent="portal_player"]
+
+[node name="Camera" type="Camera3D" parent="portal_player/PipViewport1"]
+transform = Transform3D(0.973495, 0, 0.228708, 0, 1, 0, -0.228708, 0, 0.973495, 0.88632, 1.5, 0)
+
+[node name="PipViewport2" type="SubViewport" parent="."]
+
+[node name="Camera" type="Camera3D" parent="PipViewport2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.575, 0)
+fov = 120.0
+
+[node name="CorridorPortalA" type="MeshInstance3D" parent="." node_paths=PackedStringArray("exit_portal")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000144124, 1.3, -7.15)
+mesh = SubResource("ArrayMesh_elhom")
+skeleton = NodePath("")
+script = ExtResource("6_po85p")
+disable_viewport_distance = 500.0
+fade_out_distance_max = 1000.0
+fade_out_distance_min = 100.0
+fade_out_color = Color(0, 0, 0, 1)
+exit_portal = NodePath("../CorridorPortalB")
+
+[node name="CorridorPortalB" type="MeshInstance3D" parent="." node_paths=PackedStringArray("exit_portal")]
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -0.000144124, 1.3, 7.15)
+mesh = SubResource("ArrayMesh_essa0")
+skeleton = NodePath("")
+script = ExtResource("6_po85p")
+disable_viewport_distance = 500.0
+fade_out_distance_max = 1000.0
+fade_out_distance_min = 100.0
+fade_out_color = Color(0, 0, 0, 1)
+exit_portal = NodePath("../CorridorPortalA")

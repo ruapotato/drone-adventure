@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://fv1gmdltr280"]
+
+[ext_resource type="PackedScene" uid="uid://86ngotjgep6c" path="res://import/crystal_1.glb" id="1_44d38"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_blgm0"]
+transparency = 4
+cull_mode = 1
+albedo_color = Color(1, 0.501961, 0, 1)
+metallic = 0.75
+roughness = 0.07
+
+[node name="crystal_1" instance=ExtResource("1_44d38")]
+
+[node name="Upright_crystal" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_blgm0")

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://f2cu66hq58yx"]
+
+[ext_resource type="PackedScene" uid="uid://ca5juerqy0rfw" path="res://import/portal_gate.glb" id="1_721fd"]
+
+[node name="portal_gate2" instance=ExtResource("1_721fd")]

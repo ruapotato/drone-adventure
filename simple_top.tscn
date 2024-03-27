@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxfq5vc2rd8fk"]
+
+[ext_resource type="Texture2D" uid="uid://suu852d0ilq6" path="res://addons/terrain-shader/example/wall_texture.png" id="1_05nwg"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_eq35s"]
+size = Vector3(10, 2.5, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1u4a"]
+albedo_texture = ExtResource("1_05nwg")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lr17h"]
+points = PackedVector3Array(-5, -1.25, -5, -5, -1.25, 5, 0, 1.25, -5, 5, -1.25, -5, 5, -1.25, 5, 0, 1.25, 5)
+
+[node name="simple_top" type="Node3D"]
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+mass = 120.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("PrismMesh_eq35s")
+surface_material_override/0 = SubResource("StandardMaterial3D_j1u4a")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("ConvexPolygonShape3D_lr17h")

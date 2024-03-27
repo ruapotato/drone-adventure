@@ -1,0 +1,400 @@
+[gd_scene load_steps=34 format=3 uid="uid://dqcp6cvojscdm"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_1w3vy"]
+[ext_resource type="PackedScene" uid="uid://c6sueha11ti5r" path="res://player.tscn" id="1_ljbio"]
+[ext_resource type="Material" uid="uid://c0sjqoeoujhgw" path="res://addons/terrain-shader/example/land.tres" id="6_xoxmd"]
+[ext_resource type="Script" path="res://terrain.gd" id="7_jp32y"]
+[ext_resource type="PackedScene" uid="uid://bw1owyleple0u" path="res://tree_1.tscn" id="8_rwls2"]
+[ext_resource type="PackedScene" uid="uid://mvj4g88703n2" path="res://spawn_city.tscn" id="9_6ykfr"]
+[ext_resource type="PackedScene" uid="uid://bto81la6w6fr0" path="res://tree_2.tscn" id="9_mllqn"]
+[ext_resource type="PackedScene" uid="uid://bibobxeap6w7f" path="res://crystal.tscn" id="9_qy4aa"]
+[ext_resource type="PackedScene" uid="uid://bfkqbsabxifm4" path="res://grass.tscn" id="10_j77pl"]
+[ext_resource type="PackedScene" uid="uid://4tc5tckr5kxd" path="res://music.tscn" id="11_v52dv"]
+[ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="11_xa5hy"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://drone.tscn" id="12_6rvs0"]
+[ext_resource type="PackedScene" uid="uid://seaudjounlfi" path="res://zombie.tscn" id="13_5j57a"]
+[ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="14_q05a3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bi3jv"]
+sky_top_color = Color(0.00784314, 0.454902, 1, 1)
+sky_horizon_color = Color(0.607355, 0, 0.128986, 1)
+sky_curve = 0.0284198
+sky_energy_multiplier = 0.15
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sun_angle_max = 0.0
+
+[sub_resource type="Sky" id="Sky_d5qqc"]
+sky_material = SubResource("ProceduralSkyMaterial_bi3jv")
+
+[sub_resource type="Environment" id="Environment_n6mvx"]
+background_mode = 2
+sky = SubResource("Sky_d5qqc")
+ambient_light_source = 3
+tonemap_mode = 3
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.002
+volumetric_fog_emission = Color(0.629675, 0.629675, 0.629675, 1)
+volumetric_fog_emission_energy = 0.0
+volumetric_fog_length = 3000.0
+volumetric_fog_detail_spread = 6.0
+volumetric_fog_ambient_inject = 3.12
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_cqetg"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3ashp"]
+noise_type = 2
+frequency = 0.0001
+fractal_type = 3
+fractal_octaves = 1
+fractal_ping_pong_strength = -0.03
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1tglc"]
+noise_type = 2
+frequency = 0.0012
+fractal_type = 3
+fractal_octaves = 3
+fractal_weighted_strength = 1.0
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_mn8cp"]
+graph_data = {
+"connections": [[99, 0, 37, 0], [52, 0, 40, 0], [1, 0, 38, 1], [40, 0, 68, 1], [40, 0, 75, 0], [42, 0, 39, 0], [100, 0, 103, 0], [43, 0, 38, 0], [101, 0, 102, 0], [37, 0, 4, 0], [103, 0, 101, 0], [103, 0, 101, 1], [103, 0, 99, 1], [38, 0, 68, 0], [75, 0, 78, 2], [104, 0, 99, 0], [68, 0, 104, 0], [39, 0, 37, 1], [2, 0, 39, 1], [3, 0, 40, 1]],
+"nodes": {
+"1": {
+"gui_position": Vector2(-200, 20),
+"type": "InputX"
+},
+"100": {
+"auto_connect": true,
+"gui_position": Vector2(80, -480),
+"noise": SubResource("FastNoiseLite_3ashp"),
+"type": "Noise2D",
+"x": 0.0,
+"y": 0.0
+},
+"101": {
+"gui_position": Vector2(680, -520),
+"type": "Add"
+},
+"102": {
+"gui_position": Vector2(840, -480),
+"max": 150.0,
+"min": 1.0,
+"type": "Clamp"
+},
+"103": {
+"b": 2.0,
+"gui_position": Vector2(400, -480),
+"type": "Multiply"
+},
+"104": {
+"b": 150.0,
+"gui_position": Vector2(860, -320),
+"type": "Multiply"
+},
+"2": {
+"gui_position": Vector2(-200, 120),
+"type": "InputY"
+},
+"3": {
+"gui_position": Vector2(-220, 200),
+"type": "InputZ"
+},
+"37": {
+"gui_position": Vector2(1200, -160),
+"type": "Add"
+},
+"38": {
+"gui_position": Vector2(-60, -40),
+"type": "Add"
+},
+"39": {
+"gui_position": Vector2(-80, 60),
+"type": "Add"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1560, -100),
+"type": "OutputSDF"
+},
+"40": {
+"gui_position": Vector2(-80, 180),
+"type": "Add"
+},
+"42": {
+"gui_position": Vector2(-440, 80),
+"name": &"offset",
+"type": "Constant",
+"value": 10.0
+},
+"43": {
+"gui_position": Vector2(-480, -20),
+"name": &"offset",
+"type": "Constant",
+"value": 300.0
+},
+"52": {
+"gui_position": Vector2(-440, 240),
+"name": &"offset",
+"type": "Constant",
+"value": 100.0
+},
+"66": {
+"a": 0.0,
+"b": 150.0,
+"gui_position": Vector2(1040, -200),
+"type": "Multiply"
+},
+"68": {
+"auto_connect": true,
+"gui_position": Vector2(620, -160),
+"noise": SubResource("FastNoiseLite_1tglc"),
+"type": "Noise2D"
+},
+"75": {
+"gui_position": Vector2(220, -220),
+"max": 10.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"78": {
+"a": 0.5,
+"b": 1.0,
+"gui_position": Vector2(380, -320),
+"threshold": 9.9,
+"type": "Select"
+},
+"99": {
+"gui_position": Vector2(1140, -440),
+"type": "Divide"
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_p2qw1"]
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_qc8a2"]
+density = 0.002
+emit_mode = 1
+min_slope_degrees = 1.0
+max_scale = 5.0
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_lvht4"]
+lod_index = 2
+generator = SubResource("VoxelInstanceGenerator_qc8a2")
+persistent = true
+scene = ExtResource("8_rwls2")
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_awj35"]
+density = 0.002
+emit_mode = 1
+min_slope_degrees = 7.276
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_48uyl"]
+lod_index = 2
+generator = SubResource("VoxelInstanceGenerator_awj35")
+scene = ExtResource("9_qy4aa")
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_o5stu"]
+density = 0.02
+min_height = 0.0
+max_height = 1.2
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_m3578"]
+lod_index = 2
+generator = SubResource("VoxelInstanceGenerator_o5stu")
+persistent = true
+scene = ExtResource("9_6ykfr")
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_ns0l5"]
+density = 0.001
+emit_mode = 2
+min_slope_degrees = 0.1
+max_scale = 5.0
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_yums0"]
+lod_index = 2
+generator = SubResource("VoxelInstanceGenerator_ns0l5")
+scene = ExtResource("9_mllqn")
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_r8s2m"]
+min_scale = 0.5
+max_scale = 2.0
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_16dpu"]
+lod_index = 1
+generator = SubResource("VoxelInstanceGenerator_r8s2m")
+scene = ExtResource("10_j77pl")
+
+[sub_resource type="VoxelInstanceLibrary" id="VoxelInstanceLibrary_2knuv"]
+item_1 = SubResource("VoxelInstanceLibrarySceneItem_lvht4")
+item_2 = SubResource("VoxelInstanceLibrarySceneItem_48uyl")
+item_3 = SubResource("VoxelInstanceLibrarySceneItem_m3578")
+item_4 = SubResource("VoxelInstanceLibrarySceneItem_yums0")
+item_5 = SubResource("VoxelInstanceLibrarySceneItem_16dpu")
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_1w3vy")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n6mvx")
+
+[node name="player" parent="." instance=ExtResource("1_ljbio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 463.296, 9.81731)
+
+[node name="music" parent="." instance=ExtResource("11_v52dv")]
+volume_db = 0.0
+
+[node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]
+stream = SubResource("VoxelStreamMemory_cqetg")
+generator = SubResource("VoxelGeneratorGraph_mn8cp")
+mesher = SubResource("VoxelMesherTransvoxel_p2qw1")
+material = ExtResource("6_xoxmd")
+script = ExtResource("7_jp32y")
+
+[node name="VoxelInstancer" type="VoxelInstancer" parent="VoxelLodTerrain"]
+library = SubResource("VoxelInstanceLibrary_2knuv")
+
+[node name="spawner" parent="." instance=ExtResource("11_xa5hy")]
+
+[node name="drone" parent="." instance=ExtResource("12_6rvs0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.35124, 0)
+
+[node name="player2" parent="." instance=ExtResource("1_ljbio")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10835, 1.11358, 0)
+
+[node name="zombie" parent="." instance=ExtResource("13_5j57a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6561, 2.4204, 0)
+
+[node name="Spawner" parent="." instance=ExtResource("11_xa5hy")]
+
+[node name="gui" parent="." instance=ExtResource("14_q05a3")]
+
+[node name="cars" type="Node3D" parent="."]
+
+[node name="towers" type="Node3D" parent="."]
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.965926, 0.258819, 0, -0.258819, -0.965926, 0, 0, 0)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 0.91
+light_angular_distance = 3.86
+shadow_enabled = true
+
+[node name="ufos" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.113, 22.7489, -98.5438)
+
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/value_crystal" to="VoxelLodTerrain/VoxelInstancer/value_crystal" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21783" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21783" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21795" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21795" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21807" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21807" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21819" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21819" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21841" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21841" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21853" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21853" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21865" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21865" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21877" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21877" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21887" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21887" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21897" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21897" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21911" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21911" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21923" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21923" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21937" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21937" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21949" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21949" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21961" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21961" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21973" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21973" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21985" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21985" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@21997" to="VoxelLodTerrain/VoxelInstancer/@Area3D@21997" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22009" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22009" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22021" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22021" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22041" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22041" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22053" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22053" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22065" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22065" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22077" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22077" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22089" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22089" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22111" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22111" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22133" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22133" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22143" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22143" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22157" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22157" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22177" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22177" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22195" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22195" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22207" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22207" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22225" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22225" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22237" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22237" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22249" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22249" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22261" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22261" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22273" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22273" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22285" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22285" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22297" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22297" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22309" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22309" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22321" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22321" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22333" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22333" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22345" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22345" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22349" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22349" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22361" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22361" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22385" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22385" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22409" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22409" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22427" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22427" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22439" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22439" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22451" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22451" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22463" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22463" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22475" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22475" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22489" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22489" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22519" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22519" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22533" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22533" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22549" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22549" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@22563" to="VoxelLodTerrain/VoxelInstancer/@Area3D@22563" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@27934" to="VoxelLodTerrain/VoxelInstancer/@Area3D@27934" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@27954" to="VoxelLodTerrain/VoxelInstancer/@Area3D@27954" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@27966" to="VoxelLodTerrain/VoxelInstancer/@Area3D@27966" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@27978" to="VoxelLodTerrain/VoxelInstancer/@Area3D@27978" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30288" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30288" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30376" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30376" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30386" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30386" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30398" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30398" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30410" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30410" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30422" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30422" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30434" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30434" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30446" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30446" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30462" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30462" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30472" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30472" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30490" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30490" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30494" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30494" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30506" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30506" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30528" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30528" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30540" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30540" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30552" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30552" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30574" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30574" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30586" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30586" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30598" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30598" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30610" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30610" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30622" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30622" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30634" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30634" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30652" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30652" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30664" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30664" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30676" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30676" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30688" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30688" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30700" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30700" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30726" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30726" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30746" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30746" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30758" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30758" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30770" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30770" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30782" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30782" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30794" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30794" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30806" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30806" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30818" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30818" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30830" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30830" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30852" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30852" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30874" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30874" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30882" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30882" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30894" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30894" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30898" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30898" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30910" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30910" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30930" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30930" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30942" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30942" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30962" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30962" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30974" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30974" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@30988" to="VoxelLodTerrain/VoxelInstancer/@Area3D@30988" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@31010" to="VoxelLodTerrain/VoxelInstancer/@Area3D@31010" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@31016" to="VoxelLodTerrain/VoxelInstancer/@Area3D@31016" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@31028" to="VoxelLodTerrain/VoxelInstancer/@Area3D@31028" method="_on_body_entered"]
+[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@31038" to="VoxelLodTerrain/VoxelInstancer/@Area3D@31038" method="_on_body_entered"]

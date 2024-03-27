@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbgvjgg45bjww"]
+
+[ext_resource type="Script" path="res://spawner.gd" id="1_wpc86"]
+
+[node name="Spawner" type="Node3D"]
+script = ExtResource("1_wpc86")
+
+[node name="piv" type="Node3D" parent="."]
+
+[node name="spawn_point" type="Node3D" parent="piv"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 0, 0)

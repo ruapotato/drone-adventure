@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://bmfpk4yir7r3f"]
+
+[ext_resource type="Shader" path="res://native/water.gdshader" id="1_kp3vc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jsxnm"]
+render_priority = 0
+shader = ExtResource("1_kp3vc")
+shader_parameter/color = Color(0, 0.6, 1, 1)
+shader_parameter/color2 = Color(1, 0, 0, 1)
+shader_parameter/metallic = 0.753
+shader_parameter/roughness = 0.0
+shader_parameter/wave_dir = Vector2(2, 0)
+shader_parameter/wave_dir2 = Vector2(0, 1)
+shader_parameter/time_scale = 0.025
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.15
+shader_parameter/color_deep = Color(0, 0.054902, 0.345098, 1)
+shader_parameter/color_shallow = Color(0.0313726, 0.337255, 0.803922, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.1
+shader_parameter/near = 1.0
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c5t2h"]
+size = Vector2(1000, 1000)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o537b"]
+albedo_color = Color(0.831373, 0.964706, 0.968627, 0.121569)
+
+[node name="water" type="Node3D"]
+
+[node name="swim_level" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+material_override = SubResource("ShaderMaterial_jsxnm")
+transparency = 0.48
+mesh = SubResource("PlaneMesh_c5t2h")
+
+[node name="base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_jsxnm")
+mesh = SubResource("PlaneMesh_c5t2h")
+surface_material_override/0 = SubResource("StandardMaterial3D_o537b")

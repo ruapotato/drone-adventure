@@ -1,0 +1,61 @@
+[gd_scene load_steps=6 format=3 uid="uid://djnakq8bjlyxs"]
+
+[ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
+[ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_888po"]
+font_size = 46
+font_color = Color(0.556863, 0.541176, 0.533333, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_i7c73"]
+font_size = 45
+
+[sub_resource type="LabelSettings" id="LabelSettings_2q8g7"]
+font_size = 31
+font_color = Color(0, 0, 0, 0.352941)
+
+[node name="gui" type="Node2D"]
+script = ExtResource("1_2mec0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(31, 1033.99)
+scale = Vector2(0.287083, 0.277742)
+texture = ExtResource("1_w7ev8")
+
+[node name="crystals_label" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 1000.0
+offset_right = 237.0
+offset_bottom = 1064.0
+label_settings = SubResource("LabelSettings_888po")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = 1520.0
+offset_top = 680.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(400, 400)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815968, -0.441862)
+
+[node name="TimeLabel" type="Label" parent="."]
+offset_left = 746.0
+offset_right = 1078.0
+offset_bottom = 64.0
+text = "8:00 AM"
+label_settings = SubResource("LabelSettings_i7c73")
+horizontal_alignment = 2
+
+[node name="targetLabel" type="Label" parent="."]
+offset_left = 950.0
+offset_top = 527.0
+offset_right = 1036.0
+offset_bottom = 740.0
+size_flags_horizontal = 4
+text = "|"
+label_settings = SubResource("LabelSettings_2q8g7")

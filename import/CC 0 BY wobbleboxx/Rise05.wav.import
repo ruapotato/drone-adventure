@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b2cq1xymb3mys"
+path="res://.godot/imported/Rise05.wav-1800c7cd873b2e2c14c65d73d5526357.sample"
+
+[deps]
+
+source_file="res://import/CC 0 BY wobbleboxx/Rise05.wav"
+dest_files=["res://.godot/imported/Rise05.wav-1800c7cd873b2e2c14c65d73d5526357.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bra1h5cto35fn"]
+
+[ext_resource type="Script" path="res://landgun_unlock.gd" id="1_74555"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yh2km"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5tex1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hhwht"]
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.097
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c5m1s"]
+next_pass = SubResource("StandardMaterial3D_hhwht")
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.427451)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 14.84
+
+[node name="landgun_unlock" type="Area3D"]
+script = ExtResource("1_74555")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_yh2km")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5tex1")
+surface_material_override/0 = SubResource("StandardMaterial3D_c5m1s")

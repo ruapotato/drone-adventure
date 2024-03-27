@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://be4q3x2kcbrn0"]
+
+[ext_resource type="PackedScene" uid="uid://dshe7cfv4udkg" path="res://import/drone.glb" id="1_d7wm8"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_siamd"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_bej1p"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qtcj"]
+graph_offset = Vector2(-277, 25)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_siamd")
+nodes/Animation/position = Vector2(-20, 140)
+nodes/output/position = Vector2(260, 140)
+nodes/speed/node = SubResource("AnimationNodeTimeScale_bej1p")
+nodes/speed/position = Vector2(120, 140)
+node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
+
+[node name="drone2" instance=ExtResource("1_d7wm8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522375, 0, -0.620276)
+
+[node name="Skeleton3D" parent="Sketchfab_model/f337b629572e4d64ad830bb62fa78296_fbx/Object_2/RootNode/Armature/Object_6" index="3"]
+bones/1/rotation = Quaternion(0.707107, 0, 0, 0.707107)
+bones/2/rotation = Quaternion(-1.38312e-07, 1.38312e-07, -0.782662, -0.622447)
+bones/4/rotation = Quaternion(-1.95141e-07, 5.7381e-16, 0.132261, -0.991215)
+bones/6/rotation = Quaternion(-0.0628317, 0.0111317, 0.132261, 0.989159)
+bones/8/rotation = Quaternion(1.37985e-07, 1.37985e-07, -0.607372, 0.794417)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_8qtcj")
+anim_player = NodePath("../AnimationPlayer")
+parameters/speed/scale = 50.0

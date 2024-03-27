@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bdmlgd1sg7pxh"
+path="res://.godot/imported/Mystery Mammal - Boss Battle.mp3-a68a0159c486e25e3c1d47202432c7ca.mp3str"
+
+[deps]
+
+source_file="res://import/CC BY Mystery Mammal/Mystery Mammal - Boss Battle.mp3"
+dest_files=["res://.godot/imported/Mystery Mammal - Boss Battle.mp3-a68a0159c486e25e3c1d47202432c7ca.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

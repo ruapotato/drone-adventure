@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://1h6xg4gq3pev"
+path="res://.godot/imported/Kirk Osamayo - Unsettling Ambience.mp3-16ee383c73a157c0a99eb524ee2f170c.mp3str"
+
+[deps]
+
+source_file="res://import/CC BY Kirk Osamayo/Kirk Osamayo - Unsettling Ambience.mp3"
+dest_files=["res://.godot/imported/Kirk Osamayo - Unsettling Ambience.mp3-16ee383c73a157c0a99eb524ee2f170c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

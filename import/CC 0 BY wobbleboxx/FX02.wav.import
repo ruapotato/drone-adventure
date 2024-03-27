@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ckp0ifnikclvw"
+path="res://.godot/imported/FX02.wav-c3a71c3b286dd493ed27f56b86d50a3e.sample"
+
+[deps]
+
+source_file="res://import/CC 0 BY wobbleboxx/FX02.wav"
+dest_files=["res://.godot/imported/FX02.wav-c3a71c3b286dd493ed27f56b86d50a3e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,53 @@
+[gd_scene load_steps=10 format=3 uid="uid://bcckq853wo1bg"]
+
+[ext_resource type="Script" path="res://road.gd" id="1_l231n"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_c5t2h"]
+resource_local_to_scene = true
+size = Vector2(100, 100)
+subdivide_width = 10
+subdivide_depth = 10
+
+[sub_resource type="Gradient" id="Gradient_8qxtq"]
+offsets = PackedFloat32Array(0, 0.868852, 0.909836, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.057377, 0.057377, 0.057377, 1, 1, 1, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_8xj1t"]
+frequency = 0.2154
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5ynaw"]
+width = 1000
+height = 1000
+color_ramp = SubResource("Gradient_8qxtq")
+noise = SubResource("FastNoiseLite_8xj1t")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_man1s"]
+albedo_color = Color(0.20871, 0.20871, 0.20871, 1)
+albedo_texture = SubResource("NoiseTexture2D_5ynaw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl6yr"]
+albedo_color = Color(0.190762, 0.190762, 0.190762, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_iwed3"]
+size = Vector2(1000, 1000)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d55ow"]
+size = Vector3(1000, 1, 100)
+
+[node name="road" type="Node3D"]
+script = ExtResource("1_l231n")
+
+[node name="base" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -1, 8.74228e-08, 0, -8.74228e-08, -1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_c5t2h")
+surface_material_override/0 = SubResource("StandardMaterial3D_man1s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_xl6yr")
+mesh = SubResource("PlaneMesh_iwed3")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_d55ow")

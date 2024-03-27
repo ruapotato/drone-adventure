@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://mvj4g88703n2"]
+
+[ext_resource type="Script" path="res://spawn_city.gd" id="1_4bp0a"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f1v87"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pud8a"]
+noise = SubResource("FastNoiseLite_f1v87")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kty6"]
+albedo_color = Color(0.223529, 0.164706, 1, 1)
+albedo_texture = SubResource("NoiseTexture2D_pud8a")
+metallic = 0.5
+roughness = 0.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_gbri5"]
+radius = 30.0
+height = 60.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s7nxr"]
+radius = 30.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dmxam"]
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_woec7"]
+noise = SubResource("FastNoiseLite_dmxam")
+
+[sub_resource type="FogMaterial" id="FogMaterial_6g42q"]
+albedo = Color(0.0491427, 0.136863, 0.308764, 1)
+edge_fade = 1e-05
+density_texture = SubResource("NoiseTexture3D_woec7")
+
+[node name="spawn_city" type="Node3D"]
+script = ExtResource("1_4bp0a")
+
+[node name="dist_fog" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_1kty6")
+mesh = SubResource("SphereMesh_gbri5")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_s7nxr")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+size = Vector3(100, 100, 100)
+shape = 0
+material = SubResource("FogMaterial_6g42q")

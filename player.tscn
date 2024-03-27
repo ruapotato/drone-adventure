@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6sueha11ti5r"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_4lciq"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_ej8ic"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cmlvi"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_kujap"]
+radius = 0.25
+height = 0.5
+
+[node name="player" type="Node3D"]
+script = ExtResource("1_4lciq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_ej8ic")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("CapsuleShape3D_cmlvi")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.822666, 0)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389028, 0.644869, -0.35985)
+mesh = SubResource("SphereMesh_kujap")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356403, 0.644869, -0.371263)
+mesh = SubResource("SphereMesh_kujap")

@@ -1,0 +1,30 @@
+Based on: https://github.com/Zylann/godot_voxel under: https://github.com/Zylann/godot_voxel/blob/master/LICENSE.md
+
+CC Attribution https://sketchfab.com/3d-models/wooden-logs-asset-pack-441fb13a0bf24f9aa8c4a219e5ab9be3
+CC Attribution https://sketchfab.com/3d-models/stylized-pine-tree-pack-46ac3c1a4c3645b1984a97568db54c5d
+CC Attribution https://sketchfab.com/3d-models/realistics-grass-03-2589c4f89dac4bbfab7f66be615f262e
+CC Attribution https://sketchfab.com/3d-models/grass-low-poly-08c126cdc4a54334b8d67d258bc38f53
+
+
+Planded:
+https://sketchfab.com/3d-models/police-ai-digital-station-801c61d2d6db4635907997ed64f5d0f3
+Like: https://sketchfab.com/3d-models/2-story-lincoln-logs-house-human-scale-f1fb1df99ec34c4dbe97cf0de507e3c2
+
+https://sketchfab.com/3d-models/stylized-pine-tree-pack-46ac3c1a4c3645b1984a97568db54c5d
+or
+https://sketchfab.com/3d-models/pine-tree-trio-free-download-3d23f50333be4e34a3516af231d86f1c
+or
+https://sketchfab.com/3d-models/mountain-trees-b914384f931d4b3585bd4f0bf48f0da3
+
+perhaps: https://sketchfab.com/3d-models/crystal-cluster-pack-8fc46d0cba71423ba9d48ad99a91be90
+
+May be old: 
+CC0 by Gorgious https://www.blendswap.com/blend/29727
+CC0 by drummyfish https://opengameart.org/content/family-house-collection
+CC Attribution https://sketchfab.com/3d-models/ccity-building-set-1-a2d5c7bfcc2148fb8994864c43dfcc97
+CC Attribution https://sketchfab.com/3d-models/comic-drone-f2489a3e66ee4aeb86b8d02568ffe750
+ From https://opengameart.org/content/level-up-power-up-coin-get-13-sounds under CC 0:
+  * import/CC 0 BY wobbleboxx/*
+CC 0 by https://opengameart.org/content/low-polygon-pine-tree
+CC 0 by https://opengameart.org/content/ufo-2
+CC 0 by https://github.com/Donitzo/godot-simple-portal-system/tree/main/src

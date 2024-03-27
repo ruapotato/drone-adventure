@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckeppqrkmhqm7"]
+
+[ext_resource type="PackedScene" uid="uid://dx57dhm0km57s" path="res://import/ufo.glb" id="1_2q2lj"]
+
+[node name="ufo2" instance=ExtResource("1_2q2lj")]

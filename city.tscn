@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://50tipirf2hql"]
+[gd_scene load_steps=15 format=3 uid="uid://50tipirf2hql"]
 
 [ext_resource type="PackedScene" path="res://city_import.tscn" id="1_hxu1s"]
 [ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://house_1_import.tscn" id="2_v1dca"]
@@ -32,6 +32,10 @@ size = Vector3(2.47, 5.2, 0.19)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kxlo4"]
 size = Vector3(2.155, 6.08, 0.18)
+
+[sub_resource type="FogMaterial" id="FogMaterial_iibkm"]
+density = 5.0
+edge_fade = 0.0406126
 
 [node name="city" type="Node3D"]
 
@@ -122,6 +126,11 @@ script = ExtResource("7_717f3")
 [node name="TP2_shape" type="CollisionShape3D" parent="portal/TP2"]
 transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 3.55271e-15, 0, 1, -1.90735e-06, 0, -7.14285)
 shape = SubResource("BoxShape3D_kxlo4")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.31, -47.4104, -98.254)
+size = Vector3(401.8, 63.1, 178.2)
+material = SubResource("FogMaterial_iibkm")
 
 [connection signal="body_entered" from="portal/TP1" to="portal/TP1" method="_on_body_entered"]
 [connection signal="body_entered" from="portal/TP2" to="portal/TP2" method="_on_body_entered"]

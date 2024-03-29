@@ -128,8 +128,8 @@ transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 3.55271e-15, 0, 1, -1.90735
 shape = SubResource("BoxShape3D_kxlo4")
 
 [node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.31, -47.4104, -98.254)
-size = Vector3(401.8, 63.1, 178.2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.31, -60.0645, -98.254)
+size = Vector3(507.15, 63.1, 225.85)
 material = SubResource("FogMaterial_iibkm")
 
 [connection signal="body_entered" from="portal/TP1" to="portal/TP1" method="_on_body_entered"]

@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var env = $WorldEnvironment
+@onready var drone = $drone
 @onready var sun = $sun
 @onready var city = $city
 @onready var cars = $cars
@@ -40,6 +41,7 @@ var tasks_today = day_workflow.duplicate()
 var terrain_chop
 
 var plants
+var city_running = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -135,6 +137,8 @@ func update_sky_energy(delta):
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 
 func update_cars(delta):
+	if not city_running:
+		return
 	car_timer -= delta
 	if car_timer < 0:
 		var car_spawns =  city.find_child("car_spawns").get_children()
@@ -153,6 +157,10 @@ func update_cars(delta):
 			towers.add_child(new_tow)
 			#print("Need tow...")
 
+func update_city_running():
+	city_running = drone.global_position.distance_to(city.global_position) < 250
+	#print(city_running)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#setup_terrain(delta)
@@ -163,4 +171,5 @@ func _process(delta):
 	update_cars(delta)
 	update_workflow()
 	run_active_tasks(delta)
+	update_city_running()
 

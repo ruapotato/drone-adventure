@@ -134,6 +134,8 @@ func show_npc():
 	show()
 
 func _physics_process(delta):
+	if not world.city_running:
+		return
 	#print(active_task)
 	# Add the gravity.
 	if not is_on_floor() and not collision_shape.disabled:

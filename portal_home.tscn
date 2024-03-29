@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnydq0kvpj3t1"]
+
+[ext_resource type="PackedScene" uid="uid://b5djy4wj2n7qd" path="res://segment.tscn" id="1_gu7me"]
+[ext_resource type="PackedScene" uid="uid://dxfq5vc2rd8fk" path="res://simple_top.tscn" id="2_ke73d"]
+[ext_resource type="Script" path="res://tp_city.gd" id="4_qxahs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7jrp5"]
+size = Vector3(2, 1.85254, 2)
+
+[sub_resource type="FogMaterial" id="FogMaterial_m2fxr"]
+density = 8.0
+albedo = Color(0, 0, 0, 1)
+edge_fade = 2.51067
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7e1vk"]
+size = Vector3(2.155, 2.695, 0.18)
+
+[node name="simple_home" type="Node3D"]
+
+[node name="segment" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.858946, 0)
+
+[node name="segment4" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.897976, 8.57568)
+
+[node name="segment5" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.30876, 1.37672, 4.26985)
+
+[node name="segment6" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.33118, 1.40731, 4.26985)
+
+[node name="segment2" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.87073, 0)
+
+[node name="segment7" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.90976, 8.57568)
+
+[node name="segment8" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.30876, 2.3885, 4.26985)
+
+[node name="segment9" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.33118, 2.4191, 4.26985)
+
+[node name="segment3" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.91063, 0)
+
+[node name="segment10" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.94966, 8.57568)
+
+[node name="segment11" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.30876, 3.42841, 4.26985)
+
+[node name="segment12" parent="." instance=ExtResource("1_gu7me")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.33118, 3.459, 4.26985)
+
+[node name="simple_top" parent="." instance=ExtResource("2_ke73d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.35779, 4.31069)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="TP3" type="Area3D" parent="Node3D"]
+transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("4_qxahs")
+
+[node name="TP3_shape" type="CollisionShape3D" parent="Node3D/TP3"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.118622, 1.37427, 5.10012)
+shape = SubResource("BoxShape3D_7jrp5")
+
+[node name="FogVolume" type="FogVolume" parent="Node3D/TP3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.527419, 1.13544, 5.13628)
+size = Vector3(3, 3, 3)
+material = SubResource("FogMaterial_m2fxr")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/TP3"]
+transform = Transform3D(1, -8.52652e-14, -4.26326e-14, 4.26326e-14, -4.37114e-08, 1, -4.26326e-14, -1, -4.37114e-08, 0.987248, 2.78014, 4.42217)
+light_color = Color(0.560784, 0, 0, 1)
+
+[node name="TP4" type="Area3D" parent="Node3D"]
+script = ExtResource("4_qxahs")
+
+[node name="TP4_shape" type="CollisionShape3D" parent="Node3D/TP4"]
+transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 3.55271e-15, 0, 1, -1.90735e-06, 1.34803, -7.14285)
+shape = SubResource("BoxShape3D_7e1vk")
+
+[connection signal="body_entered" from="Node3D/TP3" to="Node3D/TP3" method="_on_body_entered"]
+[connection signal="body_entered" from="Node3D/TP4" to="Node3D/TP4" method="_on_body_entered"]

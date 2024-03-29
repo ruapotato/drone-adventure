@@ -2,7 +2,7 @@ extends Node3D
 
 @onready var env = $WorldEnvironment
 @onready var sun = $sun
-#@onready var city = $city
+@onready var city = $city
 @onready var cars = $cars
 @onready var towers = $towers
 @onready var ufos = $ufos
@@ -46,21 +46,21 @@ func _ready():
 	return
 	#terrain_chop = city.find_child("terrain_cutout").get_children()
 	vt = find_child("VoxelLodTerrain").get_voxel_tool()
-	#for home_to_fill in city.find_child("homes").get_children():
-	#	var new_npc = NPC.instantiate()
-	#	new_npc.npc_home_pos = home_to_fill.global_position
+	for home_to_fill in city.find_child("homes").get_children():
+		var new_npc = NPC.instantiate()
+		new_npc.npc_home_pos = home_to_fill.global_position
 
-	#	var jobs =  city.find_child("jobs").get_children()
-	#	new_npc.npc_work_pos = jobs[randi() % jobs.size()].global_position
+		var jobs =  city.find_child("jobs").get_children()
+		new_npc.npc_work_pos = jobs[randi() % jobs.size()].global_position
 		
-	#	new_npc.npc_type = "worker"
+		new_npc.npc_type = "worker"
 		
 		#new_npc.set_deferred("global_position", home_to_fill.global_position)
-	#	new_npc.global_position = home_to_fill.global_position
+		new_npc.global_position = home_to_fill.global_position
 		
-	#	add_child(new_npc)
-	#	NPCs.append(new_npc)
-	#	print(home_to_fill)
+		add_child(new_npc)
+		NPCs.append(new_npc)
+		print(home_to_fill)
 	
 
 func run_active_tasks(delta):
@@ -135,7 +135,6 @@ func update_sky_energy(delta):
 	else:
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 
-"""
 func update_cars(delta):
 	car_timer -= delta
 	if car_timer < 0:
@@ -154,7 +153,7 @@ func update_cars(delta):
 			new_tow.set_deferred("global_rotation", city.find_child("tow_port").global_rotation)
 			towers.add_child(new_tow)
 			#print("Need tow...")
-"""
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#setup_terrain(delta)
@@ -162,7 +161,7 @@ func _process(delta):
 	update_abs_time()
 	update_friendly_time()
 	update_sky_energy(delta)
-	#update_cars(delta)
+	update_cars(delta)
 	update_workflow()
 	run_active_tasks(delta)
 

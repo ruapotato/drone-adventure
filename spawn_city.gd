@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var simple_home = preload("res://simple_home.tscn")
+@onready var simple_home = preload("res://portal_home.tscn")
 @onready var area =  $Area3D
 @onready var fog =  $FogVolume
 @onready var dist_fog = $dist_fog

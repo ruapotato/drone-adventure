@@ -5,4 +5,3 @@
 [node name="grass" type="Node3D"]
 
 [node name="grass2" parent="." instance=ExtResource("1_egfwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.00685, 0)

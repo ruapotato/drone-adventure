@@ -43,7 +43,6 @@ var plants
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	return
 	#terrain_chop = city.find_child("terrain_cutout").get_children()
 	vt = find_child("VoxelLodTerrain").get_voxel_tool()
 	for home_to_fill in city.find_child("homes").get_children():

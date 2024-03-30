@@ -55,7 +55,7 @@ func _ready():
 	color_material.roughness = .07
 	color_material.emission_enabled = true
 	color_material.emission = color
-	color_material.emission_energy_multiplier = value /10
+	color_material.emission_energy_multiplier = value /100
 	color_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_DEPTH_PRE_PASS
 	color_material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
 	color_material.cull_mode = BaseMaterial3D.CULL_FRONT

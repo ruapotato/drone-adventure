@@ -7,6 +7,7 @@ extends Node3D
 @onready var cars = $cars
 @onready var towers = $towers
 @onready var ufos = $ufos
+@onready var spawner = $spawner
 @onready var NPC = preload("res://npc.tscn")
 @onready var CAR = preload("res://vehicle.tscn")
 @onready var TOW = preload("res://towtruck.tscn")
@@ -14,10 +15,12 @@ extends Node3D
 #@onready var point_of_view = $pov
 @onready var voxels = $VoxelLodTerrain
 
-const day_len = 60*1
+const day_len = 60*.5
 const day_speed = PI/day_len
 const fog_density = 0.0526
-const day_workflow =  {6.5: "clear_fog",
+const day_workflow =  {5.9: "stop_spawn",
+					6.0: "clear_fog",
+					16.0:"start_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}
 
@@ -32,7 +35,7 @@ var friendly_time
 var friendly_time_am = false
 var NPCs = []
 
-var cars_every = 2
+var cars_every = 4
 var car_timer = cars_every
 
 
@@ -69,6 +72,10 @@ func run_active_tasks(delta):
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.002, delta / (day_len/15))
 	if active_task == "get_foggy":
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density, fog_density, delta / (day_len/4))
+	if active_task == "start_spawn":
+		spawner.running = true
+	if active_task == "stop_spawn":
+		spawner.running = false
 	if active_task == "UFO":
 		#print(len(ufos.get_children()))
 		if len(ufos.get_children()) == 0:
@@ -83,6 +90,7 @@ func update_workflow():
 		hour_index += 12
 	
 	if hour_index < .2:
+		print("day reset")
 		tasks_today = day_workflow.duplicate()
 	
 	for todo_item_time in tasks_today:
@@ -158,7 +166,7 @@ func update_cars(delta):
 			#print("Need tow...")
 
 func update_city_running():
-	city_running = drone.global_position.distance_to(city.global_position) < 250
+	city_running = drone.global_position.distance_to(city.global_position) < 150
 	#print(city_running)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

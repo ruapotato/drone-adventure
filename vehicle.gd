@@ -15,7 +15,7 @@ func _process(delta):
 	if tp_cooldown < 0:
 		tp_cooldown -= delta
 	# Remove is falls off map
-	if global_position.y < -5:
+	if global_position.y < 30:
 		crashed = true
 	
 	#Remove is stops unexpectedly 

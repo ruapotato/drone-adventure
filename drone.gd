@@ -12,9 +12,11 @@ var collision_size_at_rest = .075
 var unlocked_gun = true
 var unlocked_landgun = true
 var shoot_speed = 34
+var wind_effect = -.0005
 
 var throttle = 0.0
-var max_throttle = 3.5
+#var max_throttle = 3.5
+var max_throttle = 3.9
 
 var yaw = 0.0
 var yaw_speed = 3
@@ -95,6 +97,11 @@ func _unhandled_input(event):
 func _physics_process(delta):
 	if tp_cooldown > 0:
 		tp_cooldown -= delta
+	
+	# Wind
+	var wind_force = linear_velocity * wind_effect
+	apply_impulse(wind_force)
+		
 	#print()
 	if linear_velocity.length() > 5:
 		speed_collision.shape.radius = collision_size_at_rest * ((linear_velocity.length()/5) + 1)

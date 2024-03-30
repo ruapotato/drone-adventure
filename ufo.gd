@@ -3,7 +3,7 @@ extends RigidBody3D
 var SPEED = 300
 
 var spawn_point = Vector3(0,1000,0)
-var hover_point = Vector3(0,20,0)
+var hover_point = Vector3(0,270,0)
 
 var active_task = "drop"
 var fly_ttl = 10

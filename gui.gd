@@ -4,6 +4,7 @@ extends Node2D
 @onready var camera = $SubViewportContainer/SubViewport/Camera3D
 @onready var time_label = $TimeLabel
 @onready var target_label = $targetLabel
+@onready var speed_label = $SpeedLabel
 
 var player
 var drone
@@ -54,6 +55,9 @@ func update_time_label():
 	else:
 		time_label.text = format_hour(world.friendly_time) + " PM"
 
+func update_speed_label():
+	speed_label.text = "MPH " + str(drone.linear_velocity.length() * 2.23693629)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if str(drone.crystals) != crystal_label.text:
@@ -62,3 +66,4 @@ func _process(delta):
 	camera.look_at(drone.global_position)
 	update_time_label()
 	update_target_label()
+	update_speed_label()

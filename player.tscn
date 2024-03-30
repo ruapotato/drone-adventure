@@ -3,6 +3,8 @@
 [ext_resource type="Script" path="res://player.gd" id="1_4lciq"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ej8ic"]
+radius = 0.335
+height = 1.67
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cmlvi"]
 
@@ -22,9 +24,9 @@ mesh = SubResource("CapsuleMesh_ej8ic")
 shape = SubResource("CapsuleShape3D_cmlvi")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389028, 0.644869, -0.35985)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266888, 0.644869, -0.35985)
 mesh = SubResource("SphereMesh_kujap")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.356403, 0.644869, -0.371263)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27037, 0.644869, -0.371263)
 mesh = SubResource("SphereMesh_kujap")

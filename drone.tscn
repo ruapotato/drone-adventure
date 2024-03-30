@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=11 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
+[ext_resource type="Script" path="res://drone_sound.gd" id="3_f4ikt"]
+[ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
 emission_enabled = true
@@ -66,3 +68,17 @@ shape = SubResource("SphereShape3D_xm54y")
 
 [node name="mesh" parent="." instance=ExtResource("2_ns1cx")]
 transform = Transform3D(-0.999506, 0, 0.0314283, 0, 1, 0, -0.0314283, 0, -0.999506, 0.000589579, -0.00212165, 0.00688297)
+
+[node name="drone_sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_vses7")
+attenuation_model = 3
+volume_db = -5.0
+autoplay = true
+max_polyphony = 3
+panning_strength = 1.6
+script = ExtResource("3_f4ikt")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+current = true
+
+[connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]

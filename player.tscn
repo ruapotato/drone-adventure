@@ -21,9 +21,6 @@ mesh = SubResource("CapsuleMesh_ej8ic")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("CapsuleShape3D_cmlvi")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.822666, 0)
-
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.389028, 0.644869, -0.35985)
 mesh = SubResource("SphereMesh_kujap")

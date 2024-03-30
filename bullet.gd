@@ -91,5 +91,7 @@ func _on_area_3d_body_entered(body):
 		if body.name == "ufo":
 			body.life -= 1
 			body.fly_ttl = 6
+		if body.name == "mini_ufo":
+			body.get_parent().life -= 1
 		going_to_kill = body
-		
+		$boom.play()

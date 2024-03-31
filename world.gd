@@ -15,7 +15,7 @@ extends Node3D
 #@onready var point_of_view = $pov
 @onready var voxels = $VoxelLodTerrain
 
-const day_len = 60*.1.5
+const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.0526
 const day_workflow =  {5.9: "stop_spawn",

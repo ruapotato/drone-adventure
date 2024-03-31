@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=13 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -17,25 +17,15 @@ font_size = 39
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Gradient" id="Gradient_ebn4w"]
-offsets = PackedFloat32Array(0, 0.123377, 0.480519)
-colors = PackedColorArray(0, 0, 0, 0, 0.780748, 0.66653, 7.70092e-07, 0, 0, 1, 0.376471, 1)
+[sub_resource type="Gradient" id="Gradient_8a5nj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.054902, 0.819608, 0.12549, 0.686275)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0bpny"]
-frequency = 0.3903
-domain_warp_type = 1
-domain_warp_amplitude = 29.74
-domain_warp_frequency = 0.025
-domain_warp_fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t075m"]
-width = 177
-height = 1
-color_ramp = SubResource("Gradient_ebn4w")
-noise = SubResource("FastNoiseLite_0bpny")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nkhf7"]
+gradient = SubResource("Gradient_8a5nj")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_67nxw"]
-texture = SubResource("NoiseTexture2D_t075m")
+texture = SubResource("GradientTexture2D_nkhf7")
 
 [sub_resource type="SystemFont" id="SystemFont_cot6j"]
 

@@ -1,0 +1,67 @@
+[gd_scene load_steps=4 format=3 uid="uid://bux6jg8v62006"]
+
+[ext_resource type="Script" path="res://credit.gd" id="1_o0oqv"]
+
+[sub_resource type="Gradient" id="Gradient_uh7cu"]
+offsets = PackedFloat32Array(0, 0.148387, 0.432258, 0.845161, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.870588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fptk1"]
+gradient = SubResource("Gradient_uh7cu")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+
+[node name="Credit" type="Node2D"]
+visible = false
+script = ExtResource("1_o0oqv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(968.5, 550)
+scale = Vector2(30.4219, 17.3437)
+texture = SubResource("GradientTexture2D_fptk1")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 472.0
+offset_top = 566.0
+offset_right = 870.0
+offset_bottom = 748.0
+scale = Vector2(2.47442, 1.71035)
+text = "https://www.finnswonderland.com/"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 21.0
+offset_top = 45.0
+offset_right = 820.0
+offset_bottom = 288.0
+scale = Vector2(2.37438, 1.69083)
+text = "Play around with a tiny drone in a space that is endless."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+offset_left = 865.0
+offset_top = 922.0
+offset_right = 910.0
+offset_bottom = 953.0
+scale = Vector2(4.57518, 2.69552)
+text = "Back"
+
+[node name="lable" type="Label" parent="."]
+offset_left = 792.0
+offset_top = 107.0
+offset_right = 882.0
+offset_bottom = 133.0
+scale = Vector2(3.88099, 2.72751)
+text = "Game Goal"
+
+[node name="lable2" type="Label" parent="."]
+offset_left = 877.0
+offset_top = 490.0
+offset_right = 924.0
+offset_bottom = 516.0
+scale = Vector2(3.88099, 2.72751)
+text = "Credit"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

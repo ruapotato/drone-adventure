@@ -9,8 +9,14 @@ extends RigidBody3D
 @onready var shield = $shield
 @onready var shield_sound = $shield_sound
 @onready var shield_cam = $shield/shield_camera
+@onready var expload_effect = $expload_effect
+@onready var expload_sound = $expload_sound
+
 var collision_size_at_rest = .075
 
+var save_index = null
+var inventory = null
+var save_file = null
 var unlocked_gun = true
 var unlocked_landgun = true
 var shoot_speed = 34
@@ -19,9 +25,11 @@ var power_cell = 100
 var power_gain = 1
 var power_gain_at_rest = 25
 var power_cost = .5
-var fire_cost = 5
+var fire_cost = 3
 var shake = 0.0
 var og_camera_angle
+var dead = false
+var dead_reset_counter = 0
 
 var throttle = 0.0
 #var max_throttle = 3.5
@@ -37,12 +45,30 @@ var roll = 0.0
 var roll_speed = 5
 var tp_cooldown = 0
 
-var crystals = 0
 var last_velocity = Vector3(0,0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	save_index = get_parent().game_index
+	save_file = "user://savegame_" + str(save_index) + ".json"
+	inventory = load_save(save_file)
 	og_camera_angle = camera.rotation_degrees
+
+func save_game():
+	var save_game = FileAccess.open(save_file, FileAccess.WRITE)
+	#var save_data = JSON.stringify({"crystals":gender,
+	#"name":player_picked_name})
+	save_game.store_line(JSON.stringify(inventory))
+
+func load_save(save_file):
+	var save_game = FileAccess.open(save_file, FileAccess.READ)
+	var json_string = save_game.get_line()
+	var json = JSON.new()
+	var parse_result = json.parse(json_string)
+	print(parse_result)
+	if parse_result == 0:
+		var save_data = json.get_data()
+		return(save_data)
 
 func fire_landgun():
 	if not unlocked_landgun:
@@ -110,6 +136,21 @@ func _unhandled_input(event):
 			fire_landgun()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if dead:
+		if dead_reset_counter < 0:
+			global_position = Vector3(0,0,0)
+			inventory["crystals"] = 0
+			power_cell = 100
+			save_game()
+			dead = false
+		else:
+			dead_reset_counter -= delta
+			shield.visible = false
+			shield_cam.visible = false
+			linear_velocity = Vector3(0,0,0)
+			return
+	
+	
 	if tp_cooldown > 0:
 		tp_cooldown -= delta
 	
@@ -134,15 +175,24 @@ func _physics_process(delta):
 	if damge_vector.length() > 5:
 		print("Smaked! " + str(damge_vector.length()))
 		shake = .3
-		shield_sound.play()
 		power_cell -= abs(damge_vector.length())
+		if power_cell > 0:
+			shield_sound.play()
+		else:
+			expload_sound.play()
+		
+		#expload_effect.emitting = true
 	if shield_sound.playing:
 		shield.visible = true
 		shield_cam.visible = true
 	else:
 		shield.visible = false
 		shield_cam.visible = false
-	
+	if power_cell < 0:
+		print("You are dead!")
+		expload_effect.emitting = true
+		dead_reset_counter = 2
+		dead = true
 	#print()
 	if linear_velocity.length() > 5:
 		speed_collision.shape.radius = collision_size_at_rest * ((linear_velocity.length()/5) + 1)

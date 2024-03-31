@@ -70,8 +70,8 @@ func update_refuel():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if str(drone.crystals) != crystal_label.text:
-		crystal_label.text = str(drone.crystals)
+	if str(drone.inventory["crystals"]) != crystal_label.text:
+		crystal_label.text = str(drone.inventory["crystals"])
 	camera.global_position = drone.back_cam_mount.global_position
 	camera.look_at(drone.global_position)
 	update_time_label()

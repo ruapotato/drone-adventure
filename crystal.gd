@@ -118,7 +118,8 @@ func _on_body_entered(body):
 	if body == drone:
 		#print("I'm colleded")
 		$collected_sound.play()
-		drone.crystals += value
+		drone.inventory["crystals"] += value
+		drone.save_game()
 		#print(player.inventory["crystals"])
 		collected = true
 

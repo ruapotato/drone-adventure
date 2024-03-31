@@ -29,6 +29,8 @@ var hour_index
 var vt
 var time_to_init = 10
 var init_done = false
+var hardness
+var game_index
 
 var time
 var friendly_time

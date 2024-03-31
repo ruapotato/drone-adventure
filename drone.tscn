@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=27 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
 [ext_resource type="Script" path="res://drone_sound.gd" id="3_f4ikt"]
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 [ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
+[ext_resource type="AudioStream" uid="uid://ul3s6jsd6kwb" path="res://import/Audio/explosionCrunch_001.ogg" id="6_22p5i"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
 emission_enabled = true
@@ -87,6 +88,23 @@ height = 937
 color_ramp = SubResource("Gradient_r6e74")
 noise = SubResource("FastNoiseLite_gtohk")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_isdd4"]
+inherit_velocity_ratio = 0.008
+velocity_pivot = Vector3(0, 0.5, 0)
+direction = Vector3(0, 0.1, 0)
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+tangential_accel_max = 16.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df4wr"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.415686)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jvigt"]
+material = SubResource("StandardMaterial3D_df4wr")
+radius = 0.12
+height = 0.22
+
 [node name="drone" type="RigidBody3D"]
 mass = 0.22
 angular_damp = 100.0
@@ -147,5 +165,19 @@ texture = SubResource("NoiseTexture2D_cg1p3")
 
 [node name="shield_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pxt4h")
+
+[node name="expload_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_22p5i")
+
+[node name="expload_effect" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188786, -0.000607304)
+emitting = false
+amount = 100
+lifetime = 1.3
+interp_to_end = 0.29
+one_shot = true
+explosiveness = 0.2
+process_material = SubResource("ParticleProcessMaterial_isdd4")
+draw_pass_1 = SubResource("SphereMesh_jvigt")
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]

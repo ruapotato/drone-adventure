@@ -1,0 +1,86 @@
+[gd_scene load_steps=4 format=3 uid="uid://bce251ilfs4i7"]
+
+[ext_resource type="Script" path="res://settings.gd" id="1_n2bou"]
+
+[sub_resource type="Gradient" id="Gradient_uh7cu"]
+offsets = PackedFloat32Array(0, 0.148387, 0.432258, 0.845161, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.870588, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_fptk1"]
+gradient = SubResource("Gradient_uh7cu")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 1)
+
+[node name="SettingsScreen" type="Node2D"]
+script = ExtResource("1_n2bou")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(968.5, 550)
+scale = Vector2(30.4219, 17.3437)
+texture = SubResource("GradientTexture2D_fptk1")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 920.0
+offset_top = 922.0
+offset_right = 965.0
+offset_bottom = 953.0
+scale = Vector2(4.57518, 2.69552)
+text = "Back"
+
+[node name="lable" type="Label" parent="."]
+offset_left = 882.0
+offset_top = 54.0
+offset_right = 944.0
+offset_bottom = 80.0
+scale = Vector2(3.88099, 2.72751)
+text = "Settings"
+
+[node name="lable2" type="Label" parent="."]
+offset_left = 766.0
+offset_top = 333.0
+offset_right = 901.0
+offset_bottom = 359.0
+scale = Vector2(3.88099, 2.72751)
+text = "mouse sensitivity"
+
+[node name="lable3" type="Label" parent="."]
+offset_left = 398.0
+offset_top = 595.0
+offset_right = 731.0
+offset_bottom = 647.0
+scale = Vector2(3.88099, 2.72751)
+text = "Effects
+(Turn down if your computer is slow)"
+horizontal_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="."]
+offset_left = 851.0
+offset_top = 192.0
+offset_right = 958.0
+offset_bottom = 223.0
+scale = Vector2(2.82358, 2.12204)
+button_pressed = true
+text = "Fullscreen"
+
+[node name="MouseSensitivity" type="HSlider" parent="."]
+offset_left = 622.0
+offset_top = 412.0
+offset_right = 1466.0
+offset_bottom = 450.0
+min_value = -5.0
+max_value = 5.0
+tick_count = 11
+
+[node name="Effects" type="HSlider" parent="."]
+offset_left = 622.0
+offset_top = 647.0
+offset_right = 1466.0
+offset_bottom = 685.0
+max_value = 1.0
+step = 0.1
+value = 1.0
+tick_count = 11
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="value_changed" from="MouseSensitivity" to="." method="_on_mouse_sensitivity_value_changed"]

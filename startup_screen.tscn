@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=3 uid="uid://bk1ii21ti8xvf"]
+
+[ext_resource type="Script" path="res://startup_screen.gd" id="1_mpcew"]
+
+[sub_resource type="Gradient" id="Gradient_mamd2"]
+colors = PackedColorArray(0, 0, 0, 1, 0.270222, 0.270222, 0.270222, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_je8jc"]
+gradient = SubResource("Gradient_mamd2")
+fill_from = Vector2(1, 0)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lxmiq"]
+texture = SubResource("GradientTexture2D_je8jc")
+
+[sub_resource type="Theme" id="Theme_nflsl"]
+Button/styles/normal = SubResource("StyleBoxTexture_lxmiq")
+
+[sub_resource type="Gradient" id="Gradient_514ns"]
+offsets = PackedFloat32Array(0, 0.564935, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.423111, 0.286532, 0.257381, 1, 1, 0.727771, 0.683715, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vssi1"]
+gradient = SubResource("Gradient_514ns")
+
+[node name="startup_screen" type="Node2D"]
+script = ExtResource("1_mpcew")
+
+[node name="Delete1" type="Button" parent="."]
+offset_left = 61.0
+offset_top = 834.0
+offset_right = 133.0
+offset_bottom = 865.0
+scale = Vector2(2.14036, 1.11399)
+text = "Delete File 1"
+
+[node name="Delete2" type="Button" parent="."]
+offset_left = 61.0
+offset_top = 877.0
+offset_right = 164.0
+offset_bottom = 908.0
+scale = Vector2(2.14036, 1.11399)
+text = "Delete File 2"
+
+[node name="Delete3" type="Button" parent="."]
+offset_left = 61.0
+offset_top = 920.0
+offset_right = 164.0
+offset_bottom = 951.0
+scale = Vector2(2.14036, 1.11399)
+text = "Delete File 3"
+
+[node name="Save1" type="Button" parent="."]
+offset_left = 752.0
+offset_top = 271.0
+offset_right = 845.0
+offset_bottom = 302.0
+scale = Vector2(5.45676, 4.36493)
+theme = SubResource("Theme_nflsl")
+text = "File 1"
+
+[node name="Save2" type="Button" parent="."]
+offset_left = 752.0
+offset_top = 430.0
+offset_right = 845.0
+offset_bottom = 461.0
+scale = Vector2(5.45676, 4.36493)
+theme = SubResource("Theme_nflsl")
+text = "File 2"
+
+[node name="Save3" type="Button" parent="."]
+offset_left = 752.0
+offset_top = 589.0
+offset_right = 845.0
+offset_bottom = 620.0
+scale = Vector2(5.45676, 4.36493)
+theme = SubResource("Theme_nflsl")
+text = "File 3"
+
+[node name="hardness" type="HSlider" parent="."]
+visible = false
+offset_left = 621.0
+offset_top = 833.0
+offset_right = 1016.0
+offset_bottom = 862.0
+scale = Vector2(2.00377, 1.52599)
+min_value = 1.0
+max_value = 200.0
+value = 100.0
+rounded = true
+tick_count = 11
+ticks_on_borders = true
+
+[node name="Label3" type="Label" parent="."]
+visible = false
+offset_left = 895.0
+offset_top = 737.0
+offset_right = 965.0
+offset_bottom = 763.0
+scale = Vector2(3.32977, 1.97397)
+text = "Difficulty"
+
+[node name="Label4" type="Label" parent="."]
+visible = false
+offset_left = 547.0
+offset_top = 798.0
+offset_right = 637.0
+offset_bottom = 824.0
+scale = Vector2(2.27353, 1.38862)
+text = "Just Testing"
+
+[node name="Label5" type="Label" parent="."]
+visible = false
+offset_left = 947.0
+offset_top = 798.0
+offset_right = 1037.0
+offset_bottom = 824.0
+scale = Vector2(2.27353, 1.38862)
+text = "Normal"
+
+[node name="Label6" type="Label" parent="."]
+visible = false
+offset_left = 1331.0
+offset_top = 798.0
+offset_right = 1421.0
+offset_bottom = 824.0
+scale = Vector2(2.27353, 1.38862)
+text = "Nuts-o"
+
+[node name="setup" type="Node2D" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="setup"]
+position = Vector2(960, 540)
+scale = Vector2(32.8, 18.36)
+texture = SubResource("GradientTexture2D_vssi1")
+
+[node name="name_picked" type="TextEdit" parent="setup"]
+offset_left = 585.0
+offset_top = 191.0
+offset_right = 714.0
+offset_bottom = 230.0
+scale = Vector2(6.2211, 4.38127)
+placeholder_text = "Tiny Done"
+
+[node name="Label" type="Label" parent="setup"]
+offset_left = 291.0
+offset_top = 232.0
+offset_right = 338.0
+offset_bottom = 255.0
+scale = Vector2(5.45206, 3.95244)
+text = "Name"
+
+[node name="Button" type="Button" parent="setup"]
+offset_left = 847.0
+offset_top = 808.0
+offset_right = 896.0
+offset_bottom = 839.0
+scale = Vector2(6.69148, 4.32503)
+text = "Done"
+
+[connection signal="pressed" from="Delete1" to="." method="_on_delete_1_pressed"]
+[connection signal="pressed" from="Delete2" to="." method="_on_delete_2_pressed"]
+[connection signal="pressed" from="Delete3" to="." method="_on_delete_3_pressed"]
+[connection signal="button_down" from="Save1" to="." method="_on_no_way_button_down"]
+[connection signal="button_down" from="Save1" to="." method="_on_save_1_button_down"]
+[connection signal="button_down" from="Save2" to="." method="_on_no_way_button_down"]
+[connection signal="button_down" from="Save2" to="." method="_on_save_2_button_down"]
+[connection signal="button_down" from="Save3" to="." method="_on_save_3_button_down"]
+[connection signal="button_down" from="Save3" to="." method="_on_no_way_button_down"]
+[connection signal="pressed" from="setup/Button" to="." method="_on_button_pressed"]

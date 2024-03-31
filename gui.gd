@@ -5,6 +5,8 @@ extends Node2D
 @onready var time_label = $TimeLabel
 @onready var target_label = $targetLabel
 @onready var speed_label = $SpeedLabel
+@onready var power_cell = $power_cell
+@onready var refuel_label = $refuel
 
 var player
 var drone
@@ -54,9 +56,17 @@ func update_time_label():
 		time_label.text = format_hour(world.friendly_time) + " AM"
 	else:
 		time_label.text = format_hour(world.friendly_time) + " PM"
-
+func update_power_cell_label():
+	power_cell.value = drone.power_cell
+	
 func update_speed_label():
-	speed_label.text = "MPH " + str(drone.linear_velocity.length() * 2.23693629)
+	speed_label.text = "MPH " + str(int(drone.linear_velocity.length() * 2.23693629))
+
+func update_refuel():
+	if drone.power_cell < 30:
+		refuel_label.visible = true
+	else:
+		refuel_label.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -67,3 +77,5 @@ func _process(delta):
 	update_time_label()
 	update_target_label()
 	update_speed_label()
+	update_power_cell_label()
+	update_refuel()

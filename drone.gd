@@ -13,6 +13,11 @@ var unlocked_gun = true
 var unlocked_landgun = true
 var shoot_speed = 34
 var wind_effect = -.0005
+var power_cell = 100
+var power_gain = 1
+var power_gain_at_rest = 25
+var power_cost = .5
+var fire_cost = 5
 
 var throttle = 0.0
 #var max_throttle = 3.5
@@ -69,10 +74,14 @@ func fire_normal():
 	apply_impulse(global_transform.basis.z * .1)
 	get_parent().add_child(new_bullet)
 	
-	
+func get_max_throttle():
+	var effect = 1 - power_cell/100
+	print(effect)
+	return(max_throttle - (effect * 1.9))
+
 func _unhandled_input(event):
 	if event.is_action("throttle"):
-		throttle = -event.axis_value * max_throttle
+		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
 		yaw = -event.axis_value
 		
@@ -88,11 +97,13 @@ func _unhandled_input(event):
 	if event.is_action("roll"):
 		roll = -event.axis_value
 		#print(event)
-
-	if event.is_action_pressed("fire_right"):
-		fire_normal()
-	if event.is_action_pressed("fire_left"):
-		fire_landgun()
+	if power_cell > fire_cost:
+		if event.is_action_pressed("fire_right"):
+			power_cell -= fire_cost
+			fire_normal()
+		if event.is_action_pressed("fire_left"):
+			power_cell -= fire_cost
+			fire_landgun()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if tp_cooldown > 0:
@@ -110,6 +121,15 @@ func _physics_process(delta):
 	#rotate_y(yaw * delta)
 	#linear_velocity.y += throttle * delta
 	apply_impulse(global_transform.basis.y * delta * throttle)
+	power_cell -= throttle * delta * power_cost
+	if linear_velocity.length() < 1 and throttle < 1:
+		power_cell += power_gain_at_rest * delta
+	else:
+		power_cell += power_gain * delta
+	if power_cell > 100:
+		power_cell = 100
+	if power_cell < 0:
+		power_cell = 0
 	
 	if abs(yaw) > .01:
 		#print(yaw)

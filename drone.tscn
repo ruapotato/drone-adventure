@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=23 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
 [ext_resource type="Script" path="res://drone_sound.gd" id="3_f4ikt"]
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
+[ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
 emission_enabled = true
@@ -29,6 +30,63 @@ radius = 0.068
 [sub_resource type="SphereShape3D" id="SphereShape3D_xm54y"]
 radius = 0.078
 
+[sub_resource type="Gradient" id="Gradient_tpi8l"]
+offsets = PackedFloat32Array(0.349206, 0.801587)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0.513726, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_16tt7"]
+noise_type = 2
+frequency = 0.059
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_54l47"]
+color_ramp = SubResource("Gradient_tpi8l")
+noise = SubResource("FastNoiseLite_16tt7")
+
+[sub_resource type="Gradient" id="Gradient_ipt8k"]
+offsets = PackedFloat32Array(0.31746, 1)
+colors = PackedColorArray(0, 0, 0, 0.494118, 1, 1, 1, 0.482353)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b0v1s"]
+noise_type = 2
+frequency = 0.059
+fractal_type = 2
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cl4px"]
+seamless = true
+color_ramp = SubResource("Gradient_ipt8k")
+noise = SubResource("FastNoiseLite_b0v1s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4527"]
+transparency = 1
+albedo_color = Color(0.160784, 0.607843, 1, 0.360784)
+metallic = 1.0
+metallic_specular = 1.0
+metallic_texture = SubResource("NoiseTexture2D_cl4px")
+emission_enabled = true
+emission_texture = SubResource("NoiseTexture2D_54l47")
+
+[sub_resource type="SphereMesh" id="SphereMesh_p4g1r"]
+lightmap_size_hint = Vector2i(4, 2)
+material = SubResource("StandardMaterial3D_m4527")
+radius = 0.08
+height = 0.071
+
+[sub_resource type="Gradient" id="Gradient_r6e74"]
+colors = PackedColorArray(0, 0, 0, 0.168627, 0, 0.490196, 1, 0.560784)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gtohk"]
+noise_type = 2
+frequency = 0.0258
+fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg1p3"]
+width = 1347
+height = 937
+color_ramp = SubResource("Gradient_r6e74")
+noise = SubResource("FastNoiseLite_gtohk")
+
 [node name="drone" type="RigidBody3D"]
 mass = 0.22
 angular_damp = 100.0
@@ -40,7 +98,7 @@ material_override = SubResource("StandardMaterial3D_fpre2")
 mesh = SubResource("CylinderMesh_w6lls")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, 0.0160727, 0)
+transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, 0.0160727, -0.0055235)
 attributes = SubResource("CameraAttributesPractical_8d16w")
 current = true
 
@@ -67,7 +125,7 @@ shape = SubResource("CylinderShape3D_vpqhs")
 shape = SubResource("SphereShape3D_xm54y")
 
 [node name="mesh" parent="." instance=ExtResource("2_ns1cx")]
-transform = Transform3D(-0.999506, 0, 0.0314283, 0, 1, 0, -0.0314283, 0, -0.999506, 0.000589579, -0.00212165, 0.00688297)
+transform = Transform3D(-0.999506, 0, 0.0314283, 0, 1, 0, -0.0314283, 0, -0.999506, 0.000589579, -0.00212165, 0.00135947)
 
 [node name="drone_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vses7")
@@ -78,5 +136,16 @@ script = ExtResource("3_f4ikt")
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 current = true
+
+[node name="shield" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_p4g1r")
+
+[node name="shield_camera" type="Sprite2D" parent="shield"]
+position = Vector2(955.75, 539.25)
+scale = Vector2(1.42428, 1.14781)
+texture = SubResource("NoiseTexture2D_cg1p3")
+
+[node name="shield_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_pxt4h")
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]

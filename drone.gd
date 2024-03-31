@@ -6,7 +6,9 @@ extends RigidBody3D
 @onready var shoot_from = $shoot_from
 @onready var back_cam_mount = $back_cam_mount
 @onready var speed_collision = $speedCollision
-
+@onready var shield = $shield
+@onready var shield_sound = $shield_sound
+@onready var shield_cam = $shield/shield_camera
 var collision_size_at_rest = .075
 
 var unlocked_gun = true
@@ -18,6 +20,8 @@ var power_gain = 1
 var power_gain_at_rest = 25
 var power_cost = .5
 var fire_cost = 5
+var shake = 0.0
+var og_camera_angle
 
 var throttle = 0.0
 #var max_throttle = 3.5
@@ -34,11 +38,11 @@ var roll_speed = 5
 var tp_cooldown = 0
 
 var crystals = 0
+var last_velocity = Vector3(0,0,0)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
+	og_camera_angle = camera.rotation_degrees
 
 func fire_landgun():
 	if not unlocked_landgun:
@@ -112,7 +116,33 @@ func _physics_process(delta):
 	# Wind
 	var wind_force = linear_velocity * wind_effect
 	apply_impulse(wind_force)
-		
+	
+	# shake
+	if shake > 0:
+		var randome_angle = Vector3(randf_range(-180,180),randf_range(-180,180),randf_range(-180,180))
+		camera.rotation_degrees = lerp(camera.rotation_degrees, randome_angle, .03 * shake)
+		shake -= delta
+	elif shake < 0:
+		shake = 0
+	else:
+		camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
+	
+	
+	#Damage:
+	var damge_vector = last_velocity - linear_velocity
+	last_velocity = linear_velocity
+	if damge_vector.length() > 5:
+		print("Smaked! " + str(damge_vector.length()))
+		shake = .3
+		shield_sound.play()
+		power_cell -= abs(damge_vector.length())
+	if shield_sound.playing:
+		shield.visible = true
+		shield_cam.visible = true
+	else:
+		shield.visible = false
+		shield_cam.visible = false
+	
 	#print()
 	if linear_velocity.length() > 5:
 		speed_collision.shape.radius = collision_size_at_rest * ((linear_velocity.length()/5) + 1)

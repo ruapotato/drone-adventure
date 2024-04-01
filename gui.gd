@@ -7,6 +7,8 @@ extends Node2D
 @onready var speed_label = $SpeedLabel
 @onready var power_cell = $power_cell
 @onready var refuel_label = $refuel
+@onready var message = $message
+
 
 var player
 var drone
@@ -74,8 +76,9 @@ func _process(delta):
 		crystal_label.text = str(drone.inventory["crystals"])
 	camera.global_position = drone.back_cam_mount.global_position
 	camera.look_at(drone.global_position)
-	update_time_label()
-	update_target_label()
 	update_speed_label()
-	update_power_cell_label()
-	update_refuel()
+	if not drone.tutorial_mode:
+		update_time_label()
+		update_target_label()
+		update_power_cell_label()
+		update_refuel()

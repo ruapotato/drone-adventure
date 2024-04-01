@@ -1,0 +1,65 @@
+[gd_scene load_steps=12 format=3 uid="uid://brhpowtmjnfh3"]
+
+[ext_resource type="Script" path="res://tutorial_mode.gd" id="1_suaj1"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://drone.tscn" id="2_i4lfi"]
+[ext_resource type="PackedScene" uid="uid://c6sueha11ti5r" path="res://player.tscn" id="3_g0ljd"]
+[ext_resource type="PackedScene" uid="uid://seaudjounlfi" path="res://zombie.tscn" id="4_ctahg"]
+[ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="5_tj68u"]
+[ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="6_y83ga"]
+[ext_resource type="PackedScene" uid="uid://50tipirf2hql" path="res://city.tscn" id="7_65q51"]
+[ext_resource type="AudioStream" uid="uid://dq8n7qjii8560" path="res://import/Audio/doorClose_002.ogg" id="8_jw10d"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u04vj"]
+
+[sub_resource type="Sky" id="Sky_mggow"]
+sky_material = SubResource("ProceduralSkyMaterial_u04vj")
+
+[sub_resource type="Environment" id="Environment_l8s57"]
+background_mode = 2
+sky = SubResource("Sky_mggow")
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.54
+volumetric_fog_density = 0.0289
+volumetric_fog_albedo = Color(0.494118, 0.494118, 0.494118, 1)
+adjustment_enabled = true
+adjustment_saturation = 2.18
+
+[node name="world" type="Node3D"]
+script = ExtResource("1_suaj1")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l8s57")
+
+[node name="sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.965926, 0.258819, 0, -0.258819, -0.965926, 0, 0, 0)
+light_color = Color(1, 1, 0.85098, 1)
+light_energy = 0.91
+light_angular_distance = 3.86
+shadow_enabled = true
+
+[node name="drone" parent="." instance=ExtResource("2_i4lfi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="player" parent="." instance=ExtResource("3_g0ljd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10835, 1.11358, 0)
+
+[node name="zombie" parent="." instance=ExtResource("4_ctahg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6561, 2.4204, 0)
+
+[node name="Spawner" parent="." instance=ExtResource("5_tj68u")]
+
+[node name="gui" parent="." instance=ExtResource("6_y83ga")]
+
+[node name="city" parent="." instance=ExtResource("7_65q51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
+
+[node name="cars" type="Node3D" parent="."]
+
+[node name="towers" type="Node3D" parent="."]
+
+[node name="is_tutorial" type="Node3D" parent="."]
+
+[node name="unlock_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_jw10d")
+volume_db = -2.81

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk1ii21ti8xvf"]
+[gd_scene load_steps=9 format=3 uid="uid://bk1ii21ti8xvf"]
 
 [ext_resource type="Script" path="res://startup_screen.gd" id="1_mpcew"]
 
@@ -22,6 +22,9 @@ colors = PackedColorArray(0, 0, 0, 1, 0.423111, 0.286532, 0.257381, 1, 1, 0.7277
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vssi1"]
 gradient = SubResource("Gradient_514ns")
+
+[sub_resource type="Theme" id="Theme_om7fp"]
+default_font_size = 108
 
 [node name="startup_screen" type="Node2D"]
 script = ExtResource("1_mpcew")
@@ -159,6 +162,14 @@ offset_bottom = 839.0
 scale = Vector2(6.69148, 4.32503)
 text = "Done"
 
+[node name="tutorial_mode" type="Button" parent="."]
+offset_left = 636.0
+offset_top = 80.0
+offset_right = 1378.0
+offset_bottom = 236.0
+theme = SubResource("Theme_om7fp")
+text = "Tutorial mode"
+
 [connection signal="pressed" from="Delete1" to="." method="_on_delete_1_pressed"]
 [connection signal="pressed" from="Delete2" to="." method="_on_delete_2_pressed"]
 [connection signal="pressed" from="Delete3" to="." method="_on_delete_3_pressed"]
@@ -169,3 +180,4 @@ text = "Done"
 [connection signal="button_down" from="Save3" to="." method="_on_save_3_button_down"]
 [connection signal="button_down" from="Save3" to="." method="_on_no_way_button_down"]
 [connection signal="pressed" from="setup/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="tutorial_mode" to="." method="_on_tutorial_mode_pressed"]

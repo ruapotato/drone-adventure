@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var game = preload("res://endless_world.tscn")
+@onready var tutorial_mode = preload("res://tutorial_mode.tscn")
 @onready var hardness_menu = $hardness
 @onready var setting_screen = get_parent().find_child("SettingsScreen")
 @onready var mouse_sensitivity_effector
@@ -146,3 +147,9 @@ func _on_delete_3_pressed():
 	dir.remove_absolute("user://savegame_3.json")
 	saved_games.erase(3)
 	$Save3.text = "File 3: New"
+
+
+func _on_tutorial_mode_pressed():
+	var new_game = tutorial_mode.instantiate()
+	add_child(new_game)
+	self.hide()

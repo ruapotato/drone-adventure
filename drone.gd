@@ -44,14 +44,19 @@ var pitch_speed = 5
 var roll = 0.0
 var roll_speed = 5
 var tp_cooldown = 0
-
+var world
 var last_velocity = Vector3(0,0,0)
-
+var tutorial_mode = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	save_index = get_parent().game_index
-	save_file = "user://savegame_" + str(save_index) + ".json"
-	inventory = load_save(save_file)
+	world = get_parent()
+	if get_parent().find_child("is_tutorial"):
+		tutorial_mode = true
+		inventory = {"crystals":0}
+	if not tutorial_mode:
+		save_index = get_parent().game_index
+		save_file = "user://savegame_" + str(save_index) + ".json"
+		inventory = load_save(save_file)
 	og_camera_angle = camera.rotation_degrees
 
 func save_game():
@@ -65,7 +70,7 @@ func load_save(save_file):
 	var json_string = save_game.get_line()
 	var json = JSON.new()
 	var parse_result = json.parse(json_string)
-	print(parse_result)
+	#print(parse_result)
 	if parse_result == 0:
 		var save_data = json.get_data()
 		return(save_data)
@@ -106,7 +111,7 @@ func fire_normal():
 	
 func get_max_throttle():
 	var effect = 1 - power_cell/100
-	print(effect)
+	#print(effect)
 	return(max_throttle - (effect * 1.9))
 
 func _unhandled_input(event):
@@ -134,42 +139,8 @@ func _unhandled_input(event):
 		if event.is_action_pressed("fire_left"):
 			power_cell -= fire_cost
 			fire_landgun()
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
-	if dead:
-		if dead_reset_counter < 0:
-			global_position = Vector3(0,0,0)
-			inventory["crystals"] = 0
-			power_cell = 100
-			save_game()
-			dead = false
-		else:
-			dead_reset_counter -= delta
-			shield.visible = false
-			shield_cam.visible = false
-			linear_velocity = Vector3(0,0,0)
-			return
-	
-	
-	if tp_cooldown > 0:
-		tp_cooldown -= delta
-	
-	# Wind
-	var wind_force = linear_velocity * wind_effect
-	apply_impulse(wind_force)
-	
-	# shake
-	if shake > 0:
-		var randome_angle = Vector3(randf_range(-180,180),randf_range(-180,180),randf_range(-180,180))
-		camera.rotation_degrees = lerp(camera.rotation_degrees, randome_angle, .03 * shake)
-		shake -= delta
-	elif shake < 0:
-		shake = 0
-	else:
-		camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
-	
-	
-	#Damage:
+
+func figure_damage():
 	var damge_vector = last_velocity - linear_velocity
 	last_velocity = linear_velocity
 	if damge_vector.length() > 5:
@@ -180,37 +151,57 @@ func _physics_process(delta):
 			shield_sound.play()
 		else:
 			expload_sound.play()
-		
-		#expload_effect.emitting = true
+			
+	if power_cell < 0:
+		print("You are dead!")
+		expload_effect.emitting = true
+		dead_reset_counter = 2
+		dead = true
+	if power_cell > 100:
+		power_cell = 100
+
+
+func do_shake(delta):
+	if shake > 0:
+		var randome_angle = Vector3(randf_range(-180,180),randf_range(-180,180),randf_range(-180,180))
+		camera.rotation_degrees = lerp(camera.rotation_degrees, randome_angle, .03 * shake)
+		shake -= delta
+	elif shake < 0:
+		shake = 0
+	else:
+		camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
+
+func add_wind_push():
+	var wind_force = linear_velocity * wind_effect
+	apply_impulse(wind_force)
+
+func cooldowns(delta):
+	if tp_cooldown > 0:
+		tp_cooldown -= delta
+	
+func update_shield():
 	if shield_sound.playing:
 		shield.visible = true
 		shield_cam.visible = true
 	else:
 		shield.visible = false
 		shield_cam.visible = false
-	if power_cell < 0:
-		print("You are dead!")
-		expload_effect.emitting = true
-		dead_reset_counter = 2
-		dead = true
-	#print()
+
+func update_collision_size():
 	if linear_velocity.length() > 5:
 		speed_collision.shape.radius = collision_size_at_rest * ((linear_velocity.length()/5) + 1)
 	else:
 		speed_collision.shape.radius = collision_size_at_rest
-	#rotate_y(yaw * delta)
-	#linear_velocity.y += throttle * delta
+
+func drone_physics(delta):
+
 	apply_impulse(global_transform.basis.y * delta * throttle)
 	power_cell -= throttle * delta * power_cost
 	if linear_velocity.length() < 1 and throttle < 1:
 		power_cell += power_gain_at_rest * delta
 	else:
 		power_cell += power_gain * delta
-	if power_cell > 100:
-		power_cell = 100
-	if power_cell < 0:
-		power_cell = 0
-	
+
 	if abs(yaw) > .01:
 		#print(yaw)
 		rotate_y(yaw * yaw_speed * delta)
@@ -226,5 +217,34 @@ func _physics_process(delta):
 		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * 3)
 	else:
 		rotation.z = lerp(rotation.z, 0.0, delta * 4)
-	#print(throttle)
+
+func dead_logic(delta):
+	if dead_reset_counter < 0:
+		global_position = Vector3(0,0,0)
+		inventory["crystals"] = 0
+		power_cell = 100
+		save_game()
+		dead = false
+	else:
+		dead_reset_counter -= delta
+		shield.visible = false
+		shield_cam.visible = false
+		linear_velocity = Vector3(0,0,0)
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	if dead:
+		dead_logic(delta)
+		return
+	
+	if not tutorial_mode:
+		cooldowns(delta)
+		do_shake(delta)
+		figure_damage()
+		update_shield()
+	
+	update_collision_size()
+	add_wind_push()
+	drone_physics(delta)
+	
 

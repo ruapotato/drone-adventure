@@ -156,9 +156,11 @@ script = ExtResource("3_f4ikt")
 current = true
 
 [node name="shield" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("SphereMesh_p4g1r")
 
 [node name="shield_camera" type="Sprite2D" parent="shield"]
+visible = false
 position = Vector2(955.75, 539.25)
 scale = Vector2(1.42428, 1.14781)
 texture = SubResource("NoiseTexture2D_cg1p3")

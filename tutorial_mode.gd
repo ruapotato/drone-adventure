@@ -14,7 +14,7 @@ var hover_counter = 0
 func do_stage(delta):
 	var act = todo.keys()[stage]
 	var act_info = todo[act]
-	gui.message.text = act_info
+	gui.find_child("message").text = act_info
 	if act == "throttle":
 		if drone.linear_velocity.y > 1.5:
 			print("throttle unlock")
@@ -24,13 +24,13 @@ func do_stage(delta):
 		hover_counter += delta
 		var hover_height = drone.global_position.y
 		if hover_height > 3:
-			gui.message.text += "\nYou're too high! Lower your throttle by moving the left stick closer to the center."
+			gui.find_child("message").text += "\nYou're too high! Lower your throttle by moving the left stick closer to the center."
 			hover_counter = 0
 		elif hover_height < .3:
-			gui.message.text += "\nYou're too low! Increase your throttle by moving the left stick up a small amount."
+			gui.find_child("message").text += "\nYou're too low! Increase your throttle by moving the left stick up a small amount."
 			hover_counter = 0
 		else:
-			gui.message.text += "\nNice hight! Keep this up for a bit longer!."
+			gui.find_child("message").text += "\nNice hight! Keep this up for a bit longer!."
 			if hover_counter > 10:
 				print("hover unlock")
 				stage += 1

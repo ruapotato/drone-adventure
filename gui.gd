@@ -7,8 +7,8 @@ extends Node2D
 @onready var speed_label = $SpeedLabel
 @onready var power_cell = $power_cell
 @onready var refuel_label = $refuel
-@onready var message = $message
-
+@onready var message = $message_box/message
+@onready var message_box = $message_box
 
 var player
 var drone

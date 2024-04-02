@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=21 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -51,6 +51,31 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 55
 outline_size = 20
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_d1pl5"]
+offsets = PackedFloat32Array(0.980519, 1)
+colors = PackedColorArray(0.435192, 0.435192, 0.435192, 0.482353, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bbesd"]
+gradient = SubResource("Gradient_d1pl5")
+fill_from = Vector2(1, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bkld"]
+font_size = 126
+outline_size = 18
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4lbed"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_bq8v1"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_f2m2l"]
+font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_djbgk"]
+font_size = 26
 
 [node name="gui" type="Node2D"]
 script = ExtResource("1_2mec0")
@@ -125,10 +150,56 @@ offset_bottom = 758.0
 text = "Power Low! Land to Recharge."
 label_settings = SubResource("LabelSettings_8kq81")
 
-[node name="message" type="Label" parent="."]
+[node name="overhead_message" type="Label" parent="."]
 offset_left = 74.0
 offset_top = 76.0
 offset_right = 1802.0
 offset_bottom = 307.0
 label_settings = SubResource("LabelSettings_ijbmf")
 autowrap_mode = 3
+
+[node name="message_box" type="Sprite2D" parent="."]
+position = Vector2(754, 881.75)
+scale = Vector2(23.2188, 6.05469)
+texture = SubResource("GradientTexture2D_bbesd")
+
+[node name="message" type="Label" parent="message_box"]
+offset_left = -30.8802
+offset_top = -28.0361
+offset_right = 3414.12
+offset_bottom = 1200.96
+scale = Vector2(0.0180602, 0.0464797)
+label_settings = SubResource("LabelSettings_3bkld")
+autowrap_mode = 3
+
+[node name="option_1" type="Label" parent="message_box"]
+offset_left = -30.1911
+offset_top = -2.93161
+offset_right = 17.8089
+offset_bottom = 33.0684
+scale = Vector2(0.0918557, 0.236323)
+label_settings = SubResource("LabelSettings_4lbed")
+
+[node name="option_2" type="Label" parent="message_box"]
+offset_left = -30.1911
+offset_top = 5.65677
+offset_right = 17.8089
+offset_bottom = 41.6568
+scale = Vector2(0.0918557, 0.236323)
+label_settings = SubResource("LabelSettings_bq8v1")
+
+[node name="option_3" type="Label" parent="message_box"]
+offset_left = -30.1911
+offset_top = 14.2452
+offset_right = 17.8089
+offset_bottom = 50.2452
+scale = Vector2(0.0918557, 0.236323)
+label_settings = SubResource("LabelSettings_f2m2l")
+
+[node name="option_4" type="Label" parent="message_box"]
+offset_left = -30.1911
+offset_top = 22.8335
+offset_right = 17.8089
+offset_bottom = 58.8335
+scale = Vector2(0.0918557, 0.236323)
+label_settings = SubResource("LabelSettings_djbgk")

@@ -31,24 +31,24 @@ radius = 0.068
 [sub_resource type="SphereShape3D" id="SphereShape3D_xm54y"]
 radius = 0.078
 
-[sub_resource type="Gradient" id="Gradient_tpi8l"]
+[sub_resource type="Gradient" id="Gradient_mn40e"]
 offsets = PackedFloat32Array(0.349206, 0.801587)
 colors = PackedColorArray(0, 0, 0, 1, 0, 0.513726, 1, 1)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_16tt7"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eb2hl"]
 noise_type = 2
 frequency = 0.059
 fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_54l47"]
-color_ramp = SubResource("Gradient_tpi8l")
-noise = SubResource("FastNoiseLite_16tt7")
+color_ramp = SubResource("Gradient_mn40e")
+noise = SubResource("FastNoiseLite_eb2hl")
 
-[sub_resource type="Gradient" id="Gradient_ipt8k"]
+[sub_resource type="Gradient" id="Gradient_ag4ii"]
 offsets = PackedFloat32Array(0.31746, 1)
 colors = PackedColorArray(0, 0, 0, 0.494118, 1, 1, 1, 0.482353)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_b0v1s"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5b7qt"]
 noise_type = 2
 frequency = 0.059
 fractal_type = 2
@@ -56,10 +56,10 @@ fractal_octaves = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cl4px"]
 seamless = true
-color_ramp = SubResource("Gradient_ipt8k")
-noise = SubResource("FastNoiseLite_b0v1s")
+color_ramp = SubResource("Gradient_ag4ii")
+noise = SubResource("FastNoiseLite_5b7qt")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4527"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwupa"]
 transparency = 1
 albedo_color = Color(0.160784, 0.607843, 1, 0.360784)
 metallic = 1.0
@@ -70,7 +70,7 @@ emission_texture = SubResource("NoiseTexture2D_54l47")
 
 [sub_resource type="SphereMesh" id="SphereMesh_p4g1r"]
 lightmap_size_hint = Vector2i(4, 2)
-material = SubResource("StandardMaterial3D_m4527")
+material = SubResource("StandardMaterial3D_kwupa")
 radius = 0.08
 height = 0.071
 

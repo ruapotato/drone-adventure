@@ -97,6 +97,8 @@ func _process(delta):
 					if action == "Buy":
 						#TODO
 						drone.inventory["crystals"] -= price
+						drone.inventory[buy_text] = true
+						drone.save_game()
 					if action == "Quit":
 						message_index = -1
 						message_option_index = 1

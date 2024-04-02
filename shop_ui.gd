@@ -1,9 +1,9 @@
 extends Node3D
 
-var message_range = 500
+var message_range = 15
 var selected_item_index = 1
 var in_menu = false
-var message = ["Welcome! What can I get you today."]
+var message = ["I hope you find something you like!"]
 var message_options = []
 var item_data = [{"count":1,"icon":"res://addons/terrain-shader/icon.png","max_count":1,"name":"shield_l1"},
 	{"count":1,"icon":"res://addons/terrain-shader/icon.png","max_count":1,"name":"sword_l1"}]
@@ -75,8 +75,11 @@ func _process(delta):
 	#print(global_position.distance_to(drone.global_position))
 	#print(in_menu)
 	if global_position.distance_to(drone.global_position) < message_range:
+		gui.message_box.visible = true
 		if message:
 			message_ui = message
+		if message_index == -1:
+			gui.message.text = "Welcome to my shop!"
 		if message_index >= 1:
 			in_menu = true
 			#drone.look_at_override = $items.get_children()[message_index -1]
@@ -102,19 +105,24 @@ func _process(delta):
 					print(action)
 			#print("spend: " + str(price))
 			#message_ui[message_index] = buy_text
-			
 		else:
 			in_menu = false
+			#message_index = -1
 			#drone.look_at_override = null
 			message_options = null
 	else:
 		in_menu = false
+		gui.message_box.visible = false
+		message_index = -1
+		gui.message.text = ""
+		#message = []
 		#drone.look_at_override = null
 		message_options = null
 	#NPC messages
 	if not message_ui:
 		#message_warning.visible = false
-		gui.message.visible = false
+		gui.message_box.visible = false
+	
 	#if message_ui:
 	#	if not gui.message.visible:
 	#		pass

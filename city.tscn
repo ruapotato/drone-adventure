@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://50tipirf2hql"]
+[gd_scene load_steps=20 format=3 uid="uid://50tipirf2hql"]
 
 [ext_resource type="PackedScene" path="res://city_import.tscn" id="1_hxu1s"]
 [ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://house_1_import.tscn" id="2_v1dca"]
@@ -37,6 +37,23 @@ size = Vector3(2.155, 6.08, 0.18)
 [sub_resource type="FogMaterial" id="FogMaterial_iibkm"]
 density = 5.0
 edge_fade = 0.0406126
+
+[sub_resource type="Gradient" id="Gradient_66eui"]
+offsets = PackedFloat32Array(0.0555556, 0.134921, 0.253968, 0.365079, 0.484127, 0.547619, 0.650794, 0.738095, 0.857143)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5qk1p"]
+gradient = SubResource("Gradient_66eui")
+fill = 1
+fill_from = Vector2(0.521053, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jhgvn"]
+albedo_texture = SubResource("GradientTexture2D_5qk1p")
+albedo_texture_force_srgb = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_eguea"]
+material = SubResource("StandardMaterial3D_jhgvn")
+size = Vector2(7, 7)
 
 [node name="city" type="Node3D"]
 
@@ -146,6 +163,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17306, 0, 1.30073)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38972, 0, 1.30073)
 
 [node name="Land_Making_Gun for 600" type="Node3D" parent="shop_ui/items"]
+
+[node name="landing" type="MeshInstance3D" parent="shop_ui"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256244, 3.80995)
+mesh = SubResource("PlaneMesh_eguea")
+
+[node name="Label3D" type="Label3D" parent="shop_ui/landing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.63382, 2.85117, -2.70409)
+text = "Drone Upgrades"
+font_size = 230
+outline_size = 66
 
 [connection signal="body_entered" from="portal/TP1" to="portal/TP1" method="_on_body_entered"]
 [connection signal="body_entered" from="portal/TP2" to="portal/TP2" method="_on_body_entered"]

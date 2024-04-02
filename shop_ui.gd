@@ -1,6 +1,7 @@
 extends Node3D
 
-var message_range = 15
+#var message_range = 15
+var message_range = 300
 var selected_item_index = 1
 var in_menu = false
 var message = ["I hope you find something you like!"]
@@ -86,6 +87,17 @@ func _process(delta):
 			var this_msg = message[message_index]
 			var price = int(this_msg.split(" for ")[-1])
 			var buy_text = this_msg.split(" for ")[0]
+			
+			#If this item is already in inventory, hide
+			print(buy_text)
+			print(drone.inventory)
+			if buy_text in drone.inventory:
+				message_index += 1
+				if message_index >= len(message):
+					message_index = -1
+				gui.message.text = message_ui[message_index]
+				return
+				
 			if has_crystals(price):
 				message_options = ["Buy", "Quit"]
 			else:
@@ -96,15 +108,17 @@ func _process(delta):
 					var action = message_options[message_option_index -1]
 					if action == "Buy":
 						#TODO
+						$sell.play()
 						drone.inventory["crystals"] -= price
 						drone.inventory[buy_text] = true
 						drone.save_game()
+						message_index = -1
 					if action == "Quit":
 						message_index = -1
 						message_option_index = 1
 						gui.message.visible = false
 						#gui.message_bg.visible = false
-					print(action)
+					#print(action)
 			#print("spend: " + str(price))
 			#message_ui[message_index] = buy_text
 		else:

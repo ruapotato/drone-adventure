@@ -3,6 +3,8 @@ Based on: https://github.com/Zylann/godot_voxel under: https://github.com/Zylann
 CC Attribution https://sketchfab.com/3d-models/wooden-logs-asset-pack-441fb13a0bf24f9aa8c4a219e5ab9be3
 CC Attribution https://sketchfab.com/3d-models/stylized-pine-tree-pack-46ac3c1a4c3645b1984a97568db54c5d
 CC Attribution https://sketchfab.com/3d-models/realistics-grass-03-2589c4f89dac4bbfab7f66be615f262e
+
+https://mars.nasa.gov/resources/25043/mars-ingenuity-helicopter-3d-model/
 CC Attribution https://sketchfab.com/3d-models/grass-low-poly-08c126cdc4a54334b8d67d258bc38f53
 
 CC-BY 3.0 by jdagenet https://opengameart.org/content/sci-fi-drone-loop

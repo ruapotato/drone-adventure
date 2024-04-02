@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7c7w8tl7hh37"]
+
+[ext_resource type="PackedScene" uid="uid://bjkca56qw5ypv" path="res://import/ingenuity.glb" id="1_2m7ko"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jmhwy"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_0k6e5"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_qb656"]
+graph_offset = Vector2(-407, 94)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_jmhwy")
+nodes/Animation/position = Vector2(-160, 140)
+nodes/speed/node = SubResource("AnimationNodeTimeScale_0k6e5")
+nodes/speed/position = Vector2(80, 120)
+node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
+
+[node name="ingenuity" instance=ExtResource("1_2m7ko")]
+
+[node name="Skeleton3D" parent="Armature" index="9"]
+bones/0/rotation = Quaternion(0.0848302, 0.702, -0.702, 0.0848302)
+bones/1/rotation = Quaternion(0.0274555, -0.706574, 0.706574, 0.0274554)
+bones/2/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+
+[node name="AnimationPlayer" parent="." index="1"]
+speed_scale = 6.0
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_qb656")
+anim_player = NodePath("../AnimationPlayer")
+parameters/speed/scale = 8.0

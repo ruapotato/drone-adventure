@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=28 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 [ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
 [ext_resource type="AudioStream" uid="uid://ul3s6jsd6kwb" path="res://import/Audio/explosionCrunch_001.ogg" id="6_22p5i"]
+[ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://ingenuity_import.tscn" id="7_lkp43"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
 emission_enabled = true
@@ -181,5 +182,9 @@ one_shot = true
 explosiveness = 0.2
 process_material = SubResource("ParticleProcessMaterial_isdd4")
 draw_pass_1 = SubResource("SphereMesh_jvigt")
+
+[node name="ingenuity_mesh" parent="." instance=ExtResource("7_lkp43")]
+transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, 0, -0.0380199, 0)
+visible = false
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]

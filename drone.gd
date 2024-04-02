@@ -11,7 +11,8 @@ extends RigidBody3D
 @onready var shield_cam = $shield/shield_camera
 @onready var expload_effect = $expload_effect
 @onready var expload_sound = $expload_sound
-
+@onready var ingenuity_mesh = $ingenuity_mesh
+@onready var mesh = $mesh
 var collision_size_at_rest = .075
 
 var save_index = null
@@ -258,6 +259,19 @@ func drone_physics(delta):
 	else:
 		rotation.z = lerp(rotation.z, 0.0, delta * 4)
 
+func update_user_settings():
+	
+	# Skin
+	if "lander_skin" in inventory:
+		if inventory["lander_skin"]:
+			if not ingenuity_mesh.visible:
+				ingenuity_mesh.visible = true
+				mesh.visible = false
+			return
+	if ingenuity_mesh.visible:
+		ingenuity_mesh.visible = false
+		mesh.visible = true
+
 func dead_logic(delta):
 	if dead_reset_counter < 0:
 		global_position = Vector3(0,0,0)
@@ -286,5 +300,6 @@ func _physics_process(delta):
 	update_collision_size()
 	add_wind_push()
 	drone_physics(delta)
+	update_user_settings()
 	
 

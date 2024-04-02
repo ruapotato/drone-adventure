@@ -163,10 +163,10 @@ stream = ExtResource("10_4nfns")
 [node name="lander_skin for 150" type="Node3D" parent="shop_ui/items"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17306, 0, 1.30073)
 
-[node name="exta_power for 300" type="Node3D" parent="shop_ui/items"]
+[node name="extra_power for 300" type="Node3D" parent="shop_ui/items"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38972, 0, 1.30073)
 
-[node name="Land_Making_Gun for 600" type="Node3D" parent="shop_ui/items"]
+[node name="land_making_gun for 600" type="Node3D" parent="shop_ui/items"]
 
 [node name="landing" type="MeshInstance3D" parent="shop_ui"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256244, 3.80995)

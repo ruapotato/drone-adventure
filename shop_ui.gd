@@ -6,8 +6,9 @@ var selected_item_index = 1
 var in_menu = false
 var message = ["I hope you find something you like!"]
 var message_options = []
-var item_data = [{"count":1,"icon":"res://addons/terrain-shader/icon.png","max_count":1,"name":"shield_l1"},
-	{"count":1,"icon":"res://addons/terrain-shader/icon.png","max_count":1,"name":"sword_l1"}]
+
+var exta_power_max = 10
+var exta_power_cost = 300
 
 var drone
 
@@ -35,6 +36,29 @@ func has_crystals(needed):
 	if drone.inventory["crystals"] >= needed:
 		return true
 	return false
+
+func _unhandled_input(event):
+	if event.is_action_pressed("menu_next") or event.is_action_pressed("menu_back"):
+		print("MSG!")
+		# Update message box page
+		if message_ui:
+			print("MSG!2")
+			if event.is_action_pressed("menu_next"):
+				message_index += 1
+			else:
+				message_index = -1
+			print(message_index)
+			print(message_ui)
+			if len(message_ui) > message_index:
+				gui.message.text = message_ui[message_index]
+				gui.message.visible = true
+				print("Set text")
+				#message_bg.visible = true
+			else:
+				print("Out of msgs")
+				gui.message.visible = false
+				#message_bg.visible = false
+				message_index = -1
 
 func _process(delta):
 	print(message_options)
@@ -89,9 +113,19 @@ func _process(delta):
 			var buy_text = this_msg.split(" for ")[0]
 			
 			#If this item is already in inventory, hide
-			print(buy_text)
-			print(drone.inventory)
-			if buy_text in drone.inventory:
+			if buy_text == "extra_power":
+				if "extra_power" in drone.inventory:
+					price *= drone.inventory["extra_power"] + 1
+					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level " + str(drone.inventory["extra_power"] + 1) + ")"
+				else:
+					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level 1)"
+				"""
+				if buy_text in drone.inventory:
+					drone.inventory["extra_power"] += 1
+				else:
+					drone.inventory["extra_power"] = 1
+				"""
+			elif buy_text in drone.inventory:
 				message_index += 1
 				if message_index >= len(message):
 					message_index = -1
@@ -110,7 +144,13 @@ func _process(delta):
 						#TODO
 						$sell.play()
 						drone.inventory["crystals"] -= price
-						drone.inventory[buy_text] = true
+						if buy_text == "extra_power":
+							if "extra_power" in drone.inventory:
+								drone.inventory["extra_power"] += 1
+							else:
+								drone.inventory["extra_power"] = 1
+						else:
+							drone.inventory[buy_text] = true
 						drone.save_game()
 						message_index = -1
 					if action == "Quit":
@@ -150,21 +190,4 @@ func _process(delta):
 			#message_warning.visible = false
 			#print("message...")
 	#	message_ui = null
-	if Input.is_action_just_pressed("interact"):
-		print("MSG!")
-		# Update message box page
-		if message_ui:
-			print("MSG!2")
-			message_index += 1
-			print(message_index)
-			print(message_ui)
-			if len(message_ui) > message_index:
-				gui.message.text = message_ui[message_index]
-				gui.message.visible = true
-				print("Set text")
-				#message_bg.visible = true
-			else:
-				print("Out of msgs")
-				gui.message.visible = false
-				#message_bg.visible = false
-				message_index = -1
+

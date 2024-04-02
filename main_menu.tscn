@@ -9,15 +9,15 @@
 font_size = 150
 outline_size = 25
 
-[sub_resource type="Theme" id="Theme_3einr"]
-Button/colors/font_hover_color = Color(0.764706, 0, 0.0862745, 1)
-Button/colors/icon_normal_color = Color(0, 0, 1, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_pvh8b"]
 font_size = 66
 font_color = Color(0.19, 0.5815, 1, 1)
 outline_size = 10
 outline_color = Color(0.188235, 0.580392, 1, 1)
+
+[sub_resource type="Theme" id="Theme_3einr"]
+Button/colors/font_hover_color = Color(0.764706, 0, 0.0862745, 1)
+Button/colors/icon_normal_color = Color(0, 0, 1, 1)
 
 [node name="main_menu" type="Node2D"]
 script = ExtResource("1_8rasr")
@@ -38,13 +38,13 @@ label_settings = SubResource("LabelSettings_827c2")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="."]
+[node name="play" type="Button" parent="."]
 offset_left = 720.0
 offset_top = 418.0
 offset_right = 859.0
 offset_bottom = 470.0
 scale = Vector2(3.85076, 3.63022)
-theme = SubResource("Theme_3einr")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 30
 text = "Play"
 metadata/_edit_use_anchors_ = true
@@ -61,21 +61,21 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="."]
-offset_left = 1642.0
-offset_top = 925.0
-offset_right = 1779.0
-offset_bottom = 975.0
+offset_left = 860.0
+offset_top = 808.0
+offset_right = 997.0
+offset_bottom = 858.0
 scale = Vector2(1.90032, 1.72781)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
 text = "Quit"
 metadata/_edit_use_anchors_ = true
 
-[node name="info" type="Button" parent="."]
-offset_left = 992.0
-offset_top = 612.0
-offset_right = 1129.0
-offset_bottom = 662.0
+[node name="help" type="Button" parent="."]
+offset_left = 861.0
+offset_top = 711.0
+offset_right = 998.0
+offset_bottom = 761.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
@@ -83,10 +83,10 @@ text = "Help"
 metadata/_edit_use_anchors_ = true
 
 [node name="settings" type="Button" parent="."]
-offset_left = 720.0
-offset_top = 612.0
-offset_right = 857.0
-offset_bottom = 662.0
+offset_left = 856.0
+offset_top = 618.0
+offset_right = 993.0
+offset_bottom = 668.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
@@ -98,7 +98,7 @@ metadata/_edit_use_anchors_ = true
 [node name="SettingsScreen" parent="." instance=ExtResource("4_ix6np")]
 visible = false
 
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="info" to="." method="_on_info_pressed"]
+[connection signal="pressed" from="help" to="." method="_on_info_pressed"]
 [connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]

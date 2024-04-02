@@ -6,6 +6,20 @@ extends Node2D
 @onready var setting_screen = get_parent().find_child("SettingsScreen")
 @onready var mouse_sensitivity_effector
 @onready var effects_effector
+
+@onready var tutorial_button = $tutorial_mode
+@onready var save1_button = $Save1
+@onready var save2_button = $Save2
+@onready var save3_button = $Save3
+
+@onready var delete1_button = $Delete1
+@onready var delete2_button = $Delete2
+@onready var delete3_button = $Delete3
+
+@onready var button_order = [tutorial_button,save1_button,save2_button,save3_button,delete1_button,delete2_button,delete3_button]
+var button_index = 1
+
+
 var saved_games = {}
 
 var new_game = null
@@ -22,6 +36,15 @@ func load_save(save_file):
 	if parse_result == 0:
 		var save_data = json.get_data()
 		return(save_data)
+
+func show_selected():
+	var selected = button_order[button_index]
+	selected.add_theme_color_override("font_color", Color(1,0,0))
+	
+	for i in range(0, len(button_order)):
+		if i != button_index:
+			var not_selected = button_order[i]
+			not_selected.add_theme_color_override("font_color", Color(1,1,1))
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
@@ -49,9 +72,25 @@ func _ready():
 
 	#mouse_sensitivity_effector =  
 
-
+func _unhandled_input(event):
+	if event.is_action_pressed("menu_select"):
+		if visible:
+			button_order[button_index].emit_signal("button_down")
+			button_order[button_index].emit_signal("pressed")
+	
+	if event.is_action_pressed("menu_down"):
+		button_index += 1
+	if event.is_action_pressed("menu_up"):
+		button_index -= 1
+	
+	
+	if button_index > len(button_order) - 1:
+		button_index =  len(button_order) -1
+	if button_index < 0:
+		button_index = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
+func _process(delta):
+	show_selected()
 #	print(hardness_menu.value)
 
 
@@ -59,21 +98,18 @@ func start_game():
 	if not game_started:
 		if new_game != null:
 			new_game.queue_free()
-		#get_parent().find_child("EyeLand").visible = false
-		#get_parent().find_child("Red_Dwarf").visible = false
-		#get_parent().find_child("Space").queue_free()
-		
+
 		new_game = game.instantiate()
 		new_game.hardness = hardness_menu.value/100
-		#var spawn_p = saved_games[game_save_index]["spawn_point"]
-		#var spawn_s = load("res://" + saved_games[game_save_index]["spawn_scene"] + ".tscn")
-		#new_game.init_load = [spawn_s, spawn_p]
+
 		new_game.game_index = game_save_index
-		self.hide()
-		#get_parent().spin = false
+		#call_deferred("hide")
+		hide()
 
 		add_child(new_game)
 		game_started = true
+		print("started....")
+		print(game_save_index)
 
 
 

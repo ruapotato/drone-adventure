@@ -221,7 +221,7 @@ func draw_power(power_to_draw):
 	if extra_power_cell > 0:
 		if extra_power_cell >= power_left_to_draw:
 			extra_power_cell -= power_left_to_draw
-			print(extra_power_cell)
+			#print(extra_power_cell)
 			return(true)
 		else:
 			power_left_to_draw -= extra_power_cell

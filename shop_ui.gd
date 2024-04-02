@@ -39,29 +39,29 @@ func has_crystals(needed):
 
 func _unhandled_input(event):
 	if event.is_action_pressed("menu_next") or event.is_action_pressed("menu_back"):
-		print("MSG!")
+		#print("MSG!")
 		# Update message box page
 		if message_ui:
-			print("MSG!2")
+			#print("MSG!2")
 			if event.is_action_pressed("menu_next"):
 				message_index += 1
 			else:
 				message_index = -1
-			print(message_index)
-			print(message_ui)
+			#print(message_index)
+			#print(message_ui)
 			if len(message_ui) > message_index:
 				gui.message.text = message_ui[message_index]
 				gui.message.visible = true
-				print("Set text")
+				#print("Set text")
 				#message_bg.visible = true
 			else:
-				print("Out of msgs")
+				#print("Out of msgs")
 				gui.message.visible = false
 				#message_bg.visible = false
 				message_index = -1
 
 func _process(delta):
-	print(message_options)
+	#print(message_options)
 	#Menu options
 	if message_options:
 		if Input.is_action_just_pressed("menu_down"):
@@ -92,7 +92,7 @@ func _process(delta):
 	
 	if not message_options and message_ui:
 		for menu_child in gui.find_child("message_box").get_children():
-			print("HI" + str(menu_child))
+			#print("HI" + str(menu_child))
 			if "option" in menu_child.name:
 				if menu_child.text != "":
 					menu_child.text = ""

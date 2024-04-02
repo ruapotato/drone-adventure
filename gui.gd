@@ -6,6 +6,7 @@ extends Node2D
 @onready var target_label = $targetLabel
 @onready var speed_label = $SpeedLabel
 @onready var power_cell = $power_cell
+@onready var extra_power_cell = $extra_power_cell
 @onready var refuel_label = $refuel
 @onready var message = $message_box/message
 @onready var message_box = $message_box
@@ -60,6 +61,12 @@ func update_time_label():
 		time_label.text = format_hour(world.friendly_time) + " PM"
 func update_power_cell_label():
 	power_cell.value = drone.power_cell
+	if "extra_power" in drone.inventory:
+		extra_power_cell.visible = true
+		var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
+		extra_power_cell.value = (drone.extra_power_cell / max_extra_power) * 100
+	else:
+		extra_power_cell.visible = false
 	
 func update_speed_label():
 	speed_label.text = "MPH " + str(int(drone.linear_velocity.length() * 2.23693629))

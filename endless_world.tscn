@@ -297,14 +297,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.113, 22.7489, -98.5438)
 
 [node name="city" parent="." instance=ExtResource("15_am4oe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 246.599, 0)
-
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/value_crystal" to="VoxelLodTerrain/VoxelInstancer/value_crystal" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@199947" to="VoxelLodTerrain/VoxelInstancer/@Area3D@199947" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@199949" to="VoxelLodTerrain/VoxelInstancer/@Area3D@199949" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200012" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200012" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200049" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200049" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200137" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200137" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200243" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200243" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200393" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200393" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200395" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200395" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@200397" to="VoxelLodTerrain/VoxelInstancer/@Area3D@200397" method="_on_body_entered"]

@@ -18,10 +18,12 @@ var save_index = null
 var inventory = null
 var save_file = null
 var unlocked_gun = true
-var unlocked_landgun = true
 var shoot_speed = 34
 var wind_effect = -.0005
 var power_cell = 100
+var extra_power_cell = 0
+var extra_power_per_upgrade = 10
+
 var power_gain = 1
 var power_gain_at_rest = 25
 var power_cost = .5
@@ -76,7 +78,7 @@ func load_save(save_file):
 		return(save_data)
 
 func fire_landgun():
-	if not unlocked_landgun:
+	if not "land_making_gun" in inventory:
 		return
 	var new_bullet = bullet.instantiate()
 	new_bullet.set_deferred("global_position", shoot_from.global_position)
@@ -134,10 +136,12 @@ func _unhandled_input(event):
 		#print(event)
 	if power_cell > fire_cost:
 		if event.is_action_pressed("fire_right"):
-			power_cell -= fire_cost
+			draw_power(fire_cost)
+			#power_cell -= fire_cost
 			fire_normal()
 		if event.is_action_pressed("fire_left"):
-			power_cell -= fire_cost
+			draw_power(fire_cost)
+			#power_cell -= fire_cost
 			fire_landgun()
 
 func figure_damage():
@@ -146,7 +150,7 @@ func figure_damage():
 	if damge_vector.length() > 5:
 		print("Smaked! " + str(damge_vector.length()))
 		shake = .3
-		power_cell -= abs(damge_vector.length())
+		draw_power(abs(damge_vector.length()))
 		if power_cell > 0:
 			shield_sound.play()
 		else:
@@ -193,14 +197,50 @@ func update_collision_size():
 	else:
 		speed_collision.shape.radius = collision_size_at_rest
 
-func drone_physics(delta):
+func add_power(power_to_add):
+	if power_cell < 100:
+		power_cell += power_to_add
+		if power_cell > 100:
+			power_to_add = power_cell - 100
+			power_cell = 100
+		else:
+			return
+	
+	if "extra_power" in inventory:
+		var max_extra_power = extra_power_per_upgrade * inventory["extra_power"]
+		if extra_power_cell < max_extra_power:
+			extra_power_cell += power_to_add
+			if extra_power_cell > max_extra_power:
+				extra_power_cell = max_extra_power
+		else:
+			power_cell += power_to_add
 
-	apply_impulse(global_transform.basis.y * delta * throttle)
-	power_cell -= throttle * delta * power_cost
-	if linear_velocity.length() < 1 and throttle < 1:
-		power_cell += power_gain_at_rest * delta
+func draw_power(power_to_draw):
+	var power_left_to_draw = power_to_draw
+	if extra_power_cell > 0:
+		if extra_power_cell >= power_left_to_draw:
+			extra_power_cell -= power_left_to_draw
+			print(extra_power_cell)
+			return(true)
+		else:
+			power_left_to_draw -= extra_power_cell
+			extra_power_cell = 0
+	if power_cell > power_left_to_draw:
+		power_cell -= power_left_to_draw
+		return(true)
 	else:
-		power_cell += power_gain * delta
+		return(false)
+		
+
+func drone_physics(delta):
+	apply_impulse(global_transform.basis.y * delta * throttle)
+	#power_cell -= 
+	draw_power(abs(throttle) * delta * power_cost)
+	if linear_velocity.length() < 1 and throttle < 1:
+		add_power(power_gain_at_rest * delta)
+		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
+	else:
+		add_power(power_gain * delta)
 
 	if abs(yaw) > .01:
 		#print(yaw)

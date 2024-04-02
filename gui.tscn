@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=25 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -17,12 +17,12 @@ font_size = 39
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Gradient" id="Gradient_8a5nj"]
+[sub_resource type="Gradient" id="Gradient_5w14q"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.054902, 0.819608, 0.12549, 0.686275)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nkhf7"]
-gradient = SubResource("Gradient_8a5nj")
+gradient = SubResource("Gradient_5w14q")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_67nxw"]
 texture = SubResource("GradientTexture2D_nkhf7")
@@ -35,6 +35,23 @@ default_font_size = 33
 ProgressBar/colors/font_color = Color(0, 0, 0, 1)
 ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_67nxw")
+
+[sub_resource type="Gradient" id="Gradient_efivq"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0.054902, 0.419608, 0.721569, 0.686275)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8nnka"]
+gradient = SubResource("Gradient_efivq")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cdgy7"]
+texture = SubResource("GradientTexture2D_8nnka")
+
+[sub_resource type="Theme" id="Theme_lbp06"]
+default_font = SubResource("SystemFont_cot6j")
+default_font_size = 33
+ProgressBar/colors/font_color = Color(0, 0, 0, 1)
+ProgressBar/colors/font_outline_color = Color(1, 1, 1, 1)
+ProgressBar/styles/fill = SubResource("StyleBoxTexture_cdgy7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_888po"]
 font_size = 46
@@ -128,6 +145,17 @@ offset_bottom = 731.0
 theme = SubResource("Theme_q3l0v")
 value = 100.0
 rounded = true
+
+[node name="extra_power_cell" type="ProgressBar" parent="."]
+offset_left = 1520.0
+offset_top = 731.0
+offset_right = 1919.0
+offset_bottom = 781.0
+scale = Vector2(1, 0.347286)
+theme = SubResource("Theme_lbp06")
+value = 100.0
+rounded = true
+show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(1528.53, 653.995)

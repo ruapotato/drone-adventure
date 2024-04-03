@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=26 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -56,6 +56,12 @@ ProgressBar/styles/fill = SubResource("StyleBoxTexture_cdgy7")
 
 [sub_resource type="LabelSettings" id="LabelSettings_888po"]
 font_size = 46
+outline_size = 16
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_dx5tm"]
+font_size = 20
+font_color = Color(0, 0.427451, 0.580392, 1)
 outline_size = 16
 outline_color = Color(0, 0, 0, 1)
 
@@ -169,6 +175,13 @@ offset_top = 620.005
 offset_right = 1734.53
 offset_bottom = 684.005
 label_settings = SubResource("LabelSettings_888po")
+
+[node name="bank_label" type="Label" parent="."]
+offset_left = 1560.0
+offset_top = 599.0
+offset_right = 1742.0
+offset_bottom = 663.0
+label_settings = SubResource("LabelSettings_dx5tm")
 
 [node name="refuel" type="Label" parent="."]
 visible = false

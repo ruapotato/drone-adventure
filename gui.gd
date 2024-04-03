@@ -10,6 +10,7 @@ extends Node2D
 @onready var refuel_label = $refuel
 @onready var message = $message_box/message
 @onready var message_box = $message_box
+@onready var bank_label = $bank_label
 
 var player
 var drone
@@ -81,6 +82,13 @@ func update_refuel():
 func _process(delta):
 	if str(drone.inventory["crystals"]) != crystal_label.text:
 		crystal_label.text = str(drone.inventory["crystals"])
+	if "bank" in drone.inventory:
+		if str(drone.inventory["bank"]) != bank_label.text:
+			bank_label.text = str(drone.inventory["bank"])
+			bank_label.visible = true
+	else:
+		if bank_label.visible:
+			bank_label.visible = false
 	camera.global_position = drone.back_cam_mount.global_position
 	camera.look_at(drone.global_position)
 	update_speed_label()

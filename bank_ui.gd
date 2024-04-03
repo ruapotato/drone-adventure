@@ -5,7 +5,7 @@ var message_range = 5
 var selected_item_index = 1
 var in_menu = false
 var menu_in_use = false
-var message = ["I hope you find something you like!"]
+var message = ["This is a good place to keep your crystal in case you die."]
 var message_options = []
 
 var exta_power_max = 10
@@ -114,7 +114,7 @@ func _process(delta):
 				if "option" in menu_child.name:
 					if menu_child.text != "":
 						menu_child.text = ""
-		
+	
 	#print(global_position.distance_to(drone.global_position))
 	#print(in_menu)
 	if global_position.distance_to(drone.global_position) < message_range:
@@ -123,64 +123,32 @@ func _process(delta):
 		if message:
 			message_ui = message
 		if message_index == -1:
-			gui.message.text = "Welcome to my shop!"
-		if message_index >= 1:
+			gui.message.text = "Give me yo crystals, for save keeping."
+		if message_index >= 0:
 			in_menu = true
 			#drone.look_at_override = $items.get_children()[message_index -1]
 			var this_msg = message[message_index]
-			var price = int(this_msg.split(" for ")[-1])
-			var buy_text = this_msg.split(" for ")[0]
-			
-			#If this item is already in inventory, hide
-			if buy_text == "extra_power":
-				if "extra_power" in drone.inventory:
-					price *= drone.inventory["extra_power"] + 1
-					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level " + str(drone.inventory["extra_power"] + 1) + ")"
-				else:
-					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level 1)"
-				"""
-				if buy_text in drone.inventory:
-					drone.inventory["extra_power"] += 1
-				else:
-					drone.inventory["extra_power"] = 1
-				"""
-			elif buy_text in drone.inventory:
-				message_index += 1
-				if message_index >= len(message):
-					message_index = -1
-				gui.message.text = message_ui[message_index]
-				return
-				
-			if has_crystals(price):
-				message_options = ["Buy", "Quit"]
-			else:
-				message_options = ["Quit"]
+			var buy_text = "Deposit all"
+			message_options = ["Deposit", "Quit"]
+
 			
 			if message_options:
 				if Input.is_action_just_pressed("menu_select"):
 					var action = message_options[message_option_index -1]
-					if action == "Buy":
+					if action == "Deposit":
 						#TODO
 						$sell.play()
-						charge_crystals(price)
-						#drone.inventory["crystals"] -= price
-						if buy_text == "extra_power":
-							if "extra_power" in drone.inventory:
-								drone.inventory["extra_power"] += 1
-							else:
-								drone.inventory["extra_power"] = 1
-						else:
-							drone.inventory[buy_text] = true
+						if "bank" not in drone.inventory:
+							drone.inventory["bank"] = 0
+						drone.inventory["bank"] += drone.inventory["crystals"]
+						drone.inventory["crystals"] = 0
 						drone.save_game()
 						message_index = -1
 					if action == "Quit":
 						message_index = -1
 						message_option_index = 1
 						gui.message.visible = false
-						#gui.message_bg.visible = false
-					#print(action)
-			#print("spend: " + str(price))
-			#message_ui[message_index] = buy_text
+
 		else:
 			in_menu = false
 			#message_index = -1
@@ -200,15 +168,3 @@ func _process(delta):
 		#message_warning.visible = false
 	#	gui.message_box.visible = false
 	
-	#if message_ui:
-	#	if not gui.message.visible:
-	#		pass
-			#message_warning.visible = true
-			#if message_index > -1:
-			#	gui.message.text = message_ui[message_index]
-			#	gui.message.visible = true
-		#else:
-			#message_warning.visible = false
-			#print("message...")
-	#	message_ui = null
-

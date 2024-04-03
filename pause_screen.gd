@@ -52,3 +52,20 @@ func _unhandled_input(event):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	show_selected()
+
+
+func _on_reuseme_pressed():
+	Engine.time_scale = 1.0
+	hide()
+
+
+func _on_toggle_skin_pressed():
+	if "lander_skin" in drone.inventory:
+		drone.inventory["lander_skin"] = !drone.inventory["lander_skin"]
+
+
+func _on_exit_pressed():
+	get_tree().quit()
+	#for body in get_parent().get_children():
+	#	body.queue_free()
+	#get_tree().reload_current_scene()

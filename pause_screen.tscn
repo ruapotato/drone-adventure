@@ -28,3 +28,7 @@ offset_right = 1118.0
 offset_bottom = 614.0
 theme_override_font_sizes/font_size = 70
 text = "Exit Game"
+
+[connection signal="pressed" from="reuseme" to="." method="_on_reuseme_pressed"]
+[connection signal="pressed" from="toggle_skin" to="." method="_on_toggle_skin_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

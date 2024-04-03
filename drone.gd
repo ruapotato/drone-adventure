@@ -125,12 +125,13 @@ func _unhandled_input(event):
 		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
 		yaw = -event.axis_value
-		
+		print(event.axis_value)
+		yaw = -event.axis_value
 		#Odd bug fix Range is 1-0 but jumps to -1 at most right
 		#not sure why it jumps to -1
-		if yaw == -1:
-			yaw = 0
-		yaw = (yaw * 2) - 1
+		#if yaw == -1:
+		#	yaw = 0
+		#yaw = (yaw * 2) - 1
 		
 		#print(event.axis_value)
 	if event.is_action("pitch"):

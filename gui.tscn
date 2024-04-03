@@ -28,6 +28,7 @@ gradient = SubResource("Gradient_5w14q")
 texture = SubResource("GradientTexture2D_nkhf7")
 
 [sub_resource type="SystemFont" id="SystemFont_cot6j"]
+subpixel_positioning = 0
 
 [sub_resource type="Theme" id="Theme_q3l0v"]
 default_font = SubResource("SystemFont_cot6j")

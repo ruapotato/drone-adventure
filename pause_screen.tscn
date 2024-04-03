@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://cornhcpsobmu1"]
+
+[ext_resource type="Script" path="res://pause_screen.gd" id="1_d0qpy"]
+
+[node name="pause_screen" type="Node2D"]
+script = ExtResource("1_d0qpy")
+
+[node name="reuseme" type="Button" parent="."]
+offset_left = 782.0
+offset_top = 265.0
+offset_right = 1092.0
+offset_bottom = 370.0
+theme_override_font_sizes/font_size = 70
+text = "reuseme"
+
+[node name="toggle_skin" type="Button" parent="."]
+offset_left = 747.0
+offset_top = 388.0
+offset_right = 1136.0
+offset_bottom = 492.0
+theme_override_font_sizes/font_size = 70
+text = "Toggle Skin"
+
+[node name="exit" type="Button" parent="."]
+offset_left = 767.0
+offset_top = 510.0
+offset_right = 1118.0
+offset_bottom = 614.0
+theme_override_font_sizes/font_size = 70
+text = "Exit Game"

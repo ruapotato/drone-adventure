@@ -1,7 +1,7 @@
 extends Node3D
 
 #var message_range = 15
-var message_range = 300
+var message_range = 15
 var selected_item_index = 1
 var in_menu = false
 var message = ["I hope you find something you like!"]

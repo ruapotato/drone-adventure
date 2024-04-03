@@ -1,0 +1,54 @@
+extends Node2D
+
+@onready var reuseme_button = $reuseme
+@onready var toggle_skin_button = $toggle_skin
+@onready var exit_button = $exit
+
+@onready var button_order = [reuseme_button,toggle_skin_button,exit_button]
+var button_index = 0
+
+var drone
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	drone = get_drone()
+
+func get_drone():
+	var root_i_hope = get_parent()
+	while root_i_hope.name != "world":
+		root_i_hope = root_i_hope.get_parent()
+	return(root_i_hope.find_child("drone"))
+	
+func show_selected():
+	var selected = button_order[button_index]
+	selected.add_theme_color_override("font_color", Color(1,0,0))
+	
+	for i in range(0, len(button_order)):
+		if i != button_index:
+			var not_selected = button_order[i]
+			not_selected.add_theme_color_override("font_color", Color(1,1,1))
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		if visible:
+			Engine.time_scale = 1.0
+		else:
+			Engine.time_scale = 0.01
+		visible = !visible
+	if visible:
+		if event.is_action_pressed("menu_select"):
+			button_order[button_index].emit_signal("button_down")
+			button_order[button_index].emit_signal("pressed")
+		
+		if event.is_action_pressed("menu_down"):
+			button_index += 1
+		if event.is_action_pressed("menu_up"):
+			button_index -= 1
+		if button_index > len(button_order) - 1:
+			button_index =  len(button_order) -1
+		if button_index < 0:
+			button_index = 0
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	show_selected()

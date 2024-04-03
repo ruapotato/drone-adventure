@@ -13,6 +13,7 @@ extends RigidBody3D
 @onready var expload_sound = $expload_sound
 @onready var ingenuity_mesh = $ingenuity_mesh
 @onready var mesh = $mesh
+@onready var pause_screen = $"../pause_screen"
 var collision_size_at_rest = .075
 
 var save_index = null
@@ -118,6 +119,8 @@ func get_max_throttle():
 	return(max_throttle - (effect * 1.9))
 
 func _unhandled_input(event):
+	if is_paused():
+		return
 	if event.is_action("throttle"):
 		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
@@ -216,6 +219,9 @@ func add_power(power_to_add):
 		else:
 			power_cell += power_to_add
 
+func is_paused():
+	return(pause_screen.visible)
+
 func draw_power(power_to_draw):
 	var power_left_to_draw = power_to_draw
 	if extra_power_cell > 0:
@@ -290,7 +296,8 @@ func _physics_process(delta):
 	if dead:
 		dead_logic(delta)
 		return
-	
+	if is_paused():
+		return
 	if not tutorial_mode:
 		cooldowns(delta)
 		do_shake(delta)

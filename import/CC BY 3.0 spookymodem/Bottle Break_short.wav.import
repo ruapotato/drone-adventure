@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://nm476fyuq73n"
+path="res://.godot/imported/Bottle Break_short.wav-24c2edcea13e8e5415f05051fb452862.sample"
+
+[deps]
+
+source_file="res://import/CC BY 3.0 spookymodem/Bottle Break_short.wav"
+dest_files=["res://.godot/imported/Bottle Break_short.wav-24c2edcea13e8e5415f05051fb452862.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

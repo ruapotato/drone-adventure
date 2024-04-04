@@ -160,7 +160,7 @@ func figure_damage():
 			shield_sound.play()
 		else:
 			expload_sound.play()
-	print(power_cell)
+	#print(power_cell)
 	if power_cell < 0:
 		print("You are dead!")
 		expload_effect.emitting = true

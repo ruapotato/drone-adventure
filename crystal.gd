@@ -6,9 +6,11 @@ var bob_speed = .7
 var timer = 0
 var player
 var drone
+var world
 var init_pos
 var collected = false
 var collected_animation = .5
+var shatter_range = 1
 
 func get_player():
 	var root_i_hope = get_parent()
@@ -27,12 +29,14 @@ func _ready():
 	
 	player = get_player()
 	drone = get_drone()
+	world = drone.get_parent()
 	#value = int(name.split("_")[0])
 	if not value:
 		init_pos = global_position + Vector3(0,randi_range(0,3),0)
 		value = randi_range(1,200)
 		value = int(value/randi_range(1,100)) + 1
-	#else:
+	else:
+		$shatter_sound.play()
 	#	init_pos = global_position + Vector3(0,.2,0)
 	#print(value)
 	var color
@@ -117,7 +121,18 @@ func _process(delta):
 	#	if message:
 	#		player.message_ui = message
 
-
+func shatter():
+	if value == 1:
+		return
+	var number_to_spit_into = randi_range(2,value)
+	if number_to_spit_into > 3:
+		number_to_spit_into = 3
+	for split in range(0,number_to_spit_into):
+		var offset = Vector3(0,0,0)
+		offset.x = randi_range(-shatter_range,shatter_range)
+		offset.z = randi_range(-shatter_range,shatter_range)
+		world.add_crystal_to_world(int(value/number_to_spit_into),global_position + offset)
+	queue_free()
 func _on_body_entered(body):
 	if body == drone:
 		#print("I'm colleded")
@@ -126,4 +141,6 @@ func _on_body_entered(body):
 		drone.save_game()
 		#print(player.inventory["crystals"])
 		collected = true
+	else:
+		shatter()
 

@@ -11,7 +11,7 @@ func _ready():
 	TP3 = get_parent().find_child("TP3_shape")
 	TP4 = get_parent().find_child("TP4_shape")
 	drone = get_drone()
-	portal_point_to_city = drone.get_parent().find_child("portal_in_point")
+	portal_point_to_city = drone.get_parent().find_child("city_loader")
 	#TP4_corridor = get_parent().find_child("CorridorPortalA")
 
 func get_drone():

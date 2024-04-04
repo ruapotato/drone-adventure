@@ -1,6 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://50tipirf2hql"]
 
 [ext_resource type="PackedScene" path="res://city_import.tscn" id="1_hxu1s"]
+[ext_resource type="Script" path="res://city.gd" id="1_ne8q2"]
 [ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://house_1_import.tscn" id="2_v1dca"]
 [ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://house_2_import.tscn" id="3_p7m7l"]
 [ext_resource type="PackedScene" path="res://house_3_import.tscn" id="4_ciwt5"]
@@ -36,10 +37,6 @@ size = Vector3(2.47, 5.2, 0.19)
 [sub_resource type="BoxShape3D" id="BoxShape3D_kxlo4"]
 size = Vector3(2.155, 6.08, 0.18)
 
-[sub_resource type="FogMaterial" id="FogMaterial_iibkm"]
-density = 5.0
-edge_fade = 0.0406126
-
 [sub_resource type="Gradient" id="Gradient_66eui"]
 offsets = PackedFloat32Array(0.0555556, 0.134921, 0.253968, 0.365079, 0.484127, 0.547619, 0.650794, 0.738095, 0.857143)
 colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1)
@@ -58,6 +55,7 @@ material = SubResource("StandardMaterial3D_jhgvn")
 size = Vector2(7, 7)
 
 [node name="city" type="Node3D"]
+script = ExtResource("1_ne8q2")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_khtga")
@@ -147,11 +145,6 @@ script = ExtResource("7_717f3")
 transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 3.55271e-15, 0, 1, -1.90735e-06, 0, -7.14285)
 shape = SubResource("BoxShape3D_kxlo4")
 
-[node name="FogVolume" type="FogVolume" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.31, -60.0645, -98.254)
-size = Vector3(507.15, 63.1, 225.85)
-material = SubResource("FogMaterial_iibkm")
-
 [node name="shop_ui" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -98.4543, 0, -65.5916)
 script = ExtResource("9_7dm53")
@@ -200,6 +193,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.04747, 2.42769, -3.98414)
 text = "Bank"
 font_size = 230
 outline_size = 66
+
+[node name="cars" type="Node3D" parent="."]
+
+[node name="towers" type="Node3D" parent="."]
 
 [connection signal="body_entered" from="portal/TP1" to="portal/TP1" method="_on_body_entered"]
 [connection signal="body_entered" from="portal/TP2" to="portal/TP2" method="_on_body_entered"]

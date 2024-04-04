@@ -25,6 +25,7 @@ func _physics_process(delta):
 func _process(delta):
 	if life <= 0:
 		print("mini down")
+		drone.world.add_crystal_to_world(randi_range(1,3),body.global_position)
 		queue_free()
 	#var wanted_speed = body.global_position.direction_to(drone.global_position) * speed
 	#body.linear_velocity = wanted_speed

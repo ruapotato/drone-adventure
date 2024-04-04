@@ -125,7 +125,7 @@ func _unhandled_input(event):
 		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
 		yaw = -event.axis_value
-		print(event.axis_value)
+		#print(event.axis_value)
 		yaw = -event.axis_value
 		#Odd bug fix Range is 1-0 but jumps to -1 at most right
 		#not sure why it jumps to -1
@@ -160,7 +160,7 @@ func figure_damage():
 			shield_sound.play()
 		else:
 			expload_sound.play()
-			
+	print(power_cell)
 	if power_cell < 0:
 		print("You are dead!")
 		expload_effect.emitting = true
@@ -237,6 +237,7 @@ func draw_power(power_to_draw):
 		power_cell -= power_left_to_draw
 		return(true)
 	else:
+		power_cell = -1
 		return(false)
 		
 
@@ -281,6 +282,8 @@ func update_user_settings():
 
 func dead_logic(delta):
 	if dead_reset_counter < 0:
+		if inventory["crystals"] > 0:
+			world.add_crystal_to_world(inventory["crystals"],global_position + Vector3(0,1,0))
 		global_position = Vector3(0,0,0)
 		inventory["crystals"] = 0
 		power_cell = 100

@@ -201,6 +201,7 @@ label_settings = SubResource("LabelSettings_ijbmf")
 autowrap_mode = 3
 
 [node name="message_box" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(754, 881.75)
 scale = Vector2(23.2188, 6.05469)
 texture = SubResource("GradientTexture2D_bbesd")

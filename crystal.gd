@@ -24,12 +24,16 @@ func get_drone():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	init_pos = global_position + Vector3(0,randi_range(0,3),0)
+	
 	player = get_player()
 	drone = get_drone()
 	#value = int(name.split("_")[0])
-	value = randi_range(1,200)
-	value = int(value/randi_range(1,100)) + 1
+	if not value:
+		init_pos = global_position + Vector3(0,randi_range(0,3),0)
+		value = randi_range(1,200)
+		value = int(value/randi_range(1,100)) + 1
+	#else:
+	#	init_pos = global_position + Vector3(0,.2,0)
 	#print(value)
 	var color
 	if value >= 200:

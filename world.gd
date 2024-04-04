@@ -1,5 +1,6 @@
 extends Node3D
 
+@onready var crystal = preload("res://crystal.tscn")
 @onready var env = $WorldEnvironment
 @onready var drone = $drone
 @onready var sun = $sun
@@ -105,6 +106,15 @@ func update_friendly_time():
 		friendly_time_am = true
 	else:
 		friendly_time_am = false
+
+func add_crystal_to_world(value,pos):
+	#randi_range(20,100)
+	var new_crystal = crystal.instantiate()
+	new_crystal.value = value
+	new_crystal.init_pos = pos
+	#new_crystal.global_position = body.global_position
+	new_crystal.set_deferred("global_position", pos)
+	drone.get_parent().add_child(new_crystal)
 
 
 func update_abs_time():

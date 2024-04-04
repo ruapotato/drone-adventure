@@ -1,5 +1,6 @@
 extends RigidBody3D
 
+@onready var crystal = preload("res://crystal.tscn")
 @onready var shape = $CollisionShape3D
 
 @onready var mesh = $MeshInstance3D
@@ -83,7 +84,12 @@ func _process(delta):
 
 
 func _on_area_3d_body_entered(body):
-
+	if "crow" in body.name:
+		body.visible = false
+		world.add_crystal_to_world(randi_range(20,100),body.global_position)
+		$boom.play()
+		return
+		
 	if body.name != "drone" and body.name != "bullet" and body != self:
 		print()
 		print(body.name)

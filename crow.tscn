@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d10jrv7c6m85u"]
+
+[ext_resource type="Script" path="res://crow.gd" id="1_kg1kx"]
+[ext_resource type="PackedScene" uid="uid://uknhyh44d3wk" path="res://crow_import.tscn" id="1_wp6bs"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mkdig"]
+height = 0.471
+radius = 0.183
+
+[node name="crow" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_kg1kx")
+
+[node name="mesh" parent="." instance=ExtResource("1_wp6bs")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_mkdig")

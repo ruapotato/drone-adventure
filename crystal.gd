@@ -132,7 +132,7 @@ func shatter():
 		offset.x = randi_range(-shatter_range,shatter_range)
 		offset.z = randi_range(-shatter_range,shatter_range)
 		world.add_crystal_to_world(int(value/number_to_spit_into),global_position + offset)
-	queue_free()
+	collected = true
 func _on_body_entered(body):
 	if body == drone:
 		#print("I'm colleded")

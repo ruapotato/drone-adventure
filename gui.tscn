@@ -11,6 +11,7 @@ outline_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_2q8g7"]
 font_size = 31
 font_color = Color(0, 0, 0, 0.352941)
+outline_size = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_w3wg3"]
 font_size = 39

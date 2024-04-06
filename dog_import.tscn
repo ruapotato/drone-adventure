@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://s0bwprbhwg1e"]
+[gd_scene load_steps=14 format=3 uid="uid://s0bwprbhwg1e"]
 
 [ext_resource type="PackedScene" uid="uid://dgoshbu6epvul" path="res://import/dog.glb" id="1_og0of"]
 
@@ -9,7 +9,8 @@ albedo_color = Color(0, 0, 0, 1)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_a76l2"]
-colors = PackedColorArray(0.770492, 0.770492, 0.616393, 1, 1, 1, 0.8, 1)
+offsets = PackedFloat32Array(0, 0.278689)
+colors = PackedColorArray(0.779081, 0.779171, 0.627637, 1, 0.700059, 0.794198, 0.508381, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_62urr"]
 frequency = 0.067
@@ -34,29 +35,33 @@ animation = &"sit"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pnf8q"]
 animation = &"run"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gytc6"]
+animation = &"bark"
+
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_i538l"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_b31p4")
 blend_point_0/pos = 0.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_pnf8q")
 blend_point_1/pos = 1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_gytc6")
+blend_point_2/pos = 0.5
 min_space = 0.0
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ccxio"]
-graph_offset = Vector2(-411, 93)
+graph_offset = Vector2(-490, 99)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_jsqe1")
 nodes/TimeScale/position = Vector2(80, 120)
 nodes/walk_run/node = SubResource("AnimationNodeBlendSpace1D_i538l")
 nodes/walk_run/position = Vector2(-120, 140)
 node_connections = [&"TimeScale", 0, &"walk_run", &"output", 0, &"TimeScale"]
 
-[node name="dog" instance=ExtResource("1_og0of")]
+[node name="dog2" instance=ExtResource("1_og0of")]
 
 [node name="Skeleton3D" parent="metarig" index="0"]
 bones/0/position = Vector3(0.128779, 0.172623, -0.282823)
 bones/0/rotation = Quaternion(0.743457, -0.185451, 0.23485, 0.598101)
 bones/2/rotation = Quaternion(-0.592609, 0.0222716, -0.109838, 0.797656)
 bones/2/scale = Vector3(1, 1, 1)
-bones/3/rotation = Quaternion(0.0716813, -5.92643e-07, 3.06652e-07, 0.997428)
 bones/4/rotation = Quaternion(-0.0346536, -0.00735776, -0.017396, 0.999221)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/rotation = Quaternion(0.0864603, -0.0107557, 0.0105134, 0.996142)
@@ -108,13 +113,13 @@ bones/33/rotation = Quaternion(-0.0166105, 0.998829, -0.0136345, 0.0433459)
 bones/33/scale = Vector3(1, 1, 1)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0483191, 0.430017, -0.0180574)
+transform = Transform3D(0.727186, 0.294108, -0.620231, 0.168894, 0.799103, 0.576955, 0.665339, -0.524295, 0.531429, -0.0483189, 0.430017, -0.0180581)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D/eyes_inside_L_000" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_1tkxs")
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0340942, 0.434859, 0.0093092)
+transform = Transform3D(0.727186, 0.294108, -0.620231, 0.168894, 0.799103, 0.576955, 0.665339, -0.524295, 0.531429, -0.034094, 0.434859, 0.00930853)
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D/eyes_inside_L_002" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_6we2e")

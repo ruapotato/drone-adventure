@@ -41,21 +41,19 @@ func _ready():
 	#print(value)
 	var color
 	if value >= 200:
-		color = Color("#6600cc")
+		color = Color("#ffffff")
 	elif value >= 150:
-		color = Color("#000000")
+		color = Color("#ffffcc")
 	elif value >= 100:
-		color = Color("#AAAAAA")
+		color = Color("#ff9999")
 	elif value >= 50:
-		color = Color("#ff4d94")
+		color = Color("#ff66ff")
 	elif value >= 20:
-		color = Color("#cc0000")
+		color = Color("#3366ff")
 	elif value >= 10:
-		color = Color("#ffff00")
-	elif value >= 5:
-		color = Color("#008000")
+		color = Color("#006699")
 	else:
-		color = Color("#ff8000")
+		color = Color("#003300")
 	
 	var color_material = StandardMaterial3D.new()
 	color_material.albedo_color = color

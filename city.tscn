@@ -55,6 +55,7 @@ material = SubResource("StandardMaterial3D_jhgvn")
 size = Vector2(7, 7)
 
 [node name="city" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.7981, -13.0643, 70.8226)
 script = ExtResource("1_ne8q2")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

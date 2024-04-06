@@ -26,6 +26,8 @@ noise = SubResource("FastNoiseLite_62urr")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrobf"]
 albedo_texture = SubResource("NoiseTexture2D_nwykg")
 
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jsqe1"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b31p4"]
 animation = &"sit"
 
@@ -39,15 +41,13 @@ blend_point_1/node = SubResource("AnimationNodeAnimation_pnf8q")
 blend_point_1/pos = 1.0
 min_space = 0.0
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jsqe1"]
-
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_ccxio"]
 graph_offset = Vector2(-411, 93)
-nodes/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_i538l")
-nodes/BlendSpace1D/position = Vector2(-120, 140)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_jsqe1")
 nodes/TimeScale/position = Vector2(80, 120)
-node_connections = [&"TimeScale", 0, &"BlendSpace1D", &"output", 0, &"TimeScale"]
+nodes/walk_run/node = SubResource("AnimationNodeBlendSpace1D_i538l")
+nodes/walk_run/position = Vector2(-120, 140)
+node_connections = [&"TimeScale", 0, &"walk_run", &"output", 0, &"TimeScale"]
 
 [node name="dog" instance=ExtResource("1_og0of")]
 
@@ -108,13 +108,13 @@ bones/33/rotation = Quaternion(-0.0166105, 0.998829, -0.0136345, 0.0433459)
 bones/33/scale = Vector3(1, 1, 1)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.727186, 0.294108, -0.620231, 0.168894, 0.799103, 0.576955, 0.665339, -0.524295, 0.531429, -0.048319, 0.430017, -0.0180581)
+transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0483191, 0.430017, -0.0180574)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D/eyes_inside_L_000" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_1tkxs")
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.727186, 0.294108, -0.620231, 0.168894, 0.799103, 0.576955, 0.665339, -0.524295, 0.531429, -0.034094, 0.434859, 0.00930852)
+transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0340942, 0.434859, 0.0093092)
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D/eyes_inside_L_002" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_6we2e")
@@ -125,5 +125,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_vrobf")
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_ccxio")
 anim_player = NodePath("../AnimationPlayer")
-parameters/BlendSpace1D/blend_position = 0.0
 parameters/TimeScale/scale = 7.3
+parameters/walk_run/blend_position = 0.0

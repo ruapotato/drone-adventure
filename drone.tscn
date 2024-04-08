@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=29 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
@@ -20,6 +20,11 @@ height = 0.055
 dof_blur_far_enabled = true
 dof_blur_far_distance = 300.0
 dof_blur_far_transition = 50.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_epw67"]
+top_radius = 0.0
+bottom_radius = 0.04
+height = 0.175
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n3w36"]
 margin = 0.0
@@ -122,6 +127,10 @@ attributes = SubResource("CameraAttributesPractical_8d16w")
 current = true
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Camera3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -2.98023e-08, 1, 0, -1, -2.98023e-08, 0, -0.0034676, 0.00160534)
+mesh = SubResource("CylinderMesh_epw67")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n3w36")

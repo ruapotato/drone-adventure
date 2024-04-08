@@ -44,6 +44,8 @@ var yaw_speed = 3
 
 var pitch = 0.0
 var pitch_speed = 5
+var cam_pitch = 0.0
+var cam_roll = 0.0
 
 var roll = 0.0
 var roll_speed = 5
@@ -51,9 +53,13 @@ var tp_cooldown = 0
 var world
 var last_velocity = Vector3(0,0,0)
 var tutorial_mode = false
+
+var cam_inti_rot
+var cam_pitch_add = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
+	
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true
 		inventory = {"crystals":0}
@@ -61,7 +67,9 @@ func _ready():
 		save_index = get_parent().game_index
 		save_file = "user://savegame_" + str(save_index) + ".json"
 		inventory = load_save(save_file)
+	
 	og_camera_angle = camera.rotation_degrees
+	cam_inti_rot = camera.rotation
 
 func save_game():
 	var save_game = FileAccess.open(save_file, FileAccess.WRITE)
@@ -121,7 +129,25 @@ func get_max_throttle():
 func _unhandled_input(event):
 	if is_paused():
 		return
+		
+	if power_cell > fire_cost:
+		if event.is_action_pressed("fire_right"):
+			draw_power(fire_cost)
+			#power_cell -= fire_cost
+			fire_normal()
+		if event.is_action_pressed("fire_left"):
+			draw_power(fire_cost)
+			#power_cell -= fire_cost
+			fire_landgun()
+	
+	# aim mode
+	if Input.is_action_pressed("aim"):
+		aim_mode_unhandled_input(event)
+		return
+	
+	# normal mode
 	if event.is_action("throttle"):
+		#print(-event.axis_value)
 		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
 		yaw = -event.axis_value
@@ -139,15 +165,7 @@ func _unhandled_input(event):
 	if event.is_action("roll"):
 		roll = -event.axis_value
 		#print(event)
-	if power_cell > fire_cost:
-		if event.is_action_pressed("fire_right"):
-			draw_power(fire_cost)
-			#power_cell -= fire_cost
-			fire_normal()
-		if event.is_action_pressed("fire_left"):
-			draw_power(fire_cost)
-			#power_cell -= fire_cost
-			fire_landgun()
+
 
 func figure_damage():
 	var damge_vector = last_velocity - linear_velocity
@@ -178,7 +196,8 @@ func do_shake(delta):
 	elif shake < 0:
 		shake = 0
 	else:
-		camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
+		if not Input.is_action_pressed("aim"):
+			camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
 
 func add_wind_push():
 	var wind_force = linear_velocity * wind_effect
@@ -241,7 +260,94 @@ func draw_power(power_to_draw):
 		return(false)
 		
 
+func aim_mode_unhandled_input(event):
+	# Remap Yaw/throttle to moving
+	if event.is_action("throttle"):
+		#print(-event.axis_value)
+		pitch = event.axis_value/5
+	if event.is_action("yaw"):
+		roll = -event.axis_value/5
+		#print(event.axis_value)
+	#if event.is_action("throttle"):
+	#	throttle = -needed_throttle * get_max_throttle()
+	#if event.is_action("yaw"):
+	#	yaw = -event.axis_value
+	#	yaw = -event.axis_value
+	if event.is_action("pitch"):
+		cam_pitch = event.axis_value
+	# remap roll to yaw
+	if event.is_action("roll"):
+		yaw = -event.axis_value
+		yaw = -event.axis_value
+		#cam_roll = -event.axis_value
+
+
+
+func drone_aim_mode(delta):
+	#var needed_throttle = clamp(linear_velocity.y,-.5,.5) * -1
+	#throttle = .5 + needed_throttle
+	if linear_velocity.y < 0:
+		throttle = 1.0
+	else:
+		throttle = .5
+	#var needed_throttle = 2.0 - linear_velocity.y
+	throttle = throttle * get_max_throttle()
+	#print(throttle)
+	apply_impulse(global_transform.basis.y * delta * throttle)
+	draw_power(abs(throttle) * delta * power_cost)
+	if linear_velocity.length() < 1 and throttle < 1:
+		add_power(power_gain_at_rest * delta)
+		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
+	else:
+		add_power(power_gain * delta)
+
+	if abs(yaw) > .01:
+		#print(yaw)
+		rotate_y(yaw * yaw_speed * delta)
+	
+	var pitch_change = 0.0
+	if abs(pitch) > .01:
+		#rotation.x = (pitch * PI)/2
+		pitch_change = lerp(rotation.x,  (pitch * PI)/2, delta * 3)
+		rotation.x = pitch_change
+	else:
+		pitch_change = lerp(rotation.x,  0.0, delta * 4)
+		rotation.x  = pitch_change
+	if abs(roll) > .01:
+		#rotation.z = (roll * PI)/2
+		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * 3)
+	else:
+		rotation.z = lerp(rotation.z, 0.0, delta * 4)
+	
+	if pitch_change != 0.0:
+		camera.rotation.x = -pitch_change
+	#if abs(cam_pitch) > .01:
+	cam_pitch_add += cam_pitch * yaw_speed * delta
+	#camera.rotation.x += cam_pitch_add
+	camera.rotate_x(cam_pitch_add)
+	if cam_pitch_add > PI * 2:
+		cam_pitch_add -= PI * 2
+	if -cam_pitch_add > PI * 2:
+		cam_pitch_add += PI * 2
+	camera.rotation.y = 0.0
+	camera.rotation.z = 0.0
+	print(camera.rotation)
+	print(cam_pitch_add)
+		#camera.rotation.x = (cam_pitch * PI)/2
+	#camera.rotation.x = camera.rotation.x + (1 * delta)
+
+	#if abs(cam_roll) > .01:
+	#	camera.rotation.z = (cam_pitch * PI)/2
+
+
 func drone_physics(delta):
+	if Input.is_action_pressed("aim"):
+		drone_aim_mode(delta)
+		return
+	else:
+		cam_pitch_add = 0.0
+	#print(throttle)
+	#print(linear_velocity.y)
 	apply_impulse(global_transform.basis.y * delta * throttle)
 	#power_cell -= 
 	draw_power(abs(throttle) * delta * power_cost)

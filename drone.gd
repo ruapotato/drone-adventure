@@ -284,6 +284,7 @@ func aim_mode_unhandled_input(event):
 
 
 func drone_aim_mode(delta):
+
 	#var needed_throttle = clamp(linear_velocity.y,-.5,.5) * -1
 	#throttle = .5 + needed_throttle
 	if linear_velocity.y < 0:
@@ -321,10 +322,15 @@ func drone_aim_mode(delta):
 	
 	if pitch_change != 0.0:
 		camera.rotation.x = -pitch_change
+		#camera.rotation.x = lerp(camera.rotation.x,-pitch_change, delta * 50)
 	#if abs(cam_pitch) > .01:
-	cam_pitch_add += cam_pitch * yaw_speed * delta
+	cam_pitch_add += cam_pitch * (yaw_speed/2) * delta
 	#camera.rotation.x += cam_pitch_add
+	#if Input.is_action_just_pressed("aim"):
+	#	cam_pitch_add += rotation.x
 	camera.rotate_x(cam_pitch_add)
+	camera.rotate_x(cam_inti_rot.x)
+	camera.rotate_x(rotation.x)
 	if cam_pitch_add > PI * 2:
 		cam_pitch_add -= PI * 2
 	if -cam_pitch_add > PI * 2:

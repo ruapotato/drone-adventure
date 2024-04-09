@@ -56,10 +56,11 @@ var tutorial_mode = false
 
 var cam_inti_rot
 var cam_pitch_add = 0.0
+var skeleton
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
-	
+	skeleton = mesh.find_child("Skeleton3D")
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true
 		inventory = {"crystals":0}
@@ -144,6 +145,11 @@ func _unhandled_input(event):
 	if Input.is_action_pressed("aim"):
 		aim_mode_unhandled_input(event)
 		return
+	if Input.is_action_just_released("aim"):
+		throttle = Input.get_action_strength("throttle") * get_max_throttle()
+		#print(Input.get_action_strength("throttle"))
+	#	throttle = 0.0
+		#throttle = -event.axis_value * get_max_throttle()
 	
 	# normal mode
 	if event.is_action("throttle"):
@@ -337,8 +343,8 @@ func drone_aim_mode(delta):
 		cam_pitch_add += PI * 2
 	camera.rotation.y = 0.0
 	camera.rotation.z = 0.0
-	print(camera.rotation)
-	print(cam_pitch_add)
+	#print(camera.rotation)
+	#print(cam_pitch_add)
 		#camera.rotation.x = (cam_pitch * PI)/2
 	#camera.rotation.x = camera.rotation.x + (1 * delta)
 
@@ -392,6 +398,11 @@ func update_user_settings():
 		ingenuity_mesh.visible = false
 		mesh.visible = true
 
+func update_gun_pos():
+	pass
+	#var tmp = Quaternion(rotation.x,rotation.x,rotation.x,0)
+	#skeleton.set_bone_pose_rotation(skeleton.find_bone("gun"), tmp)
+
 func dead_logic(delta):
 	if dead_reset_counter < 0:
 		if inventory["crystals"] > 0:
@@ -424,5 +435,6 @@ func _physics_process(delta):
 	add_wind_push()
 	drone_physics(delta)
 	update_user_settings()
+	update_gun_pos()
 	
 

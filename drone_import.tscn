@@ -19,12 +19,13 @@ node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
 [node name="drone2" instance=ExtResource("1_d7wm8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522375, 0, -0.620276)
 
-[node name="Skeleton3D" parent="Sketchfab_model/f337b629572e4d64ad830bb62fa78296_fbx/Object_2/RootNode/Armature/Object_6" index="3"]
-bones/1/rotation = Quaternion(0.707107, 0, 0, 0.707107)
-bones/2/rotation = Quaternion(-1.38312e-07, 1.38312e-07, -0.782662, -0.622447)
-bones/4/rotation = Quaternion(-1.95141e-07, 5.7381e-16, 0.132261, -0.991215)
-bones/6/rotation = Quaternion(-0.0628317, 0.0111317, 0.132261, 0.989159)
-bones/8/rotation = Quaternion(1.37985e-07, 1.37985e-07, -0.607372, 0.794417)
+[node name="Skeleton3D" parent="Armature" index="1"]
+bones/1/rotation = Quaternion(-0.54055, -0.46581, -0.467557, 0.521744)
+bones/2/rotation = Quaternion(-0.514989, 0.473206, 0.474981, 0.534094)
+bones/3/rotation = Quaternion(-0.46581, 0.54055, 0.521744, 0.467557)
+bones/4/rotation = Quaternion(0.473206, 0.514989, 0.534094, -0.474981)
+bones/5/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
+bones/6/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_8qtcj")

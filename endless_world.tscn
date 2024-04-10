@@ -329,6 +329,7 @@ generator = SubResource("VoxelInstanceGenerator_ns0l5")
 scene = ExtResource("9_mllqn")
 
 [sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_r8s2m"]
+min_height = -50.0
 min_scale = 0.1
 
 [sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_16dpu"]
@@ -388,7 +389,6 @@ material = ExtResource("6_xoxmd")
 script = ExtResource("7_jp32y")
 
 [node name="VoxelInstancer" type="VoxelInstancer" parent="VoxelLodTerrain"]
-visible = false
 library = SubResource("VoxelInstanceLibrary_2knuv")
 
 [node name="spawner" parent="." instance=ExtResource("11_xa5hy")]

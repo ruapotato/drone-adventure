@@ -72,8 +72,8 @@ shape = SubResource("SphereShape3D_01l57")
 
 [node name="normal_trail" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_7sl26")
-emitting = false
-amount = 60
+amount = 80
+lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_cq51e")
 draw_pass_1 = SubResource("SphereMesh_kmfee")
 

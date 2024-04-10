@@ -134,7 +134,7 @@ shape = SubResource("BoxShape3D_n3w36")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0717006, -0.193481)
 
 [node name="back_cam_mount" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.307721)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0227404, 0.231466)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.954543, 0, 0.298075, 0, 1, 0, -0.298075, 0, 0.954543, 0, 0, 0)

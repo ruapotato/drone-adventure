@@ -12,11 +12,11 @@ func _ready():
 	world = drone.world
 	spawn_pos = global_position
 	vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
-	size = randf_range(1.5,10)
-	$lava_blob_shape/CollisionShape3D.shape.radius = size * 1.5
-	#$MeshInstance3D.radius = size
-	#$MeshInstance3D.height = size * 2
-	$MeshInstance3D.scale = size/1.5 * Vector3(1,1,1)
+	size = randf_range(1.5,5)
+	$lava_blob_shape/CollisionShape3D.shape.radius = size * 2
+	$MeshInstance3D.mesh.radius = size
+	$MeshInstance3D.mesh.height = size * 2
+	#$MeshInstance3D.scale = size/1.5 * Vector3(1,1,1)
 	$CollisionShape3D.shape.radius = size
 
 func get_drone():

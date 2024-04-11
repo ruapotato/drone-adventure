@@ -7,10 +7,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jrp5"]
 size = Vector3(2, 1.85254, 2)
 
-[sub_resource type="FogMaterial" id="FogMaterial_m2fxr"]
-density = 8.0
-albedo = Color(0, 0, 0, 1)
-edge_fade = 2.51067
+[sub_resource type="BoxMesh" id="BoxMesh_vaqsx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7e1vk"]
 size = Vector3(2.155, 2.695, 0.18)
@@ -63,17 +60,12 @@ transform = Transform3D(1, 0, -4.26326e-14, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 script = ExtResource("4_qxahs")
 
 [node name="TP3_shape" type="CollisionShape3D" parent="Node3D/TP3"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.118622, 1.37427, 5.10012)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 1.00554, 5.1)
 shape = SubResource("BoxShape3D_7jrp5")
 
-[node name="FogVolume" type="FogVolume" parent="Node3D/TP3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.527419, 1.13544, 5.13628)
-size = Vector3(3, 3, 3)
-material = SubResource("FogMaterial_m2fxr")
-
-[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/TP3"]
-transform = Transform3D(1, -8.52652e-14, -4.26326e-14, 4.26326e-14, -4.37114e-08, 1, -4.26326e-14, -1, -4.37114e-08, 0.987248, 2.78014, 4.42217)
-light_color = Color(0.560784, 0, 0, 1)
+[node name="FogVolume" type="MeshInstance3D" parent="Node3D/TP3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0322807, 1.13544, 4.85531)
+mesh = SubResource("BoxMesh_vaqsx")
 
 [node name="TP4" type="Area3D" parent="Node3D"]
 script = ExtResource("4_qxahs")

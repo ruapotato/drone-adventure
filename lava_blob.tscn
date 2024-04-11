@@ -4,17 +4,20 @@
 [ext_resource type="Material" uid="uid://c0sjqoeoujhgw" path="res://addons/terrain-shader/example/land.tres" id="2_obbha"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ckabl"]
+resource_local_to_scene = true
 radius = 0.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_tj2ni"]
+resource_local_to_scene = true
 radius = 1.5
 height = 3.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7rg2p"]
+resource_local_to_scene = true
 radius = 1.5
 
 [node name="lava_blob" type="RigidBody3D"]
-mass = 0.1
+mass = 100.0
 gravity_scale = 0.0
 script = ExtResource("1_kdqbf")
 

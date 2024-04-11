@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvf8e7kcw4gta"]
+
+[ext_resource type="PackedScene" uid="uid://xt2oy24grhvy" path="res://grass_import.tscn" id="1_jrip2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ewfb"]
+albedo_color = Color(1.67254e-06, 0.395666, 4.81308e-08, 1)
+emission_enabled = true
+emission = Color(0, 0.631373, 0, 1)
+emission_energy_multiplier = 3.16
+
+[node name="glow_grass" type="Node3D"]
+
+[node name="grass2" parent="." instance=ExtResource("1_jrip2")]
+
+[node name="Grass" parent="grass2" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_2ewfb")
+
+[editable path="grass2"]

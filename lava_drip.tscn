@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://mg2ulbapk0ej"]
+
+[ext_resource type="Material" uid="uid://c0sjqoeoujhgw" path="res://addons/terrain-shader/example/land.tres" id="1_dx4ea"]
+[ext_resource type="Script" path="res://lava_drip.gd" id="1_kpkwx"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_bpmud"]
+top_radius = 0.0
+bottom_radius = 9.191
+height = 4.464
+
+[node name="lava_drip" type="Node3D"]
+script = ExtResource("1_kpkwx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.170385, 0)
+material_override = ExtResource("1_dx4ea")
+mesh = SubResource("CylinderMesh_bpmud")

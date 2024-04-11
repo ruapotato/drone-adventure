@@ -113,13 +113,13 @@ bones/33/rotation = Quaternion(-0.0166105, 0.998829, -0.0136345, 0.0433459)
 bones/33/scale = Vector3(1, 1, 1)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D" index="0"]
-transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0483191, 0.430017, -0.0180574)
+transform = Transform3D(0.727185, 0.294108, -0.620232, 0.168895, 0.799104, 0.576954, 0.665339, -0.524295, 0.531429, -0.048319, 0.430017, -0.018058)
 
 [node name="eyes_inside_L_000" parent="metarig/Skeleton3D/eyes_inside_L_000" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_1tkxs")
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D" index="1"]
-transform = Transform3D(0.727185, 0.294106, -0.620233, 0.168896, 0.799104, 0.576953, 0.665339, -0.524295, 0.531429, -0.0340942, 0.434859, 0.00930923)
+transform = Transform3D(0.727185, 0.294108, -0.620232, 0.168895, 0.799104, 0.576954, 0.665339, -0.524295, 0.531429, -0.0340941, 0.434859, 0.00930862)
 
 [node name="eyes_inside_L_002" parent="metarig/Skeleton3D/eyes_inside_L_002" index="0"]
 surface_material_override/2 = SubResource("StandardMaterial3D_6we2e")

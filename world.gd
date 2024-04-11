@@ -130,6 +130,12 @@ func update_sky_energy(delta):
 	else:
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 
+func update_env():
+	if drone.global_position.y < -80:
+		env.environment.volumetric_fog_albedo = Color("#9e0174")
+	else:
+		env.environment.volumetric_fog_albedo = Color(1,1,1)
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#setup_terrain(delta)
@@ -139,5 +145,6 @@ func _process(delta):
 	update_sky_energy(delta)
 	update_workflow()
 	run_active_tasks(delta)
+	update_env()
 
 

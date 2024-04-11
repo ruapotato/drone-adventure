@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6b5ykkw6ra0c"]
+
+[ext_resource type="PackedScene" uid="uid://datarlbpqlujj" path="res://import/wall_mush.glb" id="1_0hijr"]
+
+[node name="wall_mush" instance=ExtResource("1_0hijr")]

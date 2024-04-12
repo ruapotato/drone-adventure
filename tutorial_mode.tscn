@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://tutorial_mode.gd" id="1_suaj1"]
 [ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://drone.tscn" id="2_i4lfi"]
 [ext_resource type="PackedScene" uid="uid://c6sueha11ti5r" path="res://player.tscn" id="3_g0ljd"]
-[ext_resource type="PackedScene" uid="uid://seaudjounlfi" path="res://zombie.tscn" id="4_ctahg"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="5_tj68u"]
 [ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="6_y83ga"]
 [ext_resource type="PackedScene" uid="uid://50tipirf2hql" path="res://city.tscn" id="7_65q51"]
 [ext_resource type="AudioStream" uid="uid://dq8n7qjii8560" path="res://import/Audio/doorClose_002.ogg" id="8_jw10d"]
+[ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://pause_screen.tscn" id="9_5utek"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u04vj"]
 
@@ -44,9 +44,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="player" parent="." instance=ExtResource("3_g0ljd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.10835, 1.11358, 0)
 
-[node name="zombie" parent="." instance=ExtResource("4_ctahg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6561, 2.4204, 0)
-
 [node name="Spawner" parent="." instance=ExtResource("5_tj68u")]
 
 [node name="gui" parent="." instance=ExtResource("6_y83ga")]
@@ -63,3 +60,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 38)
 [node name="unlock_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_jw10d")
 volume_db = -2.81
+
+[node name="pause_screen" parent="." instance=ExtResource("9_5utek")]
+visible = false

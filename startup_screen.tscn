@@ -163,10 +163,11 @@ scale = Vector2(6.69148, 4.32503)
 text = "Done"
 
 [node name="tutorial_mode" type="Button" parent="."]
-offset_left = 636.0
-offset_top = 80.0
-offset_right = 1378.0
-offset_bottom = 236.0
+offset_left = 65.0001
+offset_top = 27.0
+offset_right = 807.0
+offset_bottom = 183.0
+scale = Vector2(0.554279, 0.559799)
 theme = SubResource("Theme_om7fp")
 text = "Tutorial mode"
 

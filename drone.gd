@@ -356,10 +356,12 @@ func drone_aim_mode(delta):
 
 func drone_physics(delta):
 	if Input.is_action_pressed("aim"):
+		#print("Aim mode")
 		drone_aim_mode(delta)
 		return
 	else:
 		cam_pitch_add = 0.0
+	#print("Normal mode")
 	#print(throttle)
 	#print(linear_velocity.y)
 	if power_cell - 1 > abs(throttle) * delta * power_cost:
@@ -429,10 +431,10 @@ func _physics_process(delta):
 		return
 	if not tutorial_mode:
 		cooldowns(delta)
-		do_shake(delta)
 		figure_damage()
 		update_shield()
 	
+	do_shake(delta)
 	update_collision_size()
 	add_wind_push()
 	drone_physics(delta)

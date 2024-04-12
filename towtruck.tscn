@@ -1,49 +1,41 @@
-[gd_scene load_steps=8 format=3 uid="uid://dl31jx8vribjs"]
+[gd_scene load_steps=6 format=3 uid="uid://dl31jx8vribjs"]
 
 [ext_resource type="Script" path="res://towtruck.gd" id="1_w015h"]
+[ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_el0iw"]
+[ext_resource type="PackedScene" uid="uid://plnm18f42yjt" path="res://native/tow_import.tscn" id="3_njry5"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ejn7c"]
 height = 0.633
 
-[sub_resource type="BoxMesh" id="BoxMesh_dnevg"]
-size = Vector3(1.73, 1.23, 1.95)
-
-[sub_resource type="PrismMesh" id="PrismMesh_vlf4v"]
-size = Vector3(2.365, 3.78, 0.47)
-
-[sub_resource type="BoxMesh" id="BoxMesh_p7yrh"]
-size = Vector3(1.825, 0.662, 4.075)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_qv70c"]
-height = 0.633
-
-[sub_resource type="BoxMesh" id="BoxMesh_tkmnl"]
-size = Vector3(1.73, 1.23, 1.95)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cublk"]
+albedo_color = Color(0, 0, 0, 1)
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
 angular_damp = 100.0
 script = ExtResource("1_w015h")
 
 [node name="FR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.576572, 0, 0.876012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35216, 0, 1.08018)
 use_as_steering = true
 suspension_stiffness = 25.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FR"]
 transform = Transform3D(-4.37044e-08, -0.999841, -0.0178538, 1, -4.37114e-08, 0, -7.80413e-10, -0.0178538, 0.999841, 8.27909e-05, 0, 0)
 mesh = SubResource("CylinderMesh_ejn7c")
+surface_material_override/0 = SubResource("StandardMaterial3D_cublk")
 
 [node name="FL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.536686, 0, 0.876012)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20938, 0, 1.08018)
 use_as_steering = true
 suspension_stiffness = 25.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="FL"]
 transform = Transform3D(-4.37044e-08, -0.999841, -0.0178538, 1, -4.37114e-08, 0, -7.80413e-10, -0.0178538, 0.999841, -8.28505e-05, 0, 0)
 mesh = SubResource("CylinderMesh_ejn7c")
+surface_material_override/0 = SubResource("StandardMaterial3D_cublk")
 
 [node name="BR" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.24438, 0, -1.82756)
 engine_force = 1024.0
 use_as_traction = true
 suspension_stiffness = 25.0
@@ -51,9 +43,10 @@ suspension_stiffness = 25.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BR"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_ejn7c")
+surface_material_override/0 = SubResource("StandardMaterial3D_cublk")
 
 [node name="BL" type="VehicleWheel3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.14144, 0, -1.82756)
 engine_force = 1024.0
 use_as_traction = true
 suspension_stiffness = 25.0
@@ -61,10 +54,7 @@ suspension_stiffness = 25.0
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BL"]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
 mesh = SubResource("CylinderMesh_ejn7c")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994346, -1.15263)
-mesh = SubResource("BoxMesh_dnevg")
+surface_material_override/0 = SubResource("StandardMaterial3D_cublk")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
@@ -73,35 +63,12 @@ debug_path_custom_color = Color(0, 0, 1, 1)
 
 [node name="target" type="Node3D" parent="."]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.999848, -0.0174523, 4.37047e-08, 4.37114e-08, 1.91069e-15, -1, 0.0174523, 0.999848, 7.62867e-10, 0, 0.155252, 0)
-mesh = SubResource("PrismMesh_vlf4v")
-
 [node name="towing_mesh" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965007, 0.262223, 0, -0.262223, 0.965007, 0, 1.77514, 0.332186)
 visible = false
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23659, -5.1762)
-mesh = SubResource("BoxMesh_p7yrh")
-skeleton = NodePath("")
+[node name="pickup" parent="towing_mesh" instance=ExtResource("2_el0iw")]
+transform = Transform3D(1.76, 0, 0, 0, 1.75524, -0.12942, 0, 0.12942, 1.75524, 0, -0.553971, -5.32673)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.12638, 0, -3.93722)
-mesh = SubResource("CylinderMesh_qv70c")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1.0246, 0, -3.92658)
-mesh = SubResource("CylinderMesh_qv70c")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.962752, 0, -6.42644)
-mesh = SubResource("CylinderMesh_qv70c")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.901421, 0, -6.45159)
-mesh = SubResource("CylinderMesh_qv70c")
-
-[node name="MeshInstance3D6" type="MeshInstance3D" parent="towing_mesh"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.994346, -5.62263)
-mesh = SubResource("BoxMesh_tkmnl")
+[node name="tow" parent="." instance=ExtResource("3_njry5")]
+transform = Transform3D(0.815, 0, 0, 0, 0.815, 0, 0, 0, 0.815, 0, 0, -0.179008)

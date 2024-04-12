@@ -1,5 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d4j1h8otnefk3"]
+[gd_scene load_steps=3 format=3 uid="uid://d4j1h8otnefk3"]
 
 [ext_resource type="PackedScene" uid="uid://b7tpfeustipnc" path="res://import/tree_2.glb" id="1_6rw4v"]
+[ext_resource type="Material" uid="uid://dg0qam0tsuq0t" path="res://native/tree_tips.tres" id="2_qhauv"]
 
 [node name="tree_2" instance=ExtResource("1_6rw4v")]
+
+[node name="stylized_pine_var2" parent="." index="0"]
+surface_material_override/1 = ExtResource("2_qhauv")

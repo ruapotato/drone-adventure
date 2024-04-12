@@ -14,9 +14,9 @@ func get_drone():
 	return(root_i_hope.find_child("drone"))
 	
 func _process(delta):
-	print(drone.global_position.y)
+	#print(drone.global_position.y)
 	if drone.global_position.y < -70:
-		light_energy = 0.0
+		light_energy = 0.5
 		#visible = false
 	else:
 		light_energy = 1.0

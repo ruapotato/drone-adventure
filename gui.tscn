@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=27 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -70,6 +70,12 @@ outline_color = Color(0, 0, 0, 1)
 font_size = 23
 font_color = Color(1, 1, 0, 1)
 outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a67re"]
+font_size = 32
+font_color = Color(0.133333, 0.870588, 0.85098, 1)
+outline_size = 9
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ijbmf"]
@@ -192,6 +198,13 @@ offset_right = 1889.0
 offset_bottom = 758.0
 text = "Power Low! Land to Recharge."
 label_settings = SubResource("LabelSettings_8kq81")
+
+[node name="added_label" type="Label" parent="."]
+offset_left = 1529.0
+offset_top = 561.0
+offset_right = 1625.0
+offset_bottom = 606.0
+label_settings = SubResource("LabelSettings_a67re")
 
 [node name="overhead_message" type="Label" parent="."]
 offset_left = 74.0

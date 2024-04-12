@@ -44,8 +44,8 @@ func spawn_something():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_position = drone.global_position
-	#if running:
-	spawn_counter -= delta
-	if spawn_counter < 0:
-		spawn_something()
-	piv.rotate_y(delta*10)
+	if running:
+		spawn_counter -= delta
+		if spawn_counter < 0:
+			spawn_something()
+		piv.rotate_y(delta*10)

@@ -4,7 +4,6 @@ var value = null
 var message_range = 3
 var bob_speed = .7
 var timer = 0
-var player
 var drone
 var world
 var init_pos
@@ -12,11 +11,6 @@ var collected = false
 var collected_animation = .5
 var shatter_range = 1
 
-func get_player():
-	var root_i_hope = get_parent()
-	while root_i_hope.name != "world":
-		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("player"))
 
 func get_drone():
 	var root_i_hope = get_parent()
@@ -26,8 +20,6 @@ func get_drone():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	player = get_player()
 	drone = get_drone()
 	world = drone.get_parent()
 	#value = int(name.split("_")[0])
@@ -108,7 +100,7 @@ func _process(delta):
 		
 	if collected:
 		collected_animation -= delta
-		global_position = player.global_position
+		global_position = drone.global_position
 		rotate_y(-delta * 5)
 		global_position.y += 1.3 + abs(collected_animation - 1)
 		if collected_animation < 0:

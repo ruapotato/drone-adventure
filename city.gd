@@ -23,11 +23,10 @@ func _ready():
 		new_npc.npc_type = "worker"
 		
 		#new_npc.set_deferred("global_position", home_to_fill.global_position)
-		new_npc.global_position = home_to_fill.global_position
-		
 		add_child(new_npc)
+		new_npc.global_position = home_to_fill.global_position
 		NPCs.append(new_npc)
-		print(home_to_fill)
+		#print(home_to_fill)
 
 
 func get_drone():

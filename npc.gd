@@ -10,14 +10,13 @@ const JUMP_linear_velocity = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var player
 var drone
 var world
 
 
 var npc_type = "worker"
 
-var active_task
+var active_task = "leave_for_work"
 var temper_base = 10
 var temper_today = temper_base
 
@@ -36,16 +35,8 @@ var todo_today = worker_workflow
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_player()
 	drone = get_drone()
-	world = player.get_parent()
-
-func get_player():
-	var root_i_hope = get_parent()
-	while root_i_hope.name != "world":
-		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("player"))
-
+	world = drone.get_parent()
 
 func get_drone():
 	var root_i_hope = get_parent()
@@ -62,13 +53,13 @@ func is_on_floor():
 func goto(where, delta):
 	nav.target_position = where
 	
-	#look_at(nav.target_position)
+	look_at(nav.target_position)
 	rotation.x = lerp(rotation.x, 0.0, delta * 5)
 	rotation.z = lerp(rotation.z, 0.0, delta * 5)
-	rotation.y = lerp(rotation.y, head.rotation.y * PI, delta * 5)
+	#rotation.y = lerp(rotation.y, head.rotation.y * PI, delta * 5)
 	#rotation.z = 0.0
-	rotation.y = lerp_angle(rotation.y, atan2(-where.x, -where.z), delta * 18)
-	head.look_at(nav.target_position)
+	#rotation.y = lerp_angle(rotation.y, atan2(-where.x, -where.z), delta * 18)
+	#head.look_at(nav.target_position)
 	linear_velocity.y = lerp(linear_velocity.y, 0.0, delta)
 	
 	linear_velocity = global_position.direction_to(nav.get_next_path_position()) * SPEED

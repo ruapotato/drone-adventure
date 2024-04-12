@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://lfmmk3jdrg6f"]
+
+[ext_resource type="PackedScene" uid="uid://boaum7nf47dvc" path="res://import/blue.glb" id="1_0e2ae"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wbtcn"]
+animation = &"walk"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_8disy"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_75rxx"]
+graph_offset = Vector2(-475, 105)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_wbtcn")
+nodes/Animation/position = Vector2(-333, 201)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_8disy")
+nodes/TimeScale/position = Vector2(-29, 226)
+node_connections = [&"TimeScale", 0, &"Animation", &"output", 0, &"TimeScale"]
+
+[node name="blue" instance=ExtResource("1_0e2ae")]
+
+[node name="Skeleton3D" parent="metarig" index="0"]
+bones/0/position = Vector3(0, 1.19443, -0.0552)
+bones/100/rotation = Quaternion(0.0474049, 0.797213, -0.44968, 0.399989)
+bones/101/rotation = Quaternion(0.155362, 0.0193875, -0.189982, 0.969223)
+bones/123/rotation = Quaternion(-0.00830079, -0.7854, 0.490101, 0.377994)
+bones/124/rotation = Quaternion(0.174147, -0.0117147, 0.289328, 0.941183)
+bones/149/rotation = Quaternion(0.921658, 0.343735, -0.0590999, 0.169999)
+bones/151/rotation = Quaternion(-0.526023, -0.0106292, 0.0264767, 0.849992)
+bones/154/rotation = Quaternion(0.903114, -0.388965, 0.0668765, 0.169171)
+bones/156/rotation = Quaternion(-0.525815, 0.0120276, -0.0299601, 0.849986)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_75rxx")
+anim_player = NodePath("../AnimationPlayer")
+parameters/TimeScale/scale = 5.0

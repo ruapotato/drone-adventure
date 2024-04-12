@@ -131,7 +131,7 @@ func _unhandled_input(event):
 	if is_paused():
 		return
 		
-	if power_cell > fire_cost:
+	if power_cell > fire_cost + 1:
 		if event.is_action_pressed("fire_right"):
 			draw_power(fire_cost)
 			#power_cell -= fire_cost
@@ -300,8 +300,10 @@ func drone_aim_mode(delta):
 	#var needed_throttle = 2.0 - linear_velocity.y
 	throttle = throttle * get_max_throttle()
 	#print(throttle)
-	apply_impulse(global_transform.basis.y * delta * throttle)
-	draw_power(abs(throttle) * delta * power_cost)
+	if power_cell - 1 > abs(throttle) * delta * power_cost:
+		apply_impulse(global_transform.basis.y * delta * throttle)
+		draw_power(abs(throttle) * delta * power_cost)
+
 	if linear_velocity.length() < 1 and throttle < 1:
 		add_power(power_gain_at_rest * delta)
 		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
@@ -360,9 +362,9 @@ func drone_physics(delta):
 		cam_pitch_add = 0.0
 	#print(throttle)
 	#print(linear_velocity.y)
-	apply_impulse(global_transform.basis.y * delta * throttle)
-	#power_cell -= 
-	draw_power(abs(throttle) * delta * power_cost)
+	if power_cell - 1 > abs(throttle) * delta * power_cost:
+		apply_impulse(global_transform.basis.y * delta * throttle)
+		draw_power(abs(throttle) * delta * power_cost)
 	if linear_velocity.length() < 1 and throttle < 1:
 		add_power(power_gain_at_rest * delta)
 		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]

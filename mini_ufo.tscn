@@ -1,18 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciy2jrcmbvvdo"]
+[gd_scene load_steps=5 format=3 uid="uid://ciy2jrcmbvvdo"]
 
 [ext_resource type="Script" path="res://mini_ufo.gd" id="1_8vdp7"]
+[ext_resource type="PackedScene" uid="uid://ckeppqrkmhqm7" path="res://ufo_import.tscn" id="2_26lvm"]
 [ext_resource type="AudioStream" uid="uid://cuskc6jfvcyrd" path="res://import/Sci-Fi Drone.wav" id="2_bvn50"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_wvtqh"]
-radius = 0.22
-height = 0.628
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_07pmb"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_jlni4"]
-top_radius = 0.31
-bottom_radius = 0.51
-height = 0.135
 
 [node name="mini_ufo" type="Node3D"]
 script = ExtResource("1_8vdp7")
@@ -21,25 +13,16 @@ script = ExtResource("1_8vdp7")
 mass = 10.0
 gravity_scale = 0.0
 
+[node name="ufo2" parent="mini_ufo" instance=ExtResource("2_26lvm")]
+transform = Transform3D(0.045, 0, 0, 0, 0.045, 0, 0, 0, 0.045, 0, -0.154926, 0)
+
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="mini_ufo"]
 stream = ExtResource("2_bvn50")
 volume_db = -32.0
 autoplay = true
 max_distance = 39.01
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="mini_ufo"]
-mesh = SubResource("CapsuleMesh_wvtqh")
-skeleton = NodePath("../..")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mini_ufo"]
 shape = SubResource("SphereShape3D_07pmb")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="mini_ufo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0510213, 0)
-mesh = SubResource("CylinderMesh_jlni4")
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="mini_ufo"]
-transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, 0, -0.0833095, 0)
-mesh = SubResource("CylinderMesh_jlni4")
 
 [connection signal="finished" from="mini_ufo/AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]

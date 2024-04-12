@@ -17,7 +17,8 @@ func _ready():
 	init_pos = global_position
 	drone = get_drone()
 	bark_sound.pitch_scale = randf_range(.7,1.4)
-	mesh.scale = Vector3(1,1,1) * bark_sound.pitch_scale
+	mesh.scale = Vector3(1,1,1) * (((1-(bark_sound.pitch_scale-.7)+1)*5)-4)
+	speed *= mesh.scale.x
 	
 func get_drone():
 	var root_i_hope = get_parent()

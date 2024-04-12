@@ -11,22 +11,18 @@ extends Node2D
 @onready var message = $message_box/message
 @onready var message_box = $message_box
 @onready var bank_label = $bank_label
-
-var player
+@onready var added_label = $added_label
 var drone
 var world
+var added_counter
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player = get_player()
-	drone = get_drone()
-	world = player.get_parent()
 
-func get_player():
-	var root_i_hope = get_parent()
-	while root_i_hope.name != "world":
-		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("player"))
+	drone = get_drone()
+	world = drone.get_parent()
+
 
 
 func get_drone():
@@ -78,9 +74,18 @@ func update_refuel():
 	else:
 		refuel_label.visible = false
 
+func update_added_label(delta):
+	if added_counter <= 0:
+		if added_label.text != "":
+			added_label.text = ""
+	else:
+		added_counter -= delta
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if str(drone.inventory["crystals"]) != crystal_label.text:
+		added_label.text = "+" + str(drone.inventory["crystals"] - int(crystal_label.text))
+		added_counter = 3
 		crystal_label.text = str(drone.inventory["crystals"])
 	if "bank" in drone.inventory:
 		if str(drone.inventory["bank"]) != bank_label.text:
@@ -91,6 +96,7 @@ func _process(delta):
 			bank_label.visible = false
 	camera.global_position = drone.back_cam_mount.global_position
 	camera.look_at(drone.global_position)
+	update_added_label(delta)
 	update_speed_label()
 	if not drone.tutorial_mode:
 		update_time_label()

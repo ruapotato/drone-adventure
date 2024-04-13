@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwff7qo2uv252"]
+
+[ext_resource type="Texture2D" uid="uid://b86uellv37tub" path="res://images/idle.png" id="1_o37b6"]
+[ext_resource type="Texture2D" uid="uid://beaxg3axlj2w2" path="res://images/hover.png" id="2_gqbk0"]
+[ext_resource type="Texture2D" uid="uid://brpas64ns5ll3" path="res://images/turn.png" id="3_0cjiv"]
+[ext_resource type="Texture2D" uid="uid://bnwesipfilrve" path="res://images/forward.png" id="4_3flkb"]
+[ext_resource type="Texture2D" uid="uid://5iepa7ou7txu" path="res://images/shoot.png" id="5_rvtk5"]
+
+[node name="contols" type="Node2D"]
+
+[node name="idle" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_o37b6")
+
+[node name="hover" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_gqbk0")
+
+[node name="turn" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_0cjiv")
+
+[node name="forward" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_3flkb")
+
+[node name="shoot" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("5_rvtk5")

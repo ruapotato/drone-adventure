@@ -5,13 +5,13 @@
 [node name="pause_screen" type="Node2D"]
 script = ExtResource("1_d0qpy")
 
-[node name="reuseme" type="Button" parent="."]
+[node name="resume" type="Button" parent="."]
 offset_left = 782.0
 offset_top = 265.0
 offset_right = 1092.0
 offset_bottom = 370.0
 theme_override_font_sizes/font_size = 70
-text = "reuseme"
+text = "resume"
 
 [node name="toggle_skin" type="Button" parent="."]
 offset_left = 747.0
@@ -29,6 +29,6 @@ offset_bottom = 614.0
 theme_override_font_sizes/font_size = 70
 text = "Exit Game"
 
-[connection signal="pressed" from="reuseme" to="." method="_on_reuseme_pressed"]
+[connection signal="pressed" from="resume" to="." method="_on_reuseme_pressed"]
 [connection signal="pressed" from="toggle_skin" to="." method="_on_toggle_skin_pressed"]
 [connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

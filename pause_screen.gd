@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var reuseme_button = $reuseme
+@onready var reuseme_button = $resume
 @onready var toggle_skin_button = $toggle_skin
 @onready var exit_button = $exit
 

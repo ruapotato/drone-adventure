@@ -73,6 +73,8 @@ func _ready():
 	cam_inti_rot = camera.rotation
 
 func save_game():
+	if not save_file:
+		return
 	var save_game = FileAccess.open(save_file, FileAccess.WRITE)
 	#var save_data = JSON.stringify({"crystals":gender,
 	#"name":player_picked_name})

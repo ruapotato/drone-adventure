@@ -228,6 +228,7 @@ offset_bottom = 1200.96
 scale = Vector2(0.0180602, 0.0464797)
 label_settings = SubResource("LabelSettings_3bkld")
 autowrap_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="option_1" type="Label" parent="message_box"]
 offset_left = -30.1911
@@ -236,6 +237,7 @@ offset_right = 17.8089
 offset_bottom = 33.0684
 scale = Vector2(0.0918557, 0.236323)
 label_settings = SubResource("LabelSettings_4lbed")
+metadata/_edit_use_anchors_ = true
 
 [node name="option_2" type="Label" parent="message_box"]
 offset_left = -30.1911
@@ -244,6 +246,7 @@ offset_right = 17.8089
 offset_bottom = 41.6568
 scale = Vector2(0.0918557, 0.236323)
 label_settings = SubResource("LabelSettings_bq8v1")
+metadata/_edit_use_anchors_ = true
 
 [node name="option_3" type="Label" parent="message_box"]
 offset_left = -30.1911
@@ -252,6 +255,7 @@ offset_right = 17.8089
 offset_bottom = 50.2452
 scale = Vector2(0.0918557, 0.236323)
 label_settings = SubResource("LabelSettings_f2m2l")
+metadata/_edit_use_anchors_ = true
 
 [node name="option_4" type="Label" parent="message_box"]
 offset_left = -30.1911
@@ -260,3 +264,4 @@ offset_right = 17.8089
 offset_bottom = 58.8335
 scale = Vector2(0.0918557, 0.236323)
 label_settings = SubResource("LabelSettings_djbgk")
+metadata/_edit_use_anchors_ = true

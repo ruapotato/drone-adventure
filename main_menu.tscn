@@ -17,9 +17,9 @@ Button/colors/icon_normal_color = Color(0, 0, 1, 1)
 [node name="main_menu" type="Node2D"]
 script = ExtResource("1_8rasr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(960, 542)
-scale = Vector2(0.535665, 1.56695)
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(158, 536)
+scale = Vector2(1.38972, 1.56695)
 texture = ExtResource("2_y2m7d")
 
 [node name="Label" type="Label" parent="."]
@@ -34,13 +34,13 @@ horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="play" type="Button" parent="."]
-offset_left = 720.0
-offset_top = 418.0
-offset_right = 859.0
-offset_bottom = 470.0
-scale = Vector2(3.85076, 3.63022)
+offset_left = 803.0
+offset_top = 438.0
+offset_right = 1096.0
+offset_bottom = 640.0
+scale = Vector2(1.22893, 0.845984)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 142
 text = "Play"
 metadata/_edit_use_anchors_ = true
 

@@ -1,21 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk1ii21ti8xvf"]
+[gd_scene load_steps=6 format=3 uid="uid://bk1ii21ti8xvf"]
 
 [ext_resource type="Script" path="res://startup_screen.gd" id="1_mpcew"]
 [ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_g3udu"]
-
-[sub_resource type="Gradient" id="Gradient_mamd2"]
-colors = PackedColorArray(0, 0, 0, 1, 0.270222, 0.270222, 0.270222, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_je8jc"]
-gradient = SubResource("Gradient_mamd2")
-fill_from = Vector2(1, 0)
-fill_to = Vector2(0, 0)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lxmiq"]
-texture = SubResource("GradientTexture2D_je8jc")
-
-[sub_resource type="Theme" id="Theme_nflsl"]
-Button/styles/normal = SubResource("StyleBoxTexture_lxmiq")
 
 [sub_resource type="Gradient" id="Gradient_514ns"]
 offsets = PackedFloat32Array(0, 0.564935, 1)
@@ -30,60 +16,57 @@ default_font_size = 108
 [node name="startup_screen" type="Node2D"]
 script = ExtResource("1_mpcew")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(960, 542)
-scale = Vector2(0.535665, 1.56695)
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(158, 536)
+scale = Vector2(1.38972, 1.56695)
 texture = ExtResource("2_g3udu")
 
 [node name="Delete1" type="Button" parent="."]
-offset_left = 61.0
-offset_top = 834.0
-offset_right = 133.0
-offset_bottom = 865.0
+offset_left = 137.0
+offset_top = 865.0
+offset_right = 240.0
+offset_bottom = 896.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 1"
 
 [node name="Delete2" type="Button" parent="."]
-offset_left = 61.0
-offset_top = 877.0
-offset_right = 164.0
-offset_bottom = 908.0
+offset_left = 137.0
+offset_top = 908.0
+offset_right = 240.0
+offset_bottom = 939.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 2"
 
 [node name="Delete3" type="Button" parent="."]
-offset_left = 61.0
-offset_top = 920.0
-offset_right = 164.0
-offset_bottom = 951.0
+offset_left = 137.0
+offset_top = 951.0
+offset_right = 240.0
+offset_bottom = 982.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 3"
 
 [node name="Save1" type="Button" parent="."]
-offset_left = 752.0
-offset_top = 271.0
-offset_right = 845.0
-offset_bottom = 302.0
-scale = Vector2(5.45676, 4.36493)
-theme = SubResource("Theme_nflsl")
+offset_left = 121.0
+offset_top = 243.0
+offset_right = 379.0
+offset_bottom = 388.0
+theme_override_font_sizes/font_size = 100
 text = "File 1"
 
 [node name="Save2" type="Button" parent="."]
-offset_left = 752.0
-offset_top = 430.0
-offset_right = 845.0
-offset_bottom = 461.0
-scale = Vector2(5.45676, 4.36493)
-theme = SubResource("Theme_nflsl")
+offset_left = 121.0
+offset_top = 402.0
+offset_right = 379.0
+offset_bottom = 547.0
+theme_override_font_sizes/font_size = 100
 text = "File 2"
 
 [node name="Save3" type="Button" parent="."]
-offset_left = 752.0
-offset_top = 589.0
-offset_right = 845.0
-offset_bottom = 620.0
-scale = Vector2(5.45676, 4.36493)
-theme = SubResource("Theme_nflsl")
+offset_left = 121.0
+offset_top = 561.0
+offset_right = 379.0
+offset_bottom = 706.0
+theme_override_font_sizes/font_size = 100
 text = "File 3"
 
 [node name="hardness" type="HSlider" parent="."]

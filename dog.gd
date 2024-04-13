@@ -9,7 +9,7 @@ var world
 var bark_range = 10
 var bark_range_start = 20
 var mode = "sit"
-var speed = 10
+var speed = 5
 
 var max_range = 200
 var init_pos

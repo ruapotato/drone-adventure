@@ -2,18 +2,13 @@
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_8rasr"]
 [ext_resource type="PackedScene" uid="uid://bux6jg8v62006" path="res://credit.tscn" id="2_58kwt"]
-[ext_resource type="Texture2D" uid="uid://dcfk04exq44yk" path="res://import/boarder.jpg" id="2_romrm"]
+[ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_y2m7d"]
+[ext_resource type="Texture2D" uid="uid://bt74fouxpvede" path="res://finns_studio.png" id="3_6ql65"]
 [ext_resource type="PackedScene" uid="uid://bce251ilfs4i7" path="res://settings.tscn" id="4_ix6np"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_827c2"]
 font_size = 150
 outline_size = 25
-
-[sub_resource type="LabelSettings" id="LabelSettings_pvh8b"]
-font_size = 66
-font_color = Color(0.19, 0.5815, 1, 1)
-outline_size = 10
-outline_color = Color(0.188235, 0.580392, 1, 1)
 
 [sub_resource type="Theme" id="Theme_3einr"]
 Button/colors/font_hover_color = Color(0.764706, 0, 0.0862745, 1)
@@ -23,9 +18,9 @@ Button/colors/icon_normal_color = Color(0, 0, 1, 1)
 script = ExtResource("1_8rasr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(986.5, 506.5)
-scale = Vector2(1.44051, 3.75351)
-texture = ExtResource("2_romrm")
+position = Vector2(960, 542)
+scale = Vector2(0.535665, 1.56695)
+texture = ExtResource("2_y2m7d")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 77.0
@@ -49,15 +44,10 @@ theme_override_font_sizes/font_size = 30
 text = "Play"
 metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 631.0
-offset_top = 931.0
-offset_right = 1207.0
-offset_bottom = 1022.0
-scale = Vector2(1.27902, 1.36552)
-text = "finns.studio"
-label_settings = SubResource("LabelSettings_pvh8b")
-horizontal_alignment = 1
+[node name="finns_studio" type="Sprite2D" parent="."]
+position = Vector2(172, 978)
+scale = Vector2(0.96556, 1.03086)
+texture = ExtResource("3_6ql65")
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="."]

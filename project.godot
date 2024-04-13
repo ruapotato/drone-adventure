@@ -13,7 +13,8 @@ config_version=5
 config/name="Drone Adventure"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+boot_splash/image="res://boot_splash.png"
+config/icon="res://logo.png"
 
 [display]
 

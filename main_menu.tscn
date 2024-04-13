@@ -50,12 +50,12 @@ text = "Play"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 656.0
-offset_top = 927.0
-offset_right = 1232.0
-offset_bottom = 1018.0
+offset_left = 631.0
+offset_top = 931.0
+offset_right = 1207.0
+offset_bottom = 1022.0
 scale = Vector2(1.27902, 1.36552)
-text = "Finns Wonderland"
+text = "finns.studio"
 label_settings = SubResource("LabelSettings_pvh8b")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true

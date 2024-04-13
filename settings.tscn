@@ -36,6 +36,7 @@ scale = Vector2(3.88099, 2.72751)
 text = "Settings"
 
 [node name="lable2" type="Label" parent="."]
+visible = false
 offset_left = 766.0
 offset_top = 333.0
 offset_right = 901.0
@@ -63,6 +64,7 @@ button_pressed = true
 text = "Fullscreen"
 
 [node name="MouseSensitivity" type="HSlider" parent="."]
+visible = false
 offset_left = 622.0
 offset_top = 412.0
 offset_right = 1466.0

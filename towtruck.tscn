@@ -57,7 +57,6 @@ mesh = SubResource("CylinderMesh_ejn7c")
 surface_material_override/0 = SubResource("StandardMaterial3D_cublk")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
-debug_enabled = true
 debug_use_custom = true
 debug_path_custom_color = Color(0, 0, 1, 1)
 

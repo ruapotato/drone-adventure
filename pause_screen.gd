@@ -51,7 +51,11 @@ func _unhandled_input(event):
 			button_index = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	show_selected()
+	if visible:
+		show_selected()
+		if "lander_skin" in drone.inventory:
+			if not $toggle_skin.visible:
+				$toggle_skin.visible = true
 
 
 func _on_reuseme_pressed():

@@ -14,6 +14,7 @@ theme_override_font_sizes/font_size = 70
 text = "resume"
 
 [node name="toggle_skin" type="Button" parent="."]
+visible = false
 offset_left = 747.0
 offset_top = 388.0
 offset_right = 1136.0

@@ -96,6 +96,9 @@ func _on_area_3d_body_entered(body):
 		print(body.get_parent().name)
 		print(body.get_parent().get_parent().name)
 		print(body.name)
+		if body.name == "dog":
+			world.dogs_pissed = true
+			print("Pissed on the dogs")
 		if body.name == "ufo":
 			body.life -= 1
 			body.fly_ttl = 6

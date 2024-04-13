@@ -5,14 +5,14 @@
 [ext_resource type="AudioStream" uid="uid://cx4xh8n6uscjh" path="res://import/dog.wav" id="3_ymv80"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yit0m"]
-size = Vector3(0.585, 0.515, 0.26)
+size = Vector3(0.26, 0.62, 0.665)
 
 [node name="dog" type="RigidBody3D"]
 angular_damp = 100.0
 script = ExtResource("1_ow3n7")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105029, 0.266719, 0)
+[node name="dog" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105029, 0.425773, 0)
 shape = SubResource("BoxShape3D_yit0m")
 
 [node name="mesh" parent="." instance=ExtResource("1_nf8wd")]

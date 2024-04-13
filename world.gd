@@ -40,7 +40,7 @@ var tasks_today = day_workflow.duplicate()
 var terrain_chop
 
 var plants
-
+var dogs_pissed = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

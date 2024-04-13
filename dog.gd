@@ -4,20 +4,25 @@ extends RigidBody3D
 @onready var bark_sound = $bark_sound
 @onready var mesh = $mesh
 var drone
+var world
 #var bark_range = 20
 var bark_range = 10
 var bark_range_start = 20
 var mode = "sit"
-var speed = 20
+var speed = 10
 
 var max_range = 200
 var init_pos
+var bite_value = 10
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_pos = global_position
 	drone = get_drone()
+	world = drone.world
 	bark_sound.pitch_scale = randf_range(.7,1.4)
 	mesh.scale = Vector3(1,1,1) * (((1-(bark_sound.pitch_scale-.7)+1)*5)-4)
+	$dog.shape.size = mesh.scale * Vector3(.5,.5,.5)
+	$dog.position.y = $dog.shape.size.y/2
 	speed *= mesh.scale.x
 	
 func get_drone():
@@ -58,7 +63,25 @@ func _physics_process(delta):
 			var wanted_speed = global_position.direction_to(drone.global_position) * speed
 			wanted_speed.y = 0
 			linear_velocity = linear_velocity.lerp(wanted_speed,delta)
-			
+	if mode != "kill":
+		if gravity_scale == 0.0:
+			gravity_scale = 1.0
+	if mode == "kill":
+		animation_tree.set("parameters/walk_run/blend_position", 7.0)
+		if gravity_scale != 0.0:
+			gravity_scale = 0.0
+		look_at(drone.global_position)
+		rotate_y(PI)
+		var wanted_speed = global_position.direction_to(drone.global_position) * speed
+		#wanted_speed.y = 0
+		linear_velocity = linear_velocity.lerp(wanted_speed,delta)
+		if global_position.distance_to(drone.global_position) < 1:
+			drone.shake = .3
+			#print("BITE")
+			if not drone.draw_power(bite_value * delta) or drone.power_cell < 0:
+				drone.power_cell = -1
+				world.dogs_pissed = false
+		
 	if mode == "run":
 		look_at(drone.global_position)
 		var wanted_speed = global_position.direction_to(drone.global_position) * speed
@@ -68,6 +91,9 @@ func _physics_process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if world.dogs_pissed:
+		mode = "kill"
+		return
 	if global_position.distance_to(drone.global_position) > max_range:
 		if mode == "run" or mode == "bark":
 			mode = "sit"

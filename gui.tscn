@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=26 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -90,11 +90,6 @@ colors = PackedColorArray(0.435192, 0.435192, 0.435192, 0.482353, 1, 1, 1, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_bbesd"]
 gradient = SubResource("Gradient_d1pl5")
 fill_from = Vector2(1, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_3bkld"]
-font_size = 126
-outline_size = 18
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4lbed"]
 font_size = 26
@@ -220,15 +215,13 @@ position = Vector2(754, 881.75)
 scale = Vector2(23.2188, 6.05469)
 texture = SubResource("GradientTexture2D_bbesd")
 
-[node name="message" type="Label" parent="message_box"]
-offset_left = -30.8802
-offset_top = -28.0361
-offset_right = 3414.12
-offset_bottom = 1200.96
-scale = Vector2(0.0180602, 0.0464797)
-label_settings = SubResource("LabelSettings_3bkld")
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
+[node name="message" type="RichTextLabel" parent="message_box"]
+offset_left = -30.0
+offset_top = -25.0
+offset_right = 836.0
+offset_bottom = 173.0
+scale = Vector2(0.0689631, 0.193124)
+bbcode_enabled = true
 
 [node name="option_1" type="Label" parent="message_box"]
 offset_left = -30.1911

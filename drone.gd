@@ -57,6 +57,8 @@ var tutorial_mode = false
 var cam_inti_rot
 var cam_pitch_add = 0.0
 var skeleton
+var control_lock_yaw = false
+var control_lock_tilt = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
@@ -158,6 +160,8 @@ func _unhandled_input(event):
 		#print(-event.axis_value)
 		throttle = -event.axis_value * get_max_throttle()
 	if event.is_action("yaw"):
+		if control_lock_yaw:
+			return
 		yaw = -event.axis_value
 		#print(event.axis_value)
 		yaw = -event.axis_value
@@ -168,6 +172,8 @@ func _unhandled_input(event):
 		#yaw = (yaw * 2) - 1
 		
 		#print(event.axis_value)
+	if control_lock_tilt:
+		return
 	if event.is_action("pitch"):
 		pitch = event.axis_value
 	if event.is_action("roll"):

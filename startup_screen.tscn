@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk1ii21ti8xvf"]
+[gd_scene load_steps=10 format=3 uid="uid://bk1ii21ti8xvf"]
 
 [ext_resource type="Script" path="res://startup_screen.gd" id="1_mpcew"]
+[ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_g3udu"]
 
 [sub_resource type="Gradient" id="Gradient_mamd2"]
 colors = PackedColorArray(0, 0, 0, 1, 0.270222, 0.270222, 0.270222, 1)
@@ -28,6 +29,11 @@ default_font_size = 108
 
 [node name="startup_screen" type="Node2D"]
 script = ExtResource("1_mpcew")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(960, 542)
+scale = Vector2(0.535665, 1.56695)
+texture = ExtResource("2_g3udu")
 
 [node name="Delete1" type="Button" parent="."]
 offset_left = 61.0

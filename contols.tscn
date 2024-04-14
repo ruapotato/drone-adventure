@@ -1,10 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwff7qo2uv252"]
+[gd_scene load_steps=8 format=3 uid="uid://dwff7qo2uv252"]
 
 [ext_resource type="Texture2D" uid="uid://b86uellv37tub" path="res://images/idle.png" id="1_o37b6"]
 [ext_resource type="Texture2D" uid="uid://beaxg3axlj2w2" path="res://images/hover.png" id="2_gqbk0"]
 [ext_resource type="Texture2D" uid="uid://brpas64ns5ll3" path="res://images/turn.png" id="3_0cjiv"]
 [ext_resource type="Texture2D" uid="uid://bnwesipfilrve" path="res://images/forward.png" id="4_3flkb"]
 [ext_resource type="Texture2D" uid="uid://5iepa7ou7txu" path="res://images/shoot.png" id="5_rvtk5"]
+[ext_resource type="Texture2D" uid="uid://wsqkp8iwyl3t" path="res://images/controls.png" id="6_x7cev"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wtdr3"]
+font_size = 18
+font_color = Color(0, 0, 0, 1)
 
 [node name="contols" type="Node2D"]
 
@@ -37,3 +42,93 @@ visible = false
 position = Vector2(940, 130)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("5_rvtk5")
+
+[node name="controls_main" type="Sprite2D" parent="."]
+position = Vector2(940, 130)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("6_x7cev")
+
+[node name="gun" type="Node2D" parent="controls_main"]
+
+[node name="Label" type="Label" parent="controls_main/gun"]
+offset_left = -235.0
+offset_top = 26.6667
+offset_right = -191.0
+offset_bottom = 57.6667
+scale = Vector2(0.659794, 0.538462)
+text = "Gun
+"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Label2" type="Label" parent="controls_main/gun"]
+offset_left = 213.333
+offset_top = 5.0
+offset_right = 257.333
+offset_bottom = 36.0
+scale = Vector2(0.659794, 0.538462)
+text = "Gun
+"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Build" type="Node2D" parent="controls_main"]
+
+[node name="Label" type="Label" parent="controls_main/Build"]
+offset_left = -235.0
+offset_top = -46.6667
+offset_right = -191.0
+offset_bottom = -15.6667
+scale = Vector2(0.659794, 0.538462)
+text = "Build
+"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Label2" type="Label" parent="controls_main/Build"]
+offset_left = 211.667
+offset_top = -45.0
+offset_right = 256.667
+offset_bottom = -14.0
+scale = Vector2(0.659794, 0.538462)
+text = "Build"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Laser" type="Node2D" parent="controls_main"]
+
+[node name="Label" type="Label" parent="controls_main/Laser"]
+offset_left = -235.0
+offset_top = -10.0
+offset_right = -190.0
+offset_bottom = 21.0
+scale = Vector2(0.659794, 0.538462)
+text = "Laser
+"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Label2" type="Label" parent="controls_main/Laser"]
+offset_left = 236.667
+offset_top = -16.6667
+offset_right = 284.667
+offset_bottom = 14.3333
+scale = Vector2(0.659794, 0.538462)
+text = "Laser
+"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Ball" type="Node2D" parent="controls_main"]
+
+[node name="Label" type="Label" parent="controls_main/Ball"]
+offset_left = -286.667
+offset_top = -10.0
+offset_right = -241.667
+offset_bottom = 21.0
+scale = Vector2(0.659794, 0.538462)
+text = "Ball"
+label_settings = SubResource("LabelSettings_wtdr3")
+
+[node name="Label2" type="Label" parent="controls_main/Ball"]
+offset_left = 185.0
+offset_top = -16.6667
+offset_right = 233.0
+offset_bottom = 14.3333
+scale = Vector2(0.659794, 0.538462)
+text = "Ball"
+label_settings = SubResource("LabelSettings_wtdr3")

@@ -14,6 +14,7 @@ extends RigidBody3D
 @onready var ingenuity_mesh = $ingenuity_mesh
 @onready var mesh = $mesh
 @onready var pause_screen = $"../pause_screen"
+@onready var weckingball_skin = $weckingball_skin
 var collision_size_at_rest = .075
 
 var save_index = null
@@ -59,9 +60,11 @@ var cam_pitch_add = 0.0
 var skeleton
 var control_lock_yaw = false
 var control_lock_tilt = false
+var vt
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
+	vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
 	skeleton = mesh.find_child("Skeleton3D")
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true
@@ -90,6 +93,7 @@ func load_save(save_file):
 	#print(parse_result)
 	if parse_result == 0:
 		var save_data = json.get_data()
+		save_data["using"] = "gun"
 		return(save_data)
 
 func fire_landgun():
@@ -132,18 +136,32 @@ func get_max_throttle():
 	return(max_throttle - (effect * 1.9))
 
 func _unhandled_input(event):
+
+	
+	if event.is_action_pressed("select_gun"):
+		inventory["using"] = "gun"
+	if "land_making_gun" in inventory and event.is_action_pressed("select_build"):
+		inventory["using"] = "land_making_gun"
+	if "laser_gun" in inventory and event.is_action_pressed("select_laser"):
+		inventory["using"] = "laser_gun"
+	if "weckingball" in inventory and event.is_action_pressed("select_ball"):
+		inventory["using"] = "weckingball"
 	if is_paused():
 		return
-		
+	
+	
 	if power_cell > fire_cost + 1:
-		if event.is_action_pressed("fire_right"):
-			draw_power(fire_cost)
-			#power_cell -= fire_cost
-			fire_normal()
-		if event.is_action_pressed("fire_left"):
-			draw_power(fire_cost)
-			#power_cell -= fire_cost
-			fire_landgun()
+		if event.is_action_pressed("fire"):
+			if inventory["using"] == "gun":
+				draw_power(fire_cost)
+				fire_normal()
+			if inventory["using"] == "land_making_gun":
+				draw_power(fire_cost)
+				fire_landgun()
+			#if inventory["using"] == "laser_gun":
+			#	fire_laser()
+			#if inventory["using"] == "weckingball":
+			#	ball_mode()
 	
 	# aim mode
 	if Input.is_action_pressed("aim"):
@@ -154,6 +172,7 @@ func _unhandled_input(event):
 		#print(Input.get_action_strength("throttle"))
 	#	throttle = 0.0
 		#throttle = -event.axis_value * get_max_throttle()
+
 	
 	# normal mode
 	if event.is_action("throttle"):
@@ -361,7 +380,14 @@ func drone_aim_mode(delta):
 	#if abs(cam_roll) > .01:
 	#	camera.rotation.z = (cam_pitch * PI)/2
 
-
+func ball_mode():
+	vt.mode = VoxelTool.MODE_REMOVE
+	vt.do_sphere(global_position, linear_velocity.length()/20)
+	mass = 1000
+	weckingball_skin.visible = true
+	if $drone_sound.playing:
+		$drone_sound.stop()
+	
 func drone_physics(delta):
 	if Input.is_action_pressed("aim"):
 		#print("Aim mode")
@@ -369,6 +395,18 @@ func drone_physics(delta):
 		return
 	else:
 		cam_pitch_add = 0.0
+	
+	# weckingball mode
+	if inventory["using"] == "weckingball" and Input.is_action_pressed("fire"):
+		draw_power(delta)
+		ball_mode()
+		return
+	else:
+		if weckingball_skin.visible:
+			mass = 0.22
+			weckingball_skin.visible = false
+			$drone_sound.play()
+	
 	#print("Normal mode")
 	#print(throttle)
 	#print(linear_velocity.y)

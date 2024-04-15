@@ -12,10 +12,9 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
 emission_enabled = true
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_w6lls"]
-top_radius = 0.07
-bottom_radius = 0.07
-height = 0.055
+[sub_resource type="SphereMesh" id="SphereMesh_l06h7"]
+radius = 0.08
+height = 0.16
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8d16w"]
 dof_blur_far_enabled = true
@@ -112,10 +111,9 @@ mass = 0.22
 angular_damp = 100.0
 script = ExtResource("1_qapsr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
+[node name="weckingball_skin" type="MeshInstance3D" parent="."]
 material_override = SubResource("StandardMaterial3D_fpre2")
-mesh = SubResource("CylinderMesh_w6lls")
+mesh = SubResource("SphereMesh_l06h7")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, -0.00257987, -0.00068361)

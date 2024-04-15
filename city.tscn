@@ -141,6 +141,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38972, 0, 1.30073)
 
 [node name="land_making_gun for 600" type="Node3D" parent="shop_ui/items"]
 
+[node name="weckingball for 1000" type="Node3D" parent="shop_ui/items"]
+
+[node name="laser_gun for 2000" type="Node3D" parent="shop_ui/items"]
+
+[node name="drone_light for 2000" type="Node3D" parent="shop_ui/items"]
+
 [node name="landing" type="MeshInstance3D" parent="shop_ui"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256244, -0.048645)
 mesh = SubResource("PlaneMesh_eguea")

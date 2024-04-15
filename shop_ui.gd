@@ -131,7 +131,7 @@ func _process(delta):
 			var price = int(this_msg.split(" for ")[-1])
 			var buy_text = this_msg.split(" for ")[0]
 			
-			#If this item is already in inventory, hide
+			
 			if buy_text == "extra_power":
 				if "extra_power" in drone.inventory:
 					price *= drone.inventory["extra_power"] + 1
@@ -144,6 +144,7 @@ func _process(delta):
 				else:
 					drone.inventory["extra_power"] = 1
 				"""
+			#If this item is already in inventory, hide
 			elif buy_text in drone.inventory:
 				message_index += 1
 				if message_index >= len(message):

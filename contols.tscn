@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwff7qo2uv252"]
+[gd_scene load_steps=16 format=3 uid="uid://dwff7qo2uv252"]
 
 [ext_resource type="Texture2D" uid="uid://b86uellv37tub" path="res://images/idle.png" id="1_o37b6"]
 [ext_resource type="Texture2D" uid="uid://beaxg3axlj2w2" path="res://images/hover.png" id="2_gqbk0"]
@@ -6,8 +6,45 @@
 [ext_resource type="Texture2D" uid="uid://bnwesipfilrve" path="res://images/forward.png" id="4_3flkb"]
 [ext_resource type="Texture2D" uid="uid://5iepa7ou7txu" path="res://images/shoot.png" id="5_rvtk5"]
 [ext_resource type="Texture2D" uid="uid://wsqkp8iwyl3t" path="res://images/controls.png" id="6_x7cev"]
+[ext_resource type="Script" path="res://controls_main_interface.gd" id="7_2x2ej"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_wtdr3"]
+[sub_resource type="LabelSettings" id="LabelSettings_0ijcy"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_un5hk"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_bd2h0"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_derib"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_j8mae"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_py5x4"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2t6g8"]
+resource_local_to_scene = true
+font_size = 18
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_01adq"]
+resource_local_to_scene = true
 font_size = 18
 font_color = Color(0, 0, 0, 1)
 
@@ -47,10 +84,11 @@ texture = ExtResource("5_rvtk5")
 position = Vector2(940, 130)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("6_x7cev")
+script = ExtResource("7_2x2ej")
 
-[node name="gun" type="Node2D" parent="controls_main"]
+[node name="Gun" type="Node2D" parent="controls_main"]
 
-[node name="Label" type="Label" parent="controls_main/gun"]
+[node name="Label" type="Label" parent="controls_main/Gun"]
 offset_left = -235.0
 offset_top = 26.6667
 offset_right = -191.0
@@ -58,9 +96,9 @@ offset_bottom = 57.6667
 scale = Vector2(0.659794, 0.538462)
 text = "Gun
 "
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_0ijcy")
 
-[node name="Label2" type="Label" parent="controls_main/gun"]
+[node name="Label2" type="Label" parent="controls_main/Gun"]
 offset_left = 213.333
 offset_top = 5.0
 offset_right = 257.333
@@ -68,7 +106,7 @@ offset_bottom = 36.0
 scale = Vector2(0.659794, 0.538462)
 text = "Gun
 "
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_un5hk")
 
 [node name="Build" type="Node2D" parent="controls_main"]
 
@@ -80,7 +118,7 @@ offset_bottom = -15.6667
 scale = Vector2(0.659794, 0.538462)
 text = "Build
 "
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_bd2h0")
 
 [node name="Label2" type="Label" parent="controls_main/Build"]
 offset_left = 211.667
@@ -89,7 +127,7 @@ offset_right = 256.667
 offset_bottom = -14.0
 scale = Vector2(0.659794, 0.538462)
 text = "Build"
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_derib")
 
 [node name="Laser" type="Node2D" parent="controls_main"]
 
@@ -101,7 +139,7 @@ offset_bottom = 21.0
 scale = Vector2(0.659794, 0.538462)
 text = "Laser
 "
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_j8mae")
 
 [node name="Label2" type="Label" parent="controls_main/Laser"]
 offset_left = 236.667
@@ -111,7 +149,7 @@ offset_bottom = 14.3333
 scale = Vector2(0.659794, 0.538462)
 text = "Laser
 "
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_py5x4")
 
 [node name="Ball" type="Node2D" parent="controls_main"]
 
@@ -122,7 +160,7 @@ offset_right = -241.667
 offset_bottom = 21.0
 scale = Vector2(0.659794, 0.538462)
 text = "Ball"
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_2t6g8")
 
 [node name="Label2" type="Label" parent="controls_main/Ball"]
 offset_left = 185.0
@@ -131,4 +169,4 @@ offset_right = 233.0
 offset_bottom = 14.3333
 scale = Vector2(0.659794, 0.538462)
 text = "Ball"
-label_settings = SubResource("LabelSettings_wtdr3")
+label_settings = SubResource("LabelSettings_01adq")

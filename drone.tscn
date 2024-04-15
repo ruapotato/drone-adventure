@@ -136,7 +136,7 @@ attributes = SubResource("CameraAttributesPractical_8d16w")
 current = true
 
 [node name="drone_gun" parent="Camera3D" instance=ExtResource("8_si1r6")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Camera3D"]
 

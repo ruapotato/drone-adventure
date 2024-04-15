@@ -1,6 +1,8 @@
 extends RigidBody3D
 
 @onready var bullet = preload("res://bullet.tscn")
+@onready var laser = preload("res://laser.tscn")
+
 @onready var camera = $Camera3D
 @onready var target = $Label3D
 @onready var shoot_from = $shoot_from
@@ -16,7 +18,7 @@ extends RigidBody3D
 @onready var pause_screen = $"../pause_screen"
 @onready var weckingball_skin = $weckingball_skin
 var collision_size_at_rest = .075
-
+var laser_obj
 var save_index = null
 var inventory = null
 var save_file = null
@@ -113,6 +115,15 @@ func fire_landgun():
 	apply_impulse(global_transform.basis.z * .1)
 	get_parent().add_child(new_bullet)
 
+func fire_laser():
+		if laser_obj == null and  power_cell > fire_cost + 1:
+			draw_power(fire_cost)
+			laser_obj = laser.instantiate()
+			laser_obj.name = "laser"
+			camera.find_child("drone_gun").add_child(laser_obj)
+			#laser_obj.rotate_y(PI/2)
+			#laser_obj.rotate_z(PI/2)
+			#laser_obj.rotation = camera.rotation
 func fire_normal():
 	if not unlocked_gun:
 		return
@@ -137,7 +148,6 @@ func get_max_throttle():
 
 func _unhandled_input(event):
 
-	
 	if event.is_action_pressed("select_gun"):
 		inventory["using"] = "gun"
 	if "land_making_gun" in inventory and event.is_action_pressed("select_build"):
@@ -158,8 +168,8 @@ func _unhandled_input(event):
 			if inventory["using"] == "land_making_gun":
 				draw_power(fire_cost)
 				fire_landgun()
-			#if inventory["using"] == "laser_gun":
-			#	fire_laser()
+			if inventory["using"] == "laser_gun":
+				fire_laser()
 			#if inventory["using"] == "weckingball":
 			#	ball_mode()
 	

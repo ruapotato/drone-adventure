@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var mini_ufo = preload("res://mini_ufo.tscn")
+@onready var balloon = preload("res://balloon.tscn")
 @onready var lava_blob = preload("res://lava_blob.tscn")
 @onready var piv = $piv
 @onready var spawn_point = $piv/spawn_point
@@ -24,13 +25,22 @@ func get_drone():
 func spawn_something():
 	# On ground
 	if global_position.y > -99:
-		if drone.inventory["crystals"] < 5: 
+		if drone.inventory["crystals"] > 5: 
 			spawn_counter = spawn_every
 			var new_mini_ufo = mini_ufo.instantiate()
 			new_mini_ufo.name = "mini_ufo_" + str(spawn_index)
 			spawn_index += 1
 			new_mini_ufo.set_deferred("global_position", spawn_point.global_position)
 			get_parent().add_child(new_mini_ufo)
+	# sky things
+	if global_position.y > 200:
+		spawn_counter = spawn_every
+		var new_thing = balloon.instantiate()
+		#new_thing.name = "balloon_" + str(spawn_index)
+		spawn_index += 1
+		new_thing.set_deferred("global_position", spawn_point.global_position)
+		get_parent().add_child(new_thing)	
+	
 	# Under ground
 	if global_position.y < -99 and false:
 		spawn_counter = spawn_every

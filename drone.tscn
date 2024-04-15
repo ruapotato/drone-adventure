@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=32 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
@@ -9,7 +9,21 @@
 [ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://ingenuity_import.tscn" id="7_lkp43"]
 [ext_resource type="PackedScene" uid="uid://dmuhcsl8wg0ug" path="res://drone_gun_import.tscn" id="8_si1r6"]
 
+[sub_resource type="Gradient" id="Gradient_bwy5e"]
+offsets = PackedFloat32Array(0, 0.754098)
+colors = PackedColorArray(0.572669, 6.37732e-07, 1.92523e-07, 1, 0.721569, 0.403922, 0.341176, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xde2m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_icrxl"]
+seamless = true
+color_ramp = SubResource("Gradient_bwy5e")
+noise = SubResource("FastNoiseLite_xde2m")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fpre2"]
+albedo_texture = SubResource("NoiseTexture2D_icrxl")
+metallic = 1.0
+roughness = 0.56
 emission_enabled = true
 
 [sub_resource type="SphereMesh" id="SphereMesh_l06h7"]
@@ -112,6 +126,7 @@ angular_damp = 100.0
 script = ExtResource("1_qapsr")
 
 [node name="weckingball_skin" type="MeshInstance3D" parent="."]
+visible = false
 material_override = SubResource("StandardMaterial3D_fpre2")
 mesh = SubResource("SphereMesh_l06h7")
 

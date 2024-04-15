@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6xoinay7iwci"]
+
+[ext_resource type="PackedScene" uid="uid://bt1ex2knjtlmi" path="res://import/balloon.glb" id="1_jsmc0"]
+[ext_resource type="PackedScene" uid="uid://dg2vcwd6qo28" path="res://import/basket.glb" id="2_rw8w8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_wgpwf"]
+resource_local_to_scene = true
+radius = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d7pbb"]
+size = Vector3(1.5, 1.5, 1.5)
+
+[node name="balloon" type="Node3D"]
+
+[node name="top_balloon" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.72719, 0)
+mass = 70.0
+gravity_scale = -1.0
+
+[node name="balloon_shape" type="CollisionShape3D" parent="top_balloon"]
+shape = SubResource("SphereShape3D_wgpwf")
+
+[node name="balloon_mesh" parent="top_balloon" instance=ExtResource("1_jsmc0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.98709, 0)
+
+[node name="HingeJoint3D" type="HingeJoint3D" parent="top_balloon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+node_a = NodePath("..")
+node_b = NodePath("basket")
+
+[node name="basket" type="RigidBody3D" parent="top_balloon/HingeJoint3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.05662, 0)
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+mass = 65.0
+
+[node name="basket2" parent="top_balloon/HingeJoint3D/basket" instance=ExtResource("2_rw8w8")]
+transform = Transform3D(0.83, 0, 0, 0, 0.98, 0, 0, 0, 0.83, 0, 1.09654, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+shape = SubResource("BoxShape3D_d7pbb")

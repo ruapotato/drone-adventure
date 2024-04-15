@@ -96,6 +96,10 @@ func _on_area_3d_body_entered(body):
 		print(body.get_parent().name)
 		print(body.get_parent().get_parent().name)
 		print(body.name)
+		if body.name == "top_balloon":
+			body.mass = .1
+			body.find_child("balloon_shape").shape.radius = .1
+			body.find_child("balloon_mesh").visible = false
 		if body.name == "dog":
 			world.dogs_pissed = true
 			print("Pissed on the dogs")

@@ -15,9 +15,8 @@ extends Node3D
 const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.0526
-const day_workflow =  {5.9: "stop_spawn",
-					6.0: "clear_fog",
-					16.0:"start_spawn",
+const day_workflow =  {6.0: "clear_fog",
+					7.0:"start_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}
 
@@ -130,7 +129,10 @@ func update_sky_energy(delta):
 	else:
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 
-func update_env():
+func update_env(delta):
+	#print(drone.global_position.y)
+	if drone.global_position.y > 200:
+		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.0, delta / (day_len/15))
 	if drone.global_position.y < -80:
 		env.environment.volumetric_fog_albedo = Color("#9e0174")
 	else:
@@ -145,6 +147,6 @@ func _process(delta):
 	update_sky_energy(delta)
 	update_workflow()
 	run_active_tasks(delta)
-	update_env()
+	update_env(delta)
 
 

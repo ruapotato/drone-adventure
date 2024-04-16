@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b64jd5h3l1t2x"]
 
 [ext_resource type="Script" path="res://laser.gd" id="1_0ngld"]
-[ext_resource type="Material" path="res://native/laser.tres" id="2_e01tf"]
+[ext_resource type="Material" uid="uid://dxo3ucob1ypki" path="res://native/laser.tres" id="2_e01tf"]
 [ext_resource type="AudioStream" uid="uid://cb7q1qsyhgptq" path="res://import/shoot.wav" id="3_pmiv1"]
 [ext_resource type="AudioStream" uid="uid://bsvefj478xq7r" path="res://import/on_hit.wav" id="4_r1frt"]
 [ext_resource type="PackedScene" path="res://native/laser_effect.tscn" id="4_rhi3n"]

@@ -528,19 +528,3 @@ mesh = SubResource("CylinderMesh_ibqkg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_evae5")
-
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/value_crystal" to="VoxelLodTerrain/VoxelInstancer/value_crystal" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288365" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288365" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288368" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288368" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288370" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288370" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288460" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288460" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288504" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288504" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288606" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288606" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288756" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288756" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288758" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288758" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288760" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288760" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288764" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288764" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288768" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288768" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288770" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288770" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288772" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288772" method="_on_body_entered"]
-[connection signal="body_entered" from="VoxelLodTerrain/VoxelInstancer/@Area3D@288774" to="VoxelLodTerrain/VoxelInstancer/@Area3D@288774" method="_on_body_entered"]

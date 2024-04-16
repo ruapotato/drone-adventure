@@ -51,9 +51,9 @@ texture = ExtResource("3_6ql65")
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="."]
-offset_left = 860.0
+offset_left = 850.0
 offset_top = 808.0
-offset_right = 997.0
+offset_right = 987.0
 offset_bottom = 858.0
 scale = Vector2(1.90032, 1.72781)
 theme = SubResource("Theme_3einr")
@@ -62,9 +62,9 @@ text = "Quit"
 metadata/_edit_use_anchors_ = true
 
 [node name="help" type="Button" parent="."]
-offset_left = 861.0
+offset_left = 850.0
 offset_top = 711.0
-offset_right = 998.0
+offset_right = 987.0
 offset_bottom = 761.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")
@@ -73,9 +73,9 @@ text = "Help"
 metadata/_edit_use_anchors_ = true
 
 [node name="settings" type="Button" parent="."]
-offset_left = 856.0
+offset_left = 850.0
 offset_top = 618.0
-offset_right = 993.0
+offset_right = 987.0
 offset_bottom = 668.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")

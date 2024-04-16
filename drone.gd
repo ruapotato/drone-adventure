@@ -168,8 +168,8 @@ func _unhandled_input(event):
 			if inventory["using"] == "land_making_gun":
 				draw_power(fire_cost)
 				fire_landgun()
-			if inventory["using"] == "laser_gun":
-				fire_laser()
+			#if inventory["using"] == "laser_gun":
+			#	fire_laser()
 			#if inventory["using"] == "weckingball":
 			#	ball_mode()
 	
@@ -399,6 +399,11 @@ func ball_mode():
 		$drone_sound.stop()
 	
 func drone_physics(delta):
+	
+	# laser_gun
+	if inventory["using"] == "laser_gun" and Input.is_action_pressed("fire"):
+		fire_laser()
+	
 	if Input.is_action_pressed("aim"):
 		#print("Aim mode")
 		drone_aim_mode(delta)

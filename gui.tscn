@@ -130,10 +130,10 @@ label_settings = SubResource("LabelSettings_i7c73")
 horizontal_alignment = 2
 
 [node name="targetLabel" type="Label" parent="."]
-offset_left = 950.0
-offset_top = 527.0
-offset_right = 1036.0
-offset_bottom = 740.0
+offset_left = 951.225
+offset_top = 529.285
+offset_right = 1037.23
+offset_bottom = 742.285
 size_flags_horizontal = 4
 text = "|"
 label_settings = SubResource("LabelSettings_2q8g7")

@@ -67,7 +67,7 @@ func _process(delta):
 	
 	#scale beem up and down
 	#var size = ((int(time_alive * 100) % 30) -15) / 10000.0
-	var size_to_be = (time_alive - ttl)/200.0
+	var size_to_be = (time_alive - ttl)/1500.0
 	size = lerp(float(size), float(size_to_be), delta * 10)
 	mesh.mesh.top_radius = size
 	mesh.mesh.bottom_radius = size

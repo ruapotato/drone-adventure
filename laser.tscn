@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://native/laser_effect.tscn" id="4_rhi3n"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_yiw24"]
+flip_faces = true
 top_radius = 0.005
 bottom_radius = 0.005
 height = 0.001
@@ -19,13 +20,12 @@ script = ExtResource("1_0ngld")
 [node name="shot" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.42109e-14, -5)
 stream = ExtResource("3_pmiv1")
-volume_db = -30.0
+volume_db = 15.0
 pitch_scale = 1.51
 
 [node name="hit" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.42109e-14, -5)
 stream = ExtResource("4_r1frt")
-volume_db = -25.0
 max_db = -15.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

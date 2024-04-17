@@ -91,22 +91,6 @@ func _on_area_3d_body_entered(body):
 		return
 		
 	if body.name != "drone" and body.name != "bullet" and body != self:
-		print()
-		print(body.name)
-		print(body.get_parent().name)
-		print(body.get_parent().get_parent().name)
-		print(body.name)
-		if body.name == "top_balloon":
-			body.mass = .1
-			body.find_child("balloon_shape").shape.radius = .1
-			body.find_child("balloon_mesh").visible = false
-		if body.name == "dog":
-			world.dogs_pissed = true
-			print("Pissed on the dogs")
-		if body.name == "ufo":
-			body.life -= 1
-			body.fly_ttl = 6
-		if body.name == "mini_ufo":
-			body.get_parent().life -= 1
+		world.hurt(body, 1.0)
 		going_to_kill = body
 		$boom.play()

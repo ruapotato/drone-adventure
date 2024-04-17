@@ -4,7 +4,7 @@ extends RigidBody3D
 @onready var laser = preload("res://laser.tscn")
 
 @onready var camera = $Camera3D
-@onready var target = $Label3D
+#@onready var target = $Label3D
 @onready var shoot_from = $shoot_from
 @onready var back_cam_mount = $back_cam_mount
 @onready var speed_collision = $speedCollision

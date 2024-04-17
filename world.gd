@@ -4,7 +4,7 @@ extends Node3D
 @onready var env = $WorldEnvironment
 @onready var drone = $drone
 @onready var sun = $sun
-@onready var city = $city
+#@onready var city = $city
 @onready var ufos = $ufos
 @onready var spawner = $spawner
 
@@ -115,6 +115,24 @@ func add_crystal_to_world(value,pos):
 	new_crystal.set_deferred("global_position", pos)
 	drone.get_parent().add_child(new_crystal)
 
+func hurt(body, how_much):
+	print(body.name)
+	if "crystal" in body.name:
+		body.shatter()
+	elif body.name == "top_balloon":
+		body.mass = .1
+		body.find_child("balloon_shape").shape.radius = .1
+		body.find_child("balloon_mesh").visible = false
+	elif body.name == "dog":
+		dogs_pissed = true
+		print("Pissed on the dogs")
+	elif body.name == "ufo":
+		body.life -= how_much
+		body.fly_ttl = 6
+	elif body.name == "mini_ufo":
+		body.get_parent().life -= how_much
+	elif "life" in body:
+		body.life -= how_much
 
 func update_abs_time():
 	if sun.rotation.x > 0:

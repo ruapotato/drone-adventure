@@ -12,6 +12,7 @@ func _ready():
 	
 func get_drone():
 	var root_i_hope = get_parent()
+	#print(root_i_hope.name)
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
 	return(root_i_hope.find_child("drone"))

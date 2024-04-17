@@ -87,6 +87,7 @@ texture = ExtResource("6_x7cev")
 script = ExtResource("7_2x2ej")
 
 [node name="Gun" type="Node2D" parent="controls_main"]
+position = Vector2(0, -17.845)
 
 [node name="Label" type="Label" parent="controls_main/Gun"]
 offset_left = -235.0
@@ -109,6 +110,7 @@ text = "Gun
 label_settings = SubResource("LabelSettings_un5hk")
 
 [node name="Build" type="Node2D" parent="controls_main"]
+position = Vector2(0, -17.845)
 
 [node name="Label" type="Label" parent="controls_main/Build"]
 offset_left = -235.0
@@ -130,6 +132,7 @@ text = "Build"
 label_settings = SubResource("LabelSettings_derib")
 
 [node name="Laser" type="Node2D" parent="controls_main"]
+position = Vector2(0, -17.845)
 
 [node name="Label" type="Label" parent="controls_main/Laser"]
 offset_left = -235.0
@@ -152,6 +155,7 @@ text = "Laser
 label_settings = SubResource("LabelSettings_py5x4")
 
 [node name="Ball" type="Node2D" parent="controls_main"]
+position = Vector2(0, -17.845)
 
 [node name="Label" type="Label" parent="controls_main/Ball"]
 offset_left = -286.667

@@ -23,6 +23,6 @@ stream = ExtResource("3_8d3ei")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.387632, 0)
 stream = ExtResource("4_kvk46")
 volume_db = -12.19
-max_db = -12.0
+max_db = -20.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

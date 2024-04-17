@@ -32,3 +32,5 @@ mesh = SubResource("SphereMesh_tj2ni")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7rg2p")
+
+[connection signal="area_entered" from="lava_blob_shape" to="." method="_on_lava_blob_shape_area_entered"]

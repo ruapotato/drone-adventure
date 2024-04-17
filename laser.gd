@@ -9,11 +9,13 @@ var ttl = .4
 var size = 0
 var drone
 var max_size = 100
+var world
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("hi")
 	drone = get_drone()
+	world = drone.world
 	$shot.play()
 	add_exception(drone)
 	mesh.mesh.height = max_size
@@ -38,12 +40,7 @@ func _process(delta):
 		ray_cast_point = to_local(get_collision_point())
 		body = get_collider()
 		print(body.name)
-		if "life" in body:
-			body.life -= damage * delta
-			print("Hurting...")
-		elif body.name == "mini_ufo":
-			body.get_parent().life -= damage * delta
-			print("Hurting...")
+		world.hurt(body, damage * delta)
 		mesh.mesh.height = ray_cast_point.z
 		mesh.position.z = ray_cast_point.z/2
 		laser_effect.position.z = ray_cast_point.z/2

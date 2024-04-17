@@ -20,10 +20,10 @@ node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522375, 0, -0.620276)
 
 [node name="Skeleton3D" parent="Armature" index="1"]
-bones/1/rotation = Quaternion(-0.262989, -0.660192, -0.662668, 0.236335)
-bones/2/rotation = Quaternion(-0.222243, 0.665293, 0.667788, 0.249103)
-bones/3/rotation = Quaternion(-0.660192, 0.262989, 0.236335, 0.662668)
-bones/4/rotation = Quaternion(0.665293, 0.222243, 0.249103, -0.667788)
+bones/1/rotation = Quaternion(-0.424887, -0.572532, -0.57468, 0.401772)
+bones/2/rotation = Quaternion(-0.390476, 0.580378, 0.582555, 0.413908)
+bones/3/rotation = Quaternion(-0.572532, 0.424887, 0.401772, 0.57468)
+bones/4/rotation = Quaternion(0.580378, 0.390476, 0.413908, -0.582555)
 bones/5/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
 bones/6/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 

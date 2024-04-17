@@ -20,6 +20,7 @@ func get_drone():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	name += "_crystal"
 	drone = get_drone()
 	world = drone.get_parent()
 	#value = int(name.split("_")[0])
@@ -113,6 +114,7 @@ func _process(delta):
 
 func shatter():
 	if value == 1:
+		collected = true
 		return
 	var number_to_spit_into = randi_range(2,value)
 	if number_to_spit_into > 3:

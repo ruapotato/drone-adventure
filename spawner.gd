@@ -11,7 +11,9 @@ var spawn_every = 10
 var spawn_counter = spawn_every
 var spawn_index = 0
 var drone
-var running = false
+var running = true
+var day_spawn = true
+var night_spawn = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone = get_drone()
@@ -25,7 +27,7 @@ func get_drone():
 func spawn_something():
 	# On ground
 	if global_position.y > -99:
-		if drone.inventory["crystals"] > 5: 
+		if drone.inventory["crystals"] > 5 and night_spawn:
 			spawn_counter = spawn_every
 			var new_mini_ufo = mini_ufo.instantiate()
 			new_mini_ufo.name = "mini_ufo_" + str(spawn_index)
@@ -33,7 +35,7 @@ func spawn_something():
 			new_mini_ufo.set_deferred("global_position", spawn_point.global_position)
 			get_parent().add_child(new_mini_ufo)
 	# sky things
-	if global_position.y > 200:
+	if global_position.y > 200 and day_spawn:
 		spawn_counter = spawn_every
 		var new_thing = balloon.instantiate()
 		#new_thing.name = "balloon_" + str(spawn_index)

@@ -16,7 +16,8 @@ const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.0526
 const day_workflow =  {6.0: "clear_fog",
-					7.0:"start_spawn",
+					7.0:"day_spawn",
+					21.0:"night_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}
 
@@ -53,10 +54,12 @@ func run_active_tasks(delta):
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.002, delta / (day_len/15))
 	if active_task == "get_foggy":
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density, fog_density, delta / (day_len/4))
-	if active_task == "start_spawn":
-		spawner.running = true
-	if active_task == "stop_spawn":
-		spawner.running = false
+	if active_task == "day_spawn":
+		spawner.day_spawn = true
+		spawner.night_spawn = false
+	if active_task == "night_spawn":
+		spawner.day_spawn = false
+		spawner.night_spawn = true
 	if active_task == "UFO":
 		#print(len(ufos.get_children()))
 		if len(ufos.get_children()) == 0:

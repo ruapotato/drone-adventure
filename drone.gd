@@ -307,9 +307,9 @@ func aim_mode_unhandled_input(event):
 	# Remap Yaw/throttle to moving
 	if event.is_action("throttle"):
 		#print(-event.axis_value)
-		pitch = event.axis_value/5
+		pitch = event.axis_value/10
 	if event.is_action("yaw"):
-		roll = -event.axis_value/5
+		roll = -event.axis_value/10
 		#print(event.axis_value)
 	#if event.is_action("throttle"):
 	#	throttle = -needed_throttle * get_max_throttle()
@@ -320,8 +320,8 @@ func aim_mode_unhandled_input(event):
 		cam_pitch = event.axis_value
 	# remap roll to yaw
 	if event.is_action("roll"):
-		yaw = -event.axis_value
-		yaw = -event.axis_value
+		yaw = -event.axis_value/2
+		yaw = -event.axis_value/2
 		#cam_roll = -event.axis_value
 
 

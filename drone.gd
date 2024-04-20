@@ -43,6 +43,7 @@ var throttle = 0.0
 var max_throttle = 3.9
 
 var yaw = 0.0
+var yaw_to_use = 0.0
 var yaw_speed = 3
 
 var pitch = 0.0
@@ -63,6 +64,7 @@ var skeleton
 var control_lock_yaw = false
 var control_lock_tilt = false
 var vt
+var joy_stick_speed = 5.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
@@ -348,28 +350,27 @@ func drone_aim_mode(delta):
 		add_power(power_gain * delta)
 
 	if abs(yaw) > .01:
-		#print(yaw)
-		rotate_y(yaw * yaw_speed * delta)
+		rotate_y((yaw/50) * (joy_stick_speed + world.control_sensitivity_effector))
 	
 	var pitch_change = 0.0
 	if abs(pitch) > .01:
 		#rotation.x = (pitch * PI)/2
-		pitch_change = lerp(rotation.x,  (pitch * PI)/2, delta * 3)
+		pitch_change = lerp(rotation.x,  (pitch * PI)/2, delta * (joy_stick_speed + world.control_sensitivity_effector))
 		rotation.x = pitch_change
 	else:
-		pitch_change = lerp(rotation.x,  0.0, delta * 4)
+		pitch_change = lerp(rotation.x,  0.0, delta * 5)
 		rotation.x  = pitch_change
 	if abs(roll) > .01:
 		#rotation.z = (roll * PI)/2
-		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * 3)
+		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * (joy_stick_speed + world.control_sensitivity_effector))
 	else:
-		rotation.z = lerp(rotation.z, 0.0, delta * 4)
+		rotation.z = lerp(rotation.z, 0.0, delta * 5)
 	
 	if pitch_change != 0.0:
 		camera.rotation.x = -pitch_change
 		#camera.rotation.x = lerp(camera.rotation.x,-pitch_change, delta * 50)
 	#if abs(cam_pitch) > .01:
-	cam_pitch_add += cam_pitch * (yaw_speed/2) * delta
+	cam_pitch_add += cam_pitch * delta * (joy_stick_speed + world.control_sensitivity_effector) * .5
 	#camera.rotation.x += cam_pitch_add
 	#if Input.is_action_just_pressed("aim"):
 	#	cam_pitch_add += rotation.x
@@ -390,9 +391,9 @@ func drone_aim_mode(delta):
 	#if abs(cam_roll) > .01:
 	#	camera.rotation.z = (cam_pitch * PI)/2
 
-func ball_mode():
+func ball_mode(delta):
 	vt.mode = VoxelTool.MODE_REMOVE
-	vt.do_sphere(global_position, linear_velocity.length()/20)
+	vt.grow_sphere(global_position,  linear_velocity.length()/20, delta * clamp(linear_velocity.length(),1,60))
 	mass = 1000
 	weckingball_skin.visible = true
 	if $drone_sound.playing:
@@ -414,7 +415,7 @@ func drone_physics(delta):
 	# weckingball mode
 	if inventory["using"] == "weckingball" and Input.is_action_pressed("fire"):
 		draw_power(delta)
-		ball_mode()
+		ball_mode(delta)
 		return
 	else:
 		if weckingball_skin.visible:
@@ -434,21 +435,26 @@ func drone_physics(delta):
 	else:
 		add_power(power_gain * delta)
 
-	if abs(yaw) > .01:
+	if yaw != 0.0:
 		#print(yaw)
-		rotate_y(yaw * yaw_speed * delta)
+		yaw_to_use = lerp(yaw_to_use, (yaw * yaw_speed * delta), delta*(joy_stick_speed + world.control_sensitivity_effector))
+	else:
+		yaw_to_use = lerp(yaw_to_use, 0.0,delta*5)
+	if yaw_to_use != 0.0:
+		rotate_y(yaw_to_use)
 		
 	if abs(pitch) > .01:
 		#rotation.x = (pitch * PI)/2
-		rotation.x = lerp(rotation.x,  (pitch * PI)/2, delta * 3)
+		rotation.x = lerp(rotation.x,  (pitch * PI)/2, delta * (joy_stick_speed + world.control_sensitivity_effector))
 	else:
 		rotation.x = lerp(rotation.x,  0.0, delta * 4)
 
 	if abs(roll) > .01:
 		#rotation.z = (roll * PI)/2
-		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * 3)
+		rotation.z = lerp(rotation.z,  (roll * PI)/2, delta * (joy_stick_speed + world.control_sensitivity_effector))
 	else:
-		rotation.z = lerp(rotation.z, 0.0, delta * 4)
+		#rotation.z = lerp(rotation.z, 0.0, delta * 4)
+		rotation.z = lerp(rotation.z, 0.0, delta * (joy_stick_speed + world.control_sensitivity_effector))
 
 func update_user_settings():
 	
@@ -485,6 +491,7 @@ func dead_logic(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	#print(world.control_sensitivity_effector)
 	if dead:
 		dead_logic(delta)
 		return

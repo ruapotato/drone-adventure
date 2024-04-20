@@ -21,6 +21,3 @@ func _on_check_box_toggled(button_pressed):
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
-
-func _on_mouse_sensitivity_value_changed(value):
-	pass # Replace with function body.

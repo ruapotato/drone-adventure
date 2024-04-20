@@ -37,9 +37,9 @@ func _unhandled_input(event):
 		if visible:
 			button_order[button_index].emit_signal("pressed")
 	
-	if event.is_action_pressed("menu_down"):
+	if Input.is_action_just_pressed("menu_down"):
 		button_index += 1
-	if event.is_action_pressed("menu_up"):
+	if Input.is_action_just_pressed("menu_up"):
 		button_index -= 1
 	
 	
@@ -55,7 +55,7 @@ func _on_button_pressed():
 		new_game.queue_free()
 	new_game = game.instantiate()
 	
-	new_game.mouse_sensitivity_effector = $SettingsScreen.find_child("MouseSensitivity").value
+	new_game.control_sensitivity_effector = $SettingsScreen.find_child("ControlSensitivity").value
 	new_game.effects_effector = $SettingsScreen.find_child("Effects").value
 	self.hide()
 	get_parent().add_child(new_game)

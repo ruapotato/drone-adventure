@@ -13,8 +13,9 @@ config_version=5
 config/name="Drone Adventure"
 run/main_scene="res://main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-boot_splash/image="res://logo.png"
-config/icon="res://logo.png"
+boot_splash/bg_color=Color(1, 1, 1, 1)
+boot_splash/image="res://logo_dark.png"
+config/icon="res://logo_dark.png"
 
 [display]
 
@@ -22,6 +23,7 @@ window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=3
 window/stretch/mode="canvas_items"
+window/vsync/vsync_mode=0
 
 [input]
 
@@ -144,7 +146,5 @@ select_ball={
 
 [rendering]
 
-anti_aliasing/quality/msaa_2d=1
 anti_aliasing/quality/msaa_3d=1
 anti_aliasing/quality/screen_space_aa=1
-anti_aliasing/quality/use_taa=true

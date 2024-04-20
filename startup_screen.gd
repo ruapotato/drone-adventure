@@ -4,7 +4,7 @@ extends Node2D
 @onready var tutorial_mode = preload("res://tutorial_mode.tscn")
 @onready var hardness_menu = $hardness
 @onready var setting_screen = get_parent().find_child("SettingsScreen")
-@onready var mouse_sensitivity_effector
+#@onready var control_sensitivity_effector
 @onready var effects_effector
 
 @onready var tutorial_button = $tutorial_mode
@@ -18,7 +18,7 @@ extends Node2D
 
 @onready var button_order = [tutorial_button,save1_button,save2_button,save3_button,delete1_button,delete2_button,delete3_button]
 var button_index = 1
-
+var control_sensitivity_effector
 
 var saved_games = {}
 
@@ -70,7 +70,7 @@ func _ready():
 	
 	#print(mouse_sensitivity_effector)
 
-	#mouse_sensitivity_effector =  
+	#control_sensitivity_effector =  setting_screen.find_child("ControlSensitivity").Value
 
 func _unhandled_input(event):
 	if event.is_action_pressed("menu_select"):
@@ -78,9 +78,9 @@ func _unhandled_input(event):
 			button_order[button_index].emit_signal("button_down")
 			button_order[button_index].emit_signal("pressed")
 	
-	if event.is_action_pressed("menu_down"):
+	if Input.is_action_just_pressed("menu_down"):
 		button_index += 1
-	if event.is_action_pressed("menu_up"):
+	if Input.is_action_just_pressed("menu_up"):
 		button_index -= 1
 	
 	
@@ -101,7 +101,7 @@ func start_game():
 
 		new_game = game.instantiate()
 		new_game.hardness = hardness_menu.value/100
-
+		new_game.control_sensitivity_effector = control_sensitivity_effector
 		new_game.game_index = game_save_index
 		#call_deferred("hide")
 		hide()

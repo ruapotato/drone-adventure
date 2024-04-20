@@ -41,9 +41,9 @@ func _unhandled_input(event):
 			button_order[button_index].emit_signal("button_down")
 			button_order[button_index].emit_signal("pressed")
 		
-		if event.is_action_pressed("menu_down"):
+		if Input.is_action_just_pressed("menu_down"):
 			button_index += 1
-		if event.is_action_pressed("menu_up"):
+		if Input.is_action_just_pressed("menu_up"):
 			button_index -= 1
 		if button_index > len(button_order) - 1:
 			button_index =  len(button_order) -1

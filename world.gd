@@ -28,7 +28,7 @@ var time_to_init = 10
 var init_done = false
 var hardness
 var game_index
-
+var control_sensitivity_effector
 var time
 var friendly_time
 var friendly_time_am = false

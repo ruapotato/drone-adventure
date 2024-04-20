@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=27 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -102,6 +102,11 @@ font_size = 26
 
 [sub_resource type="LabelSettings" id="LabelSettings_djbgk"]
 font_size = 26
+
+[sub_resource type="LabelSettings" id="LabelSettings_vf1rj"]
+font_size = 26
+outline_size = 7
+outline_color = Color(0, 0, 0, 1)
 
 [node name="gui" type="Node2D"]
 script = ExtResource("1_2mec0")
@@ -258,3 +263,11 @@ offset_bottom = 58.8335
 scale = Vector2(0.0918557, 0.236323)
 label_settings = SubResource("LabelSettings_djbgk")
 metadata/_edit_use_anchors_ = true
+
+[node name="stats" type="Node2D" parent="."]
+
+[node name="fps" type="Label" parent="stats"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "11"
+label_settings = SubResource("LabelSettings_vf1rj")

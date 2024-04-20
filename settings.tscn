@@ -36,13 +36,12 @@ scale = Vector2(3.88099, 2.72751)
 text = "Settings"
 
 [node name="lable2" type="Label" parent="."]
-visible = false
 offset_left = 766.0
 offset_top = 333.0
 offset_right = 901.0
 offset_bottom = 359.0
 scale = Vector2(3.88099, 2.72751)
-text = "mouse sensitivity"
+text = "Control sensitivity"
 
 [node name="lable3" type="Label" parent="."]
 offset_left = 398.0
@@ -63,14 +62,14 @@ scale = Vector2(2.82358, 2.12204)
 button_pressed = true
 text = "Fullscreen"
 
-[node name="MouseSensitivity" type="HSlider" parent="."]
-visible = false
+[node name="ControlSensitivity" type="HSlider" parent="."]
 offset_left = 622.0
 offset_top = 412.0
 offset_right = 1466.0
 offset_bottom = 450.0
-min_value = -5.0
-max_value = 5.0
+min_value = -4.0
+max_value = 4.0
+step = 0.1
 tick_count = 11
 
 [node name="Effects" type="HSlider" parent="."]
@@ -85,4 +84,3 @@ tick_count = 11
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
-[connection signal="value_changed" from="MouseSensitivity" to="." method="_on_mouse_sensitivity_value_changed"]

@@ -80,6 +80,9 @@ func update_added_label(delta):
 			added_label.text = ""
 	else:
 		added_counter -= delta
+func update_fps():
+	if $stats.visible:
+		$stats/fps.text = str(Engine.get_frames_per_second())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -98,6 +101,7 @@ func _process(delta):
 	camera.look_at(drone.global_position)
 	update_added_label(delta)
 	update_speed_label()
+	update_fps()
 	if not drone.tutorial_mode:
 		update_time_label()
 		update_target_label()

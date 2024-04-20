@@ -53,6 +53,9 @@ func _unhandled_input(event):
 func _process(delta):
 	if visible:
 		show_selected()
+		if drone.tutorial_mode:
+			if $contols.visible:
+				$contols.visible = false
 		if "lander_skin" in drone.inventory:
 			if not $toggle_skin.visible:
 				$toggle_skin.visible = true

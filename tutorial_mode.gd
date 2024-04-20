@@ -20,6 +20,7 @@ var friendly_time_am = true
 var message
 var init_turn = 0
 var hover_index = 0
+var control_sensitivity_effector
 
 func _ready():
 	message = gui.find_child("message")
@@ -28,6 +29,9 @@ func _ready():
 	pause_screen.find_child("toggle_skin").visible = false
 	drone.control_lock_tilt = true
 	drone.control_lock_yaw = true
+
+func hurt(whatev, man):
+	pass
 
 func pause():
 	if pause_screen.visible:
@@ -63,7 +67,7 @@ func do_stage(delta):
 	if act == "shoot":
 		show_image("shoot")
 		if Input.is_action_pressed("aim"):
-			if Input.is_action_just_pressed("fire_right"):
+			if Input.is_action_just_pressed("fire"):
 				stage += 1
 				contol_images.visible = false
 				unlock_sound.play()

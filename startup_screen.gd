@@ -187,5 +187,6 @@ func _on_delete_3_pressed():
 
 func _on_tutorial_mode_pressed():
 	var new_game = tutorial_mode.instantiate()
+	new_game.control_sensitivity_effector = control_sensitivity_effector
 	add_child(new_game)
 	self.hide()

@@ -68,12 +68,13 @@ var joy_stick_speed = 5.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
-	vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
+	
 	skeleton = mesh.find_child("Skeleton3D")
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true
-		inventory = {"crystals":0}
+		inventory = {"crystals":0, "using":"gun"}
 	if not tutorial_mode:
+		vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
 		save_index = get_parent().game_index
 		save_file = "user://savegame_" + str(save_index) + ".json"
 		inventory = load_save(save_file)

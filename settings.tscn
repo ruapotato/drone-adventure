@@ -20,18 +20,18 @@ scale = Vector2(0.303752, 0.581316)
 texture = ExtResource("2_r6olw")
 
 [node name="lable" type="Label" parent="."]
-offset_left = 882.0
-offset_top = 54.0
-offset_right = 944.0
-offset_bottom = 80.0
-scale = Vector2(3.88099, 2.72751)
+offset_left = 839.0
+offset_top = 165.0
+offset_right = 901.0
+offset_bottom = 191.0
+scale = Vector2(4.881, 3.728)
 text = "Settings"
 
 [node name="lable2" type="Label" parent="."]
-offset_left = 766.0
-offset_top = 333.0
-offset_right = 901.0
-offset_bottom = 359.0
+offset_left = 726.0
+offset_top = 590.0
+offset_right = 866.0
+offset_bottom = 616.0
 scale = Vector2(3.88099, 2.72751)
 text = "Control sensitivity"
 
@@ -47,19 +47,19 @@ text = "Effects
 horizontal_alignment = 1
 
 [node name="CheckBox" type="CheckBox" parent="."]
-offset_left = 851.0
-offset_top = 192.0
-offset_right = 958.0
-offset_bottom = 223.0
+offset_left = 843.0
+offset_top = 399.0
+offset_right = 950.0
+offset_bottom = 430.0
 scale = Vector2(2.82358, 2.12204)
 button_pressed = true
 text = "Fullscreen"
 
 [node name="ControlSensitivity" type="HSlider" parent="."]
-offset_left = 622.0
-offset_top = 412.0
-offset_right = 1466.0
-offset_bottom = 450.0
+offset_left = 582.0
+offset_top = 669.0
+offset_right = 1426.0
+offset_bottom = 707.0
 min_value = -4.0
 max_value = 4.0
 step = 0.1

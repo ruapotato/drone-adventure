@@ -22,25 +22,25 @@ scale = Vector2(1.38972, 1.56695)
 texture = ExtResource("2_g3udu")
 
 [node name="Delete1" type="Button" parent="."]
-offset_left = 137.0
+offset_left = 1537.0
 offset_top = 865.0
-offset_right = 240.0
+offset_right = 1640.0
 offset_bottom = 896.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 1"
 
 [node name="Delete2" type="Button" parent="."]
-offset_left = 137.0
+offset_left = 1537.0
 offset_top = 908.0
-offset_right = 240.0
+offset_right = 1640.0
 offset_bottom = 939.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 2"
 
 [node name="Delete3" type="Button" parent="."]
-offset_left = 137.0
+offset_left = 1537.0
 offset_top = 951.0
-offset_right = 240.0
+offset_right = 1640.0
 offset_bottom = 982.0
 scale = Vector2(2.14036, 1.11399)
 text = "Delete File 3"
@@ -152,10 +152,10 @@ scale = Vector2(6.69148, 4.32503)
 text = "Done"
 
 [node name="tutorial_mode" type="Button" parent="."]
-offset_left = 65.0001
-offset_top = 27.0
-offset_right = 807.0
-offset_bottom = 183.0
+offset_left = 1391.0
+offset_top = 95.0
+offset_right = 2133.0
+offset_bottom = 251.0
 scale = Vector2(0.554279, 0.559799)
 theme = SubResource("Theme_om7fp")
 text = "Tutorial mode"

@@ -12,10 +12,10 @@ scale = Vector2(1.38972, 1.56695)
 texture = ExtResource("2_0n3ej")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 472.0
-offset_top = 566.0
-offset_right = 870.0
-offset_bottom = 748.0
+offset_left = 478.0
+offset_top = 602.0
+offset_right = 876.0
+offset_bottom = 784.0
 scale = Vector2(2.47442, 1.71035)
 text = "https://finns.studio/
 By Finns Wonderland LLC
@@ -24,36 +24,36 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 21.0
-offset_top = 45.0
-offset_right = 820.0
-offset_bottom = 288.0
+offset_left = 42.0
+offset_top = 273.0
+offset_right = 841.0
+offset_bottom = 516.0
 scale = Vector2(2.37438, 1.69083)
 text = "Play around with a tiny drone in a space that is endless."
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="."]
-offset_left = 865.0
-offset_top = 922.0
-offset_right = 910.0
-offset_bottom = 953.0
+offset_left = 188.0
+offset_top = 871.0
+offset_right = 233.0
+offset_bottom = 902.0
 scale = Vector2(4.57518, 2.69552)
 text = "Back"
 
 [node name="lable" type="Label" parent="."]
-offset_left = 792.0
-offset_top = 107.0
-offset_right = 882.0
-offset_bottom = 133.0
+offset_left = 801.0
+offset_top = 314.0
+offset_right = 891.0
+offset_bottom = 340.0
 scale = Vector2(3.88099, 2.72751)
 text = "Game Goal"
 
 [node name="lable2" type="Label" parent="."]
-offset_left = 877.0
-offset_top = 490.0
-offset_right = 924.0
-offset_bottom = 516.0
+offset_left = 871.0
+offset_top = 616.0
+offset_right = 918.0
+offset_bottom = 642.0
 scale = Vector2(3.88099, 2.72751)
 text = "Credit"
 

@@ -85,9 +85,10 @@ func _unhandled_input(event):
 			button_index -= 1
 	
 	if Input.is_action_just_pressed("menu_close"):
-		if not $setup.visible:
+		if not $setup.visible and visible:
 			#for body in get_parent().get_children():
 			#	body.queue_free()
+			#Reset
 			get_tree().reload_current_scene()
 			queue_free()
 		else:

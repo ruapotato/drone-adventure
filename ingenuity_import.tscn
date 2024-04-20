@@ -17,10 +17,28 @@ node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
 
 [node name="ingenuity" instance=ExtResource("1_2m7ko")]
 
+[node name="leg_01" parent="Armature" index="2"]
+visibility_range_begin = 0.1
+
+[node name="leg_02" parent="Armature" index="3"]
+visibility_range_begin = 0.1
+
+[node name="leg_03" parent="Armature" index="4"]
+visibility_range_begin = 0.1
+
+[node name="leg_04" parent="Armature" index="5"]
+visibility_range_begin = 0.1
+
 [node name="Skeleton3D" parent="Armature" index="9"]
-bones/0/rotation = Quaternion(0.0848302, 0.702, -0.702, 0.0848302)
-bones/1/rotation = Quaternion(0.0274555, -0.706574, 0.706574, 0.0274554)
+bones/0/rotation = Quaternion(0.54625, 0.449012, -0.449012, 0.546249)
+bones/1/rotation = Quaternion(0.504309, -0.495654, 0.495653, 0.504309)
 bones/2/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+
+[node name="rotors_01" parent="Armature/Skeleton3D" index="0"]
+visibility_range_begin = 0.1
+
+[node name="rotors_02" parent="Armature/Skeleton3D" index="1"]
+visibility_range_begin = 0.1
 
 [node name="AnimationPlayer" parent="." index="1"]
 speed_scale = 6.0

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://50tipirf2hql" path="res://city.tscn" id="7_65q51"]
 [ext_resource type="AudioStream" uid="uid://dq8n7qjii8560" path="res://import/Audio/doorClose_002.ogg" id="8_jw10d"]
 [ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://pause_screen.tscn" id="9_5utek"]
-[ext_resource type="PackedScene" uid="uid://dwff7qo2uv252" path="res://contols.tscn" id="9_ya0pb"]
+[ext_resource type="PackedScene" uid="uid://dwff7qo2uv252" path="res://controls.tscn" id="9_ngre0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u04vj"]
 
@@ -65,4 +65,4 @@ volume_db = -2.81
 [node name="pause_screen" parent="." instance=ExtResource("9_5utek")]
 visible = false
 
-[node name="contols" parent="." instance=ExtResource("9_ya0pb")]
+[node name="contols" parent="." instance=ExtResource("9_ngre0")]

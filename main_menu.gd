@@ -7,7 +7,7 @@ extends Node2D
 @onready var quit_button = $quit
 @onready var setting_button = $settings
 
-@onready var button_order = [play_button,setting_button,help_button,quit_button]
+@onready var button_order = [play_button,setting_button,quit_button,help_button]
 var button_index = 0
 
 var new_game = null

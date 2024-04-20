@@ -45,6 +45,12 @@ func _unhandled_input(event):
 			button_index += 1
 		if Input.is_action_just_pressed("menu_up"):
 			button_index -= 1
+		
+		if button_index == 1 and not $toggle_skin.visible:
+			if Input.is_action_just_pressed("menu_down"):
+				button_index = 2
+			if Input.is_action_just_pressed("menu_up"):
+				button_index = 0
 		if button_index > len(button_order) - 1:
 			button_index =  len(button_order) -1
 		if button_index < 0:

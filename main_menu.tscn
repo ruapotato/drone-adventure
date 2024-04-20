@@ -85,6 +85,7 @@ text = "Settings"
 metadata/_edit_use_anchors_ = true
 
 [node name="Credit" parent="." instance=ExtResource("2_58kwt")]
+visible = false
 
 [node name="SettingsScreen" parent="." instance=ExtResource("4_ix6np")]
 visible = false

@@ -33,16 +33,28 @@ func _process(delta):
 	show_selected()
 
 func _unhandled_input(event):
+	
+	var in_sub_menu = $Credit.visible or $SettingsScreen.visible
 	if event.is_action_pressed("menu_select"):
-		if visible:
+		if visible and not in_sub_menu:
 			button_order[button_index].emit_signal("pressed")
+
+	if not in_sub_menu:
+		if Input.is_action_just_pressed("menu_down"):
+			button_index += 1
+		if Input.is_action_just_pressed("menu_up"):
+			button_index -= 1
 	
-	if Input.is_action_just_pressed("menu_down"):
-		button_index += 1
-	if Input.is_action_just_pressed("menu_up"):
-		button_index -= 1
-	
-	
+	if Input.is_action_just_pressed("menu_close"):
+		if $Credit.visible:
+			$Credit.visible = false
+		if $SettingsScreen.visible:
+			$SettingsScreen.visible = false
+	if in_sub_menu and $SettingsScreen.visible:
+		if Input.is_action_just_pressed("menu_next"):
+			$SettingsScreen.find_child("ControlSensitivity").value += 0.5
+		if Input.is_action_just_pressed("menu_back"):
+			$SettingsScreen.find_child("ControlSensitivity").value -= 0.5
 	if button_index > len(button_order) - 1:
 		button_index =  len(button_order) -1
 	if button_index < 0:

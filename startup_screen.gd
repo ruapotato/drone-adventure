@@ -73,16 +73,29 @@ func _ready():
 	#control_sensitivity_effector =  setting_screen.find_child("ControlSensitivity").Value
 
 func _unhandled_input(event):
-	if event.is_action_pressed("menu_select"):
+	var in_sub_menu = $setup.visible
+	if event.is_action_pressed("menu_select") and not in_sub_menu:
 		if visible:
 			button_order[button_index].emit_signal("button_down")
 			button_order[button_index].emit_signal("pressed")
+	if not in_sub_menu:
+		if Input.is_action_just_pressed("menu_down"):
+			button_index += 1
+		if Input.is_action_just_pressed("menu_up"):
+			button_index -= 1
 	
-	if Input.is_action_just_pressed("menu_down"):
-		button_index += 1
-	if Input.is_action_just_pressed("menu_up"):
-		button_index -= 1
+	if Input.is_action_just_pressed("menu_close"):
+		if not $setup.visible:
+			#for body in get_parent().get_children():
+			#	body.queue_free()
+			get_tree().reload_current_scene()
+			queue_free()
+		else:
+			$setup.visible = false
 	
+	#Start new file
+	if in_sub_menu and event.is_action_pressed("menu_select"):
+		$setup/Button.emit_signal("pressed")
 	
 	if button_index > len(button_order) - 1:
 		button_index =  len(button_order) -1

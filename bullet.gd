@@ -3,12 +3,12 @@ extends RigidBody3D
 @onready var crystal = preload("res://crystal.tscn")
 @onready var shape = $CollisionShape3D
 
-@onready var mesh = $MeshInstance3D
 @onready var area = $Area3D
 
 @onready var normal_trail = $normal_trail
 @onready var add_trail =$add_trail
 
+var mesh
 var ttk = .1
 var dead = false
 var going_to_kill = null
@@ -39,8 +39,13 @@ func _ready():
 		if not add_mode:
 			normal_trail.emitting = true
 			vt.mode = VoxelTool.MODE_REMOVE
+			visible
+			$add_trail/MeshInstance3D.visible = false
+			mesh = $normal_trail/MeshInstance3D
 		else:
 			add_trail.emitting = true
+			$normal_trail/MeshInstance3D.visible = false
+			mesh = $add_trail/MeshInstance3D
 
 func get_player():
 	var root_i_hope = get_parent()
@@ -69,7 +74,10 @@ func _process(delta):
 		if ttk < 0 and not dead:
 			var new_decal = Decal.new()
 			if not drone.tutorial_mode:
-				vt.do_sphere(global_position, 1.5)
+				if not add_mode:
+					vt.do_sphere(global_position, 1.5 * 2)
+				else:
+					vt.do_sphere(global_position, 1.5)
 			new_decal.texture_albedo = load("res://import/damage.png")
 			new_decal.texture_normal = load("res://import/damage.png")
 			new_decal.set_deferred("global_position",global_position)
@@ -89,7 +97,17 @@ func _on_area_3d_body_entered(body):
 		world.add_crystal_to_world(randi_range(20,100),body.global_position)
 		$boom.play()
 		return
+	
+	if global_position.distance_to(drone.global_position) < 1.7:
+		return
+	if "ufo" in body.name:
+		world.hurt(body, 1.0)
+		going_to_kill = body
+		$boom.play()
 		
+	if global_position.distance_to(drone.global_position) < 1.7:
+		return
+	
 	if body.name != "drone" and body.name != "bullet" and body != self:
 		world.hurt(body, 1.0)
 		going_to_kill = body

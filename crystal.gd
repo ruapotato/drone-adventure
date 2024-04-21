@@ -133,7 +133,7 @@ func _on_body_entered(body):
 		drone.save_game()
 		#print(player.inventory["crystals"])
 		collected = true
-	else:
-		if body.name != "wall":
-			shatter()
+	#else:
+	#	if body.name != "wall":
+	#		shatter()
 

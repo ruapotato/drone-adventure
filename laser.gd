@@ -11,8 +11,8 @@ var drone
 var max_size = 100
 var world
 var vt
-var dig_radius = 1
-var strength = 50
+var dig_radius = 1.5
+var strength = 90
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

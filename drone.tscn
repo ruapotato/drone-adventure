@@ -31,9 +31,8 @@ radius = 0.08
 height = 0.16
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8d16w"]
-dof_blur_far_enabled = true
 dof_blur_far_distance = 300.0
-dof_blur_far_transition = 50.0
+dof_blur_far_transition = 120.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n3w36"]
 margin = 0.0

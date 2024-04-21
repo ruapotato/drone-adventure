@@ -16,7 +16,7 @@ func _ready():
 	world = drone.world
 	spawn_pos = global_position
 	#vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
-	size = randf_range(1.5,3)
+	size = randf_range(.5,20)
 	set_size(size)
 
 func set_size(new_size):

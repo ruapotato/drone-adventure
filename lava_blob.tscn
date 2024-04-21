@@ -1,11 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://csnqcjv0ohjxx"]
+[gd_scene load_steps=4 format=3 uid="uid://csnqcjv0ohjxx"]
 
-[ext_resource type="Script" path="res://lava_blob.gd" id="1_kdqbf"]
-[ext_resource type="Material" uid="uid://c0sjqoeoujhgw" path="res://addons/terrain-shader/example/land.tres" id="2_obbha"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_ckabl"]
-resource_local_to_scene = true
-radius = 0.0
+[ext_resource type="Material" uid="uid://c15yfiunngigb" path="res://native/lava.tres" id="2_7tj01"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_tj2ni"]
 resource_local_to_scene = true
@@ -18,19 +13,11 @@ radius = 1.5
 
 [node name="lava_blob" type="RigidBody3D"]
 mass = 100.0
-gravity_scale = 0.0
-script = ExtResource("1_kdqbf")
-
-[node name="lava_blob_shape" type="Area3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="lava_blob_shape"]
-shape = SubResource("SphereShape3D_ckabl")
+gravity_scale = 0.5
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-material_override = ExtResource("2_obbha")
+material_override = ExtResource("2_7tj01")
 mesh = SubResource("SphereMesh_tj2ni")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_7rg2p")
-
-[connection signal="area_entered" from="lava_blob_shape" to="." method="_on_lava_blob_shape_area_entered"]

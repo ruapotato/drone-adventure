@@ -1,0 +1,32 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://ncprok47g3di"]
+
+[ext_resource type="Shader" path="res://addons/terrain-shader/Terrain.gdshader" id="1_dt6ia"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_j6rje"]
+noise_type = 4
+frequency = 0.303
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ind0h"]
+seamless = true
+noise = SubResource("FastNoiseLite_j6rje")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5m25x"]
+noise_type = 3
+fractal_type = 2
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_af5xa"]
+seamless = true
+noise = SubResource("FastNoiseLite_5m25x")
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_dt6ia")
+shader_parameter/WallTexScale = 1.725
+shader_parameter/WallColor = Color(0.203922, 0.627451, 1, 0.458824)
+shader_parameter/TopTexScale = -0.265
+shader_parameter/TopColor = Color(0.188235, 0.756863, 1, 0.490196)
+shader_parameter/BlendValues = Vector4(2, 0, 0, 1)
+shader_parameter/WallTex = SubResource("NoiseTexture2D_af5xa")
+shader_parameter/TopTex = SubResource("NoiseTexture2D_ind0h")

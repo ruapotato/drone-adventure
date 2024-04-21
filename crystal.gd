@@ -134,5 +134,6 @@ func _on_body_entered(body):
 		#print(player.inventory["crystals"])
 		collected = true
 	else:
-		shatter()
+		if body.name != "wall":
+			shatter()
 

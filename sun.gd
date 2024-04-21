@@ -16,7 +16,7 @@ func get_drone():
 func _process(delta):
 	#print(drone.global_position.y)
 	if drone.global_position.y < -70:
-		light_energy = 0.5
+		light_energy = 1.0
 		#visible = false
 	else:
 		light_energy = 1.0

@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var game = preload("res://endless_world.tscn")
+@onready var game = preload("res://world.tscn")
 @onready var tutorial_mode = preload("res://tutorial_mode.tscn")
 @onready var hardness_menu = $hardness
 @onready var setting_screen = get_parent().find_child("SettingsScreen")

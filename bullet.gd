@@ -63,7 +63,7 @@ func get_drone():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if going_to_kill:
-		mass = 10000
+		mass = 1000
 		linear_velocity = Vector3(0,0,0)
 		ttk -= delta
 		if ttk > 0:
@@ -72,16 +72,16 @@ func _process(delta):
 			mesh.mesh.radius += delta * 10
 			mesh.mesh.height += delta * 20
 		if ttk < 0 and not dead:
-			var new_decal = Decal.new()
+			#var new_decal = Decal.new()
 			if not drone.tutorial_mode:
 				if not add_mode:
 					vt.do_sphere(global_position, 1.5 * 2)
 				else:
 					vt.do_sphere(global_position, 1.5)
-			new_decal.texture_albedo = load("res://import/damage.png")
-			new_decal.texture_normal = load("res://import/damage.png")
-			new_decal.set_deferred("global_position",global_position)
-			get_parent().add_child(new_decal)
+			#new_decal.texture_albedo = load("res://import/damage.png")
+			#new_decal.texture_normal = load("res://import/damage.png")
+			#new_decal.set_deferred("global_position",global_position)
+			#get_parent().add_child(new_decal)
 			dead = true
 			queue_free()
 			#shape.queue_free()

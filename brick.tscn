@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bexmjgxve7dqp"]
+
+[ext_resource type="Script" path="res://move_to_og.gd" id="1_lc5uc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s4eqs"]
+size = Vector3(2, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ljf6m"]
+size = Vector3(2, 1, 1)
+
+[node name="brick" type="RigidBody3D"]
+mass = 600.0
+script = ExtResource("1_lc5uc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_s4eqs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ljf6m")

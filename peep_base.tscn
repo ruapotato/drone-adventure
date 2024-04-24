@@ -1,0 +1,1091 @@
+[gd_scene load_steps=9 format=3 uid="uid://cnw4w8atg2wii"]
+
+[ext_resource type="PackedScene" uid="uid://bexmjgxve7dqp" path="res://brick.tscn" id="1_4pj1u"]
+[ext_resource type="Material" uid="uid://d31hy8amp0rxy" path="res://native/lava_emit.tres" id="2_grpya"]
+[ext_resource type="PackedScene" uid="uid://8ecisnwbnehw" path="res://core.tscn" id="3_lg1om"]
+[ext_resource type="PackedScene" uid="uid://dgimh1pogand5" path="res://person_spawner.tscn" id="4_rkee8"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_hmdxj"]
+flip_faces = true
+left_to_right = -2.0
+size = Vector3(3.67, -7.05, 16)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8qybh"]
+data = PackedVector3Array(1.835, 3.525, 8, -9.175, -3.525, 8, -1.835, 3.525, 8, -1.835, 3.525, -8, -9.175, -3.525, -8, 1.835, 3.525, -8, -9.175, -3.525, -8, -9.175, -3.525, 8, 1.835, 3.525, 8, 1.835, 3.525, -8, -9.175, -3.525, -8, 1.835, 3.525, 8, -9.175, -3.525, 8, -9.175, -3.525, -8, -1.835, 3.525, -8, -1.835, 3.525, 8, -9.175, -3.525, 8, -1.835, 3.525, -8, 1.835, 3.525, 8, -1.835, 3.525, 8, -1.835, 3.525, -8, 1.835, 3.525, -8, 1.835, 3.525, 8, -1.835, 3.525, -8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pig56"]
+size = Vector3(16, 3, 28.125)
+
+[sub_resource type="BoxMesh" id="BoxMesh_12gio"]
+size = Vector3(16, 3, 28.02)
+
+[node name="peep_base" type="Node3D"]
+
+[node name="building" type="Node3D" parent="."]
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="building"]
+transform = Transform3D(2.88055e-09, -7.73019e-08, -1, 0.884231, -0.46705, 3.86509e-08, -0.46705, -0.884231, 6.70073e-08, 0, -0.448023, 17.9892)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="building/StaticBody3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, -3.55271e-15, -7.10543e-15, 1, 0, 0, 0)
+material_override = ExtResource("2_grpya")
+mesh = SubResource("PrismMesh_hmdxj")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="building/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_8qybh")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="building"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_pig56")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="building/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+material_override = ExtResource("2_grpya")
+mesh = SubResource("BoxMesh_12gio")
+
+[node name="wall" type="Node3D" parent="building"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.896784, -1.88115, 4.33448)
+
+[node name="RigidBody3D78" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 5, 0)
+
+[node name="RigidBody3D79" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 5, 0)
+
+[node name="RigidBody3D180" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 1)
+
+[node name="RigidBody3D182" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, 1)
+
+[node name="RigidBody3D181" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 1)
+
+[node name="RigidBody3D183" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 2)
+
+[node name="RigidBody3D184" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 2)
+
+[node name="RigidBody3D185" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 2)
+
+[node name="RigidBody3D186" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 3)
+
+[node name="RigidBody3D187" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, 3)
+
+[node name="RigidBody3D188" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 3)
+
+[node name="RigidBody3D189" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 4)
+
+[node name="RigidBody3D190" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 4)
+
+[node name="RigidBody3D191" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 4)
+
+[node name="RigidBody3D192" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 5)
+
+[node name="RigidBody3D193" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, 5)
+
+[node name="RigidBody3D194" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 5)
+
+[node name="RigidBody3D195" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 6)
+
+[node name="RigidBody3D196" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 6)
+
+[node name="RigidBody3D197" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 6)
+
+[node name="RigidBody3D198" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 7)
+
+[node name="RigidBody3D199" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 6, 7)
+
+[node name="RigidBody3D200" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 7)
+
+[node name="RigidBody3D201" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 5, 8)
+
+[node name="RigidBody3D202" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 8)
+
+[node name="RigidBody3D203" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 8)
+
+[node name="RigidBody3D80" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5, 0)
+
+[node name="RigidBody3D81" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 0)
+
+[node name="RigidBody3D82" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 0)
+
+[node name="RigidBody3D83" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 4, 0)
+
+[node name="RigidBody3D84" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 4, 0.5)
+
+[node name="RigidBody3D86" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 3, 1.5)
+
+[node name="RigidBody3D91" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 3, 0.5)
+
+[node name="RigidBody3D94" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 2, 1.5)
+
+[node name="RigidBody3D95" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 4, 1.5)
+
+[node name="RigidBody3D85" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 2, 0.5)
+
+[node name="RigidBody3D96" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 4, 2.5)
+
+[node name="RigidBody3D163" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 3, 3.5)
+
+[node name="RigidBody3D164" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 3, 2.5)
+
+[node name="RigidBody3D165" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 2, 3.5)
+
+[node name="RigidBody3D166" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 4, 3.5)
+
+[node name="RigidBody3D167" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 2, 2.5)
+
+[node name="RigidBody3D168" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 4, 4.5)
+
+[node name="RigidBody3D169" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 3, 5.5)
+
+[node name="RigidBody3D170" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 3, 4.5)
+
+[node name="RigidBody3D171" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 2, 5.5)
+
+[node name="RigidBody3D172" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 4, 5.5)
+
+[node name="RigidBody3D173" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 2, 4.5)
+
+[node name="RigidBody3D174" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 4, 6.5)
+
+[node name="RigidBody3D175" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 3, 7.5)
+
+[node name="RigidBody3D176" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 3, 6.5)
+
+[node name="RigidBody3D177" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 2, 7.5)
+
+[node name="RigidBody3D178" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1, 4, 7.5)
+
+[node name="RigidBody3D179" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 2, 6.5)
+
+[node name="RigidBody3D87" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4, 0)
+
+[node name="RigidBody3D90" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, 0)
+
+[node name="RigidBody3D88" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3, 0)
+
+[node name="RigidBody3D89" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0)
+
+[node name="RigidBody3D92" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, 0)
+
+[node name="RigidBody3D93" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 0)
+
+[node name="RigidBody3D97" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2, 0)
+
+[node name="RigidBody3D162" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+
+[node name="RigidBody3D98" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 7, 0)
+
+[node name="RigidBody3D99" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 7, 0)
+
+[node name="RigidBody3D108" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 8, 0)
+
+[node name="RigidBody3D112" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, 0)
+
+[node name="RigidBody3D114" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9, 0)
+
+[node name="RigidBody3D115" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+
+[node name="RigidBody3D116" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9, 0)
+
+[node name="RigidBody3D113" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 10, 0)
+
+[node name="RigidBody3D117" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 11, 0)
+
+[node name="RigidBody3D119" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, 0)
+
+[node name="RigidBody3D120" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 11, 0)
+
+[node name="RigidBody3D118" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 10, 0)
+
+[node name="RigidBody3D121" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 12, 0)
+
+[node name="RigidBody3D122" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 12, 0)
+
+[node name="RigidBody3D123" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 13, 0)
+
+[node name="RigidBody3D124" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, 0)
+
+[node name="RigidBody3D125" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 14, 0)
+
+[node name="RigidBody3D127" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 14, 0)
+
+[node name="RigidBody3D132" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 12, 0)
+
+[node name="RigidBody3D133" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 8, 0)
+
+[node name="RigidBody3D134" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 16, 0)
+
+[node name="RigidBody3D128" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 14, 0)
+
+[node name="RigidBody3D129" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 10, 0)
+
+[node name="RigidBody3D130" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 10, 0)
+
+[node name="RigidBody3D131" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 10, 0)
+
+[node name="RigidBody3D126" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15, 0)
+
+[node name="RigidBody3D100" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 7, 0)
+
+[node name="RigidBody3D109" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 8, 0)
+
+[node name="RigidBody3D110" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, 0)
+
+[node name="RigidBody3D111" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 8, 0)
+
+[node name="RigidBody3D135" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 8, -10)
+
+[node name="RigidBody3D136" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 9, -10)
+
+[node name="RigidBody3D137" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 9, -10)
+
+[node name="RigidBody3D138" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, -10)
+
+[node name="RigidBody3D139" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 9, -10)
+
+[node name="RigidBody3D140" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 10, -10)
+
+[node name="RigidBody3D141" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 11, -10)
+
+[node name="RigidBody3D142" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 11, -10)
+
+[node name="RigidBody3D143" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 11, -10)
+
+[node name="RigidBody3D144" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 10, -10)
+
+[node name="RigidBody3D145" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 12, -10)
+
+[node name="RigidBody3D146" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 12, -10)
+
+[node name="RigidBody3D147" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 13, -10)
+
+[node name="RigidBody3D148" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 13, -10)
+
+[node name="RigidBody3D149" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 14, -9.5)
+
+[node name="RigidBody3D150" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 14, -9.5)
+
+[node name="RigidBody3D151" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 12, -9.5)
+
+[node name="RigidBody3D152" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 8, -9.5)
+
+[node name="RigidBody3D153" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 16, -9.5)
+
+[node name="RigidBody3D154" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 14, -9.5)
+
+[node name="RigidBody3D155" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 10, -9.5)
+
+[node name="RigidBody3D156" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1, 10, -9.5)
+
+[node name="RigidBody3D157" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 10, -9.5)
+
+[node name="RigidBody3D158" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 15, -10)
+
+[node name="RigidBody3D159" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 8, -10)
+
+[node name="RigidBody3D160" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -10)
+
+[node name="RigidBody3D161" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 8, -10)
+
+[node name="RigidBody3D101" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, 0)
+
+[node name="RigidBody3D102" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 7, 0)
+
+[node name="RigidBody3D103" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 0)
+
+[node name="RigidBody3D104" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 6, 0)
+
+[node name="RigidBody3D105" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 0)
+
+[node name="RigidBody3D106" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, 0)
+
+[node name="RigidBody3D107" parent="building/wall" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 0)
+
+[node name="wall2" type="Node3D" parent="building"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 4.89678, -1.88115, -1.66552)
+
+[node name="RigidBody3D78" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 5, 0)
+
+[node name="RigidBody3D79" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 5, 0)
+
+[node name="RigidBody3D80" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5, 0)
+
+[node name="RigidBody3D81" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 0)
+
+[node name="RigidBody3D82" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 0)
+
+[node name="RigidBody3D83" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 4, 0)
+
+[node name="RigidBody3D84" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4, 0)
+
+[node name="RigidBody3D85" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4, 0)
+
+[node name="RigidBody3D86" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, 0)
+
+[node name="RigidBody3D87" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4, 0)
+
+[node name="RigidBody3D88" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3, 0)
+
+[node name="RigidBody3D89" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0)
+
+[node name="RigidBody3D90" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 3, 0)
+
+[node name="RigidBody3D91" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 0)
+
+[node name="RigidBody3D92" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, 0)
+
+[node name="RigidBody3D93" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 0)
+
+[node name="RigidBody3D94" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 0)
+
+[node name="RigidBody3D95" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2, 0)
+
+[node name="RigidBody3D96" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+
+[node name="RigidBody3D97" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2, 0)
+
+[node name="RigidBody3D98" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 7, 0)
+
+[node name="RigidBody3D99" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 7, 0)
+
+[node name="RigidBody3D100" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 7, 0)
+
+[node name="RigidBody3D101" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, 0)
+
+[node name="RigidBody3D102" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 7, 0)
+
+[node name="RigidBody3D103" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 0)
+
+[node name="RigidBody3D104" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 6, 0)
+
+[node name="RigidBody3D105" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 0)
+
+[node name="RigidBody3D106" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, 0)
+
+[node name="RigidBody3D107" parent="building/wall2" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 0)
+
+[node name="wall3" type="Node3D" parent="building"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.10322, -1.88115, -5.66552)
+
+[node name="RigidBody3D78" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 5, 0)
+
+[node name="RigidBody3D79" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 5, 0)
+
+[node name="RigidBody3D80" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5, 0)
+
+[node name="RigidBody3D81" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 0)
+
+[node name="RigidBody3D82" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 0)
+
+[node name="RigidBody3D83" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 4, 0)
+
+[node name="RigidBody3D84" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4, 0)
+
+[node name="RigidBody3D85" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4, 0)
+
+[node name="RigidBody3D86" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, 0)
+
+[node name="RigidBody3D87" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4, 0)
+
+[node name="RigidBody3D88" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3, 0)
+
+[node name="RigidBody3D89" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0)
+
+[node name="RigidBody3D90" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 3, 0)
+
+[node name="RigidBody3D91" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 0)
+
+[node name="RigidBody3D92" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, 0)
+
+[node name="RigidBody3D93" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 0)
+
+[node name="RigidBody3D94" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 0)
+
+[node name="RigidBody3D95" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2, 0)
+
+[node name="RigidBody3D96" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+
+[node name="RigidBody3D97" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2, 0)
+
+[node name="RigidBody3D98" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 7, 0)
+
+[node name="RigidBody3D99" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 7, 0)
+
+[node name="RigidBody3D100" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 7, 0)
+
+[node name="RigidBody3D101" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, 0)
+
+[node name="RigidBody3D102" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 7, 0)
+
+[node name="RigidBody3D103" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 0)
+
+[node name="RigidBody3D104" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 6, 0)
+
+[node name="RigidBody3D105" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 0)
+
+[node name="RigidBody3D106" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, 0)
+
+[node name="RigidBody3D107" parent="building/wall3" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 0)
+
+[node name="wall4" type="Node3D" parent="building"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.10322, -1.88115, 0.334482)
+
+[node name="RigidBody3D78" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 5, 0)
+
+[node name="RigidBody3D79" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 5, 0)
+
+[node name="RigidBody3D80" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 5, 0)
+
+[node name="RigidBody3D81" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 5, 0)
+
+[node name="RigidBody3D82" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 5, 0)
+
+[node name="RigidBody3D83" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 4, 0)
+
+[node name="RigidBody3D84" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 4, 0)
+
+[node name="RigidBody3D85" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 4, 0)
+
+[node name="RigidBody3D86" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, 0)
+
+[node name="RigidBody3D87" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 4, 0)
+
+[node name="RigidBody3D88" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 3, 0)
+
+[node name="RigidBody3D89" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 0)
+
+[node name="RigidBody3D90" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 3, 0)
+
+[node name="RigidBody3D91" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 3, 0)
+
+[node name="RigidBody3D92" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 3, 0)
+
+[node name="RigidBody3D93" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 2, 0)
+
+[node name="RigidBody3D94" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, 0)
+
+[node name="RigidBody3D95" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2, 0)
+
+[node name="RigidBody3D96" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 2, 0)
+
+[node name="RigidBody3D97" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 2, 0)
+
+[node name="RigidBody3D98" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 7, 0)
+
+[node name="RigidBody3D108" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 8, -4.76837e-06)
+
+[node name="RigidBody3D109" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 8, -1.43051e-06)
+
+[node name="RigidBody3D110" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 8, -1.43051e-06)
+
+[node name="RigidBody3D111" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -1.43051e-06)
+
+[node name="RigidBody3D112" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 8, -1.43051e-06)
+
+[node name="RigidBody3D113" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 8, -1.43051e-06)
+
+[node name="RigidBody3D114" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 9, -0.500006)
+
+[node name="RigidBody3D115" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 9, -0.500001)
+
+[node name="RigidBody3D116" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 9, -0.500001)
+
+[node name="RigidBody3D117" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 9, -0.500001)
+
+[node name="RigidBody3D118" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 9, -0.500001)
+
+[node name="RigidBody3D119" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 9, -0.500001)
+
+[node name="RigidBody3D120" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 10, -1.00001)
+
+[node name="RigidBody3D121" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 10, -1)
+
+[node name="RigidBody3D122" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 10, -1)
+
+[node name="RigidBody3D123" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 10, -1)
+
+[node name="RigidBody3D124" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 10, -1)
+
+[node name="RigidBody3D125" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 10, -1)
+
+[node name="RigidBody3D126" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 11, -1.50001)
+
+[node name="RigidBody3D127" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 11, -1.5)
+
+[node name="RigidBody3D128" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 11, -1.5)
+
+[node name="RigidBody3D129" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 11, -1.5)
+
+[node name="RigidBody3D130" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 11, -1.5)
+
+[node name="RigidBody3D131" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 11, -1.5)
+
+[node name="RigidBody3D132" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 12, -2.00001)
+
+[node name="RigidBody3D133" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 12, -2)
+
+[node name="RigidBody3D134" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 12, -2)
+
+[node name="RigidBody3D135" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 12, -2)
+
+[node name="RigidBody3D136" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 12, -2)
+
+[node name="RigidBody3D137" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 12, -2)
+
+[node name="RigidBody3D138" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 13, -2.50001)
+
+[node name="RigidBody3D139" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 13, -2.5)
+
+[node name="RigidBody3D140" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 13, -2.5)
+
+[node name="RigidBody3D141" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 13, -2.5)
+
+[node name="RigidBody3D142" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 13, -2.5)
+
+[node name="RigidBody3D143" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 13, -2.5)
+
+[node name="RigidBody3D144" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 14, -3.00001)
+
+[node name="RigidBody3D145" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 14, -3)
+
+[node name="RigidBody3D146" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 14, -3)
+
+[node name="RigidBody3D147" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 14, -3)
+
+[node name="RigidBody3D148" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 14, -3)
+
+[node name="RigidBody3D149" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 14, -3)
+
+[node name="RigidBody3D150" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 8, -10)
+
+[node name="RigidBody3D151" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 8, -10)
+
+[node name="RigidBody3D152" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 8, -10)
+
+[node name="RigidBody3D153" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 8, -10)
+
+[node name="RigidBody3D154" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 8, -10)
+
+[node name="RigidBody3D155" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 8, -10)
+
+[node name="RigidBody3D156" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 9, -9.50001)
+
+[node name="RigidBody3D157" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 9, -9.5)
+
+[node name="RigidBody3D158" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 9, -9.5)
+
+[node name="RigidBody3D159" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 9, -9.5)
+
+[node name="RigidBody3D160" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 9, -9.5)
+
+[node name="RigidBody3D161" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 9, -9.5)
+
+[node name="RigidBody3D162" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 10, -9.00001)
+
+[node name="RigidBody3D163" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 10, -9)
+
+[node name="RigidBody3D164" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 10, -9)
+
+[node name="RigidBody3D165" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 10, -9)
+
+[node name="RigidBody3D166" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 10, -9)
+
+[node name="RigidBody3D167" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 10, -9)
+
+[node name="RigidBody3D168" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49999, 11, -8.50001)
+
+[node name="RigidBody3D169" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 11, -8.5)
+
+[node name="RigidBody3D170" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 11, -8.5)
+
+[node name="RigidBody3D171" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 11, -8.5)
+
+[node name="RigidBody3D172" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 11, -8.5)
+
+[node name="RigidBody3D173" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50001, 11, -8.5)
+
+[node name="RigidBody3D174" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49999, 12, -8)
+
+[node name="RigidBody3D175" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 12, -8)
+
+[node name="RigidBody3D176" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 12, -8)
+
+[node name="RigidBody3D177" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 12, -8)
+
+[node name="RigidBody3D178" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 12, -8)
+
+[node name="RigidBody3D179" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50001, 12, -8)
+
+[node name="RigidBody3D180" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49999, 13, -7.5)
+
+[node name="RigidBody3D181" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 13, -7.5)
+
+[node name="RigidBody3D182" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 13, -7.5)
+
+[node name="RigidBody3D183" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 13, -7.5)
+
+[node name="RigidBody3D184" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 13, -7.5)
+
+[node name="RigidBody3D185" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50001, 13, -7.5)
+
+[node name="RigidBody3D186" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49999, 14, -7)
+
+[node name="RigidBody3D187" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 14, -7)
+
+[node name="RigidBody3D188" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 14, -7)
+
+[node name="RigidBody3D189" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 14, -7)
+
+[node name="RigidBody3D190" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 14, -7)
+
+[node name="RigidBody3D191" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50001, 14, -7)
+
+[node name="RigidBody3D192" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 15, -6.5)
+
+[node name="RigidBody3D193" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 15, -6.5)
+
+[node name="RigidBody3D194" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 15, -6.5)
+
+[node name="RigidBody3D195" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 15, -6.5)
+
+[node name="RigidBody3D196" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 15, -6.5)
+
+[node name="RigidBody3D197" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 15, -6.5)
+
+[node name="RigidBody3D198" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 16, -6)
+
+[node name="RigidBody3D199" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 16, -6)
+
+[node name="RigidBody3D200" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 16, -6)
+
+[node name="RigidBody3D201" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 16, -6)
+
+[node name="RigidBody3D202" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 16, -6)
+
+[node name="RigidBody3D203" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 16, -6)
+
+[node name="RigidBody3D204" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 17, -5.5)
+
+[node name="RigidBody3D205" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 17, -5.5)
+
+[node name="RigidBody3D206" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 17, -5.5)
+
+[node name="RigidBody3D207" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 17, -5.5)
+
+[node name="RigidBody3D208" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 17, -5.5)
+
+[node name="RigidBody3D209" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 17, -5.5)
+
+[node name="RigidBody3D210" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 15, -3.50001)
+
+[node name="RigidBody3D211" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 15, -3.5)
+
+[node name="RigidBody3D212" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 15, -3.5)
+
+[node name="RigidBody3D213" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 15, -3.5)
+
+[node name="RigidBody3D214" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 15, -3.5)
+
+[node name="RigidBody3D215" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 15, -3.5)
+
+[node name="RigidBody3D216" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 16, -4)
+
+[node name="RigidBody3D217" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 16, -4)
+
+[node name="RigidBody3D218" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 16, -4)
+
+[node name="RigidBody3D219" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 16, -4)
+
+[node name="RigidBody3D220" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 16, -4)
+
+[node name="RigidBody3D221" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 16, -4)
+
+[node name="RigidBody3D222" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 17, -4.5)
+
+[node name="RigidBody3D223" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 17, -4.5)
+
+[node name="RigidBody3D224" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 17, -4.5)
+
+[node name="RigidBody3D225" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 17, -4.5)
+
+[node name="RigidBody3D226" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 17, -4.5)
+
+[node name="RigidBody3D227" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 17, -4.5)
+
+[node name="RigidBody3D228" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.49998, 18, -5.00001)
+
+[node name="RigidBody3D229" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 18, -5)
+
+[node name="RigidBody3D230" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 18, -5)
+
+[node name="RigidBody3D231" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 18, -5)
+
+[node name="RigidBody3D232" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 18, -5)
+
+[node name="RigidBody3D233" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.50002, 18, -5)
+
+[node name="RigidBody3D99" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 7, 0)
+
+[node name="RigidBody3D100" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 7, 0)
+
+[node name="RigidBody3D101" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 7, 0)
+
+[node name="RigidBody3D102" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 7, 0)
+
+[node name="RigidBody3D103" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 6, 0)
+
+[node name="RigidBody3D104" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 6, 0)
+
+[node name="RigidBody3D105" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 6, 0)
+
+[node name="RigidBody3D106" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 6, 0)
+
+[node name="RigidBody3D107" parent="building/wall4" instance=ExtResource("1_4pj1u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 6, 0)
+
+[node name="core" parent="." instance=ExtResource("3_lg1om")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.988187, -0.232219, 0)
+
+[node name="person_spawner" parent="core" instance=ExtResource("4_rkee8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)

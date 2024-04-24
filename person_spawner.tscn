@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgimh1pogand5"]
+
+[ext_resource type="Script" path="res://person_spawner.gd" id="1_yrgtt"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_slinh"]
+height = 0.207
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yfs5d"]
+height = 0.1
+
+[node name="person_spawner" type="Area3D"]
+script = ExtResource("1_yrgtt")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_slinh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110074, 0)
+mesh = SubResource("CylinderMesh_yfs5d")

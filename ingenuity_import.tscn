@@ -30,8 +30,8 @@ visibility_range_begin = 0.1
 visibility_range_begin = 0.1
 
 [node name="Skeleton3D" parent="Armature" index="9"]
-bones/0/rotation = Quaternion(0.54625, 0.449012, -0.449012, 0.546249)
-bones/1/rotation = Quaternion(0.504309, -0.495654, 0.495653, 0.504309)
+bones/0/rotation = Quaternion(0.40519, 0.5795, -0.5795, 0.40519)
+bones/1/rotation = Quaternion(0.386329, -0.592242, 0.592242, 0.386329)
 bones/2/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 
 [node name="rotors_01" parent="Armature/Skeleton3D" index="0"]

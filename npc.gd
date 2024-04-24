@@ -15,6 +15,7 @@ var world
 
 
 var npc_type = "worker"
+var damage = 10
 
 var active_task = "leave_for_work"
 var temper_base = 10
@@ -31,12 +32,26 @@ var worker_workflow =   {7.0: "leave_for_work",
 						17.0: "return_home"}
 
 var todo_today = worker_workflow
+var bad_core
+var core
 #var bed_time =
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone = get_drone()
 	world = drone.get_parent()
+	var core_dist = 0
+	for core_option in world.find_children("core"):
+		if core_option.global_position.distance_to(npc_home_pos) < 100:
+			print("Found core")
+			core = core_option
+		else:
+			print("Found bad core")
+			print(core_option.global_position)
+			print(global_position)
+			bad_core = core_option
+	print(core)
+	print(bad_core)
 
 func get_drone():
 	var root_i_hope = get_parent()
@@ -51,32 +66,35 @@ func is_on_floor():
 	return(floor)
 
 func goto(where, delta):
-	nav.target_position = where
-	
-	look_at(nav.target_position)
-	rotation.x = lerp(rotation.x, 0.0, delta * 5)
-	rotation.z = lerp(rotation.z, 0.0, delta * 5)
-	#rotation.y = lerp(rotation.y, head.rotation.y * PI, delta * 5)
-	#rotation.z = 0.0
-	#rotation.y = lerp_angle(rotation.y, atan2(-where.x, -where.z), delta * 18)
-	#head.look_at(nav.target_position)
-	linear_velocity.y = lerp(linear_velocity.y, 0.0, delta)
-	
-	linear_velocity = global_position.direction_to(nav.get_next_path_position()) * SPEED
-	#linear_velocity = linear_velocity.move_toward(nav.get_next_path_position(),delta * SPEED)
-	#var direction = nav.get_next_path_position() - global_position
-	#direction = direction.normalized()
-	#if direction:
-	#	linear_velocity.x = direction.x * SPEED
-	#	linear_velocity.z = direction.z * SPEED
-	#else:
-	#	linear_velocity.x = move_toward(linear_velocity.x, 0, SPEED)
-	#	linear_velocity.z = move_toward(linear_velocity.z, 0, SPEED)
-	
-	if global_position.distance_to(where) < 1.0:
-		return true
-	else:
-		return false
+	if npc_type == "fighter":
+		linear_velocity = global_position.direction_to(bad_core.global_position) * SPEED
+	if npc_type == "worker":
+		nav.target_position = where
+		
+		look_at(nav.target_position)
+		rotation.x = lerp(rotation.x, 0.0, delta * 5)
+		rotation.z = lerp(rotation.z, 0.0, delta * 5)
+		#rotation.y = lerp(rotation.y, head.rotation.y * PI, delta * 5)
+		#rotation.z = 0.0
+		#rotation.y = lerp_angle(rotation.y, atan2(-where.x, -where.z), delta * 18)
+		#head.look_at(nav.target_position)
+		linear_velocity.y = lerp(linear_velocity.y, 0.0, delta)
+		
+		linear_velocity = global_position.direction_to(nav.get_next_path_position()) * SPEED
+		#linear_velocity = linear_velocity.move_toward(nav.get_next_path_position(),delta * SPEED)
+		#var direction = nav.get_next_path_position() - global_position
+		#direction = direction.normalized()
+		#if direction:
+		#	linear_velocity.x = direction.x * SPEED
+		#	linear_velocity.z = direction.z * SPEED
+		#else:
+		#	linear_velocity.x = move_toward(linear_velocity.x, 0, SPEED)
+		#	linear_velocity.z = move_toward(linear_velocity.z, 0, SPEED)
+		
+		if global_position.distance_to(where) < 1.0:
+			return true
+		else:
+			return false
 	
 func be_pissed(delta):
 	#Run after drone and jump on it
@@ -127,25 +145,33 @@ func show_npc():
 func _physics_process(delta):
 	#print(active_task)
 	# Add the gravity.
-	if not is_on_floor() and not collision_shape.disabled:
+	if not is_on_floor():
 		linear_velocity.y -= gravity * delta
 		#print("Down")
 	
-	think_damnit()
+	if npc_type == "fighter":
+		goto(bad_core.global_position, delta)
+		if global_position.distance_to(bad_core.global_position) < 1:
+			bad_core.life -= delta * damage
+			print(bad_core.life)
 	
-	if active_task == "pissed":
-		be_pissed(delta)
 	
-	if active_task == "leave_for_work":
-		if goto(npc_work_pos, delta):
-			hide_npc()
-		else:
-			show_npc()
-	if active_task == "return_home":
-		if goto(npc_home_pos, delta):
-			hide_npc()
-		else:
-			show_npc()
+	if npc_type == "worker":
+		think_damnit()
+		
+		if active_task == "pissed":
+			be_pissed(delta)
+		
+		if active_task == "leave_for_work":
+			if goto(npc_work_pos, delta):
+				hide_npc()
+			else:
+				show_npc()
+		if active_task == "return_home":
+			if goto(npc_home_pos, delta):
+				hide_npc()
+			else:
+				show_npc()
 	#move_and_slide()
 
 

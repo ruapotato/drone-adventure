@@ -150,10 +150,11 @@ func _physics_process(delta):
 		#print("Down")
 	
 	if npc_type == "fighter":
-		goto(bad_core.global_position, delta)
-		if global_position.distance_to(bad_core.global_position) < 1:
-			bad_core.life -= delta * damage
-			print(bad_core.life)
+		if bad_core:
+			goto(bad_core.global_position, delta)
+			if global_position.distance_to(bad_core.global_position) < 1:
+				bad_core.life -= delta * damage
+				print(bad_core.life)
 	
 	
 	if npc_type == "worker":

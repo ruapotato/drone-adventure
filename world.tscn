@@ -101,7 +101,7 @@ graph_data = {
 "type": "Add"
 },
 "102": {
-"gui_position": Vector2(840, -480),
+"gui_position": Vector2(860, -560),
 "max": 150.0,
 "min": 1.0,
 "type": "Clamp"
@@ -168,13 +168,13 @@ graph_data = {
 "type": "Clamp"
 },
 "131": {
-"gui_position": Vector2(-1040, -40),
+"gui_position": Vector2(-1020, -40),
 "type": "Constant",
-"value": 750.0
+"value": 1e+08
 },
 "132": {
 "b": -1.0,
-"gui_position": Vector2(-960, 360),
+"gui_position": Vector2(-860, 260),
 "type": "Multiply"
 },
 "2": {
@@ -491,7 +491,7 @@ graph_data = {
 "131": {
 "gui_position": Vector2(-1040, -40),
 "type": "Constant",
-"value": 750.0
+"value": 999999.0
 },
 "132": {
 "b": -1.0,

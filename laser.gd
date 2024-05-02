@@ -46,8 +46,11 @@ func _process(delta):
 		print(body.name)
 		world.hurt(body, damage * delta)
 		if body.name == "VoxelLodTerrain":
-			vt.mode = VoxelTool.MODE_REMOVE
-			vt.grow_sphere(get_collision_point(), dig_radius, strength * delta)
+			world.dirt_vt.mode = VoxelTool.MODE_REMOVE
+			world.dirt_vt.grow_sphere(get_collision_point(), dig_radius, strength * delta)
+		elif body.name == "VoxelLodTerrain2":
+			world.crystal_vt.mode = VoxelTool.MODE_REMOVE
+			world.crystal_vt.grow_sphere(get_collision_point(), dig_radius, strength * delta)
 		mesh.mesh.height = ray_cast_point.z
 		mesh.position.z = ray_cast_point.z/2
 		laser_effect.position.z = ray_cast_point.z/2

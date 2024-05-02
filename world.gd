@@ -10,7 +10,8 @@ extends Node3D
 
 @onready var UFO = preload("res://ufo.tscn")
 #@onready var point_of_view = $pov
-@onready var voxels = $VoxelLodTerrain
+@onready var dirt_voxels = $VoxelLodTerrain
+@onready var crystal_voxels = $VoxelLodTerrain2
 
 const day_len = 60*2
 const day_speed = PI/day_len
@@ -23,7 +24,8 @@ const day_workflow =  {6.0: "clear_fog",
 
 
 var hour_index
-var vt
+var dirt_vt
+var crystal_vt
 var time_to_init = 10
 var init_done = false
 var hardness
@@ -45,7 +47,8 @@ var dogs_pissed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#terrain_chop = city.find_child("terrain_cutout").get_children()
-	vt = find_child("VoxelLodTerrain").get_voxel_tool()
+	dirt_vt = dirt_voxels.get_voxel_tool()
+	crystal_vt = crystal_voxels.get_voxel_tool()
 	
 	
 

@@ -1,33 +1,49 @@
-[gd_scene load_steps=5 format=3 uid="uid://be4q3x2kcbrn0"]
+[gd_scene load_steps=8 format=3 uid="uid://be4q3x2kcbrn0"]
 
 [ext_resource type="PackedScene" uid="uid://dshe7cfv4udkg" path="res://import/drone.glb" id="1_d7wm8"]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_siamd"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m0oeq"]
 animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_caqfq"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5v5x1"]
+animation = &"land"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ipsx8"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_m0oeq")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_caqfq")
+blend_point_1/pos = -1.0
+blend_point_2/node = SubResource("AnimationNodeAnimation_5v5x1")
+blend_point_2/pos = 0.0
+min_space = 0.0
 
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_bej1p"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qtcj"]
-graph_offset = Vector2(-277, 25)
-nodes/Animation/node = SubResource("AnimationNodeAnimation_siamd")
-nodes/Animation/position = Vector2(-20, 140)
+graph_offset = Vector2(-420, 38)
+nodes/fly/node = SubResource("AnimationNodeBlendSpace1D_ipsx8")
+nodes/fly/position = Vector2(-320, 120)
 nodes/output/position = Vector2(260, 140)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_bej1p")
 nodes/speed/position = Vector2(120, 140)
-node_connections = [&"output", 0, &"speed", &"speed", 0, &"Animation"]
+node_connections = [&"output", 0, &"speed", &"speed", 0, &"fly"]
 
 [node name="drone2" instance=ExtResource("1_d7wm8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.522375, 0, -0.620276)
 
 [node name="Skeleton3D" parent="Armature" index="1"]
-bones/1/rotation = Quaternion(-0.698657, 0.0956035, 0.0959619, 0.702517)
-bones/2/rotation = Quaternion(-0.694934, -0.0607701, -0.0412873, 0.715311)
-bones/3/rotation = Quaternion(0.0956033, 0.698657, 0.702517, -0.095962)
-bones/4/rotation = Quaternion(-0.0607702, 0.694934, 0.715311, 0.0412871)
+bones/1/rotation = Quaternion(-0.707107, 8.42937e-08, -8.42937e-08, 0.707107)
+bones/2/rotation = Quaternion(-0.707107, 8.42937e-08, -8.42937e-08, 0.707107)
+bones/3/rotation = Quaternion(-8.42937e-08, 0.707107, 0.707107, -8.42937e-08)
+bones/4/rotation = Quaternion(-8.42937e-08, 0.707107, 0.707107, -8.42937e-08)
 bones/5/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
 bones/6/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]
 tree_root = SubResource("AnimationNodeBlendTree_8qtcj")
 anim_player = NodePath("../AnimationPlayer")
+parameters/fly/blend_position = 0.0
 parameters/speed/scale = 50.0

@@ -35,10 +35,10 @@ func _ready():
 	#	add_collision_exception_with(child)
 	world = drone.world
 	if not drone.tutorial_mode:
-		vt = world.find_child("VoxelLodTerrain").get_voxel_tool()
+		#vt = world.dirt_vt
 		if not add_mode:
 			normal_trail.emitting = true
-			vt.mode = VoxelTool.MODE_REMOVE
+			#vt.mode = VoxelTool.MODE_REMOVE
 			visible
 			$add_trail/MeshInstance3D.visible = false
 			mesh = $normal_trail/MeshInstance3D
@@ -75,9 +75,13 @@ func _process(delta):
 			#var new_decal = Decal.new()
 			if not drone.tutorial_mode:
 				if not add_mode:
-					vt.do_sphere(global_position, 1.5 * 2)
+					world.dirt_vt.mode = VoxelTool.MODE_REMOVE
+					world.dirt_vt.do_sphere(global_position, 1.5 * 2)
+					world.crystal_vt.mode = VoxelTool.MODE_REMOVE
+					world.crystal_vt.do_sphere(global_position, 1.5 * 2)
 				else:
-					vt.do_sphere(global_position, 1.5)
+					world.crystal_vt.mode = VoxelTool.MODE_ADD
+					world.crystal_vt.do_sphere(global_position, 1.5)
 			#new_decal.texture_albedo = load("res://import/damage.png")
 			#new_decal.texture_normal = load("res://import/damage.png")
 			#new_decal.set_deferred("global_position",global_position)

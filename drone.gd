@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @onready var bullet = preload("res://bullet.tscn")
 @onready var laser = preload("res://laser.tscn")
-
+@onready var animation_tree = get_node("mesh/AnimationTree")
 @onready var camera = $Camera3D
 #@onready var target = $Label3D
 @onready var shoot_from = $shoot_from
@@ -65,6 +65,7 @@ var control_lock_yaw = false
 var control_lock_tilt = false
 var vt
 var joy_stick_speed = 5.0
+var landed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
@@ -344,12 +345,8 @@ func drone_aim_mode(delta):
 		apply_impulse(global_transform.basis.y * delta * throttle)
 		draw_power(abs(throttle) * delta * power_cost)
 
-	if linear_velocity.length() < 1 and throttle < 1:
-		add_power(power_gain_at_rest * delta)
-		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
-	else:
-		add_power(power_gain * delta)
-
+	
+		
 	if abs(yaw) > .01:
 		rotate_y((yaw/50) * (joy_stick_speed + world.control_sensitivity_effector))
 	
@@ -432,9 +429,21 @@ func drone_physics(delta):
 		draw_power(abs(throttle) * delta * power_cost)
 	if linear_velocity.length() < 1 and throttle < 1:
 		add_power(power_gain_at_rest * delta)
+		landed = true
 		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
 	else:
 		add_power(power_gain * delta)
+		landed = false
+
+
+	if landed:
+		var current_blend = animation_tree.get("parameters/fly/blend_position")
+		var new_blend = lerp(current_blend,0.0, delta * 5)
+		animation_tree.set("parameters/fly/blend_position", new_blend)
+	else:
+		var current_blend = animation_tree.get("parameters/fly/blend_position")
+		var new_blend = lerp(current_blend,1.0, delta * 5)
+		animation_tree.set("parameters/fly/blend_position", new_blend)
 
 	if yaw != 0.0:
 		#print(yaw)

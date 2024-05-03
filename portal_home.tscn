@@ -1,13 +1,30 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnydq0kvpj3t1"]
+[gd_scene load_steps=11 format=3 uid="uid://cnydq0kvpj3t1"]
 
 [ext_resource type="PackedScene" uid="uid://b5djy4wj2n7qd" path="res://segment.tscn" id="1_gu7me"]
 [ext_resource type="PackedScene" uid="uid://dxfq5vc2rd8fk" path="res://simple_top.tscn" id="2_ke73d"]
 [ext_resource type="Script" path="res://tp_city.gd" id="4_qxahs"]
+[ext_resource type="Script" path="res://TP_cube.gd" id="4_x3nnb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jrp5"]
 size = Vector3(2, 1.85254, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vaqsx"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_giscw"]
+noise_type = 2
+frequency = 0.0092
+fractal_type = 3
+fractal_octaves = 1
+fractal_ping_pong_strength = 7.58
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8e31a"]
+noise = SubResource("FastNoiseLite_giscw")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gdxrn"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 0.3
+emission_texture = SubResource("NoiseTexture2D_8e31a")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7e1vk"]
 size = Vector3(2.155, 2.695, 0.18)
@@ -66,6 +83,8 @@ shape = SubResource("BoxShape3D_7jrp5")
 [node name="FogVolume" type="MeshInstance3D" parent="Node3D/TP3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0322807, 1.13544, 4.85531)
 mesh = SubResource("BoxMesh_vaqsx")
+surface_material_override/0 = SubResource("StandardMaterial3D_gdxrn")
+script = ExtResource("4_x3nnb")
 
 [node name="TP4" type="Area3D" parent="Node3D"]
 script = ExtResource("4_qxahs")

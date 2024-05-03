@@ -6,7 +6,7 @@ extends Node3D
 @onready var dist_fog = $dist_fog
 
 var drone
-var player
+var world
 var vt
 var init_done = false
 var init_countdown = 2
@@ -17,21 +17,14 @@ var fog_colors = ["#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#
 var color_index = 0.0
 
 func _ready():
-	player = get_player()
 	drone = get_drone()
-
-	vt = drone.get_parent().find_child("VoxelLodTerrain").get_voxel_tool()
-	vt.mode = VoxelTool.MODE_REMOVE
+	world = drone.world
+	vt = world.dirt_vt
+	
 	#vt.smooth_sphere(global_position - Vector3(0,1,0), 10,200)
 	#vt.do_box(global_position - Vector3(10,10,10), global_position + Vector3(10,10,10))
 	#vt.do_sphere(global_position, 10)
 
-
-func get_player():
-	var root_i_hope = get_parent()
-	while root_i_hope.name != "world":
-		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("player"))
 
 func get_drone():
 	var root_i_hope = get_parent()

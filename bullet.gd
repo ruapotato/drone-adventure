@@ -34,18 +34,18 @@ func _ready():
 	#for child in get_drone().get_children():
 	#	add_collision_exception_with(child)
 	world = drone.world
-	if not drone.tutorial_mode:
+	#if not drone.tutorial_mode:
 		#vt = world.dirt_vt
-		if not add_mode:
-			normal_trail.emitting = true
-			#vt.mode = VoxelTool.MODE_REMOVE
-			visible
-			$add_trail/MeshInstance3D.visible = false
-			mesh = $normal_trail/MeshInstance3D
-		else:
-			add_trail.emitting = true
-			$normal_trail/MeshInstance3D.visible = false
-			mesh = $add_trail/MeshInstance3D
+	if not add_mode:
+		normal_trail.emitting = true
+		#vt.mode = VoxelTool.MODE_REMOVE
+		visible
+		$add_trail/MeshInstance3D.visible = false
+		mesh = $normal_trail/MeshInstance3D
+	else:
+		add_trail.emitting = true
+		$normal_trail/MeshInstance3D.visible = false
+		mesh = $add_trail/MeshInstance3D
 
 func get_player():
 	var root_i_hope = get_parent()

@@ -89,15 +89,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	timer += (delta * bob_speed)
 	if not collected:
-		var bob_pos
-		if int(timer) % 2 == 0:
-			bob_pos = (timer - int(timer)) - .5
-		else:
-			bob_pos = .5 - (timer - int(timer))
-		#print(bob_pos)
-		global_position.y = init_pos.y + (bob_pos/5)
+		if false:#global_position.distance_to(drone.global_position) < 30:
+			timer += (delta * bob_speed)
+			var bob_pos
+			if int(timer) % 2 == 0:
+				bob_pos = (timer - int(timer)) - .5
+			else:
+				bob_pos = .5 - (timer - int(timer))
+			#print(bob_pos)
+			global_position.y = init_pos.y + (bob_pos/5)
 		
 	if collected:
 		collected_animation -= delta

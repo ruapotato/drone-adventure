@@ -123,6 +123,9 @@ func add_crystal_to_world(value,pos):
 
 func hurt(body, how_much):
 	print(body.name)
+	if "crow" in body.name:
+		body.visible = false
+		add_crystal_to_world(randi_range(20,100),body.global_position)
 	if "crystal" in body.name:
 		body.shatter()
 	elif body.name == "top_balloon":
@@ -157,7 +160,7 @@ func update_env(delta):
 	#print(drone.global_position.y)
 	if drone.global_position.y > 200:
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.0, delta / (day_len/15))
-	if drone.global_position.y < -80:
+	if drone.global_position.y < -50:
 		env.environment.volumetric_fog_albedo = Color("#9e0174")
 	else:
 		env.environment.volumetric_fog_albedo = Color(1,1,1)

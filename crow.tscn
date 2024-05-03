@@ -4,14 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://uknhyh44d3wk" path="res://crow_import.tscn" id="1_wp6bs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mkdig"]
-height = 0.471
-radius = 0.183
+height = 0.851
+radius = 0.228
 
 [node name="crow" type="RigidBody3D"]
 gravity_scale = 0.0
 script = ExtResource("1_kg1kx")
 
 [node name="mesh" parent="." instance=ExtResource("1_wp6bs")]
+transform = Transform3D(2.5, 0, 0, 0, 2.5, 0, 0, 0, 2.5, 0, 0.516849, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.369093, 0)
 shape = SubResource("CylinderShape3D_mkdig")

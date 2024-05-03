@@ -14,6 +14,7 @@ var init_pos
 func _ready():
 	init_pos = global_position
 	drone = get_drone()
+	#scale = randf_range(1,5) * Vector3(1,1,1)
 	
 func get_drone():
 	var root_i_hope = get_parent()

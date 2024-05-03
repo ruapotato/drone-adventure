@@ -124,8 +124,9 @@ func add_crystal_to_world(value,pos):
 func hurt(body, how_much):
 	print(body.name)
 	if "crow" in body.name:
-		body.visible = false
-		add_crystal_to_world(randi_range(20,100),body.global_position)
+		if body.visible:
+			body.visible = false
+			add_crystal_to_world(randi_range(20,100),body.global_position)
 	if "crystal" in body.name:
 		body.shatter()
 	elif body.name == "top_balloon":

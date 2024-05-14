@@ -144,6 +144,9 @@ func _process(delta):
 				else:
 					drone.inventory["extra_power"] = 1
 				"""
+			#If we are paying off the chihuahuas
+			elif buy_text == "chihuahua_bounty":
+				drone.world.dogs_pissed = false
 			#If this item is already in inventory, hide
 			elif buy_text in drone.inventory:
 				message_index += 1

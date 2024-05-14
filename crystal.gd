@@ -28,10 +28,18 @@ func _ready():
 		init_pos = global_position + Vector3(0,randi_range(0,3),0)
 		value = randi_range(1,200)
 		value = int(value/randi_range(1,100)) + 1
+		if global_position.y < -99:
+			#print(abs(global_position.y)/100)
+			#print("power crystal")
+			value *= abs(global_position.y)/100
+		if get_parent().name == "basket":
+			#print("Basket crystal")
+			value *= 2
 	else:
 		$shatter_sound.play()
 	#	init_pos = global_position + Vector3(0,.2,0)
 	#print(value)
+	value = int(value)
 	var color
 	if value >= 200:
 		color = Color("#ffffff")

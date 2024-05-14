@@ -12,6 +12,8 @@ extends Node2D
 @onready var message_box = $message_box
 @onready var bank_label = $bank_label
 @onready var added_label = $added_label
+@onready var chihuahuas = $chihuahuas
+
 var drone
 var world
 var added_counter
@@ -68,6 +70,13 @@ func update_power_cell_label():
 func update_speed_label():
 	speed_label.text = "MPH " + str(int(drone.linear_velocity.length() * 2.23693629))
 
+
+func update_chihuahuas():
+	if world.dogs_pissed:
+		chihuahuas.visible = true
+	else:
+		chihuahuas.visible = false
+
 func update_refuel():
 	if drone.power_cell < 30:
 		refuel_label.visible = true
@@ -107,3 +116,4 @@ func _process(delta):
 		update_target_label()
 		update_power_cell_label()
 		update_refuel()
+		update_chihuahuas()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=3 uid="uid://50tipirf2hql"]
 
-[ext_resource type="PackedScene" path="res://city_import.tscn" id="1_hxu1s"]
+[ext_resource type="PackedScene" uid="uid://bu6h1kvqv7kkj" path="res://city_import.tscn" id="1_hxu1s"]
 [ext_resource type="Script" path="res://city.gd" id="1_ne8q2"]
 [ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://house_1_import.tscn" id="2_v1dca"]
 [ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://house_2_import.tscn" id="3_p7m7l"]
@@ -145,7 +145,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38972, 0, 1.30073)
 
 [node name="laser_gun for 2000" type="Node3D" parent="shop_ui/items"]
 
-[node name="drone_light for 2000" type="Node3D" parent="shop_ui/items"]
+[node name="chihuahua_bounty for 100" type="Node3D" parent="shop_ui/items"]
 
 [node name="landing" type="MeshInstance3D" parent="shop_ui"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256244, -0.048645)

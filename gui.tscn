@@ -199,6 +199,15 @@ offset_bottom = 758.0
 text = "Power Low! Land to Recharge."
 label_settings = SubResource("LabelSettings_8kq81")
 
+[node name="chihuahuas" type="Label" parent="."]
+visible = false
+offset_left = 1544.0
+offset_top = 748.0
+offset_right = 1905.0
+offset_bottom = 780.0
+text = "Chihuahuas are going to kill you!"
+label_settings = SubResource("LabelSettings_8kq81")
+
 [node name="added_label" type="Label" parent="."]
 offset_left = 1529.0
 offset_top = 561.0

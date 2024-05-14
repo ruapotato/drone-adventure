@@ -75,8 +75,9 @@ func _physics_process(delta):
 		var wanted_speed = global_position.direction_to(drone.global_position) * speed
 		#wanted_speed.y = 0
 		linear_velocity = linear_velocity.lerp(wanted_speed,delta)
-		if global_position.distance_to(drone.global_position) < 1:
+		if global_position.distance_to(drone.global_position) < 4:
 			drone.shake = .3
+			bark_sound.play()
 			#print("BITE")
 			if not drone.draw_power(bite_value * delta) or drone.power_cell < 0:
 				drone.power_cell = -1

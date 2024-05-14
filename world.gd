@@ -16,8 +16,8 @@ extends Node3D
 const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.0526
-const day_workflow =  {6.0: "clear_fog",
-					7.0:"day_spawn",
+const day_workflow =  {5.0:"day_spawn",
+					6.0: "clear_fog",
 					21.0:"night_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}

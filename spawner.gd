@@ -11,7 +11,7 @@ var spawn_every = 10
 var spawn_counter = spawn_every
 var spawn_index = 0
 var drone
-var running = true
+#var running = true
 var day_spawn = true
 var night_spawn = false
 # Called when the node enters the scene tree for the first time.
@@ -44,10 +44,12 @@ func spawn_something():
 		get_parent().add_child(new_thing)	
 	
 	# Under ground
-	if global_position.y < -99 and false:
-		spawn_counter = spawn_every
-		var new_thing = lava_blob.instantiate()
-		new_thing.name = "lava_blob_" + str(spawn_index)
+	if global_position.y < -99:
+		spawn_counter = spawn_every/(abs(drone.global_position.y)/300)
+		print(spawn_counter)
+		print("make ufo")
+		var new_thing = mini_ufo.instantiate()
+		new_thing.name = "mini_ufo_" + str(spawn_index)
 		spawn_index += 1
 		new_thing.set_deferred("global_position", spawn_point.global_position)
 		get_parent().add_child(new_thing)	
@@ -56,8 +58,9 @@ func spawn_something():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	global_position = drone.global_position
-	if running:
+	if true:#running:
 		spawn_counter -= delta
 		if spawn_counter < 0:
 			spawn_something()
-		piv.rotate_y(delta*10)
+		rotation.y = drone.rotation.y
+		#piv.rotate_y(delta*10)

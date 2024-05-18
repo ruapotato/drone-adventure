@@ -1,5 +1,12 @@
 Based on: https://github.com/Zylann/godot_voxel under: https://github.com/Zylann/godot_voxel/blob/master/LICENSE.md
 
+CC-by 4.0 migfus20 https://opengameart.org/content/field-orchestra
+CC-0 by celestialghost8 https://opengameart.org/content/inevitable-doom
+CC-0 by mrpoly https://opengameart.org/content/menu-music
+CC-BY 3.0 Matthew Pablo https://opengameart.org/content/desolate
+CC-BY 3.0 Varon Kein https://opengameart.org/content/mml-the-three-princesses-of-lilac-meadow
+CC-0 https://opengameart.org/content/the-creep
+CC-BY Spring Spring https://opengameart.org/content/field-2
 CC Attribution https://sketchfab.com/3d-models/wooden-logs-asset-pack-441fb13a0bf24f9aa8c4a219e5ab9be3
 CC Attribution https://sketchfab.com/3d-models/stylized-pine-tree-pack-46ac3c1a4c3645b1984a97568db54c5d
 CC Attribution https://sketchfab.com/3d-models/realistics-grass-03-2589c4f89dac4bbfab7f66be615f262e

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://deajefwtuxb2q"
+path="res://.godot/imported/Desolate.mp3-c5aa1510d6986ab566030242ee767725.mp3str"
+
+[deps]
+
+source_file="res://import/CC_by_3.0_Matthew Pablo_Desolate Collection/Desolate.mp3"
+dest_files=["res://.godot/imported/Desolate.mp3-c5aa1510d6986ab566030242ee767725.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

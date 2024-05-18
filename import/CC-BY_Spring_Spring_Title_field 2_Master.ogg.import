@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvqd6lmmes26h"
+path="res://.godot/imported/CC-BY_Spring_Spring_Title_field 2_Master.ogg-ddffded0c7a3b21efd2fc5df6e77c0ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://import/CC-BY_Spring_Spring_Title_field 2_Master.ogg"
+dest_files=["res://.godot/imported/CC-BY_Spring_Spring_Title_field 2_Master.ogg-ddffded0c7a3b21efd2fc5df6e77c0ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,6 +2,7 @@ extends Node3D
 
 @onready var crystal = preload("res://crystal.tscn")
 @onready var env = $WorldEnvironment
+@onready var music = $music
 @onready var drone = $drone
 @onready var sun = $sun
 #@onready var city = $city
@@ -12,6 +13,8 @@ extends Node3D
 #@onready var point_of_view = $pov
 @onready var dirt_voxels = $VoxelLodTerrain
 @onready var crystal_voxels = $VoxelLodTerrain2
+@onready var gui = $gui
+
 
 const day_len = 60*2
 const day_speed = PI/day_len
@@ -22,7 +25,13 @@ const day_workflow =  {5.0:"day_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}
 
-
+@onready var music_list = {"underground":preload("res://import/CC0_by_mrpoly_awesomeness.wav"),
+							"ufo":preload("res://import/CC0_ruskerdax_-_the_creep.mp3"),
+							"shop":preload("res://import/CC_BY_3.0_Varon_Kein_The Three Princesses of Lilac Meadow.ogg"),
+							"meadow":preload("res://import/CC_by_4_migfus20_asdf_2.mp3"),
+							"city":preload("res://import/CC-BY_Spring_Spring_Title_field 2_Master.ogg"),
+							"heighup":preload("res://import/CC_by_3.0_Matthew Pablo_Desolate Collection/Desolate.mp3"),
+							"dogs":preload("res://import/CC0_by_celestialghost8_Inevitable Doom.wav")}
 var hour_index
 var dirt_vt
 var crystal_vt
@@ -65,7 +74,8 @@ func run_active_tasks(delta):
 		spawner.night_spawn = true
 	if active_task == "UFO":
 		#print(len(ufos.get_children()))
-		if len(ufos.get_children()) == 0:
+		
+		if len(ufos.get_children()) == 0 and drone.global_position.y > -50:
 			print("INIT UFO")
 			var new_ufo = UFO.instantiate()
 			ufos.add_child(new_ufo)
@@ -138,7 +148,7 @@ func hurt(body, how_much):
 		print("Pissed on the dogs")
 	elif body.name == "ufo":
 		body.life -= how_much
-		body.fly_ttl = 6
+		body.fly_ttl = 20
 	elif body.name == "mini_ufo":
 		body.get_parent().life -= how_much
 	elif "life" in body:
@@ -165,7 +175,31 @@ func update_env(delta):
 		env.environment.volumetric_fog_albedo = Color("#9e0174")
 	else:
 		env.environment.volumetric_fog_albedo = Color(1,1,1)
+
+func update_music():
+	#print( drone.global_position.y)
+	var music_pick = ""
+	if drone.global_position.y > 750:
+		music_pick = "heighup"
+	elif drone.global_position.y > 430:
+		music_pick = "city"
+	elif drone.global_position.y > -50:
+		music_pick = "meadow"
+	else:
+		music_pick = "underground"
 	
+	if gui.message_box.visible:
+		music_pick = "shop"
+	
+	if len(ufos.get_children()) > 0:
+		music_pick = "ufo"
+	
+	if dogs_pissed:
+		music_pick = "dogs"
+	
+	if music_list[music_pick] != music.stream:
+		music.stream = music_list[music_pick]
+		music.play()
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#setup_terrain(delta)
@@ -176,5 +210,10 @@ func _process(delta):
 	update_workflow()
 	run_active_tasks(delta)
 	update_env(delta)
+	update_music()
 
 
+
+
+func _on_music_finished():
+	music.play()

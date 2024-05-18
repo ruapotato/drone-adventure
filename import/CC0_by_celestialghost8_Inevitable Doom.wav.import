@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbbs5dx8lhy5x"
+path="res://.godot/imported/CC0_by_celestialghost8_Inevitable Doom.wav-16db29f99e3ae6ea4504a0c05e10eaf7.sample"
+
+[deps]
+
+source_file="res://import/CC0_by_celestialghost8_Inevitable Doom.wav"
+dest_files=["res://.godot/imported/CC0_by_celestialghost8_Inevitable Doom.wav-16db29f99e3ae6ea4504a0c05e10eaf7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

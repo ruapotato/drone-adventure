@@ -205,8 +205,10 @@ offset_left = 1544.0
 offset_top = 748.0
 offset_right = 1905.0
 offset_bottom = 780.0
-text = "Chihuahuas are going to kill you!"
+text = "Chihuahuas are going to kill you!
+City Shop can help!"
 label_settings = SubResource("LabelSettings_8kq81")
+horizontal_alignment = 1
 
 [node name="added_label" type="Label" parent="."]
 offset_left = 1529.0

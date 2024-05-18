@@ -1,6 +1,7 @@
 extends Node3D
 
 @onready var mini_ufo = preload("res://mini_ufo.tscn")
+@onready var ufo = preload("res://ufo.tscn")
 @onready var balloon = preload("res://balloon.tscn")
 @onready var lava_blob = preload("res://lava_blob.tscn")
 @onready var piv = $piv
@@ -14,6 +15,8 @@ var drone
 #var running = true
 var day_spawn = true
 var night_spawn = false
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone = get_drone()
@@ -35,7 +38,14 @@ func spawn_something():
 			new_mini_ufo.set_deferred("global_position", spawn_point.global_position)
 			get_parent().add_child(new_mini_ufo)
 	# sky things
-	if global_position.y > 200 and day_spawn:
+	if global_position.y > 750:
+		spawn_counter = spawn_every * 4
+		if len(world.ufos.get_children()) == 0:
+			print("INIT UFO")
+			var new_ufo = ufo.instantiate()
+			world.ufos.add_child(new_ufo)
+
+	elif global_position.y > 200 and day_spawn:
 		spawn_counter = spawn_every
 		var new_thing = balloon.instantiate()
 		#new_thing.name = "balloon_" + str(spawn_index)

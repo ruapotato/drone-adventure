@@ -3,22 +3,23 @@ extends RigidBody3D
 var SPEED = 300
 
 var spawn_point = Vector3(0,1000,0)
-var hover_point = Vector3(0,470,0)
+var hover_point = Vector3(0,0,0)
 
 var active_task = "drop"
-var fly_ttl = 10
-var life = 15
+var fly_ttl = 30
+var life = 42
 var drone
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gravity_scale = 0
 	drone = get_drone()
 	global_position = spawn_point
-	var parent_pos = get_parent().global_position
+	var parent_pos = drone.global_position
 	spawn_point.x = parent_pos.x
 	spawn_point.z = parent_pos.z
 	hover_point.x = parent_pos.x
 	hover_point.z = parent_pos.z
+	hover_point.y = parent_pos.y + 30
 
 func get_drone():
 	var root_i_hope = get_parent()

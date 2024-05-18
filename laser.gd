@@ -3,7 +3,7 @@ extends RayCast3D
 @onready var mesh = $MeshInstance3D
 @onready var laser_effect = $laser_effect
 
-var damage = 100
+var damage = 10
 var time_alive = 0
 var ttl = .4
 var size = 0

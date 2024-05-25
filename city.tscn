@@ -133,6 +133,8 @@ stream = ExtResource("10_4nfns")
 
 [node name="items" type="Node3D" parent="shop_ui"]
 
+[node name="chihuahua_restitution for 100" type="Node3D" parent="shop_ui/items"]
+
 [node name="lander_skin for 150" type="Node3D" parent="shop_ui/items"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17306, 0, 1.30073)
 
@@ -144,8 +146,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38972, 0, 1.30073)
 [node name="weckingball for 1000" type="Node3D" parent="shop_ui/items"]
 
 [node name="laser_gun for 2000" type="Node3D" parent="shop_ui/items"]
-
-[node name="chihuahua_bounty for 100" type="Node3D" parent="shop_ui/items"]
 
 [node name="landing" type="MeshInstance3D" parent="shop_ui"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.256244, -0.048645)
@@ -182,6 +182,9 @@ outline_size = 66
 [node name="cars" type="Node3D" parent="."]
 
 [node name="towers" type="Node3D" parent="."]
+
+[node name="city_center" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -112.638, 0.906185, -56.2726)
 
 [connection signal="body_entered" from="portal/TP1" to="portal/TP1" method="_on_body_entered"]
 [connection signal="body_entered" from="portal/TP2" to="portal/TP2" method="_on_body_entered"]

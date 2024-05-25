@@ -1,10 +1,13 @@
 extends Node3D
 @onready var body = $mini_ufo
 var drone
-var speed = 14
+var speed = 25
 
+var dead_counter = 3.0 
+var dead = false
+var life = 1.1
 
-var life = 2
+var mode = "swing"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,15 +21,33 @@ func get_drone():
 	return(root_i_hope.find_child("drone"))
 
 func _physics_process(delta):
-	var wanted_speed = body.global_position.direction_to(drone.global_position) * speed
-	body.linear_velocity = body.linear_velocity.lerp(wanted_speed,delta)
+	if mode == "swing":
+		var wanted_speed = body.global_position.direction_to(drone.global_position) * speed
+		body.linear_velocity = body.linear_velocity.lerp(wanted_speed,delta)
+		if drone.global_position.distance_to(body.global_position) < 1:
+			mode = "run"
+	if mode == "run":
+		var wanted_speed = body.global_position.direction_to(drone.global_position) * speed * -.5
+		body.linear_velocity = body.linear_velocity.lerp(wanted_speed,delta)
+		if drone.global_position.distance_to(body.global_position) > 10:
+			mode = "swing"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if dead:
+		if dead_counter > 0:
+			dead_counter -= delta
+		else:
+			queue_free()
+		return
 	if life <= 0:
 		print("mini down")
 		drone.world.add_crystal_to_world(randi_range(1,3),body.global_position)
-		queue_free()
+		$mini_ufo/expload.play()
+		$mini_ufo/ufo2.visible = false
+		$mini_ufo/expload_effect.emitting = true
+		dead = true
+		#queue_free()
 	#var wanted_speed = body.global_position.direction_to(drone.global_position) * speed
 	#body.linear_velocity = wanted_speed
 	#body.apply_impulse()

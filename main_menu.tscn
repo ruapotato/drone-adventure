@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_8rasr"]
 [ext_resource type="PackedScene" uid="uid://bux6jg8v62006" path="res://credit.tscn" id="2_58kwt"]
-[ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_y2m7d"]
+[ext_resource type="Texture2D" uid="uid://cer8ofc6rtlo1" path="res://Hero.png" id="2_jied5"]
 [ext_resource type="Texture2D" uid="uid://bt74fouxpvede" path="res://finns_studio.png" id="3_6ql65"]
 [ext_resource type="PackedScene" uid="uid://bce251ilfs4i7" path="res://settings.tscn" id="4_ix6np"]
 [ext_resource type="Texture2D" uid="uid://css62a7b5oonx" path="res://logo.png" id="6_1q1py"]
@@ -19,9 +19,9 @@ Button/colors/icon_normal_color = Color(0, 0, 1, 1)
 script = ExtResource("1_8rasr")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(158, 536)
-scale = Vector2(1.38972, 1.56695)
-texture = ExtResource("2_y2m7d")
+position = Vector2(870, 568)
+scale = Vector2(0.761198, 0.975807)
+texture = ExtResource("2_jied5")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 48.0
@@ -70,7 +70,7 @@ offset_bottom = 1001.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
-text = "Help"
+text = "Credits"
 metadata/_edit_use_anchors_ = true
 
 [node name="settings" type="Button" parent="."]

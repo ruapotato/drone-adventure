@@ -60,9 +60,9 @@ func _unhandled_input(event):
 		# Update message box page
 		if message_ui:
 			#print("MSG!2")
-			if event.is_action_pressed("menu_next"):
+			if Input.is_action_just_pressed("menu_next"):
 				message_index += 1
-			else:
+			if Input.is_action_just_pressed("menu_back"):
 				message_index = -1
 			#print(message_index)
 			#print(message_ui)

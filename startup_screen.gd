@@ -126,6 +126,18 @@ func start_game():
 		print(game_save_index)
 
 
+func reset_game():
+	Engine.time_scale = 1.0
+	if new_game != null:
+		new_game.queue_free()
+		new_game = null
+	get_tree().reload_current_scene()
+	queue_free()
+	#game_started = false
+	#if new_game != null:
+	#	new_game.queue_free()
+	#	new_game = null
+	#show()
 
 func _on_save_1_button_down():
 	game_save_index = 1

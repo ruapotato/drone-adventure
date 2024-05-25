@@ -11,50 +11,76 @@ position = Vector2(158, 536)
 scale = Vector2(1.38972, 1.56695)
 texture = ExtResource("2_0n3ej")
 
-[node name="Label" type="Label" parent="."]
-offset_left = 478.0
-offset_top = 602.0
-offset_right = 876.0
-offset_bottom = 784.0
+[node name="credit_text" type="Label" parent="."]
+offset_left = 267.0
+offset_top = 255.0
+offset_right = 943.0
+offset_bottom = 1500.0
+scale = Vector2(2.37438, 1.69083)
+text = "By David Hamner
+Code is GPL3
+Assets I made are also gpl3, all other assets are open and are listed here:
+Eng Based on: https://github.com/Zylann/godot_voxel under: https://github.com/Zylann/godot_voxel/blob/master/LICENSE.md
+CC0 1.0 Universal addon: portals
+CC 0 by https://github.com/Donitzo/godot-simple-portal-system/tree/main/src
+CC-by 4.0 migfus20 https://opengameart.org/content/field-orchestra
+CC-0 by celestialghost8 https://opengameart.org/content/inevitable-doom
+CC-0 by mrpoly https://opengameart.org/content/menu-music
+CC-BY 3.0 Matthew Pablo https://opengameart.org/content/desolate
+CC-BY 3.0 Varon Kein https://opengameart.org/content/mml-the-three-princesses-of-lilac-meadow
+CC-0 https://opengameart.org/content/the-creep
+CC-BY Spring Spring https://opengameart.org/content/field-2
+CC Attribution https://sketchfab.com/3d-models/wooden-logs-asset-pack-441fb13a0bf24f9aa8c4a219e5ab9be3
+CC Attribution https://sketchfab.com/3d-models/stylized-pine-tree-pack-46ac3c1a4c3645b1984a97568db54c5d
+CC Attribution https://sketchfab.com/3d-models/realistics-grass-03-2589c4f89dac4bbfab7f66be615f262e
+CC Attribution https://sketchfab.com/3d-models/grass-low-poly-08c126cdc4a54334b8d67d258bc38f53
+CC-by munro98 https://www.blendswap.com/blend/22331
+CC 0 Nodelete by https://blendswap.com/blend/7340
+CC-BY 3.0 by jdagenet https://opengameart.org/content/sci-fi-drone-loop
+CC-BY 3.0 by KLY https://opengameart.org/content/whistle
+CC 0 by Kenney https://opengameart.org/content/sci-fi-sounds
+CC 0 by NenadSimic https://opengameart.org/content/muffled-distant-explosion
+CC-BY 3.0 by spookymodem https://opengameart.org/content/breaking-bottle
+CC 0 by RayB2 https://opengameart.org/content/vehicles-0
+CC 0 by Karmabub https://opengameart.org/content/blue
+https://mars.nasa.gov/resources/25043/mars-ingenuity-helicopter-3d-model/
+
+
+Likely cut but still could be in the game files: 
+CC0 by Gorgious https://www.blendswap.com/blend/29727
+CC0 by drummyfish https://opengameart.org/content/family-house-collection
+CC Attribution https://sketchfab.com/3d-models/ccity-building-set-1-a2d5c7bfcc2148fb8994864c43dfcc97
+CC Attribution https://sketchfab.com/3d-models/comic-drone-f2489a3e66ee4aeb86b8d02568ffe750
+ From https://opengameart.org/content/level-up-power-up-coin-get-13-sounds under CC 0:
+  * import/CC 0 BY wobbleboxx/*
+CC 0 by https://opengameart.org/content/low-polygon-pine-tree
+CC 0 by https://opengameart.org/content/ufo-2
+
+See ref.txt for a more updated version. 
+Source can be found here: 
+https://bitbucket.org/hackersgame/drone-adventure/
+https://bitbucket.org/hackersgame/drone-adventure-assets/"
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Label" type="Label" parent="credit_text"]
+offset_left = -143.195
+offset_top = -206.408
+offset_right = 254.805
+offset_bottom = -24.4075
 scale = Vector2(2.47442, 1.71035)
-text = "https://finns.studio/
-By Finns Wonderland LLC
+text = "Finns Wonderland LLC
+https://finns.studio/
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Label2" type="Label" parent="."]
-offset_left = 42.0
-offset_top = 273.0
-offset_right = 841.0
-offset_bottom = 516.0
-scale = Vector2(2.37438, 1.69083)
-text = "Play around with a tiny drone in a space that is endless."
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Button" type="Button" parent="."]
-offset_left = 188.0
-offset_top = 871.0
-offset_right = 233.0
-offset_bottom = 902.0
+offset_left = 17.0
+offset_top = 538.0
+offset_right = 62.0
+offset_bottom = 569.0
 scale = Vector2(4.57518, 2.69552)
 text = "Back"
-
-[node name="lable" type="Label" parent="."]
-offset_left = 801.0
-offset_top = 314.0
-offset_right = 891.0
-offset_bottom = 340.0
-scale = Vector2(3.88099, 2.72751)
-text = "Game Goal"
-
-[node name="lable2" type="Label" parent="."]
-offset_left = 871.0
-offset_top = 616.0
-offset_right = 918.0
-offset_bottom = 642.0
-scale = Vector2(3.88099, 2.72751)
-text = "Credit"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

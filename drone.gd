@@ -50,6 +50,7 @@ var pitch = 0.0
 var pitch_speed = 5
 var cam_pitch = 0.0
 var cam_roll = 0.0
+var feet_on_ground = false
 
 var roll = 0.0
 var roll_speed = 5
@@ -69,7 +70,7 @@ var landed = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
-	
+	global_position = world.find_child("spawn").global_position
 	skeleton = mesh.find_child("Skeleton3D")
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true
@@ -217,7 +218,7 @@ func _unhandled_input(event):
 func figure_damage():
 	var damge_vector = last_velocity - linear_velocity
 	last_velocity = linear_velocity
-	if damge_vector.length() > 5:
+	if damge_vector.length() > 4:
 		print("Smaked! " + str(damge_vector.length()))
 		shake = .3
 		draw_power(abs(damge_vector.length()))
@@ -389,6 +390,11 @@ func drone_aim_mode(delta):
 	#if abs(cam_roll) > .01:
 	#	camera.rotation.z = (cam_pitch * PI)/2
 
+func on_ground():
+	if linear_velocity.length() < 1 and throttle < 1:
+		return(true)
+	return(feet_on_ground)
+
 func ball_mode(delta):
 	vt.mode = VoxelTool.MODE_REMOVE
 	vt.grow_sphere(global_position,  linear_velocity.length()/20, delta * clamp(linear_velocity.length(),1,60))
@@ -427,7 +433,7 @@ func drone_physics(delta):
 	if power_cell - 1 > abs(throttle) * delta * power_cost:
 		apply_impulse(global_transform.basis.y * delta * throttle)
 		draw_power(abs(throttle) * delta * power_cost)
-	if linear_velocity.length() < 1 and throttle < 1:
+	if on_ground():
 		add_power(power_gain_at_rest * delta)
 		landed = true
 		#var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
@@ -488,7 +494,7 @@ func dead_logic(delta):
 	if dead_reset_counter < 0:
 		if inventory["crystals"] > 0:
 			world.add_crystal_to_world(inventory["crystals"],global_position + Vector3(0,1,0))
-		global_position = Vector3(0,0,0)
+		global_position = world.spawn.global_position
 		inventory["crystals"] = 0
 		power_cell = 100
 		save_game()
@@ -520,3 +526,13 @@ func _physics_process(delta):
 	update_gun_pos()
 	
 
+
+
+func _on_feet_area_area_entered(area):
+	if area.name == "ground":
+		feet_on_ground = true
+
+
+func _on_feet_area_area_exited(area):
+	if area.name == "ground":
+		feet_on_ground = false

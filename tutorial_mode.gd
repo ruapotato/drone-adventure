@@ -21,7 +21,7 @@ var message
 var init_turn = 0
 var hover_index = 0
 var control_sensitivity_effector
-
+var dogs_pissed = false
 func _ready():
 	message = gui.find_child("message")
 	gui.find_child("message_box").visible = true
@@ -96,7 +96,7 @@ func do_stage(delta):
 		else:
 			show_image("idle")
 		hover_counter += delta
-		var hover_height = drone.global_position.y
+		var hover_height = drone.global_position.y - $spawn.global_position.y
 		if hover_height > 3:
 			message.text += "\nYou're too high! Lower your throttle by moving the left joystick closer to the center."
 			hover_counter = 0

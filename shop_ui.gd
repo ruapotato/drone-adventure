@@ -18,10 +18,12 @@ var message_index = -1
 var message_option_index = 1
 var message_ui = null
 var gui
+var world
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone = get_drone()
+	world = drone.world
 	gui = drone.get_parent().find_child("gui")
 	for obj in $items.get_children():
 		var mull_msg = obj.name
@@ -144,9 +146,14 @@ func _process(delta):
 				else:
 					drone.inventory["extra_power"] = 1
 				"""
+			elif buy_text == "chihuahua_restitution":
+				if not world.dogs_pissed:
+					message_index += 1
+					if message_index >= len(message):
+						message_index = -1
+					gui.message.text = message_ui[message_index]
+					return
 			#If we are paying off the chihuahuas
-			elif buy_text == "chihuahua_bounty":
-				drone.world.dogs_pissed = false
 			#If this item is already in inventory, hide
 			elif buy_text in drone.inventory:
 				message_index += 1
@@ -173,8 +180,11 @@ func _process(delta):
 								drone.inventory["extra_power"] += 1
 							else:
 								drone.inventory["extra_power"] = 1
+						elif buy_text == "chihuahua_restitution":
+							drone.world.dogs_pissed = false
 						else:
 							drone.inventory[buy_text] = true
+							world.pause()
 						drone.save_game()
 						message_index = -1
 					if action == "Quit":

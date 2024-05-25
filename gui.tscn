@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=29 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
@@ -107,6 +107,20 @@ font_size = 26
 font_size = 26
 outline_size = 7
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tctn"]
+bg_color = Color(0.32549, 1, 0.458824, 1)
+corner_radius_top_left = 21
+corner_radius_top_right = 21
+corner_radius_bottom_right = 21
+corner_radius_bottom_left = 21
+
+[sub_resource type="Theme" id="Theme_y484j"]
+ProgressBar/colors/font_color = Color(1, 1, 1, 1)
+ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
+ProgressBar/constants/outline_size = 12
+ProgressBar/font_sizes/font_size = 48
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_4tctn")
 
 [node name="gui" type="Node2D"]
 script = ExtResource("1_2mec0")
@@ -282,3 +296,12 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "11"
 label_settings = SubResource("LabelSettings_vf1rj")
+
+[node name="boss_bar" type="ProgressBar" parent="."]
+visible = false
+offset_left = 317.0
+offset_top = 23.0
+offset_right = 1544.0
+offset_bottom = 81.0
+theme = SubResource("Theme_y484j")
+value = 100.0

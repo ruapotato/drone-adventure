@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	$credit_text.global_position.y -= delta * 25
 
 
 func _on_button_pressed():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://csbqpug6w6x1y"]
+[gd_scene load_steps=14 format=3 uid="uid://csbqpug6w6x1y"]
 
 [ext_resource type="Script" path="res://vehicle.gd" id="1_6dyft"]
 [ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_micnr"]
+[ext_resource type="AudioStream" uid="uid://dk3278hkecnww" path="res://import/Audio/engineCircular_001.ogg" id="3_k3may"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ejn7c"]
 height = 0.205
@@ -10,10 +11,38 @@ height = 0.205
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_os3fw"]
-size = Vector3(1.785, 0.695, 4.06)
+size = Vector3(1.785, 0.425, 4.35)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_weji8"]
-size = Vector3(1.67, 1.51, 1.96)
+size = Vector3(1.97, 0.855, 1.225)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_och00"]
+size = Vector3(1.97, 0.675, 1.225)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qjd6u"]
+inherit_velocity_ratio = 0.008
+velocity_pivot = Vector3(0, 0.5, 0)
+direction = Vector3(0, 0.1, 0)
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+tangential_accel_max = 16.8
+scale_min = 0.2
+scale_max = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ommc"]
+transparency = 1
+albedo_color = Color(0, 0, 0, 0.415686)
+
+[sub_resource type="SphereMesh" id="SphereMesh_xgoe6"]
+material = SubResource("StandardMaterial3D_0ommc")
+radius = 1.0
+height = 2.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_64cnp"]
+size = Vector3(1.64, 0.715, 0.26)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6u0cd"]
+size = Vector3(0.295, 0.44, 1.92885)
 
 [node name="VehicleBody3D" type="VehicleBody3D"]
 center_of_mass_mode = 1
@@ -63,12 +92,46 @@ mesh = SubResource("CylinderMesh_ejn7c")
 surface_material_override/0 = SubResource("StandardMaterial3D_n5n42")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.252799, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132334, 0)
 shape = SubResource("BoxShape3D_os3fw")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.870561, -0.440031)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.786, 0.523)
 shape = SubResource("BoxShape3D_weji8")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.283298, 1.7027)
+shape = SubResource("BoxShape3D_och00")
 
 [node name="pickup" parent="." instance=ExtResource("2_micnr")]
 transform = Transform3D(1.465, 0, 0, 0, 1.465, 0, 0, 0, 1.465, 0, -0.397098, 0)
+
+[node name="eng_sounds" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20226, 1.80629)
+stream = ExtResource("3_k3may")
+autoplay = true
+
+[node name="expload_effect" type="GPUParticles3D" parent="."]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0.685342, 1.91669)
+emitting = false
+amount = 1000
+lifetime = 60.0
+interp_to_end = 0.29
+one_shot = true
+explosiveness = 0.2
+process_material = SubResource("ParticleProcessMaterial_qjd6u")
+draw_pass_1 = SubResource("SphereMesh_xgoe6")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377844, -2.1841)
+shape = SubResource("BoxShape3D_64cnp")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.862, 0.378, -1.145)
+shape = SubResource("BoxShape3D_6u0cd")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.816205, 0.378, -1.145)
+shape = SubResource("BoxShape3D_6u0cd")
+
+[connection signal="finished" from="eng_sounds" to="." method="_on_eng_sounds_finished"]

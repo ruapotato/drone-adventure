@@ -8,3 +8,6 @@ script = ExtResource("2_o3nmk")
 
 [node name="pasted__pCube52" parent="." index="3"]
 visible = false
+
+[node name="Icosphere" parent="." index="17"]
+transform = Transform3D(3.02201, 0, 0, 0, 1.85785, 0, 0, 0, 1.85785, -121.21, -0.133467, -82.658)

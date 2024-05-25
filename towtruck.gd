@@ -55,3 +55,7 @@ func _physics_process(delta):
 func _process(delta):
 	pass
 	
+
+
+func _on_eng_sounds_finished():
+	$eng_sounds.play()

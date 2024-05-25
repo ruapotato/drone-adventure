@@ -14,7 +14,8 @@ extends Node3D
 @onready var dirt_voxels = $VoxelLodTerrain
 @onready var crystal_voxels = $VoxelLodTerrain2
 @onready var gui = $gui
-
+@onready var spawn = $spawn
+@onready var pause_screen = $pause_screen
 
 const day_len = 60*2
 const day_speed = PI/day_len
@@ -52,6 +53,10 @@ var terrain_chop
 
 var plants
 var dogs_pissed = false
+var boss_life = null
+var boss_max_life = null
+
+var last_mouse_move = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -122,6 +127,19 @@ func update_friendly_time():
 	else:
 		friendly_time_am = false
 
+func _unhandled_input(event):
+	if event is InputEventMouseMotion:
+		#print("mouse")
+		last_mouse_move = 0.0
+
+
+func pause():
+	if pause_screen.visible:
+		Engine.time_scale = 1.0
+	else:
+		Engine.time_scale = 0.01
+	pause_screen.visible = not pause_screen.visible
+
 func add_crystal_to_world(value,pos):
 	#randi_range(20,100)
 	var new_crystal = crystal.instantiate()
@@ -133,6 +151,11 @@ func add_crystal_to_world(value,pos):
 
 func hurt(body, how_much):
 	print(body.name)
+	if "weak_point" in body.name:
+		body = body.get_parent()
+		how_much *= 3
+	
+	
 	if "crow" in body.name:
 		if body.visible:
 			body.visible = false
@@ -200,6 +223,17 @@ func update_music():
 	if music_list[music_pick] != music.stream:
 		music.stream = music_list[music_pick]
 		music.play()
+
+func update_mouse(delta):
+	last_mouse_move += delta
+	if last_mouse_move > 3:
+		if Input.mouse_mode != Input.MOUSE_MODE_HIDDEN:
+			Input.mouse_mode = Input.MOUSE_MODE_HIDDEN
+	else:
+		if Input.mouse_mode == Input.MOUSE_MODE_HIDDEN:
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#setup_terrain(delta)
@@ -211,6 +245,7 @@ func _process(delta):
 	run_active_tasks(delta)
 	update_env(delta)
 	update_music()
+	update_mouse(delta)
 
 
 

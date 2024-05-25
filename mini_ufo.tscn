@@ -1,10 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciy2jrcmbvvdo"]
+[gd_scene load_steps=9 format=3 uid="uid://ciy2jrcmbvvdo"]
 
 [ext_resource type="Script" path="res://mini_ufo.gd" id="1_8vdp7"]
 [ext_resource type="PackedScene" uid="uid://ckeppqrkmhqm7" path="res://ufo_import.tscn" id="2_26lvm"]
 [ext_resource type="AudioStream" uid="uid://cuskc6jfvcyrd" path="res://import/Sci-Fi Drone.wav" id="2_bvn50"]
+[ext_resource type="AudioStream" uid="uid://nmg52d60eji2" path="res://import/Audio/explosionCrunch_004.ogg" id="4_n7ftu"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_07pmb"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8sr7k"]
+inherit_velocity_ratio = 0.008
+velocity_pivot = Vector3(0, 0.5, 0)
+direction = Vector3(0, 0.1, 0)
+initial_velocity_max = 0.1
+gravity = Vector3(0, 0, 0)
+tangential_accel_max = 16.8
+scale_min = 0.2
+scale_max = 1.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qfqna"]
+transparency = 1
+albedo_color = Color(0, 1, 0, 0.415686)
+
+[sub_resource type="SphereMesh" id="SphereMesh_f3xbx"]
+material = SubResource("StandardMaterial3D_qfqna")
+radius = 1.0
+height = 2.0
 
 [node name="mini_ufo" type="Node3D"]
 script = ExtResource("1_8vdp7")
@@ -24,5 +44,19 @@ max_distance = 39.01
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="mini_ufo"]
 shape = SubResource("SphereShape3D_07pmb")
+
+[node name="expload" type="AudioStreamPlayer3D" parent="mini_ufo"]
+stream = ExtResource("4_n7ftu")
+
+[node name="expload_effect" type="GPUParticles3D" parent="mini_ufo"]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0.0188786, -0.000607304)
+emitting = false
+amount = 100
+lifetime = 6.0
+interp_to_end = 0.29
+one_shot = true
+explosiveness = 0.2
+process_material = SubResource("ParticleProcessMaterial_8sr7k")
+draw_pass_1 = SubResource("SphereMesh_f3xbx")
 
 [connection signal="finished" from="mini_ufo/AudioStreamPlayer3D" to="." method="_on_audio_stream_player_3d_finished"]

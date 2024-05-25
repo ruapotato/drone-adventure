@@ -4,6 +4,7 @@ extends Node3D
 @onready var TOW = preload("res://towtruck.tscn")
 @onready var cars = $cars
 @onready var towers = $towers
+@onready var city_center = $city_center
 var NPCs = []
 
 var cars_every = 4
@@ -65,7 +66,7 @@ func update_cars(delta):
 
 
 func update_city_running():
-	city_running = drone.global_position.distance_to(global_position) < 150
+	city_running = drone.global_position.distance_to(city_center.global_position) < 250
 	
 	
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c6xoinay7iwci"]
+[gd_scene load_steps=8 format=3 uid="uid://c6xoinay7iwci"]
 
 [ext_resource type="PackedScene" uid="uid://bt1ex2knjtlmi" path="res://import/balloon.glb" id="1_jsmc0"]
 [ext_resource type="PackedScene" uid="uid://dg2vcwd6qo28" path="res://import/basket.glb" id="2_rw8w8"]
@@ -9,7 +9,13 @@ resource_local_to_scene = true
 radius = 1.8
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d7pbb"]
-size = Vector3(1.5, 1.5, 1.5)
+size = Vector3(1.5, 0.35, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fnfu2"]
+size = Vector3(0.395, 1.55, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i4ndo"]
+size = Vector3(1.55, 1.55, 0.395)
 
 [node name="balloon" type="Node3D"]
 
@@ -40,6 +46,29 @@ mass = 65.0
 transform = Transform3D(0.83, 0, 0, 0, 0.98, 0, 0, 0, 0.83, 0, 1.09654, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.47121, 0)
 shape = SubResource("BoxShape3D_d7pbb")
 
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.875656, 0.109267, 0)
+shape = SubResource("BoxShape3D_fnfu2")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.858106, 0.109267, 0)
+shape = SubResource("BoxShape3D_fnfu2")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0639204, 0.109267, 0.842941)
+shape = SubResource("BoxShape3D_i4ndo")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0639204, 0.109267, -0.86098)
+shape = SubResource("BoxShape3D_i4ndo")
+
 [node name="value_crystal" parent="top_balloon/HingeJoint3D/basket" instance=ExtResource("3_65nab")]
+
+[node name="ground" type="Area3D" parent="top_balloon/HingeJoint3D/basket"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="top_balloon/HingeJoint3D/basket/ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.301664, 0)
+shape = SubResource("BoxShape3D_d7pbb")

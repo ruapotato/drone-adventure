@@ -8,10 +8,14 @@ extends Node2D
 var button_index = 0
 
 var drone
+var world
+var startup_screen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	drone = get_drone()
+	world = drone.world
+	startup_screen = world.get_parent()
 
 func get_drone():
 	var root_i_hope = get_parent()
@@ -75,10 +79,12 @@ func _on_reuseme_pressed():
 func _on_toggle_skin_pressed():
 	if "lander_skin" in drone.inventory:
 		drone.inventory["lander_skin"] = !drone.inventory["lander_skin"]
+		world.pause()
 
 
 func _on_exit_pressed():
-	get_tree().quit()
+	startup_screen.reset_game()
+	#get_tree().quit()
 	#for body in get_parent().get_children():
 	#	body.queue_free()
 	#get_tree().reload_current_scene()

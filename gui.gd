@@ -13,6 +13,7 @@ extends Node2D
 @onready var bank_label = $bank_label
 @onready var added_label = $added_label
 @onready var chihuahuas = $chihuahuas
+@onready var boss_bar = $boss_bar
 
 var drone
 var world
@@ -93,6 +94,15 @@ func update_fps():
 	if $stats.visible:
 		$stats/fps.text = str(Engine.get_frames_per_second())
 
+func update_boss_bar():
+	if world.boss_max_life != null:
+		if not boss_bar.visible:
+			boss_bar.visible = true
+		boss_bar.value =  world.boss_life/world.boss_max_life * 100
+	else:
+		if boss_bar.visible:
+			boss_bar.visible = false
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if str(drone.inventory["crystals"]) != crystal_label.text:
@@ -112,6 +122,7 @@ func _process(delta):
 	update_speed_label()
 	update_fps()
 	if not drone.tutorial_mode:
+		update_boss_bar()
 		update_time_label()
 		update_target_label()
 		update_power_cell_label()

@@ -12,6 +12,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if crashed and not $expload_effect.emitting:
+		$eng_sounds.stream = load("res://import/Audio/spaceEngineLarge_000.ogg")
+		$eng_sounds.play()
+		$expload_effect.emitting = true
+	
 	if tp_cooldown < 0:
 		tp_cooldown -= delta
 	# Remove is falls off map
@@ -32,5 +37,10 @@ func _process(delta):
 		engine_force = 0
 	if (init_angle - global_rotation).length() > .5 and not crashed:
 		crashed = true
+
 		#print("CRASH!!!")
 	#print((init_angle - global_rotation).length())
+
+
+func _on_eng_sounds_finished():
+	$eng_sounds.play()

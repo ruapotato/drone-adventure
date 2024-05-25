@@ -18,7 +18,7 @@ var boom_color
 var drone
 var world
 var vt
-var damage = 1.0
+var damage = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -107,7 +107,8 @@ func _on_area_3d_body_entered(body):
 		return
 	if "ufo" in body.name:
 		world.hurt(body, damage)
-		damage = 0
+		if not "mini_ufo" in body.name:
+			damage = 0
 		going_to_kill = body
 		$boom.play()
 		

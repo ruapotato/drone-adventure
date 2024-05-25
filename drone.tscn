@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=33 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
@@ -110,19 +110,24 @@ initial_velocity_max = 0.1
 gravity = Vector3(0, 0, 0)
 tangential_accel_max = 16.8
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_df4wr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5spmm"]
 transparency = 1
 albedo_color = Color(1, 0, 0, 0.415686)
 
 [sub_resource type="SphereMesh" id="SphereMesh_jvigt"]
-material = SubResource("StandardMaterial3D_df4wr")
+material = SubResource("StandardMaterial3D_5spmm")
 radius = 0.12
 height = 0.22
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c6ijy"]
+size = Vector3(0.09, 0.035, 0.09)
 
 [node name="drone" type="RigidBody3D"]
 mass = 0.22
 angular_damp = 100.0
 script = ExtResource("1_qapsr")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
 
 [node name="weckingball_skin" type="MeshInstance3D" parent="."]
 visible = false
@@ -165,8 +170,6 @@ autoplay = true
 max_polyphony = 3
 script = ExtResource("3_f4ikt")
 
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
-
 [node name="shield" type="MeshInstance3D" parent="."]
 visible = false
 mesh = SubResource("SphereMesh_p4g1r")
@@ -198,4 +201,12 @@ draw_pass_1 = SubResource("SphereMesh_jvigt")
 transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, 0, -0.0380199, 0)
 visible = false
 
+[node name="feet_area" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="feet_area"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0198136, 0)
+shape = SubResource("BoxShape3D_c6ijy")
+
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]
+[connection signal="area_entered" from="feet_area" to="." method="_on_feet_area_area_entered"]
+[connection signal="area_exited" from="feet_area" to="." method="_on_feet_area_area_exited"]

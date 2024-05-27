@@ -109,6 +109,8 @@ transform = Transform3D(1.465, 0, 0, 0, 1.465, 0, 0, 0, 1.465, 0, -0.397098, 0)
 [node name="eng_sounds" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20226, 1.80629)
 stream = ExtResource("3_k3may")
+volume_db = -15.0
+max_db = -15.0
 autoplay = true
 
 [node name="expload_effect" type="GPUParticles3D" parent="."]

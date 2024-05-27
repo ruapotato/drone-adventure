@@ -165,7 +165,6 @@ transform = Transform3D(0.0314283, 0, 0.999506, 0, 1, 0, -0.999506, 0, 0.0314283
 
 [node name="drone_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vses7")
-volume_db = 5.306
 autoplay = true
 max_polyphony = 3
 script = ExtResource("3_f4ikt")
@@ -182,9 +181,11 @@ texture = SubResource("NoiseTexture2D_cg1p3")
 
 [node name="shield_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_pxt4h")
+volume_db = -15.0
 
 [node name="expload_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_22p5i")
+volume_db = -15.0
 
 [node name="expload_effect" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188786, -0.000607304)

@@ -21,7 +21,7 @@ const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.0526
 const day_workflow =  {5.0:"day_spawn",
-					6.0: "clear_fog",
+					7.5: "clear_fog",
 					21.0:"night_spawn",
 					23.0: "get_foggy",
 					2.0:  "UFO"}
@@ -68,7 +68,7 @@ func _ready():
 
 func run_active_tasks(delta):
 	if active_task == "clear_fog":
-		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.002, delta / (day_len/15))
+		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.002, delta / (day_len/8))
 	if active_task == "get_foggy":
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density, fog_density, delta / (day_len/4))
 	if active_task == "day_spawn":
@@ -204,18 +204,23 @@ func update_music():
 	var music_pick = ""
 	if drone.global_position.y > 750:
 		music_pick = "heighup"
+		music.volume_db = 0
 	elif drone.global_position.y > 430:
 		music_pick = "city"
+		music.volume_db = -5
 	elif drone.global_position.y > -50:
 		music_pick = "meadow"
+		music.volume_db = 0
 	else:
 		music_pick = "underground"
-	
+		music.volume_db = -10
 	if gui.message_box.visible:
 		music_pick = "shop"
+		music.volume_db = -15
 	
 	if len(ufos.get_children()) > 0:
 		music_pick = "ufo"
+		music.volume_db = -10
 	
 	if dogs_pissed:
 		music_pick = "dogs"

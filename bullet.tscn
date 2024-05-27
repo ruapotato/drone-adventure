@@ -99,9 +99,13 @@ mesh = SubResource("SphereMesh_mn4ax")
 
 [node name="boom" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_xf4tc")
+volume_db = -3.0
+max_db = -3.0
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("2_mnx3d")
+volume_db = -3.0
+max_db = -3.0
 autoplay = true
 max_distance = 150.0
 

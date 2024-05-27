@@ -30,13 +30,14 @@ func get_drone():
 func spawn_something():
 	# On ground
 	if global_position.y > -99:
-		if drone.inventory["crystals"] > 5 and night_spawn:
+		if drone.inventory["crystals"] > 10 and night_spawn:
 			spawn_counter = spawn_every
 			var new_mini_ufo = mini_ufo.instantiate()
 			new_mini_ufo.name = "mini_ufo_" + str(spawn_index)
 			spawn_index += 1
 			new_mini_ufo.set_deferred("global_position", spawn_point.global_position)
 			get_parent().add_child(new_mini_ufo)
+			return
 	# sky things
 	if global_position.y > 750:
 		spawn_counter = spawn_every * 4
@@ -44,6 +45,7 @@ func spawn_something():
 			print("INIT UFO")
 			var new_ufo = ufo.instantiate()
 			world.ufos.add_child(new_ufo)
+			return
 
 	elif global_position.y > 200 and day_spawn:
 		spawn_counter = spawn_every
@@ -51,7 +53,8 @@ func spawn_something():
 		#new_thing.name = "balloon_" + str(spawn_index)
 		spawn_index += 1
 		new_thing.set_deferred("global_position", spawn_point.global_position)
-		get_parent().add_child(new_thing)	
+		get_parent().add_child(new_thing)
+		return
 	
 	# Under ground
 	if global_position.y < -99:
@@ -62,7 +65,8 @@ func spawn_something():
 		new_thing.name = "mini_ufo_" + str(spawn_index)
 		spawn_index += 1
 		new_thing.set_deferred("global_position", spawn_point.global_position)
-		get_parent().add_child(new_thing)	
+		get_parent().add_child(new_thing)
+		return
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -47,6 +47,8 @@ shape = SubResource("SphereShape3D_07pmb")
 
 [node name="expload" type="AudioStreamPlayer3D" parent="mini_ufo"]
 stream = ExtResource("4_n7ftu")
+volume_db = -8.0
+max_db = -8.0
 
 [node name="expload_effect" type="GPUParticles3D" parent="mini_ufo"]
 transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, 0, 0.0188786, -0.000607304)

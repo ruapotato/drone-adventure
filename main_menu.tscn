@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dm5fnhhhsp54m"]
+[gd_scene load_steps=8 format=3 uid="uid://dm5fnhhhsp54m"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_8rasr"]
 [ext_resource type="PackedScene" uid="uid://bux6jg8v62006" path="res://credit.tscn" id="2_58kwt"]
 [ext_resource type="Texture2D" uid="uid://cer8ofc6rtlo1" path="res://Hero.png" id="2_jied5"]
 [ext_resource type="Texture2D" uid="uid://bt74fouxpvede" path="res://finns_studio.png" id="3_6ql65"]
-[ext_resource type="PackedScene" uid="uid://bce251ilfs4i7" path="res://settings.tscn" id="4_ix6np"]
 [ext_resource type="Texture2D" uid="uid://css62a7b5oonx" path="res://logo.png" id="6_1q1py"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_827c2"]
@@ -52,10 +51,10 @@ texture = ExtResource("3_6ql65")
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="."]
-offset_left = 850.0
-offset_top = 756.0
-offset_right = 987.0
-offset_bottom = 806.0
+offset_left = 846.0
+offset_top = 650.0
+offset_right = 983.0
+offset_bottom = 700.0
 scale = Vector2(1.90032, 1.72781)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
@@ -73,21 +72,7 @@ theme_override_font_sizes/font_size = 30
 text = "Credits"
 metadata/_edit_use_anchors_ = true
 
-[node name="settings" type="Button" parent="."]
-offset_left = 848.0
-offset_top = 658.0
-offset_right = 985.0
-offset_bottom = 708.0
-scale = Vector2(1.91612, 1.71842)
-theme = SubResource("Theme_3einr")
-theme_override_font_sizes/font_size = 30
-text = "Settings"
-metadata/_edit_use_anchors_ = true
-
 [node name="Credit" parent="." instance=ExtResource("2_58kwt")]
-visible = false
-
-[node name="SettingsScreen" parent="." instance=ExtResource("4_ix6np")]
 visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -98,4 +83,3 @@ texture = ExtResource("6_1q1py")
 [connection signal="pressed" from="play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="help" to="." method="_on_info_pressed"]
-[connection signal="pressed" from="settings" to="." method="_on_settings_pressed"]

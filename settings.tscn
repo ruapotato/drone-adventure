@@ -1,23 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://bce251ilfs4i7"]
 
 [ext_resource type="Script" path="res://settings.gd" id="1_n2bou"]
-[ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_r6olw"]
+[ext_resource type="Texture2D" uid="uid://cer8ofc6rtlo1" path="res://Hero.png" id="2_vlfvv"]
 
 [node name="SettingsScreen" type="Node2D"]
 script = ExtResource("1_n2bou")
 
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(870, 568)
+scale = Vector2(0.761198, 0.975807)
+texture = ExtResource("2_vlfvv")
+
 [node name="Button" type="Button" parent="."]
-offset_left = 920.0
-offset_top = 922.0
-offset_right = 965.0
-offset_bottom = 953.0
+offset_left = 16.0
+offset_top = 711.0
+offset_right = 61.0
+offset_bottom = 742.0
 scale = Vector2(4.57518, 2.69552)
 text = "Back"
-
-[node name="Sprite2D2" type="Sprite2D" parent="Button"]
-position = Vector2(-166.551, -143.201)
-scale = Vector2(0.303752, 0.581316)
-texture = ExtResource("2_r6olw")
 
 [node name="lable" type="Label" parent="."]
 offset_left = 839.0
@@ -28,10 +28,10 @@ scale = Vector2(4.881, 3.728)
 text = "Settings"
 
 [node name="lable2" type="Label" parent="."]
-offset_left = 726.0
-offset_top = 590.0
-offset_right = 866.0
-offset_bottom = 616.0
+offset_left = 746.0
+offset_top = 902.0
+offset_right = 886.0
+offset_bottom = 928.0
 scale = Vector2(3.88099, 2.72751)
 text = "Control sensitivity"
 
@@ -46,20 +46,27 @@ text = "Effects
 (Turn down if your computer is slow)"
 horizontal_alignment = 1
 
-[node name="CheckBox" type="CheckBox" parent="."]
-offset_left = 843.0
-offset_top = 399.0
-offset_right = 950.0
-offset_bottom = 430.0
+[node name="fullscreen" type="CheckBox" parent="."]
+offset_left = 6.10352e-05
+offset_top = 562.0
+offset_right = 107.0
+offset_bottom = 593.0
 scale = Vector2(2.82358, 2.12204)
 button_pressed = true
 text = "Fullscreen"
 
+[node name="throttle_zero_at_center" type="CheckBox" parent="."]
+offset_top = 628.0
+offset_right = 378.0
+offset_bottom = 659.0
+scale = Vector2(2.82358, 2.12204)
+text = "Set Throttle to Zero when joystick is centered"
+
 [node name="ControlSensitivity" type="HSlider" parent="."]
-offset_left = 582.0
-offset_top = 669.0
-offset_right = 1426.0
-offset_bottom = 707.0
+offset_left = 602.0
+offset_top = 981.0
+offset_right = 1446.0
+offset_bottom = 1019.0
 min_value = -4.0
 max_value = 4.0
 step = 0.1
@@ -77,4 +84,6 @@ value = 1.0
 tick_count = 11
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="throttle_zero_at_center" to="." method="_on_throttle_zero_at_center_toggled"]
+[connection signal="changed" from="ControlSensitivity" to="." method="_on_control_sensitivity_changed"]

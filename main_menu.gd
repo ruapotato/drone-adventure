@@ -5,9 +5,8 @@ extends Node2D
 @onready var play_button = $play
 @onready var help_button = $help
 @onready var quit_button = $quit
-@onready var setting_button = $settings
 
-@onready var button_order = [play_button,setting_button,quit_button,help_button]
+@onready var button_order = [play_button,quit_button,help_button]
 var button_index = 0
 
 var new_game = null
@@ -34,7 +33,7 @@ func _process(delta):
 
 func _unhandled_input(event):
 	
-	var in_sub_menu = $Credit.visible or $SettingsScreen.visible
+	var in_sub_menu = $Credit.visible
 	if event.is_action_pressed("menu_select"):
 		if visible and not in_sub_menu:
 			button_order[button_index].emit_signal("pressed")
@@ -48,13 +47,13 @@ func _unhandled_input(event):
 	if Input.is_action_just_pressed("menu_close"):
 		if $Credit.visible:
 			$Credit.visible = false
-		if $SettingsScreen.visible:
-			$SettingsScreen.visible = false
-	if in_sub_menu and $SettingsScreen.visible:
-		if Input.is_action_just_pressed("menu_next"):
-			$SettingsScreen.find_child("ControlSensitivity").value += 0.5
-		if Input.is_action_just_pressed("menu_back"):
-			$SettingsScreen.find_child("ControlSensitivity").value -= 0.5
+		#if $SettingsScreen.visible:
+		#	$SettingsScreen.visible = false
+	#if in_sub_menu and $SettingsScreen.visible:
+	#	if Input.is_action_just_pressed("menu_next"):
+	#		$SettingsScreen.find_child("ControlSensitivity").value += 0.5
+	#	if Input.is_action_just_pressed("menu_back"):
+	#		$SettingsScreen.find_child("ControlSensitivity").value -= 0.5
 	if button_index > len(button_order) - 1:
 		button_index =  len(button_order) -1
 	if button_index < 0:
@@ -67,8 +66,8 @@ func _on_button_pressed():
 		new_game.queue_free()
 	new_game = game.instantiate()
 	
-	new_game.control_sensitivity_effector = $SettingsScreen.find_child("ControlSensitivity").value
-	new_game.effects_effector = $SettingsScreen.find_child("Effects").value
+	#new_game.control_sensitivity_effector = $SettingsScreen.find_child("ControlSensitivity").value
+	#new_game.effects_effector = $SettingsScreen.find_child("Effects").value
 	self.hide()
 	get_parent().add_child(new_game)
 

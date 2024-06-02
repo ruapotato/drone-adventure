@@ -114,8 +114,8 @@ func start_game():
 			new_game.queue_free()
 
 		new_game = game.instantiate()
-		new_game.hardness = hardness_menu.value/100
-		new_game.control_sensitivity_effector = control_sensitivity_effector
+		#new_game.hardness = hardness_menu.value/100
+		#new_game.control_sensitivity_effector = control_sensitivity_effector
 		new_game.game_index = game_save_index
 		#call_deferred("hide")
 		hide()
@@ -213,6 +213,6 @@ func _on_delete_3_pressed():
 
 func _on_tutorial_mode_pressed():
 	var new_game = tutorial_mode.instantiate()
-	new_game.control_sensitivity_effector = control_sensitivity_effector
+	#new_game.control_sensitivity_effector = control_sensitivity_effector
 	add_child(new_game)
 	self.hide()

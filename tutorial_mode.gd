@@ -17,21 +17,24 @@ var stage = 0
 var hover_counter = 0
 var friendly_time = 11.0
 var friendly_time_am = true
-var message
+var tutorial_message
 var init_turn = 0
 var hover_index = 0
-var control_sensitivity_effector
+
 var dogs_pissed = false
+var control_sensitivity_effector = -1.0
+
 func _ready():
-	message = gui.find_child("message")
+	tutorial_message = gui.find_child("message")
 	gui.find_child("message_box").visible = true
 	pause_screen.find_child("resume").text = "Next"
-	pause_screen.find_child("toggle_skin").visible = false
+	#pause_screen.find_child("toggle_skin").visible = false
 	drone.control_lock_tilt = true
 	drone.control_lock_yaw = true
 
 func hurt(whatev, man):
 	pass
+
 
 func pause():
 	if pause_screen.visible:
@@ -46,11 +49,16 @@ func show_image(image_name):
 			kid.visible = false
 		else:
 			kid.visible = true
+
+# Punt
+func message(msg):
+	print(msg)
 	
+
 func do_stage(delta):
 	var act = todo.keys()[stage]
 	var act_info = todo[act]
-	message.text = act_info
+	tutorial_message.text = act_info
 	if act == "throttle":
 		show_image("hover")
 		if drone.linear_velocity.y > 1.5:
@@ -98,13 +106,13 @@ func do_stage(delta):
 		hover_counter += delta
 		var hover_height = drone.global_position.y - $spawn.global_position.y
 		if hover_height > 3:
-			message.text += "\nYou're too high! Lower your throttle by moving the left joystick closer to the center."
+			tutorial_message.text += "\nYou're too high! Lower your throttle by moving the left joystick closer to the center."
 			hover_counter = 0
 		elif hover_height < .3:
-			message.text += "\nYou're too low! Increase your throttle by moving the left joystick up a little."
+			tutorial_message.text += "\nYou're too low! Increase your throttle by moving the left joystick up a little."
 			hover_counter = 0
 		else:
-			message.text += "\nNice height! Keep this up for a bit longer."
+			tutorial_message.text += "\nNice height! Keep this up for a bit longer."
 			if hover_counter > 7:
 				print("hover unlock")
 				drone.control_lock_yaw = false

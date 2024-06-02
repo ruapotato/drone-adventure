@@ -1,10 +1,10 @@
 extends Node2D
 
 @onready var reuseme_button = $resume
-@onready var toggle_skin_button = $toggle_skin
+@onready var settings_button = $settings
 @onready var exit_button = $exit
 
-@onready var button_order = [reuseme_button,toggle_skin_button,exit_button]
+@onready var button_order = [reuseme_button,settings_button,exit_button]
 var button_index = 0
 
 var drone
@@ -34,13 +34,14 @@ func show_selected():
 
 
 func _unhandled_input(event):
+	var in_sub_menu = $SettingsScreen.visible
 	if event.is_action_pressed("pause"):
 		if visible:
 			Engine.time_scale = 1.0
 		else:
 			Engine.time_scale = 0.01
 		visible = !visible
-	if visible:
+	if visible and not in_sub_menu:
 		if event.is_action_pressed("menu_select"):
 			button_order[button_index].emit_signal("button_down")
 			button_order[button_index].emit_signal("pressed")
@@ -50,7 +51,7 @@ func _unhandled_input(event):
 		if Input.is_action_just_pressed("menu_up"):
 			button_index -= 1
 		
-		if button_index == 1 and not $toggle_skin.visible:
+		if button_index == 1 and not $settings.visible:
 			if Input.is_action_just_pressed("menu_down"):
 				button_index = 2
 			if Input.is_action_just_pressed("menu_up"):
@@ -66,9 +67,9 @@ func _process(delta):
 		if drone.tutorial_mode:
 			if $contols.visible:
 				$contols.visible = false
-		if "lander_skin" in drone.inventory:
-			if not $toggle_skin.visible:
-				$toggle_skin.visible = true
+		#if "lander_skin" in drone.inventory:
+		#	if not $settings.visible:
+		#		$settings.visible = true
 
 
 func _on_reuseme_pressed():
@@ -76,10 +77,10 @@ func _on_reuseme_pressed():
 	hide()
 
 
-func _on_toggle_skin_pressed():
-	if "lander_skin" in drone.inventory:
-		drone.inventory["lander_skin"] = !drone.inventory["lander_skin"]
-		world.pause()
+#func _on_settings_pressed():
+#	if "lander_skin" in drone.inventory:
+#		drone.inventory["lander_skin"] = !drone.inventory["lander_skin"]
+#		world.pause()
 
 
 func _on_exit_pressed():
@@ -88,3 +89,7 @@ func _on_exit_pressed():
 	#for body in get_parent().get_children():
 	#	body.queue_free()
 	#get_tree().reload_current_scene()
+
+
+func _on_settings_pressed():
+	$SettingsScreen.visible = true

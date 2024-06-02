@@ -69,7 +69,7 @@ var joy_stick_speed = 5.0
 var landed = false
 
 #var throttle_center = -1.0
-var throttle_center = 0.0
+var throttle_center = -1.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
@@ -111,13 +111,17 @@ func load_save(save_file):
 
 
 func get_throttle():
-	if throttle_center == 0.0:
+	#inventory init this really should not be here
+	if "throttle_zero_centered" not in inventory:
+		inventory["throttle_zero_centered"] = false
+	
+	
+	if inventory["throttle_zero_centered"]:
+		throttle_center = 0.0
 		return(control_ajust(throttle))
-	else:
-		var corrected_throttle = (((throttle/max_throttle) - throttle_center)/2) * max_throttle
-		#print(corrected_throttle)
-		#print(max_throttle)
-		return(control_ajust(corrected_throttle))
+	throttle_center = -1.0
+	var corrected_throttle = (((throttle/max_throttle) - throttle_center)/2) * max_throttle
+	return(control_ajust(corrected_throttle))
 
 func fire_landgun():
 	if not "land_making_gun" in inventory:
@@ -210,11 +214,11 @@ func _unhandled_input(event):
 	if event.is_action("throttle"):
 		#print(-event.axis_value)
 		throttle = -event.axis_value * get_max_throttle()
-		if throttle_center == 0.0:
-			if throttle < - .8:
-				print("Enabled full axis mode for throttle.")
-				world.message("Enabled full axis mode for throttle.")
-				throttle_center = -1.0
+		#if throttle_center == 0.0:
+			#if throttle < - .8:
+			#	print("Enabled full axis mode for throttle.")
+			#	world.message("Enabled full axis mode for throttle.")
+			#	throttle_center = -1.0
 		#throttle = get_throttle()
 	if event.is_action("yaw"):
 		if control_lock_yaw:

@@ -67,6 +67,9 @@ var control_lock_tilt = false
 var vt
 var joy_stick_speed = 5.0
 var landed = false
+
+#var throttle_center = -1.0
+var throttle_center = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	world = get_parent()
@@ -83,6 +86,9 @@ func _ready():
 	
 	og_camera_angle = camera.rotation_degrees
 	cam_inti_rot = camera.rotation
+
+
+
 
 func save_game():
 	if not save_file:
@@ -102,6 +108,16 @@ func load_save(save_file):
 		var save_data = json.get_data()
 		save_data["using"] = "gun"
 		return(save_data)
+
+
+func get_throttle():
+	if throttle_center == 0.0:
+		return(control_ajust(throttle))
+	else:
+		var corrected_throttle = (((throttle/max_throttle) - throttle_center)/2) * max_throttle
+		#print(corrected_throttle)
+		#print(max_throttle)
+		return(control_ajust(corrected_throttle))
 
 func fire_landgun():
 	if not "land_making_gun" in inventory:
@@ -164,7 +180,8 @@ func _unhandled_input(event):
 	if is_paused():
 		return
 	
-	
+	#if event.is_action("throttle"):
+	#	print(event.value)
 	if power_cell > fire_cost + 1:
 		if event.is_action_pressed("fire"):
 			if inventory["using"] == "gun":
@@ -183,22 +200,28 @@ func _unhandled_input(event):
 		aim_mode_unhandled_input(event)
 		return
 	if Input.is_action_just_released("aim"):
-		throttle = Input.get_action_strength("throttle") * get_max_throttle()
+		#throttle =  get_throttle()
 		#print(Input.get_action_strength("throttle"))
 	#	throttle = 0.0
-		#throttle = -event.axis_value * get_max_throttle()
+		throttle = -event.axis_value * get_max_throttle()
 
 	
 	# normal mode
 	if event.is_action("throttle"):
 		#print(-event.axis_value)
 		throttle = -event.axis_value * get_max_throttle()
+		if throttle_center == 0.0:
+			if throttle < - .8:
+				print("Enabled full axis mode for throttle.")
+				world.message("Enabled full axis mode for throttle.")
+				throttle_center = -1.0
+		#throttle = get_throttle()
 	if event.is_action("yaw"):
 		if control_lock_yaw:
 			return
-		yaw = -event.axis_value
+		#yaw = -event.axis_value
 		#print(event.axis_value)
-		yaw = -event.axis_value
+		yaw = control_ajust(-event.axis_value)
 		#Odd bug fix Range is 1-0 but jumps to -1 at most right
 		#not sure why it jumps to -1
 		#if yaw == -1:
@@ -209,11 +232,15 @@ func _unhandled_input(event):
 	if control_lock_tilt:
 		return
 	if event.is_action("pitch"):
-		pitch = event.axis_value
+		
+		pitch = control_ajust(event.axis_value)
 	if event.is_action("roll"):
-		roll = -event.axis_value
+		roll = control_ajust(-event.axis_value)
 		#print(event)
 
+func control_ajust(value):
+	#print(value)
+	return((value ** 1/3) * 3)
 
 func figure_damage():
 	var damge_vector = last_velocity - linear_velocity
@@ -430,9 +457,9 @@ func drone_physics(delta):
 	#print("Normal mode")
 	#print(throttle)
 	#print(linear_velocity.y)
-	if power_cell - 1 > abs(throttle) * delta * power_cost:
-		apply_impulse(global_transform.basis.y * delta * throttle)
-		draw_power(abs(throttle) * delta * power_cost)
+	if power_cell - 1 > abs(get_throttle()) * delta * power_cost:
+		apply_impulse(global_transform.basis.y * delta * get_throttle())
+		draw_power(abs(get_throttle()) * delta * power_cost)
 	if on_ground():
 		add_power(power_gain_at_rest * delta)
 		landed = true

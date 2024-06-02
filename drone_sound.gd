@@ -8,7 +8,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pitch_scale = abs(drone.throttle/8) + .5
+	pitch_scale = abs(drone.get_throttle()/8) + .5
 
 
 func _on_finished():

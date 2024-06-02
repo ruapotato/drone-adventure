@@ -102,6 +102,11 @@ func update_workflow():
 			tasks_today.erase(todo_item_time)
 
 
+func message(this_message):
+	gui.system_messages.text = this_message
+	gui.system_messages.show()
+	gui.system_messages_counter = 10
+
 func update_friendly_time():
 	var AM_PM = "PM"
 	var hour

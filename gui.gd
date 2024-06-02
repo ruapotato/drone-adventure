@@ -14,11 +14,12 @@ extends Node2D
 @onready var added_label = $added_label
 @onready var chihuahuas = $chihuahuas
 @onready var boss_bar = $boss_bar
+@onready var system_messages = $system_messages
 
 var drone
 var world
 var added_counter
-
+var system_messages_counter = 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -103,6 +104,14 @@ func update_boss_bar():
 		if boss_bar.visible:
 			boss_bar.visible = false
 
+func update_system_msg(delta):
+	if system_messages.visible:
+		if system_messages_counter > 0:
+			system_messages_counter -= delta
+		elif system_messages_counter < 0:
+			system_messages_counter = 0
+			system_messages.hide()
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if str(drone.inventory["crystals"]) != crystal_label.text:
@@ -121,6 +130,7 @@ func _process(delta):
 	update_added_label(delta)
 	update_speed_label()
 	update_fps()
+	update_system_msg(delta)
 	if not drone.tutorial_mode:
 		update_boss_bar()
 		update_time_label()

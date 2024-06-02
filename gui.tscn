@@ -1,10 +1,16 @@
-[gd_scene load_steps=29 format=3 uid="uid://djnakq8bjlyxs"]
+[gd_scene load_steps=30 format=3 uid="uid://djnakq8bjlyxs"]
 
 [ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7c73"]
 font_size = 45
+outline_size = 14
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_gcka3"]
+font_size = 45
+font_color = Color(1, 1, 0, 1)
 outline_size = 14
 outline_color = Color(0, 0, 0, 1)
 
@@ -147,6 +153,14 @@ offset_bottom = 678.0
 text = "8:00 AM"
 label_settings = SubResource("LabelSettings_i7c73")
 horizontal_alignment = 2
+
+[node name="system_messages" type="Label" parent="."]
+visible = false
+offset_left = 3.0
+offset_top = 18.0
+offset_right = 1091.0
+offset_bottom = 82.0
+label_settings = SubResource("LabelSettings_gcka3")
 
 [node name="targetLabel" type="Label" parent="."]
 offset_left = 951.225

@@ -1,6 +1,6 @@
 # Drone Adventure
-
-Buy it today on [Steam](https://store.steampowered.com/app/2976630/Drone_Adventure/)!
+Download [Free](https://hackersgame.itch.io/drone-adventure)!
+Buy it today on [Steam](https://store.steampowered.com/app/2976630/Drone_Adventure/), to show your support (Not diffrent than the above)!
 
 Thank you for your support!
 

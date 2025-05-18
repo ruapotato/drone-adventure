@@ -177,6 +177,7 @@ func setup_init_save(p_name, index):
 	[{},{},{},{},{},{},{},{},{},{}],
 	[{},{},{},{},{},{},{},{},{},{}]]
 	var init_inventory = {"crystals": 0}
+	init_inventory["throttle_zero_centered"] = true
 	init_inventory["name"] = p_name
 	var save_data = JSON.stringify(init_inventory)
 	saved_games[index] = init_inventory

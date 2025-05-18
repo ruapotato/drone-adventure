@@ -209,7 +209,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0198136, 0)
 shape = SubResource("BoxShape3D_c6ijy")
 
-[node name="legs" type="Node3D" parent="."]
+[node name="LegsNode" type="Node3D" parent="."]
 script = ExtResource("9_812hj")
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]

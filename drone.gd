@@ -17,6 +17,7 @@ extends RigidBody3D
 @onready var mesh = $mesh
 @onready var pause_screen = $"../pause_screen"
 @onready var weckingball_skin = $weckingball_skin
+@onready var legs = $LegsNode
 var collision_size_at_rest = .075
 var laser_obj
 var save_index = null
@@ -39,6 +40,10 @@ var dead = false
 var dead_reset_counter = 0
 
 var throttle = 0.0
+@export var ground_detection_ray_length : float = 20.0 # You can adjust this in the Inspector
+var _height_from_ground : float = -1.0
+var is_walking = false
+var walk_when = .2
 #var max_throttle = 3.5
 var max_throttle = 3.9
 
@@ -536,6 +541,41 @@ func dead_logic(delta):
 		shield_cam.visible = false
 		linear_velocity = Vector3(0,0,0)
 
+func ground_check(delta):
+	var space_state = get_world_3d().direct_space_state
+	if space_state: # Check if space_state is valid
+		var query_parameters = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * ground_detection_ray_length) # Use new var name
+		query_parameters.exclude = [self] # Exclude the drone itself
+		# For the ray to hit anything, the drone's 'collision_mask' must include the layer of the ground.
+		# And the ground's 'collision_layer' must be set.
+		query_parameters.collision_mask = self.collision_mask # Use drone's own mask, or set a specific one for ground.
+		var ray_cast_result_dict = space_state.intersect_ray(query_parameters) # Use new var name
+		_height_from_ground = -1.0 # Default to -1 (no ground hit / out of range)
+		if ray_cast_result_dict: # Check if the dictionary is not empty (i.e., ray hit something)
+			_height_from_ground = global_position.distance_to(ray_cast_result_dict.position)
+			# print("Current height from ground: ", _height_from_ground) # <<< UNCOMMENT THIS LINE TO SEE THE HEIGHT
+		# else: # Optional: If you want to know when the ray specifically misses
+			# print("No ground detected by ray within ", ground_detection_ray_length, "m.")
+	else:
+		print("ERROR: Could not get 3D physics space state for ground raycast.")
+		_height_from_ground = -1.0 # Still set to default if space_state is null
+	if _height_from_ground < walk_when and _height_from_ground > 0:
+		is_walking = true
+	else:
+		is_walking = false
+
+	
+func walk(delta):
+	if is_walking:
+		if not legs.visible:
+			legs.visible = true
+	else:
+		if legs.visible:
+			legs.visible = false
+	
+	if is_walking:
+		legs.animate_legs(delta, linear_velocity.length())
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	#print(world.control_sensitivity_effector)
@@ -549,6 +589,8 @@ func _physics_process(delta):
 		figure_damage()
 		update_shield()
 	
+	ground_check(delta)
+	walk(delta)
 	do_shake(delta)
 	update_collision_size()
 	add_wind_push()

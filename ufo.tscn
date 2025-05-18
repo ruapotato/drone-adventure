@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://b3ct0m16w2e6y"]
 
 [ext_resource type="PackedScene" uid="uid://dx57dhm0km57s" path="res://import/ufo.glb" id="1_n0x31"]
-[ext_resource type="Script" path="res://ufo.gd" id="1_umv54"]
+[ext_resource type="Script" uid="uid://dafe8ngj5plf0" path="res://ufo.gd" id="1_umv54"]
 [ext_resource type="AudioStream" uid="uid://fsw2ucgccx57" path="res://import/Audio/spaceEngine_003.ogg" id="3_v4gtg"]
 [ext_resource type="AudioStream" uid="uid://ckv06agd8rbpa" path="res://import/Audio/laserRetro_004.ogg" id="4_u0qd1"]
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bbb52fppx54ll" path="res://import/house_1.glb" id="1_75mip"]
 [ext_resource type="Texture2D" uid="uid://basxylok6t2r2" path="res://blends/textures/house_b_bake.png" id="2_bhlpn"]
-[ext_resource type="Script" path="res://all_rigid_bodies.gd" id="2_upymr"]
+[ext_resource type="Script" uid="uid://djnj77lsuat4y" path="res://all_rigid_bodies.gd" id="2_upymr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e1o5c"]
 albedo_texture = ExtResource("2_bhlpn")

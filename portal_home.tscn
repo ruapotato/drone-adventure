@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b5djy4wj2n7qd" path="res://segment.tscn" id="1_gu7me"]
 [ext_resource type="PackedScene" uid="uid://dxfq5vc2rd8fk" path="res://simple_top.tscn" id="2_ke73d"]
-[ext_resource type="Script" path="res://tp_city.gd" id="4_qxahs"]
-[ext_resource type="Script" path="res://TP_cube.gd" id="4_x3nnb"]
+[ext_resource type="Script" uid="uid://ctwj05scsusu" path="res://tp_city.gd" id="4_qxahs"]
+[ext_resource type="Script" uid="uid://cdpshkg8ll2s7" path="res://TP_cube.gd" id="4_x3nnb"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7jrp5"]
 size = Vector3(2, 1.85254, 2)

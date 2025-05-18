@@ -16,7 +16,7 @@ persistent = true
 scene = ExtResource("1_324i3")
 
 [sub_resource type="VoxelInstanceLibrary" id="VoxelInstanceLibrary_4f3oc"]
-item_1 = SubResource("VoxelInstanceLibrarySceneItem_q7hyd")
+_data = [0, 1, SubResource("VoxelInstanceLibrarySceneItem_q7hyd")]
 
 [node name="VoxelInstancer" type="VoxelInstancer"]
 library = SubResource("VoxelInstanceLibrary_4f3oc")

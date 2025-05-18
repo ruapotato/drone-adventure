@@ -71,4 +71,3 @@ func _process(delta):
 				else:
 					body.set_size(body.size  - eat_speed * delta)
 					set_size(size + eat_speed * delta)
-

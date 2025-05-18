@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bce251ilfs4i7"]
 
-[ext_resource type="Script" path="res://settings.gd" id="1_n2bou"]
+[ext_resource type="Script" uid="uid://dd48bjf12mkbi" path="res://settings.gd" id="1_n2bou"]
 [ext_resource type="Texture2D" uid="uid://cer8ofc6rtlo1" path="res://Hero.png" id="2_vlfvv"]
 
 [node name="SettingsScreen" type="Node2D"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dm2rvwhsfq2gy"]
 
-[ext_resource type="Script" path="res://spawn_dog.gd" id="1_r4bm5"]
+[ext_resource type="Script" uid="uid://ddhwkmkvuxqas" path="res://spawn_dog.gd" id="1_r4bm5"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_y2d8c"]
 size = Vector3(2, 2, 2)

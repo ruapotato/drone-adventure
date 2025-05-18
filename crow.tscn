@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d10jrv7c6m85u"]
 
-[ext_resource type="Script" path="res://crow.gd" id="1_kg1kx"]
+[ext_resource type="Script" uid="uid://hfdrtp48wtoc" path="res://crow.gd" id="1_kg1kx"]
 [ext_resource type="PackedScene" uid="uid://uknhyh44d3wk" path="res://crow_import.tscn" id="1_wp6bs"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mkdig"]

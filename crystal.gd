@@ -145,4 +145,3 @@ func _on_body_entered(body):
 	#else:
 	#	if body.name != "wall":
 	#		shatter()
-

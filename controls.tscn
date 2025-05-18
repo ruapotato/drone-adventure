@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bnwesipfilrve" path="res://images/forward.png" id="4_nut4g"]
 [ext_resource type="Texture2D" uid="uid://5iepa7ou7txu" path="res://images/shoot.png" id="5_n0noa"]
 [ext_resource type="Texture2D" uid="uid://wsqkp8iwyl3t" path="res://images/controls.png" id="6_38e8u"]
-[ext_resource type="Script" path="res://controls_main_interface.gd" id="7_dd4m0"]
+[ext_resource type="Script" uid="uid://ch0fgysvfna4f" path="res://controls_main_interface.gd" id="7_dd4m0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_0ijcy"]
 resource_local_to_scene = true

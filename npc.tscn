@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bompn6iaxi1hd"]
 
-[ext_resource type="Script" path="res://npc.gd" id="1_wldse"]
+[ext_resource type="Script" uid="uid://eh1dd1fkhahb" path="res://npc.gd" id="1_wldse"]
 [ext_resource type="PackedScene" uid="uid://lfmmk3jdrg6f" path="res://native/blue_import.tscn" id="2_1qmdk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qit12"]

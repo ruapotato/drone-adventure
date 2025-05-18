@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://mvj4g88703n2"]
 
-[ext_resource type="Script" path="res://spawn_city.gd" id="1_4bp0a"]
+[ext_resource type="Script" uid="uid://bupypiv0ccs3h" path="res://spawn_city.gd" id="1_4bp0a"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f1v87"]
 

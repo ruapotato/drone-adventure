@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu6h1kvqv7kkj"]
 
 [ext_resource type="PackedScene" uid="uid://bypk2pnpxxsal" path="res://import/city.glb" id="1_t6qv1"]
-[ext_resource type="Script" path="res://all_static_import.gd" id="2_o3nmk"]
+[ext_resource type="Script" uid="uid://bck6s51egwhis" path="res://all_static_import.gd" id="2_o3nmk"]
 
 [node name="city" instance=ExtResource("1_t6qv1")]
 script = ExtResource("2_o3nmk")

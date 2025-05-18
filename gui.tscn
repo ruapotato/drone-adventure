@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://djnakq8bjlyxs"]
 
-[ext_resource type="Script" path="res://gui.gd" id="1_2mec0"]
+[ext_resource type="Script" uid="uid://sbkf87o01fse" path="res://gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7c73"]

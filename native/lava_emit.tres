@@ -19,4 +19,4 @@ clearcoat_roughness = 0.11
 anisotropy_enabled = true
 anisotropy = -1.0
 grow_amount = -0.2
-proximity_fade_distance = 0.0
+proximity_fade_distance = 0.01

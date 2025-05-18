@@ -225,4 +225,3 @@ func _process(delta):
 			#message_warning.visible = false
 			#print("message...")
 	#	message_ui = null
-

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://vbeam2q3uv3v"]
 
-[ext_resource type="Script" path="res://bullet.gd" id="1_wvb2e"]
+[ext_resource type="Script" uid="uid://ba4osa61m65cl" path="res://bullet.gd" id="1_wvb2e"]
 [ext_resource type="AudioStream" uid="uid://cenhtihwsvkso" path="res://import/Audio/laserLarge_003.ogg" id="2_mnx3d"]
 [ext_resource type="Material" uid="uid://c15yfiunngigb" path="res://native/lava.tres" id="2_uewed"]
 [ext_resource type="AudioStream" uid="uid://drd312txbq1vl" path="res://import/NenadSimic - Muffled Distant Explosion.wav" id="2_xf4tc"]

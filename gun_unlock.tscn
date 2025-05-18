@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://ck5euxkvoqu6u"]
 
-[ext_resource type="Script" path="res://gun_unlock.gd" id="1_1j0xp"]
+[ext_resource type="Script" uid="uid://cxxgeclwln4c4" path="res://gun_unlock.gd" id="1_1j0xp"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_olwxo"]
 

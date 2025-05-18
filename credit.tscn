@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bux6jg8v62006"]
 
-[ext_resource type="Script" path="res://credit.gd" id="1_o0oqv"]
+[ext_resource type="Script" uid="uid://dr1dq46idwsy4" path="res://credit.gd" id="1_o0oqv"]
 [ext_resource type="Texture2D" uid="uid://bgh6vsei817or" path="res://finns_banner.png" id="2_0n3ej"]
 
 [node name="Credit" type="Node2D"]
@@ -64,6 +64,7 @@ vertical_alignment = 1
 autowrap_mode = 3
 
 [node name="Label" type="Label" parent="credit_text"]
+layout_mode = 0
 offset_left = -143.195
 offset_top = -206.408
 offset_right = 254.805

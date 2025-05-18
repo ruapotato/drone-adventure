@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ulewqpb6pf1r"]
 
 [ext_resource type="PackedScene" uid="uid://s0bwprbhwg1e" path="res://dog_import.tscn" id="1_nf8wd"]
-[ext_resource type="Script" path="res://dog.gd" id="1_ow3n7"]
+[ext_resource type="Script" uid="uid://ct70m5mdmrcsc" path="res://dog.gd" id="1_ow3n7"]
 [ext_resource type="AudioStream" uid="uid://cx4xh8n6uscjh" path="res://import/dog.wav" id="3_ymv80"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yit0m"]

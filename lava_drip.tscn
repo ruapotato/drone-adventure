@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://mg2ulbapk0ej"]
 
-[ext_resource type="Script" path="res://lava_drip.gd" id="1_kpkwx"]
+[ext_resource type="Script" uid="uid://yn7u2xo3kklu" path="res://lava_drip.gd" id="1_kpkwx"]
 [ext_resource type="Material" uid="uid://d31hy8amp0rxy" path="res://native/lava_emit.tres" id="3_ys6ci"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_bpmud"]

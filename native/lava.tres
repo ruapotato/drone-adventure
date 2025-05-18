@@ -22,4 +22,4 @@ backlight = Color(1, 1, 1, 1)
 refraction_enabled = true
 detail_albedo = SubResource("NoiseTexture2D_0x1sg")
 grow_amount = -0.2
-proximity_fade_distance = 0.0
+proximity_fade_distance = 0.01

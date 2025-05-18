@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bibobxeap6w7f"]
 
 [ext_resource type="PackedScene" uid="uid://fv1gmdltr280" path="res://crystal_1_import.tscn" id="1_01mjl"]
-[ext_resource type="Script" path="res://crystal.gd" id="1_83e6y"]
+[ext_resource type="Script" uid="uid://dmo7xnsdwpka8" path="res://crystal.gd" id="1_83e6y"]
 [ext_resource type="AudioStream" uid="uid://belm352v5gf05" path="res://import/CC 0 BY wobbleboxx/Coin01.wav" id="3_8d3ei"]
 [ext_resource type="AudioStream" uid="uid://nm476fyuq73n" path="res://import/CC BY 3.0 spookymodem/Bottle Break_short.wav" id="4_kvk46"]
 

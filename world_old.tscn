@@ -1,9 +1,8 @@
 [gd_scene load_steps=66 format=3 uid="uid://diyap7b33kktd"]
 
-[ext_resource type="Script" path="res://world.gd" id="1_btd38"]
-[ext_resource type="PackedScene" uid="uid://4tc5tckr5kxd" path="res://music.tscn" id="2_y7ctv"]
+[ext_resource type="Script" uid="uid://cjvcaas3hsam7" path="res://world.gd" id="1_btd38"]
 [ext_resource type="Material" uid="uid://c15yfiunngigb" path="res://native/lava.tres" id="3_joui1"]
-[ext_resource type="Script" path="res://terrain.gd" id="4_tio1m"]
+[ext_resource type="Script" uid="uid://v4xl7xyu143b" path="res://terrain.gd" id="4_tio1m"]
 [ext_resource type="PackedScene" uid="uid://c6b5ykkw6ra0c" path="res://wall_mush_import.tscn" id="5_dd0q4"]
 [ext_resource type="PackedScene" uid="uid://mg2ulbapk0ej" path="res://lava_drip.tscn" id="6_1qk21"]
 [ext_resource type="PackedScene" uid="uid://bibobxeap6w7f" path="res://crystal.tscn" id="7_n54sm"]
@@ -13,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://ltxh7e20h7ra" path="res://land_scar.tscn" id="11_c6rem"]
 [ext_resource type="PackedScene" uid="uid://lwg2gntsbop8" path="res://black_light.tscn" id="12_2r5kh"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="13_u0nel"]
-[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://drone.tscn" id="14_u0cqd"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="14_u0cqd"]
 [ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="15_h666a"]
 [ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://pause_screen.tscn" id="16_lmtuv"]
-[ext_resource type="Script" path="res://city_loader.gd" id="17_s025p"]
+[ext_resource type="Script" uid="uid://cg3wef78p48ru" path="res://city_loader.gd" id="17_s025p"]
 [ext_resource type="Material" uid="uid://c0sjqoeoujhgw" path="res://addons/terrain-shader/example/land.tres" id="18_rymgd"]
-[ext_resource type="Script" path="res://wall.gd" id="19_gs8np"]
+[ext_resource type="Script" uid="uid://b0np802e7i28h" path="res://wall.gd" id="19_gs8np"]
 [ext_resource type="PackedScene" uid="uid://cnw4w8atg2wii" path="res://peep_base.tscn" id="20_mwys0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bi3jv"]
@@ -46,6 +45,9 @@ volumetric_fog_length = 3000.0
 volumetric_fog_detail_spread = 6.0
 volumetric_fog_ambient_inject = 3.12
 adjustment_enabled = true
+
+[sub_resource type="Resource" id="Resource_isck6"]
+metadata/__load_path__ = "res://music.tscn"
 
 [sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_cqetg"]
 
@@ -264,45 +266,9 @@ lod_index = 2
 generator = SubResource("VoxelInstanceGenerator_qc8a2")
 persistent = true
 
-[sub_resource type="VoxelInstanceLibraryMultiMeshItem" id="VoxelInstanceLibraryMultiMeshItem_58qij"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4xbd"]
-noise_type = 2
-fractal_type = 2
-fractal_octaves = 1
-fractal_weighted_strength = 1.0
-
-[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_1qlfw"]
-density = 0.002
-min_slope_degrees = 55.0
-max_slope_degrees = 100.0
-min_height = -99999.0
-max_height = -99.0
-min_scale = 0.7
-max_scale = 6.0
-scale_distribution = 3
-noise = SubResource("FastNoiseLite_f4xbd")
-
-[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_uceto"]
-lod_index = 2
-generator = SubResource("VoxelInstanceGenerator_1qlfw")
-scene = ExtResource("5_dd0q4")
-
-[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_0dc4f"]
-density = 0.001
-min_slope_degrees = 0.1
-max_slope_degrees = 60.0
-min_height = -99999.0
-max_height = -120.0
-
-[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_u0byd"]
-lod_index = 1
-generator = SubResource("VoxelInstanceGenerator_0dc4f")
-scene = ExtResource("6_1qk21")
-
 [sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_awj35"]
-density = 0.002
 emit_mode = 1
+density = 0.002
 min_slope_degrees = 0.1
 min_height = -99999.0
 
@@ -323,8 +289,8 @@ persistent = true
 scene = ExtResource("8_24l3r")
 
 [sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_ns0l5"]
-density = 0.01
 emit_mode = 2
+density = 0.01
 min_slope_degrees = 0.1
 min_height = 25.0
 min_scale = 0.3
@@ -383,19 +349,44 @@ lod_index = 2
 generator = SubResource("VoxelInstanceGenerator_72y3r")
 scene = ExtResource("12_2r5kh")
 
+[sub_resource type="VoxelInstanceLibraryMultiMeshItem" id="VoxelInstanceLibraryMultiMeshItem_58qij"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4xbd"]
+noise_type = 2
+fractal_type = 2
+fractal_octaves = 1
+fractal_weighted_strength = 1.0
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_1qlfw"]
+density = 0.002
+min_slope_degrees = 55.0
+max_slope_degrees = 100.0
+min_height = -99999.0
+max_height = -99.0
+min_scale = 0.7
+max_scale = 6.0
+scale_distribution = 3
+noise = SubResource("FastNoiseLite_f4xbd")
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_uceto"]
+lod_index = 2
+generator = SubResource("VoxelInstanceGenerator_1qlfw")
+scene = ExtResource("5_dd0q4")
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_0dc4f"]
+density = 0.001
+min_slope_degrees = 0.1
+max_slope_degrees = 60.0
+min_height = -99999.0
+max_height = -120.0
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_u0byd"]
+lod_index = 1
+generator = SubResource("VoxelInstanceGenerator_0dc4f")
+scene = ExtResource("6_1qk21")
+
 [sub_resource type="VoxelInstanceLibrary" id="VoxelInstanceLibrary_2knuv"]
-item_1 = SubResource("VoxelInstanceLibrarySceneItem_lvht4")
-item_2 = SubResource("VoxelInstanceLibrarySceneItem_48uyl")
-item_3 = SubResource("VoxelInstanceLibrarySceneItem_m3578")
-item_4 = SubResource("VoxelInstanceLibrarySceneItem_yums0")
-item_5 = SubResource("VoxelInstanceLibraryMultiMeshItem_2ch7c")
-item_6 = SubResource("VoxelInstanceLibrarySceneItem_7tpuh")
-item_7 = SubResource("VoxelInstanceLibrarySceneItem_772kv")
-item_8 = SubResource("VoxelInstanceLibrarySceneItem_g6bki")
-item_9 = SubResource("VoxelInstanceLibrarySceneItem_tr77b")
-item_10 = SubResource("VoxelInstanceLibraryMultiMeshItem_58qij")
-item_11 = SubResource("VoxelInstanceLibrarySceneItem_uceto")
-item_12 = SubResource("VoxelInstanceLibrarySceneItem_u0byd")
+_data = [0, 1, SubResource("VoxelInstanceLibrarySceneItem_lvht4"), 2, SubResource("VoxelInstanceLibrarySceneItem_48uyl"), 3, SubResource("VoxelInstanceLibrarySceneItem_m3578"), 4, SubResource("VoxelInstanceLibrarySceneItem_yums0"), 5, SubResource("VoxelInstanceLibraryMultiMeshItem_2ch7c"), 6, SubResource("VoxelInstanceLibrarySceneItem_7tpuh"), 7, SubResource("VoxelInstanceLibrarySceneItem_772kv"), 8, SubResource("VoxelInstanceLibrarySceneItem_g6bki"), 9, SubResource("VoxelInstanceLibrarySceneItem_tr77b"), 10, SubResource("VoxelInstanceLibraryMultiMeshItem_58qij"), 11, SubResource("VoxelInstanceLibrarySceneItem_uceto"), 12, SubResource("VoxelInstanceLibrarySceneItem_u0byd")]
 
 [sub_resource type="FogMaterial" id="FogMaterial_ma4x8"]
 density = 5.0
@@ -443,7 +434,7 @@ script = ExtResource("1_btd38")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_n6mvx")
 
-[node name="music" parent="." instance=ExtResource("2_y7ctv")]
+[node name="music" parent="."]
 volume_db = 0.0
 
 [node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]

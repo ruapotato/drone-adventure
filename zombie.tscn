@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://seaudjounlfi"]
 
-[ext_resource type="Script" path="res://zombie.gd" id="1_fvlh0"]
+[ext_resource type="Script" uid="uid://b0pvkdxr7c8fj" path="res://zombie.gd" id="1_fvlh0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cacb7"]
 

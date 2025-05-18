@@ -23,4 +23,3 @@ func _physics_process(delta):
 		gravity_scale = 0.0
 		global_position = spawn_point
 		rotation = spawn_rot
-

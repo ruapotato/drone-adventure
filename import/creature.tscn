@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bc3vhvn2eck8e"]
 
-[ext_resource type="Script" path="res://creature.gd" id="1_x7ltt"]
+[ext_resource type="Script" uid="uid://cwfw63xl5pxeh" path="res://creature.gd" id="1_x7ltt"]
 [ext_resource type="PackedScene" uid="uid://b8xl13xan2f7p" path="res://import/creature_import.tscn" id="2_1h4s6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7uplu"]

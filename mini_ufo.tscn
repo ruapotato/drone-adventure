@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ciy2jrcmbvvdo"]
 
-[ext_resource type="Script" path="res://mini_ufo.gd" id="1_8vdp7"]
+[ext_resource type="Script" uid="uid://dq3uv17hdkfw1" path="res://mini_ufo.gd" id="1_8vdp7"]
 [ext_resource type="PackedScene" uid="uid://ckeppqrkmhqm7" path="res://ufo_import.tscn" id="2_26lvm"]
 [ext_resource type="AudioStream" uid="uid://cuskc6jfvcyrd" path="res://import/Sci-Fi Drone.wav" id="2_bvn50"]
 [ext_resource type="AudioStream" uid="uid://nmg52d60eji2" path="res://import/Audio/explosionCrunch_004.ogg" id="4_n7ftu"]

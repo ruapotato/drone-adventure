@@ -30,23 +30,23 @@ void vertex(){
 
 vec4 stochastic_sample(sampler2D tex, vec2 uv){
 	vec2 skewV = mat2(vec2(1.0,1.0),vec2(-0.57735027 , 1.15470054))*uv * 3.464;
-	
+
 	vec2 vxID = floor(skewV);
 	vec2 fracV = fract(skewV);
 	vec3 barry = vec3(fracV.x,fracV.y,1.0-fracV.x-fracV.y);
-	
+
 	mat4 bw_vx = barry.z>0.0?
 		mat4(vec4(vxID,0.0,0.0),vec4((vxID+vec2(0.0,1.0)),0.0,0.0),vec4(vxID+vec2(1.0,0.0),0,0),vec4(barry.zyx,0)):
 		mat4(vec4(vxID+vec2(1.0,1.0),0.0,0.0),vec4((vxID+vec2(1.0,0.0)),0.0,0.0),vec4(vxID+vec2(0.0,1.0),0,0),vec4(-barry.z,1.0-barry.y,1.0-barry.x,0));
-		
+
 	vec2 ddx = dFdx(uv);
 	vec2 ddy = dFdy(uv);
-	
+
 	return (textureGrad(tex,uv+hash(bw_vx[0].xy),ddx,ddy)*bw_vx[3].x) +
 	(textureGrad(tex,uv+hash(bw_vx[1].xy),ddx,ddy)*bw_vx[3].y) +
 	(textureGrad(tex,uv+hash(bw_vx[2].xy),ddx,ddy)*bw_vx[3].z)
 	;
-	
+
 }
 
 vec4 triplanar_texture(sampler2D p_sampler, vec3 p_weights, vec3 p_triplanar_pos, float uv_scale) {
@@ -64,12 +64,8 @@ void fragment() {
 
 	vec4 top_tex = triplanar_texture(TopTex, power_normal, triplanar_pos,TopTexScale);
 	vec3 top = top_tex.rgb * TopColor.rgb;
-	
-	
+
+
 	float blend = clamp((flatness*BlendValues.x)+BlendValues.y,BlendValues.z,BlendValues.w);
 	ALBEDO = mix(wall,top,blend);
 }
-
-
-
-

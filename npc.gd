@@ -184,5 +184,3 @@ func _on_blocked_area_area_entered(area):
 func _on_blocked_area_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	if is_on_floor() and not collision_shape.disabled:
 		linear_velocity.y = JUMP_linear_velocity
-
-

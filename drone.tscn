@@ -1,13 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=34 format=3 uid="uid://5ti8gwrj7tha"]
 
-[ext_resource type="Script" path="res://drone.gd" id="1_qapsr"]
+[ext_resource type="Script" uid="uid://f8xifi7wely8" path="res://drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
-[ext_resource type="Script" path="res://drone_sound.gd" id="3_f4ikt"]
+[ext_resource type="Script" uid="uid://dfjrm1r376qcq" path="res://drone_sound.gd" id="3_f4ikt"]
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 [ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
 [ext_resource type="AudioStream" uid="uid://ul3s6jsd6kwb" path="res://import/Audio/explosionCrunch_001.ogg" id="6_22p5i"]
 [ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://ingenuity_import.tscn" id="7_lkp43"]
 [ext_resource type="PackedScene" uid="uid://dmuhcsl8wg0ug" path="res://drone_gun_import.tscn" id="8_si1r6"]
+[ext_resource type="Script" uid="uid://bshu4jm72uder" path="res://legs.gd" id="9_812hj"]
 
 [sub_resource type="Gradient" id="Gradient_bwy5e"]
 offsets = PackedFloat32Array(0, 0.754098)
@@ -207,6 +208,9 @@ visible = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="feet_area"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0198136, 0)
 shape = SubResource("BoxShape3D_c6ijy")
+
+[node name="legs" type="Node3D" parent="."]
+script = ExtResource("9_812hj")
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]
 [connection signal="area_entered" from="feet_area" to="." method="_on_feet_area_area_entered"]

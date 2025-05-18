@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://brhpowtmjnfh3"]
 
-[ext_resource type="Script" path="res://tutorial_mode.gd" id="1_suaj1"]
-[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://drone.tscn" id="2_i4lfi"]
+[ext_resource type="Script" uid="uid://cs5n4jxy7jviy" path="res://tutorial_mode.gd" id="1_suaj1"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="2_i4lfi"]
 [ext_resource type="PackedScene" uid="uid://c6sueha11ti5r" path="res://player.tscn" id="3_g0ljd"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="5_tj68u"]
 [ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="6_y83ga"]

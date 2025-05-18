@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dgimh1pogand5"]
 
-[ext_resource type="Script" path="res://person_spawner.gd" id="1_yrgtt"]
+[ext_resource type="Script" uid="uid://c0qi4nukali72" path="res://person_spawner.gd" id="1_yrgtt"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_slinh"]
 height = 0.207

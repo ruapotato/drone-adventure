@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bcckq853wo1bg"]
 
-[ext_resource type="Script" path="res://road.gd" id="1_l231n"]
+[ext_resource type="Script" uid="uid://b2bl81jocxxn5" path="res://road.gd" id="1_l231n"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_c5t2h"]
 resource_local_to_scene = true

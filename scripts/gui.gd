@@ -112,6 +112,8 @@ func update_system_msg(delta):
 			system_messages_counter = 0
 			system_messages.hide()
 
+
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if str(drone.inventory["crystals"]) != crystal_label.text:
@@ -125,8 +127,8 @@ func _process(delta):
 	else:
 		if bank_label.visible:
 			bank_label.visible = false
-	camera.global_position = drone.back_cam_mount.global_position
-	camera.look_at(drone.global_position)
+	#camera.global_position = drone.back_cam_mount.global_position
+	#camera.look_at(drone.global_position)
 	update_added_label(delta)
 	update_speed_label()
 	update_fps()

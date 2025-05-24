@@ -3,7 +3,8 @@ extends RigidBody3D
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var laser = preload("res://scenes/laser.tscn")
 @onready var animation_tree = get_node("chicken_wings/AnimationTree")
-@onready var camera = $Camera3D
+@onready var head_mesh = $head_piv/chicken_head
+@onready var head_piv = $head_piv
 #@onready var target = $Label3D
 @onready var shoot_from = $shoot_from
 @onready var back_cam_mount = $back_cam_mount
@@ -35,7 +36,7 @@ var power_gain_at_rest = 25
 var power_cost = .5
 var fire_cost = 3
 var shake = 0.0
-var og_camera_angle
+var og_head_piv_angle
 var dead = false
 var dead_reset_counter = 0
 
@@ -89,8 +90,8 @@ func _ready():
 		save_file = "user://savegame_" + str(save_index) + ".json"
 		inventory = load_save(save_file)
 	
-	og_camera_angle = camera.rotation_degrees
-	cam_inti_rot = camera.rotation
+	og_head_piv_angle = head_piv.rotation_degrees
+	cam_inti_rot = head_piv.rotation
 
 
 
@@ -141,7 +142,7 @@ func fire_landgun():
 	
 	new_bullet.add_collision_exception_with(self)
 	new_bullet.linear_velocity = linear_velocity
-	new_bullet.apply_impulse(-camera.global_transform.basis.z *  shoot_speed)
+	new_bullet.apply_impulse(-head_piv.global_transform.basis.z *  shoot_speed)
 	apply_impulse(global_transform.basis.z * .1)
 	get_parent().add_child(new_bullet)
 
@@ -150,10 +151,10 @@ func fire_laser():
 			draw_power(fire_cost)
 			laser_obj = laser.instantiate()
 			laser_obj.name = "laser"
-			camera.find_child("drone_gun").add_child(laser_obj)
+			head_piv.find_child("drone_gun").add_child(laser_obj)
 			#laser_obj.rotate_y(PI/2)
 			#laser_obj.rotate_z(PI/2)
-			#laser_obj.rotation = camera.rotation
+			#laser_obj.rotation = head_piv.rotation
 func fire_normal():
 	if not unlocked_gun:
 		return
@@ -167,7 +168,7 @@ func fire_normal():
 	
 	new_bullet.add_collision_exception_with(self)
 	new_bullet.linear_velocity = linear_velocity
-	new_bullet.apply_impulse(-camera.global_transform.basis.z *  shoot_speed)
+	new_bullet.apply_impulse(-head_piv.global_transform.basis.z *  shoot_speed)
 	apply_impulse(global_transform.basis.z * .1)
 	get_parent().add_child(new_bullet)
 	
@@ -275,13 +276,13 @@ func figure_damage():
 func do_shake(delta):
 	if shake > 0:
 		var randome_angle = Vector3(randf_range(-180,180),randf_range(-180,180),randf_range(-180,180))
-		camera.rotation_degrees = lerp(camera.rotation_degrees, randome_angle, .03 * shake)
+		head_piv.rotation_degrees = lerp(head_piv.rotation_degrees, randome_angle, .03 * shake)
 		shake -= delta
 	elif shake < 0:
 		shake = 0
 	else:
 		if not Input.is_action_pressed("aim"):
-			camera.rotation_degrees = lerp(camera.rotation_degrees, og_camera_angle, .03)
+			head_piv.rotation_degrees = lerp(head_piv.rotation_degrees, og_head_piv_angle, .03)
 
 func add_wind_push():
 	var wind_force = linear_velocity * wind_effect
@@ -402,29 +403,29 @@ func drone_aim_mode(delta):
 		rotation.z = lerp(rotation.z, 0.0, delta * 5)
 	
 	if pitch_change != 0.0:
-		camera.rotation.x = -pitch_change
-		#camera.rotation.x = lerp(camera.rotation.x,-pitch_change, delta * 50)
+		head_piv.rotation.x = -pitch_change
+		#head_piv.rotation.x = lerp(head_piv.rotation.x,-pitch_change, delta * 50)
 	#if abs(cam_pitch) > .01:
 	cam_pitch_add += cam_pitch * delta * (joy_stick_speed + world.control_sensitivity_effector) * .5
-	#camera.rotation.x += cam_pitch_add
+	#head_piv.rotation.x += cam_pitch_add
 	#if Input.is_action_just_pressed("aim"):
 	#	cam_pitch_add += rotation.x
-	camera.rotate_x(cam_pitch_add)
-	camera.rotate_x(cam_inti_rot.x)
-	camera.rotate_x(rotation.x)
+	head_piv.rotate_x(cam_pitch_add)
+	head_piv.rotate_x(cam_inti_rot.x)
+	head_piv.rotate_x(rotation.x)
 	if cam_pitch_add > PI * 2:
 		cam_pitch_add -= PI * 2
 	if -cam_pitch_add > PI * 2:
 		cam_pitch_add += PI * 2
-	camera.rotation.y = 0.0
-	camera.rotation.z = 0.0
-	#print(camera.rotation)
+	head_piv.rotation.y = 0.0
+	head_piv.rotation.z = 0.0
+	#print(head_piv.rotation)
 	#print(cam_pitch_add)
-		#camera.rotation.x = (cam_pitch * PI)/2
-	#camera.rotation.x = camera.rotation.x + (1 * delta)
+		#head_piv.rotation.x = (cam_pitch * PI)/2
+	#head_piv.rotation.x = head_piv.rotation.x + (1 * delta)
 
 	#if abs(cam_roll) > .01:
-	#	camera.rotation.z = (cam_pitch * PI)/2
+	#	head_piv.rotation.z = (cam_pitch * PI)/2
 
 func on_ground():
 	if linear_velocity.length() < 1 and throttle < 1:
@@ -561,9 +562,21 @@ func ground_check(delta):
 		is_walking = false
 
 	
+func _keep_head_upright():
+
+	# Get the current global rotation (in Euler angles)
+	var current_global_rot = head_mesh.global_rotation
+
+	# Set X (pitch) and Z (roll) to zero
+	current_global_rot.x = 0.0
+	current_global_rot.z = 0.0
+	current_global_rot.y = rotation.y
+
+	# Apply the modified rotation back.
+	# The 'y' rotation remains whatever it was, but x and z are forced to 0.
+	head_mesh.global_rotation = current_global_rot
+	
 func walk(delta):
-	
-	
 	if is_walking:
 		legs.animate_legs(delta, linear_velocity.length())
 	else:
@@ -571,6 +584,7 @@ func walk(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	_keep_head_upright()
 	#print(world.control_sensitivity_effector)
 	if dead:
 		dead_logic(delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=36 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" uid="uid://f8xifi7wely8" path="res://entities/drone.gd" id="1_qapsr"]
 [ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://import/drone_import.tscn" id="2_ns1cx"]
@@ -33,10 +33,6 @@ emission_enabled = true
 [sub_resource type="SphereMesh" id="SphereMesh_l06h7"]
 radius = 0.08
 height = 0.16
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_8d16w"]
-dof_blur_far_distance = 300.0
-dof_blur_far_transition = 120.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n3w36"]
 margin = 0.0
@@ -138,18 +134,19 @@ visible = false
 material_override = SubResource("StandardMaterial3D_fpre2")
 mesh = SubResource("SphereMesh_l06h7")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="head_piv" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, 0, 0)
-attributes = SubResource("CameraAttributesPractical_8d16w")
-current = true
 
-[node name="drone_gun" parent="Camera3D" instance=ExtResource("8_si1r6")]
+[node name="drone_gun" parent="head_piv" instance=ExtResource("8_si1r6")]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
 visible = false
 
-[node name="VoxelViewer" type="VoxelViewer" parent="Camera3D"]
+[node name="VoxelViewer" type="VoxelViewer" parent="head_piv"]
 
-[node name="chicken_head" parent="Camera3D" instance=ExtResource("3_vnpas")]
+[node name="chicken_head" parent="head_piv" instance=ExtResource("3_vnpas")]
+
+[node name="Camera3D" type="Camera3D" parent="head_piv"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139889, 0.293098)
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n3w36")

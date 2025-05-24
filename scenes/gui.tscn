@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://djnakq8bjlyxs"]
 
-[ext_resource type="Script" uid="uid://sbkf87o01fse" path="res://gui.gd" id="1_2mec0"]
+[ext_resource type="Script" uid="uid://sbkf87o01fse" path="res://scripts/gui.gd" id="1_2mec0"]
 [ext_resource type="Texture2D" uid="uid://bgoskk3hg05oq" path="res://import/crystals_icon.png" id="1_w7ev8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_i7c73"]
@@ -131,25 +131,11 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_4tctn")
 [node name="gui" type="Node2D"]
 script = ExtResource("1_2mec0")
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = 1520.0
-offset_top = 680.0
-offset_right = 1920.0
-offset_bottom = 1080.0
-
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-handle_input_locally = false
-size = Vector2i(400, 400)
-render_target_update_mode = 4
-
-[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815968, -0.441862)
-
 [node name="TimeLabel" type="Label" parent="."]
-offset_left = 1678.0
-offset_top = 614.0
-offset_right = 1910.0
-offset_bottom = 678.0
+offset_left = 1674.0
+offset_top = 933.0
+offset_right = 1906.0
+offset_bottom = 997.0
 text = "8:00 AM"
 label_settings = SubResource("LabelSettings_i7c73")
 horizontal_alignment = 2
@@ -172,27 +158,27 @@ text = "|"
 label_settings = SubResource("LabelSettings_2q8g7")
 
 [node name="SpeedLabel" type="Label" parent="."]
-offset_left = 1735.0
-offset_top = 564.0
-offset_right = 1899.0
-offset_bottom = 614.0
+offset_left = 1731.0
+offset_top = 883.0
+offset_right = 1908.0
+offset_bottom = 937.0
 text = "MPH 1.00"
 label_settings = SubResource("LabelSettings_w3wg3")
 
 [node name="power_cell" type="ProgressBar" parent="."]
-offset_left = 1520.0
-offset_top = 681.0
-offset_right = 1919.0
-offset_bottom = 731.0
+offset_left = 1516.0
+offset_top = 1000.0
+offset_right = 1915.0
+offset_bottom = 1050.0
 theme = SubResource("Theme_q3l0v")
 value = 100.0
 rounded = true
 
 [node name="extra_power_cell" type="ProgressBar" parent="."]
-offset_left = 1520.0
-offset_top = 731.0
-offset_right = 1919.0
-offset_bottom = 781.0
+offset_left = 1516.0
+offset_top = 1050.0
+offset_right = 1915.0
+offset_bottom = 1100.0
 scale = Vector2(1, 0.347286)
 theme = SubResource("Theme_lbp06")
 value = 100.0
@@ -200,22 +186,22 @@ rounded = true
 show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1528.53, 653.995)
+position = Vector2(1524.53, 972.995)
 scale = Vector2(0.287083, 0.277742)
 texture = ExtResource("1_w7ev8")
 
 [node name="crystals_label" type="Label" parent="."]
-offset_left = 1552.53
-offset_top = 620.005
-offset_right = 1734.53
-offset_bottom = 684.005
+offset_left = 1548.53
+offset_top = 939.005
+offset_right = 1730.53
+offset_bottom = 1003.01
 label_settings = SubResource("LabelSettings_888po")
 
 [node name="bank_label" type="Label" parent="."]
-offset_left = 1560.0
-offset_top = 599.0
-offset_right = 1742.0
-offset_bottom = 663.0
+offset_left = 1556.0
+offset_top = 918.0
+offset_right = 1738.0
+offset_bottom = 982.0
 label_settings = SubResource("LabelSettings_dx5tm")
 
 [node name="refuel" type="Label" parent="."]
@@ -239,10 +225,10 @@ label_settings = SubResource("LabelSettings_8kq81")
 horizontal_alignment = 1
 
 [node name="added_label" type="Label" parent="."]
-offset_left = 1529.0
-offset_top = 561.0
-offset_right = 1625.0
-offset_bottom = 606.0
+offset_left = 1525.0
+offset_top = 880.0
+offset_right = 1621.0
+offset_bottom = 925.0
 label_settings = SubResource("LabelSettings_a67re")
 
 [node name="overhead_message" type="Label" parent="."]

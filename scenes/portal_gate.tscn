@@ -1,5 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnm5ogkm5n6dw"]
+[gd_scene load_steps=4 format=3 uid="uid://dnm5ogkm5n6dw"]
 
+[ext_resource type="Material" uid="uid://cquqer0xqv6mw" path="res://native/portal_gate.tres" id="1_4odv8"]
 [ext_resource type="PackedScene" uid="uid://ca5juerqy0rfw" path="res://import/portal_gate.glb" id="1_p8oda"]
 
-[node name="portal_gate" instance=ExtResource("1_p8oda")]
+[sub_resource type="BoxMesh" id="BoxMesh_t4cfy"]
+size = Vector3(13.2, 19.785, 3.245)
+
+[node name="portal_gate" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.1837)
+material_override = ExtResource("1_4odv8")
+mesh = SubResource("BoxMesh_t4cfy")
+
+[node name="portal_gate" parent="." instance=ExtResource("1_p8oda")]
+visible = false

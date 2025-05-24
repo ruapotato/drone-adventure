@@ -22,9 +22,10 @@
 sky_top_color = Color(0.00784314, 0.454902, 1, 1)
 sky_horizon_color = Color(0.607355, 0, 0.128986, 1)
 sky_curve = 0.0284198
-sky_energy_multiplier = 0.15
+sky_energy_multiplier = 0.0
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sun_angle_max = 0.0
+energy_multiplier = 0.7
 
 [sub_resource type="Sky" id="Sky_d5qqc"]
 sky_material = SubResource("ProceduralSkyMaterial_bi3jv")
@@ -34,6 +35,13 @@ background_mode = 2
 sky = SubResource("Sky_d5qqc")
 ambient_light_source = 3
 tonemap_mode = 3
+ssr_enabled = true
+ssr_max_steps = 117
+ssr_fade_in = 1e-05
+ssr_fade_out = 0.00955431
+ssr_depth_tolerance = 0.01
+ssao_enabled = true
+ssao_power = 9.74704
 glow_enabled = true
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.002

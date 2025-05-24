@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://import/house_2_import.tscn" id="3_p7m7l"]
 [ext_resource type="Script" uid="uid://bck6s51egwhis" path="res://scripts/all_static_import.gd" id="4_21j1e"]
 [ext_resource type="PackedScene" uid="uid://b8tvstgu1vx8i" path="res://import/house_3_import.tscn" id="4_ciwt5"]
-[ext_resource type="PackedScene" uid="uid://c6mxna5e72f5c" path="res://addons/src/scenes/portal.tscn" id="6_rflm0"]
+[ext_resource type="PackedScene" uid="uid://bgsdn0gxce0qu" path="res://addons/src/scenes/portal.tscn" id="6_rflm0"]
 [ext_resource type="Script" uid="uid://cfmkr44070pnd" path="res://addons/src/scenes/tp_portal.gd" id="7_717f3"]
 [ext_resource type="PackedScene" uid="uid://dnm5ogkm5n6dw" path="res://scenes/portal_gate.tscn" id="8_8el6a"]
 [ext_resource type="Script" uid="uid://yyimbm5qkqi5" path="res://scripts/shop_ui.gd" id="9_7dm53"]
@@ -109,6 +109,7 @@ transform = Transform3D(1.19209e-07, 0, 1, 0, 1, 0, -1, 0, 1.19209e-07, 58.4205,
 
 [node name="portal" parent="." instance=ExtResource("6_rflm0")]
 transform = Transform3D(-2.08128e-07, 0, -25.2614, 0, 3.44834, 0, 4.76141, 0, -1.10421e-06, -119.791, 0, -55.1328)
+visible = false
 
 [node name="TP1" type="Area3D" parent="portal"]
 script = ExtResource("7_717f3")

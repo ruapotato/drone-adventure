@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c6mxna5e72f5c"]
+[gd_scene load_steps=14 format=4 uid="uid://bgsdn0gxce0qu"]
 
 [ext_resource type="Script" uid="uid://c33xq7cbuoo4e" path="res://addons/src/scripts/line_renderer.gd" id="3_hnrfe"]
 [ext_resource type="Material" uid="uid://d33aomc1mqhjj" path="res://addons/src/materials/lines.tres" id="4_jynqk"]

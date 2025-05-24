@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://bw1owyleple0u"]
 
-[ext_resource type="PackedScene" uid="uid://tumkybh0rqg2" path="res://tree_1_import.tscn" id="1_283tm"]
+[ext_resource type="PackedScene" uid="uid://tumkybh0rqg2" path="res://import/tree_1_import.tscn" id="1_283tm"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rcq7x"]
 points = PackedVector3Array(0.34497, 8.35941, 0.726989, 0.0564751, 8.26321, 0.246304, -0.03969, 8.35941, 0.246304, 0.15264, 8.64787, 0.246304, 0.0564751, 8.35941, 0.630805, -0.03969, 8.64787, 0.342441, 0.34497, 8.26321, 0.438578, 0.0564751, 8.26321, 0.630805, 0.24873, 8.55163, 0.246304, 0.24873, 8.26321, 0.246304)

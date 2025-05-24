@@ -2,3 +2,6 @@
 debug_data/*
 Linux.x86_64
 Windows.exe
+
+./exports/*exe
+./exports/*_64

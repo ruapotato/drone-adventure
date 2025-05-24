@@ -11,11 +11,11 @@ config_version=5
 [application]
 
 config/name="Drone Adventure"
-run/main_scene="res://main_menu.tscn"
+run/main_scene="uid://dm5fnhhhsp54m"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(1, 1, 1, 1)
-boot_splash/image="res://logo_dark.png"
-config/icon="res://logo_dark.png"
+boot_splash/image="uid://dxsl2h3mgwkxi"
+config/icon="uid://dutbhx84gx0ys"
 
 [display]
 

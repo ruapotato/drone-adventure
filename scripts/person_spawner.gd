@@ -1,7 +1,7 @@
 extends Area3D
 
 
-@onready var NPC = preload("res://npc.tscn")
+@onready var NPC = preload("res://entities/npc.tscn")
 var NPCs = []
 
 var spawn_every = 10

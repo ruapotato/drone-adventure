@@ -8,6 +8,7 @@ var tow_target
 var tow_dropoff
 
 var todo = "pickup"
+var time_to_pickup = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -15,24 +16,28 @@ func _ready():
 		add_collision_exception_with(fellow_truck)
 
 func set_target_pickup():
-	if tow_target.global_position.y < -5:
-		tow_target.queue_free()
-		queue_free()
-	#if not tow_target.global_position:
+	#if tow_target.global_position.y < -5:
+	#	tow_target.queue_free()
 	#	queue_free()
+	if not is_instance_valid(tow_target):
+		queue_free()
+		return
 	nav.target_position = tow_target.global_position
 	target.look_at(nav.get_next_path_position())
 	target.rotate_y(PI)
 	
 
 func set_target_dropoff():
-	if global_position.y < -5:
-		queue_free()
+	#if global_position.y < -5:
+	#	queue_free()
 	nav.target_position = tow_dropoff.global_position
 	target.look_at(nav.get_next_path_position())
 	target.rotate_y(PI)
 
 func _physics_process(delta):
+	time_to_pickup -= delta
+	if time_to_pickup < 0:
+		queue_free()
 	if todo == "pickup":
 		set_target_pickup()
 		if global_position.distance_to(nav.target_position) < 10:

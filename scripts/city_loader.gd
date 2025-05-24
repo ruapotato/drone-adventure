@@ -3,7 +3,7 @@ extends Node3D
 @onready var city = preload("res://scenes/city.tscn")
 
 var drone
-var range = 350
+var range = 400
 var city_loaded = false
 var running_city
 # Called when the node enters the scene tree for the first time.

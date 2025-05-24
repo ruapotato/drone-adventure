@@ -1,17 +1,17 @@
 [gd_scene load_steps=19 format=3 uid="uid://50tipirf2hql"]
 
-[ext_resource type="PackedScene" uid="uid://bu6h1kvqv7kkj" path="res://city_import.tscn" id="1_hxu1s"]
-[ext_resource type="Script" uid="uid://b3jtpqiwl713u" path="res://city.gd" id="1_ne8q2"]
-[ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://house_1_import.tscn" id="2_v1dca"]
-[ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://house_2_import.tscn" id="3_p7m7l"]
-[ext_resource type="Script" uid="uid://bck6s51egwhis" path="res://all_static_import.gd" id="4_21j1e"]
-[ext_resource type="PackedScene" uid="uid://b8tvstgu1vx8i" path="res://house_3_import.tscn" id="4_ciwt5"]
+[ext_resource type="PackedScene" uid="uid://bu6h1kvqv7kkj" path="res://import/city_import.tscn" id="1_hxu1s"]
+[ext_resource type="Script" uid="uid://b3jtpqiwl713u" path="res://scripts/city.gd" id="1_ne8q2"]
+[ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://import/house_1_import.tscn" id="2_v1dca"]
+[ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://import/house_2_import.tscn" id="3_p7m7l"]
+[ext_resource type="Script" uid="uid://bck6s51egwhis" path="res://scripts/all_static_import.gd" id="4_21j1e"]
+[ext_resource type="PackedScene" uid="uid://b8tvstgu1vx8i" path="res://import/house_3_import.tscn" id="4_ciwt5"]
 [ext_resource type="PackedScene" uid="uid://c6mxna5e72f5c" path="res://addons/src/scenes/portal.tscn" id="6_rflm0"]
 [ext_resource type="Script" uid="uid://cfmkr44070pnd" path="res://addons/src/scenes/tp_portal.gd" id="7_717f3"]
-[ext_resource type="PackedScene" uid="uid://dnm5ogkm5n6dw" path="res://portal_gate.tscn" id="8_8el6a"]
-[ext_resource type="Script" uid="uid://yyimbm5qkqi5" path="res://shop_ui.gd" id="9_7dm53"]
+[ext_resource type="PackedScene" uid="uid://dnm5ogkm5n6dw" path="res://scenes/portal_gate.tscn" id="8_8el6a"]
+[ext_resource type="Script" uid="uid://yyimbm5qkqi5" path="res://scripts/shop_ui.gd" id="9_7dm53"]
 [ext_resource type="AudioStream" uid="uid://38pppnlpbc7v" path="res://import/CC 0 BY wobbleboxx/Rise04.wav" id="10_4nfns"]
-[ext_resource type="Script" uid="uid://ta6wu152eouw" path="res://bank_ui.gd" id="11_ite3i"]
+[ext_resource type="Script" uid="uid://ta6wu152eouw" path="res://scripts/bank_ui.gd" id="11_ite3i"]
 [ext_resource type="Material" uid="uid://dqhthuw0rd6pp" path="res://native/landing.tres" id="12_i233g"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_khtga"]
@@ -47,15 +47,15 @@ navigation_mesh = SubResource("NavigationMesh_khtga")
 [node name="mesh" parent="NavigationRegion3D" instance=ExtResource("1_hxu1s")]
 
 [node name="house_1" parent="NavigationRegion3D" instance=ExtResource("2_v1dca")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -134.582, 0.202217, -51.1012)
+transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -134.582, 0.202217, -51.1012)
 script = ExtResource("4_21j1e")
 
 [node name="house_2" parent="NavigationRegion3D" instance=ExtResource("3_p7m7l")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -287.698, 0, -47.8553)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -287.698, 0, -47.8553)
 script = ExtResource("4_21j1e")
 
 [node name="house_3" parent="NavigationRegion3D" instance=ExtResource("4_ciwt5")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 23.7447, 0, -47.4016)
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 23.7447, 0, -47.4016)
 script = ExtResource("4_21j1e")
 
 [node name="homes" type="Node3D" parent="."]

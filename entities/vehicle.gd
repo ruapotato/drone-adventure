@@ -5,6 +5,7 @@ var init_angle = null
 var crashed = false
 var beeing_helped = false
 var tp_cooldown = 0
+var time_to_live_crashed = 60
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -12,6 +13,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if crashed:
+		time_to_live_crashed -= delta
+		if time_to_live_crashed < 0:
+			queue_free()
 	if crashed and not $expload_effect.emitting:
 		$eng_sounds.stream = load("res://import/Audio/spaceEngineLarge_000.ogg")
 		$eng_sounds.play()
@@ -20,8 +25,8 @@ func _process(delta):
 	if tp_cooldown < 0:
 		tp_cooldown -= delta
 	# Remove is falls off map
-	if global_position.y < 30:
-		crashed = true
+	#if global_position.y < 30:
+	#	crashed = true
 	
 	#Remove is stops unexpectedly 
 	start_time -= delta

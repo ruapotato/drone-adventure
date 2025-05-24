@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bompn6iaxi1hd"]
 
-[ext_resource type="Script" uid="uid://eh1dd1fkhahb" path="res://npc.gd" id="1_wldse"]
+[ext_resource type="Script" uid="uid://eh1dd1fkhahb" path="res://entities/npc.gd" id="1_wldse"]
 [ext_resource type="PackedScene" uid="uid://lfmmk3jdrg6f" path="res://native/blue_import.tscn" id="2_1qmdk"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_qit12"]
@@ -48,7 +48,6 @@ mesh = SubResource("SphereMesh_gr1ie")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="head"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.506704)
-visible = false
 mesh = SubResource("SphereMesh_pdp6j")
 
 [node name="BlockedArea" type="Area3D" parent="."]

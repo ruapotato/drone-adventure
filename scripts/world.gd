@@ -19,7 +19,7 @@ extends Node3D
 
 const day_len = 60*2
 const day_speed = PI/day_len
-const fog_density = 0.0526
+const fog_density = 0.00526
 const day_workflow =  {5.0:"day_spawn",
 					7.5: "clear_fog",
 					21.0:"night_spawn",
@@ -191,7 +191,7 @@ func update_abs_time():
 
 func update_sky_energy(delta):
 	if sun.rotation.x > 0:
-		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 0.0, delta)
+		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 0.15, delta)
 	else:
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 

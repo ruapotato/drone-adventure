@@ -2,7 +2,7 @@ extends RigidBody3D
 
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var laser = preload("res://scenes/laser.tscn")
-@onready var animation_tree = get_node("mesh/AnimationTree")
+@onready var animation_tree = get_node("chicken_wings/AnimationTree")
 @onready var camera = $Camera3D
 #@onready var target = $Label3D
 @onready var shoot_from = $shoot_from
@@ -479,13 +479,9 @@ func drone_physics(delta):
 
 
 	if landed:
-		var current_blend = animation_tree.get("parameters/fly/blend_position")
-		var new_blend = lerp(current_blend,0.0, delta * 5)
-		animation_tree.set("parameters/fly/blend_position", new_blend)
+		animation_tree.set("parameters/SPEED/scale", 0)
 	else:
-		var current_blend = animation_tree.get("parameters/fly/blend_position")
-		var new_blend = lerp(current_blend,1.0, delta * 5)
-		animation_tree.set("parameters/fly/blend_position", new_blend)
+		animation_tree.set("parameters/SPEED/scale", get_throttle() * 15)
 
 	if yaw != 0.0:
 		#print(yaw)
@@ -566,15 +562,12 @@ func ground_check(delta):
 
 	
 func walk(delta):
-	if is_walking:
-		if not legs.visible:
-			legs.visible = true
-	else:
-		if legs.visible:
-			legs.visible = false
+	
 	
 	if is_walking:
 		legs.animate_legs(delta, linear_velocity.length())
+	else:
+		legs.animate_legs(delta, 0)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):

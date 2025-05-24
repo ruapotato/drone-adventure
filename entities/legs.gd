@@ -17,8 +17,8 @@ const REGULAR_FOOT_LENGTH = 0.15
 # Chicken leg dimensions
 const CHICKEN_LEG_SPEED = 35.0
 const CHICKEN_MAX_ANGLE = PI/8 # Slightly larger swing for chicken
-const CHICKEN_LEG_LENGTH = 0.1 # Shorter legs for drone
-const CHICKEN_LEG_RADIUS = 0.015
+const CHICKEN_LEG_LENGTH = 0.06 # Shorter legs for drone
+const CHICKEN_LEG_RADIUS = 0.01
 const CHICKEN_TOE_LENGTH = 0.06
 const CHICKEN_TOE_RADIUS = 0.008
 
@@ -63,9 +63,9 @@ func _ready():
 		CURRENT_LEG_LENGTH = REGULAR_LEG_LENGTH
 	
 	if !left_leg_node:
-		left_leg_node = create_leg_mesh("left_leg", -0.1 if !is_chicken else -0.05)
+		left_leg_node = create_leg_mesh("left_leg", -0.05 if !is_chicken else -0.03)
 	if !right_leg_node:
-		right_leg_node = create_leg_mesh("right_leg", 0.1 if !is_chicken else 0.05)
+		right_leg_node = create_leg_mesh("right_leg", 0.05 if !is_chicken else 0.03)
 
 	if sound_on_foot_hit == null:
 		print("Footstep sound not loaded. Check path: res://audio/player_toe_tip.wav")

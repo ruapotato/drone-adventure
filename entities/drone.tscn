@@ -1,14 +1,17 @@
-[gd_scene load_steps=34 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=37 format=3 uid="uid://5ti8gwrj7tha"]
 
-[ext_resource type="Script" uid="uid://f8xifi7wely8" path="res://drone.gd" id="1_qapsr"]
-[ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://drone_import.tscn" id="2_ns1cx"]
-[ext_resource type="Script" uid="uid://dfjrm1r376qcq" path="res://drone_sound.gd" id="3_f4ikt"]
+[ext_resource type="Script" uid="uid://f8xifi7wely8" path="res://entities/drone.gd" id="1_qapsr"]
+[ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://import/drone_import.tscn" id="2_ns1cx"]
+[ext_resource type="Script" uid="uid://dfjrm1r376qcq" path="res://scripts/drone_sound.gd" id="3_f4ikt"]
+[ext_resource type="PackedScene" uid="uid://bn01ua1n810ar" path="res://import/chicken_head.glb" id="3_vnpas"]
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 [ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
 [ext_resource type="AudioStream" uid="uid://ul3s6jsd6kwb" path="res://import/Audio/explosionCrunch_001.ogg" id="6_22p5i"]
-[ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://ingenuity_import.tscn" id="7_lkp43"]
-[ext_resource type="PackedScene" uid="uid://dmuhcsl8wg0ug" path="res://drone_gun_import.tscn" id="8_si1r6"]
-[ext_resource type="Script" uid="uid://bshu4jm72uder" path="res://legs.gd" id="9_812hj"]
+[ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://import/ingenuity_import.tscn" id="7_lkp43"]
+[ext_resource type="PackedScene" uid="uid://dmuhcsl8wg0ug" path="res://import/drone_gun_import.tscn" id="8_si1r6"]
+[ext_resource type="Script" uid="uid://bshu4jm72uder" path="res://entities/legs.gd" id="9_812hj"]
+[ext_resource type="PackedScene" uid="uid://cqqtiu3evspok" path="res://import/chicken_body.glb" id="11_jssfm"]
+[ext_resource type="PackedScene" uid="uid://cuit411r1ucl" path="res://import/chicken_wings_import.tscn" id="12_jssfm"]
 
 [sub_resource type="Gradient" id="Gradient_bwy5e"]
 offsets = PackedFloat32Array(0, 0.754098)
@@ -136,14 +139,17 @@ material_override = SubResource("StandardMaterial3D_fpre2")
 mesh = SubResource("SphereMesh_l06h7")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, -0.00257987, -0.00068361)
+transform = Transform3D(1, 0, 0, 0, 0.90747, -0.420117, 0, 0.420117, 0.90747, 0, 0, 0)
 attributes = SubResource("CameraAttributesPractical_8d16w")
 current = true
 
 [node name="drone_gun" parent="Camera3D" instance=ExtResource("8_si1r6")]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0)
+visible = false
 
 [node name="VoxelViewer" type="VoxelViewer" parent="Camera3D"]
+
+[node name="chicken_head" parent="Camera3D" instance=ExtResource("3_vnpas")]
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n3w36")
@@ -163,6 +169,7 @@ shape = SubResource("SphereShape3D_xm54y")
 
 [node name="mesh" parent="." instance=ExtResource("2_ns1cx")]
 transform = Transform3D(0.0314283, 0, 0.999506, 0, 1, 0, -0.999506, 0, 0.0314283, 0.000589579, -0.00212165, 0.00135947)
+visible = false
 
 [node name="drone_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vses7")
@@ -171,6 +178,7 @@ max_polyphony = 3
 script = ExtResource("3_f4ikt")
 
 [node name="shield" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.555, 0, 0, 0, 3.18, 0, 0, 0, 1.555, 0, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_p4g1r")
 
@@ -211,6 +219,10 @@ shape = SubResource("BoxShape3D_c6ijy")
 
 [node name="LegsNode" type="Node3D" parent="."]
 script = ExtResource("9_812hj")
+
+[node name="chicken_body" parent="." instance=ExtResource("11_jssfm")]
+
+[node name="chicken_wings" parent="." instance=ExtResource("12_jssfm")]
 
 [connection signal="finished" from="drone_sound" to="drone_sound" method="_on_finished"]
 [connection signal="area_entered" from="feet_area" to="." method="_on_feet_area_area_entered"]

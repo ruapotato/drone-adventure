@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cuit411r1ucl"]
+
+[ext_resource type="PackedScene" uid="uid://bvl2sfnnp82dp" path="res://import/chicken_wings.glb" id="1_xaf72"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2tle5"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_cpnk8"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_6dtqx"]
+graph_offset = Vector2(-523, 84)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_2tle5")
+nodes/Animation/position = Vector2(-360, 140)
+nodes/SPEED/node = SubResource("AnimationNodeTimeScale_cpnk8")
+nodes/SPEED/position = Vector2(-80, 140)
+nodes/output/position = Vector2(240, 160)
+node_connections = [&"SPEED", 0, &"Animation", &"output", 0, &"SPEED"]
+
+[node name="chicken_wings" instance=ExtResource("1_xaf72")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/1/rotation = Quaternion(0.647511, 0.342176, 0.606721, -0.309087)
+bones/2/rotation = Quaternion(0.613497, -0.351599, -0.613497, -0.351599)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource("AnimationNodeBlendTree_6dtqx")
+anim_player = NodePath("../AnimationPlayer")
+parameters/SPEED/scale = 12.19

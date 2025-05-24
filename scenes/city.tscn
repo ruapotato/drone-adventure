@@ -1,11 +1,11 @@
 [gd_scene load_steps=19 format=3 uid="uid://50tipirf2hql"]
 
-[ext_resource type="PackedScene" uid="uid://bu6h1kvqv7kkj" path="res://import/city_import.tscn" id="1_hxu1s"]
 [ext_resource type="Script" uid="uid://b3jtpqiwl713u" path="res://scripts/city.gd" id="1_ne8q2"]
 [ext_resource type="PackedScene" uid="uid://cctn324s64iwe" path="res://import/house_1_import.tscn" id="2_v1dca"]
 [ext_resource type="PackedScene" uid="uid://c5v036rjnqerm" path="res://import/house_2_import.tscn" id="3_p7m7l"]
 [ext_resource type="Script" uid="uid://bck6s51egwhis" path="res://scripts/all_static_import.gd" id="4_21j1e"]
 [ext_resource type="PackedScene" uid="uid://b8tvstgu1vx8i" path="res://import/house_3_import.tscn" id="4_ciwt5"]
+[ext_resource type="PackedScene" uid="uid://bypk2pnpxxsal" path="res://import/city.glb" id="6_obbxu"]
 [ext_resource type="PackedScene" uid="uid://bgsdn0gxce0qu" path="res://addons/src/scenes/portal.tscn" id="6_rflm0"]
 [ext_resource type="Script" uid="uid://cfmkr44070pnd" path="res://addons/src/scenes/tp_portal.gd" id="7_717f3"]
 [ext_resource type="PackedScene" uid="uid://dnm5ogkm5n6dw" path="res://scenes/portal_gate.tscn" id="8_8el6a"]
@@ -44,8 +44,6 @@ script = ExtResource("1_ne8q2")
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 navigation_mesh = SubResource("NavigationMesh_khtga")
 
-[node name="mesh" parent="NavigationRegion3D" instance=ExtResource("1_hxu1s")]
-
 [node name="house_1" parent="NavigationRegion3D" instance=ExtResource("2_v1dca")]
 transform = Transform3D(-1, 0, 1.50996e-07, 0, 1, 0, -1.50996e-07, 0, -1, -134.582, 0.202217, -51.1012)
 script = ExtResource("4_21j1e")
@@ -56,6 +54,9 @@ script = ExtResource("4_21j1e")
 
 [node name="house_3" parent="NavigationRegion3D" instance=ExtResource("4_ciwt5")]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 23.7447, 0, -47.4016)
+script = ExtResource("4_21j1e")
+
+[node name="city" parent="NavigationRegion3D" instance=ExtResource("6_obbxu")]
 script = ExtResource("4_21j1e")
 
 [node name="homes" type="Node3D" parent="."]

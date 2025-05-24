@@ -23,12 +23,12 @@ min_space = 0.0
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_bej1p"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8qtcj"]
-graph_offset = Vector2(-420, 38)
+graph_offset = Vector2(-433.23, 8.23575)
 nodes/fly/node = SubResource("AnimationNodeBlendSpace1D_ipsx8")
 nodes/fly/position = Vector2(-320, 120)
 nodes/output/position = Vector2(260, 140)
 nodes/speed/node = SubResource("AnimationNodeTimeScale_bej1p")
-nodes/speed/position = Vector2(120, 140)
+nodes/speed/position = Vector2(-20, 100)
 node_connections = [&"output", 0, &"speed", &"speed", 0, &"fly"]
 
 [node name="drone2" instance=ExtResource("1_d7wm8")]
@@ -39,7 +39,6 @@ bones/1/rotation = Quaternion(-0.707107, 8.42937e-08, -8.42937e-08, 0.707107)
 bones/2/rotation = Quaternion(-0.707107, 8.42937e-08, -8.42937e-08, 0.707107)
 bones/3/rotation = Quaternion(-8.42937e-08, 0.707107, 0.707107, -8.42937e-08)
 bones/4/rotation = Quaternion(-8.42937e-08, 0.707107, 0.707107, -8.42937e-08)
-bones/5/rotation = Quaternion(0.5, 0.5, 0.5, -0.5)
 bones/6/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="2"]

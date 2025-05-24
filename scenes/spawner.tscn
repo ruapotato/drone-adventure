@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cbgvjgg45bjww"]
 
-[ext_resource type="Script" uid="uid://c3fofqj38renl" path="res://spawner.gd" id="1_wpc86"]
+[ext_resource type="Script" uid="uid://c3fofqj38renl" path="res://scripts/spawner.gd" id="1_wpc86"]
 
 [node name="Spawner" type="Node3D"]
 script = ExtResource("1_wpc86")

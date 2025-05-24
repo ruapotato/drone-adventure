@@ -563,7 +563,9 @@ func ground_check(delta):
 
 	
 func _keep_head_upright():
-
+	if Input.is_action_pressed("aim"):
+		head_mesh.rotation = Vector3(0,0,0)
+		return
 	# Get the current global rotation (in Euler angles)
 	var current_global_rot = head_mesh.global_rotation
 

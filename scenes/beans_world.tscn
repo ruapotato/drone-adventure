@@ -1,0 +1,404 @@
+[gd_scene load_steps=22 format=3 uid="uid://cwswl06gstkdc"]
+
+[ext_resource type="PackedScene" uid="uid://g4doma51o4b0" path="res://entities/beans.tscn" id="1_jigem"]
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_vdnpi"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ss3ok"]
+noise_type = 5
+frequency = 0.0018
+fractal_type = 2
+fractal_octaves = 2
+fractal_gain = 2.135
+fractal_weighted_strength = 0.37
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_6fi2n"]
+graph_data = {
+"connections": [[7, 0, 13, 0], [7, 0, 4, 0], [20, 0, 16, 1], [20, 0, 17, 1], [20, 0, 18, 1], [2, 0, 17, 0], [2, 0, 19, 0], [19, 0, 21, 0], [19, 0, 20, 1], [18, 0, 7, 2], [17, 0, 7, 1], [3, 0, 18, 0], [16, 0, 7, 0], [1, 0, 16, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(-60, 40),
+"type": "InputX"
+},
+"13": {
+"b": -1.0,
+"gui_position": Vector2(1120, -40),
+"type": "Multiply"
+},
+"16": {
+"gui_position": Vector2(620, 40),
+"type": "Divide"
+},
+"17": {
+"gui_position": Vector2(620, 160),
+"type": "Divide"
+},
+"18": {
+"gui_position": Vector2(614.922, 292.82),
+"type": "Divide"
+},
+"19": {
+"b": 1000.0,
+"gui_position": Vector2(60, 240),
+"type": "Divide"
+},
+"2": {
+"gui_position": Vector2(-60, 120),
+"type": "InputY"
+},
+"20": {
+"a": 0.0,
+"gui_position": Vector2(300, 240),
+"type": "Add"
+},
+"21": {
+"gui_position": Vector2(180, 200),
+"type": "Abs"
+},
+"3": {
+"gui_position": Vector2(-60, 320),
+"type": "InputZ"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1300, 160),
+"type": "OutputSDF"
+},
+"7": {
+"auto_connect": true,
+"gui_position": Vector2(900, 100),
+"noise": SubResource("FastNoiseLite_ss3ok"),
+"type": "Noise3D"
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_q1men"]
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_idrx8"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r78n2"]
+noise_type = 2
+frequency = 0.0029
+fractal_type = 3
+fractal_octaves = 1
+fractal_weighted_strength = 1.0
+fractal_ping_pong_strength = 1.45
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_12x4e"]
+graph_data = {
+"connections": [[9, 0, 6, 2], [8, 0, 6, 1], [7, 0, 6, 0], [6, 0, 4, 0], [3, 0, 9, 0], [2, 0, 8, 0], [2, 0, 11, 0], [13, 0, 12, 1], [12, 0, 7, 1], [12, 0, 8, 1], [12, 0, 9, 1], [11, 0, 13, 0], [10, 0, 12, 0], [1, 0, 7, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(440, 50),
+"type": "InputX"
+},
+"10": {
+"gui_position": Vector2(-220, 200),
+"type": "Constant",
+"value": 2.0
+},
+"11": {
+"b": 1000.0,
+"gui_position": Vector2(0, 160),
+"type": "Divide"
+},
+"12": {
+"gui_position": Vector2(260, 260),
+"type": "Add"
+},
+"13": {
+"gui_position": Vector2(120, 160),
+"max": 10.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"2": {
+"gui_position": Vector2(-260, 80),
+"type": "InputY"
+},
+"3": {
+"gui_position": Vector2(420, 280),
+"type": "InputZ"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1340, 140),
+"type": "OutputSDF"
+},
+"6": {
+"auto_connect": true,
+"gui_position": Vector2(820, 100),
+"noise": SubResource("FastNoiseLite_r78n2"),
+"type": "Noise3D"
+},
+"7": {
+"gui_position": Vector2(580, 20),
+"type": "Divide"
+},
+"8": {
+"gui_position": Vector2(580, 140),
+"type": "Divide"
+},
+"9": {
+"gui_position": Vector2(580, 240),
+"type": "Divide"
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_ijx0w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r4gsg"]
+albedo_color = Color(0.156863, 0.254902, 0.682353, 1)
+
+[sub_resource type="VoxelStreamMemory" id="VoxelStreamMemory_pfvs6"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0oxbf"]
+noise_type = 2
+frequency = 0.0001
+fractal_type = 2
+fractal_gain = 1.985
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2ped4"]
+noise_type = 2
+frequency = 0.0744
+fractal_octaves = 1
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_p3xu0"]
+graph_data = {
+"connections": [[6, 0, 17, 0], [3, 0, 21, 0], [25, 0, 23, 0], [24, 0, 12, 0], [1, 0, 18, 0], [10, 0, 11, 0], [23, 0, 24, 1], [11, 0, 12, 1], [12, 0, 4, 0], [16, 0, 17, 1], [17, 0, 24, 0], [18, 0, 16, 0], [19, 0, 18, 1], [19, 0, 20, 1], [19, 0, 21, 1], [2, 0, 10, 0], [2, 0, 20, 0], [2, 0, 25, 0], [20, 0, 16, 1], [21, 0, 16, 2]],
+"nodes": {
+"1": {
+"gui_position": Vector2(273, 55),
+"type": "InputX"
+},
+"10": {
+"b": 10.0,
+"gui_position": Vector2(380, -120),
+"type": "Subtract"
+},
+"11": {
+"auto_connect": true,
+"gui_position": Vector2(585.64, -133.1),
+"height": 0.0,
+"type": "SdfPlane"
+},
+"12": {
+"gui_position": Vector2(1000, 0),
+"smoothness": 0.0,
+"type": "SdfSmoothSubtract"
+},
+"16": {
+"auto_connect": true,
+"gui_position": Vector2(540, 240),
+"noise": SubResource("FastNoiseLite_2ped4"),
+"type": "Noise3D"
+},
+"17": {
+"gui_position": Vector2(718.74, 133.1),
+"type": "Subtract"
+},
+"18": {
+"gui_position": Vector2(380, 200),
+"type": "Divide"
+},
+"19": {
+"gui_position": Vector2(106.48, 212.96),
+"type": "Constant",
+"value": 50.0
+},
+"2": {
+"gui_position": Vector2(273, 145),
+"type": "InputY"
+},
+"20": {
+"gui_position": Vector2(380, 300),
+"type": "Divide"
+},
+"21": {
+"gui_position": Vector2(380, 400),
+"type": "Divide"
+},
+"22": {
+"a": 0.0,
+"b": 1.0,
+"gui_position": Vector2(720, 0),
+"type": "Divide"
+},
+"23": {
+"b": 500.0,
+"gui_position": Vector2(520, 0),
+"type": "Divide"
+},
+"24": {
+"gui_position": Vector2(900, 120),
+"type": "Subtract"
+},
+"25": {
+"b": 750.0,
+"gui_position": Vector2(380, 20),
+"type": "Subtract"
+},
+"3": {
+"gui_position": Vector2(273, 255),
+"type": "InputZ"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1160, 60),
+"type": "OutputSDF"
+},
+"6": {
+"auto_connect": true,
+"gui_position": Vector2(540, 120),
+"noise": SubResource("FastNoiseLite_0oxbf"),
+"type": "Noise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_w7x16"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ywm2"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+diffuse_mode = 3
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_7oi05"]
+graph_data = {
+"connections": [[6, 0, 17, 0], [1, 0, 18, 0], [10, 0, 11, 0], [11, 0, 12, 1], [12, 0, 4, 0], [16, 0, 17, 1], [3, 0, 21, 0], [17, 0, 12, 0], [18, 0, 16, 0], [19, 0, 18, 1], [19, 0, 20, 1], [19, 0, 21, 1], [2, 0, 10, 0], [2, 0, 20, 0], [20, 0, 16, 1], [21, 0, 16, 2]],
+"nodes": {
+"1": {
+"gui_position": Vector2(273, 55),
+"type": "InputX"
+},
+"10": {
+"b": 10.0,
+"gui_position": Vector2(380, -120),
+"type": "Subtract"
+},
+"11": {
+"auto_connect": true,
+"gui_position": Vector2(585.64, -133.1),
+"height": 0.0,
+"type": "SdfPlane"
+},
+"12": {
+"gui_position": Vector2(900, 60),
+"smoothness": 0.0,
+"type": "SdfSmoothSubtract"
+},
+"16": {
+"auto_connect": true,
+"gui_position": Vector2(540, 240),
+"noise": SubResource("FastNoiseLite_2ped4"),
+"type": "Noise3D"
+},
+"17": {
+"gui_position": Vector2(718.74, 133.1),
+"type": "Subtract"
+},
+"18": {
+"gui_position": Vector2(380, 200),
+"type": "Divide"
+},
+"19": {
+"gui_position": Vector2(100, 200),
+"type": "Constant",
+"value": 5.0
+},
+"2": {
+"gui_position": Vector2(273, 145),
+"type": "InputY"
+},
+"20": {
+"gui_position": Vector2(380, 300),
+"type": "Divide"
+},
+"21": {
+"gui_position": Vector2(380, 400),
+"type": "Divide"
+},
+"3": {
+"gui_position": Vector2(273, 255),
+"type": "InputZ"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(1160, 60),
+"type": "OutputSDF"
+},
+"6": {
+"auto_connect": true,
+"gui_position": Vector2(540, 120),
+"noise": SubResource("FastNoiseLite_0oxbf"),
+"type": "Noise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+}
+},
+"version": 2
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ti5g7"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0)
+
+[sub_resource type="VoxelInstanceGenerator" id="VoxelInstanceGenerator_7bcah"]
+density = 0.003
+
+[sub_resource type="VoxelInstanceLibrarySceneItem" id="VoxelInstanceLibrarySceneItem_8a26g"]
+lod_index = 4
+generator = SubResource("VoxelInstanceGenerator_7bcah")
+scene = ExtResource("1_jigem")
+
+[sub_resource type="VoxelInstanceLibrary" id="VoxelInstanceLibrary_c21jj"]
+_data = [0, 1, SubResource("VoxelInstanceLibrarySceneItem_8a26g")]
+
+[node name="beans_world" type="Node3D"]
+
+[node name="spaceTerrain" type="VoxelLodTerrain" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5000, -393.57)
+stream = SubResource("VoxelStreamMemory_vdnpi")
+generator = SubResource("VoxelGeneratorGraph_6fi2n")
+mesher = SubResource("VoxelMesherTransvoxel_q1men")
+
+[node name="spaceTopTerrain" type="VoxelLodTerrain" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15000, 0)
+stream = SubResource("VoxelStreamMemory_idrx8")
+generator = SubResource("VoxelGeneratorGraph_12x4e")
+mesher = SubResource("VoxelMesherTransvoxel_ijx0w")
+voxel_bounds = AABB(-5.36871e+08, -10240, -5.36871e+08, 1.07374e+09, 5.36881e+08, 1.07374e+09)
+material = SubResource("StandardMaterial3D_r4gsg")
+
+[node name="clowdsTerrain" type="VoxelLodTerrain" parent="."]
+stream = SubResource("VoxelStreamMemory_pfvs6")
+generator = SubResource("VoxelGeneratorGraph_p3xu0")
+mesher = SubResource("VoxelMesherTransvoxel_w7x16")
+lod_count = 5
+lod_distance = 20.0
+secondary_lod_distance = 20.0
+material = SubResource("StandardMaterial3D_2ywm2")
+generate_collisions = false
+
+[node name="beanSpawnTerrain" type="VoxelLodTerrain" parent="."]
+stream = SubResource("VoxelStreamMemory_pfvs6")
+generator = SubResource("VoxelGeneratorGraph_7oi05")
+mesher = SubResource("VoxelMesherTransvoxel_w7x16")
+lod_count = 5
+lod_distance = 20.0
+secondary_lod_distance = 20.0
+material = SubResource("StandardMaterial3D_ti5g7")
+generate_collisions = false
+
+[node name="VoxelInstancer" type="VoxelInstancer" parent="beanSpawnTerrain"]
+library = SubResource("VoxelInstanceLibrary_c21jj")

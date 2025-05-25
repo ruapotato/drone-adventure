@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bp74fmyat7sox"]
+
+[ext_resource type="Script" path="res://crap.gd" id="1_hrmwl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_uu2te"]
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4qw8"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.415686, 0.870588, 0.0156863, 0.054902)
+
+[sub_resource type="SphereMesh" id="SphereMesh_s1la1"]
+radius = 0.1
+height = 0.2
+
+[sub_resource type="FogMaterial" id="FogMaterial_ihjj8"]
+density = 8.0
+height_falloff = 1e+06
+edge_fade = 0.800007
+
+[node name="crap" type="RigidBody3D"]
+script = ExtResource("1_hrmwl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_uu2te")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+material_override = SubResource("StandardMaterial3D_o4qw8")
+mesh = SubResource("SphereMesh_s1la1")
+
+[node name="FogVolume" type="FogVolume" parent="."]
+shape = 0
+material = SubResource("FogMaterial_ihjj8")

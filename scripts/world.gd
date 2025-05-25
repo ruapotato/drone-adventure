@@ -4,6 +4,7 @@ extends Node3D
 @onready var env = $WorldEnvironment
 @onready var music = $music
 @onready var drone = $drone
+@onready var gee = $Gee
 @onready var sun = $sun
 #@onready var city = $city
 @onready var ufos = $ufos
@@ -17,6 +18,7 @@ extends Node3D
 @onready var spawn = $spawn
 @onready var pause_screen = $pause_screen
 
+const SAFE = Vector3(10000,10000,10000)
 const day_len = 60*2
 const day_speed = PI/day_len
 const fog_density = 0.00526
@@ -44,6 +46,7 @@ var control_sensitivity_effector = 0.0
 var time
 var friendly_time
 var friendly_time_am = false
+var controlable = [drone, gee]
 
 
 
@@ -137,6 +140,36 @@ func _unhandled_input(event):
 		#print("mouse")
 		last_mouse_move = 0.0
 
+
+func play_as_gee():
+	var loc = drone.global_position
+	var rot = drone.global_rotation
+	var vol = drone.linear_velocity
+	
+
+	gee.active = true
+	gee.gass = 100
+	gee.global_position = loc
+	gee.global_rotation = rot
+	gee.linear_velocity = vol
+	drone.active = false
+	gee.camera.current = true
+
+	
+func play_as_drone():
+	var loc = gee.global_position
+	var rot = gee.global_rotation
+	var vol = gee.linear_velocity
+	
+	gee.active = false
+	drone.global_position = loc
+	drone.global_rotation = rot
+	drone.linear_velocity = vol
+	drone.last_velocity =  vol
+	drone.camera.current = true
+	#gee.camera.current = false
+	drone.active = true
+	
 
 func pause():
 	if pause_screen.visible:

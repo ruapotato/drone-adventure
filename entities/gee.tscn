@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b83cj8y3wbpiy"]
+
+[ext_resource type="Script" uid="uid://kal1r1iil53a" path="res://entities/gee.gd" id="1_ycbrj"]
+[ext_resource type="AudioStream" uid="uid://d2lcgmlugi1xi" path="res://audio/fart.wav" id="2_0itbt"]
+[ext_resource type="PackedScene" uid="uid://byj5epg015skl" path="res://import/Gee.glb" id="3_5cl66"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_46inw"]
+rough = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gwqgu"]
+radius = 0.69
+
+[node name="Gee" type="RigidBody3D"]
+mass = 68.0
+physics_material_override = SubResource("PhysicsMaterial_46inw")
+angular_damp_mode = 1
+angular_damp = 100.0
+script = ExtResource("1_ycbrj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.637873, 0)
+shape = SubResource("SphereShape3D_gwqgu")
+
+[node name="piv" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.56837, 0.0746298)
+
+[node name="SpringArm3D" type="SpringArm3D" parent="piv"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.892)
+
+[node name="Camera3D" type="Camera3D" parent="piv/SpringArm3D"]
+
+[node name="cam_goal" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458418, 1.92573)
+
+[node name="crap_hole" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.110256, 0.283935)
+
+[node name="fart_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0itbt")
+volume_db = -80.0
+
+[node name="Gee2" parent="." instance=ExtResource("3_5cl66")]
+
+[connection signal="finished" from="fart_sound" to="." method="_on_fart_sound_finished"]

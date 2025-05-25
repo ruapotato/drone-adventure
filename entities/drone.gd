@@ -3,6 +3,7 @@ extends RigidBody3D
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var laser = preload("res://scenes/laser.tscn")
 @onready var animation_tree = get_node("chicken_wings/AnimationTree")
+@onready var camera = $head_piv/Camera3D
 @onready var head_mesh = $head_piv/chicken_head
 @onready var head_piv = $head_piv
 #@onready var target = $Label3D
@@ -19,6 +20,8 @@ extends RigidBody3D
 @onready var pause_screen = $"../pause_screen"
 @onready var weckingball_skin = $weckingball_skin
 @onready var legs = $LegsNode
+@onready var vox = $head_piv/VoxelViewer
+var active = true
 var collision_size_at_rest = .075
 var laser_obj
 var save_index = null
@@ -178,7 +181,9 @@ func get_max_throttle():
 	return(max_throttle - (effect * 1.9))
 
 func _unhandled_input(event):
-
+	if not active:
+		global_position = get_viewport().get_camera_3d().global_position + Vector3(0,10,0)
+		return
 	if event.is_action_pressed("select_gun"):
 		inventory["using"] = "gun"
 	if "land_making_gun" in inventory and event.is_action_pressed("select_build"):
@@ -591,6 +596,8 @@ func walk(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if not active:
+		return
 	_keep_head_upright()
 	#print(world.control_sensitivity_effector)
 	if dead:

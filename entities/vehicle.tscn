@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://csbqpug6w6x1y"]
 
-[ext_resource type="Script" uid="uid://dc458u4m5d6io" path="res://vehicle.gd" id="1_6dyft"]
+[ext_resource type="Script" uid="uid://dc458u4m5d6io" path="res://entities/vehicle.gd" id="1_6dyft"]
 [ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_micnr"]
 [ext_resource type="AudioStream" uid="uid://dk3278hkecnww" path="res://import/Audio/engineCircular_001.ogg" id="3_k3may"]
 

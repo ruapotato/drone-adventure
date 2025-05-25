@@ -34,13 +34,13 @@ emission_enabled = true
 radius = 0.08
 height = 0.16
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jssfm"]
+radius = 0.063
+height = 0.136
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_n3w36"]
 margin = 0.0
 size = Vector3(0.12, 0.07, 0.12)
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vpqhs"]
-height = 0.07
-radius = 0.068
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_xm54y"]
 radius = 0.078
@@ -148,6 +148,12 @@ visible = false
 [node name="Camera3D" type="Camera3D" parent="head_piv"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.139889, 0.293098)
 
+[node name="ground_obj" type="RigidBody3D" parent="head_piv"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="head_piv/ground_obj"]
+transform = Transform3D(0.954543, 0, 0.298075, -0.125226, 0.90747, 0.40102, -0.270494, -0.420117, 0.866219, 0, -0.136711, 0.0632908)
+shape = SubResource("CapsuleShape3D_jssfm")
+
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_n3w36")
 
@@ -156,10 +162,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0717006, -0.193481)
 
 [node name="back_cam_mount" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0227404, 0.231466)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.954543, 0, 0.298075, 0, 1, 0, -0.298075, 0, 0.954543, 0, 0, 0)
-shape = SubResource("CylinderShape3D_vpqhs")
 
 [node name="speedCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xm54y")

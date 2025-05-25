@@ -242,10 +242,13 @@ func _unhandled_input(event):
 	if control_lock_tilt:
 		return
 	if event.is_action("pitch"):
-		
-		pitch = control_ajust(event.axis_value)
+		if not is_walking:
+			pitch = control_ajust(event.axis_value)
 	if event.is_action("roll"):
 		roll = control_ajust(-event.axis_value)
+	
+	if is_walking:
+		pitch = -get_throttle() /15
 		#print(event)
 
 func control_ajust(value):
@@ -580,6 +583,8 @@ func _keep_head_upright():
 	
 func walk(delta):
 	if is_walking:
+		#rotation.x = 0
+		#rotation.y = 0
 		legs.animate_legs(delta, linear_velocity.length())
 	else:
 		legs.animate_legs(delta, 0)

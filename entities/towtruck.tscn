@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://dl31jx8vribjs"]
 
-[ext_resource type="Script" uid="uid://cvbt6ad47bukv" path="res://towtruck.gd" id="1_w015h"]
+[ext_resource type="Script" uid="uid://cvbt6ad47bukv" path="res://entities/towtruck.gd" id="1_w015h"]
 [ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_el0iw"]
 [ext_resource type="PackedScene" uid="uid://plnm18f42yjt" path="res://native/tow_import.tscn" id="3_njry5"]
 [ext_resource type="AudioStream" uid="uid://svso3mxbmysp" path="res://import/Audio/spaceEngine_000.ogg" id="4_w3o52"]

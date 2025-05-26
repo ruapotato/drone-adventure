@@ -1,0 +1,438 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2gd4upmu816b"]
+
+[ext_resource type="Shader" uid="uid://d1ye0bp20oylf" path="res://native/eyeball_world3.gdshader" id="1_cktii"]
+
+[sub_resource type="ZN_FastNoiseLite" id="ZN_FastNoiseLite_pn0d8"]
+noise_type = 2
+period = 2670.9
+fractal_type = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qg7lp"]
+noise_type = 3
+frequency = 0.0189
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0ps4c"]
+frequency = 0.0025
+
+[sub_resource type="VoxelGeneratorGraph" id="VoxelGeneratorGraph_n66pw"]
+graph_data = {
+"connections": [[90, 0, 101, 0], [89, 0, 112, 1], [88, 0, 90, 0], [7, 0, 8, 1], [7, 0, 9, 1], [6, 0, 20, 0], [6, 0, 15, 0], [6, 0, 29, 1], [6, 0, 131, 0], [55, 0, 117, 0], [53, 0, 48, 1], [50, 0, 53, 0], [48, 0, 55, 0], [127, 0, 124, 1], [125, 0, 115, 1], [124, 0, 4, 0], [121, 0, 125, 0], [3, 0, 6, 3], [3, 0, 9, 0], [120, 0, 121, 0], [2, 0, 22, 0], [12, 0, 13, 1], [115, 0, 127, 0], [114, 0, 120, 0], [112, 0, 110, 0], [117, 0, 124, 0], [1, 0, 6, 2], [1, 0, 8, 0], [105, 0, 106, 1], [101, 0, 106, 0], [100, 0, 104, 0], [100, 0, 102, 0], [41, 0, 40, 1], [102, 0, 103, 0], [132, 0, 102, 1], [103, 0, 101, 1], [104, 0, 105, 0], [106, 0, 111, 0], [108, 0, 109, 0], [109, 0, 112, 0], [110, 0, 111, 1], [111, 0, 117, 1], [8, 0, 10, 0], [135, 0, 137, 0], [17, 0, 16, 0], [9, 0, 10, 2], [136, 0, 138, 0], [18, 0, 39, 1], [10, 0, 13, 0], [137, 0, 140, 0], [138, 0, 140, 2], [20, 0, 23, 0], [13, 0, 39, 0], [140, 0, 115, 0], [22, 0, 18, 0], [15, 0, 17, 0], [16, 0, 18, 1], [21, 0, 22, 1], [23, 0, 21, 0], [24, 0, 20, 1], [24, 0, 104, 1], [24, 0, 120, 1], [29, 0, 30, 0], [30, 0, 36, 0], [31, 0, 41, 0], [32, 0, 33, 1], [33, 0, 40, 0], [35, 0, 31, 0], [36, 0, 31, 1], [39, 0, 33, 0], [131, 0, 50, 0], [40, 0, 48, 0]],
+"nodes": {
+"1": {
+"gui_position": Vector2(260, -180),
+"type": "InputX"
+},
+"10": {
+"auto_connect": true,
+"gui_position": Vector2(660, -180),
+"noise": SubResource("FastNoiseLite_qg7lp"),
+"type": "Noise3D",
+"y": 0.0
+},
+"100": {
+"auto_connect": true,
+"gui_position": Vector2(1380, 420),
+"type": "Distance2D",
+"x0": 0.0,
+"x1": 0.0,
+"y0": 0.0,
+"y1": 0.0
+},
+"101": {
+"gui_position": Vector2(1740, 280),
+"type": "Multiply"
+},
+"102": {
+"gui_position": Vector2(1560, 400),
+"type": "Subtract"
+},
+"103": {
+"gui_position": Vector2(1680, 400),
+"max": 200.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"104": {
+"gui_position": Vector2(1560, 520),
+"type": "Subtract"
+},
+"105": {
+"gui_position": Vector2(1840, 420),
+"max": 200.0,
+"min": 1.0,
+"type": "Clamp"
+},
+"106": {
+"gui_position": Vector2(1860, 300),
+"type": "Divide"
+},
+"108": {
+"gui_position": Vector2(1400, 700),
+"type": "InputY"
+},
+"109": {
+"gui_position": Vector2(1480, 700),
+"max": 30.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"110": {
+"b": 1.0,
+"gui_position": Vector2(1720, 700),
+"type": "Add"
+},
+"111": {
+"gui_position": Vector2(1840, 700),
+"type": "Divide"
+},
+"112": {
+"gui_position": Vector2(1620, 700),
+"type": "Divide"
+},
+"113": {
+"gui_position": Vector2(1400, 620),
+"gui_size": Vector2(545.339, 23.8821),
+"text": "Lower islands once they pass water level.",
+"type": "Comment"
+},
+"114": {
+"auto_connect": true,
+"gui_position": Vector2(2140, 400),
+"type": "Distance2D",
+"x0": 0.0,
+"x1": 0.0,
+"y0": 0.0,
+"y1": 0.0
+},
+"115": {
+"gui_position": Vector2(2620, 280),
+"type": "Multiply"
+},
+"117": {
+"gui_position": Vector2(2420, -180),
+"type": "Add"
+},
+"12": {
+"gui_position": Vector2(-60, -100),
+"name": &"height",
+"type": "Constant",
+"value": 10.0
+},
+"120": {
+"gui_position": Vector2(2280, 420),
+"type": "Subtract"
+},
+"121": {
+"gui_position": Vector2(2380, 420),
+"max": 100.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"124": {
+"gui_position": Vector2(2520, -180),
+"type": "Add"
+},
+"125": {
+"b": 20.0,
+"gui_position": Vector2(2540, 400),
+"type": "Multiply"
+},
+"126": {
+"gui_position": Vector2(2120, 200),
+"gui_size": Vector2(555.67, 58.1538),
+"name": &"Midnight Mountains",
+"text": "",
+"type": "Comment"
+},
+"127": {
+"b": 0.0,
+"gui_position": Vector2(2780, 280),
+"type": "Add"
+},
+"128": {
+"gui_position": Vector2(2200, -260),
+"gui_size": Vector2(427.372, 49.4373),
+"name": &"Combine",
+"text": "",
+"type": "Comment"
+},
+"13": {
+"gui_position": Vector2(780, -180),
+"type": "Multiply"
+},
+"131": {
+"b": 10.0,
+"gui_position": Vector2(1700, -120),
+"type": "Subtract"
+},
+"132": {
+"gui_position": Vector2(-100, 80),
+"name": &"ocean_rim_start",
+"type": "Constant",
+"value": 3100.0
+},
+"135": {
+"gui_position": Vector2(2080, 280),
+"type": "InputX"
+},
+"136": {
+"gui_position": Vector2(2100, 340),
+"type": "InputZ"
+},
+"137": {
+"b": 10.0,
+"gui_position": Vector2(2200, 260),
+"type": "Divide"
+},
+"138": {
+"b": 10.0,
+"gui_position": Vector2(2220, 360),
+"type": "Divide"
+},
+"140": {
+"auto_connect": true,
+"gui_position": Vector2(2340, 280),
+"noise": SubResource("FastNoiseLite_0ps4c"),
+"type": "Noise3D",
+"y": 0.0
+},
+"15": {
+"b": 0.05,
+"gui_position": Vector2(660, 240),
+"type": "Multiply"
+},
+"16": {
+"gui_position": Vector2(1000, 240),
+"max": 50.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"17": {
+"b": -50.0,
+"gui_position": Vector2(860, 240),
+"type": "Add"
+},
+"18": {
+"gui_position": Vector2(1120, 240),
+"type": "Add"
+},
+"2": {
+"gui_position": Vector2(260, -100),
+"type": "InputY"
+},
+"20": {
+"gui_position": Vector2(700, 360),
+"type": "Subtract"
+},
+"21": {
+"gui_position": Vector2(940, 360),
+"max": 0.0,
+"min": -100.0,
+"type": "Clamp"
+},
+"22": {
+"gui_position": Vector2(1080, 380),
+"type": "Add"
+},
+"23": {
+"b": -1.0,
+"gui_position": Vector2(820, 360),
+"type": "Multiply"
+},
+"24": {
+"gui_position": Vector2(-40, -20),
+"name": &"outside_rim_start",
+"type": "Constant",
+"value": 16000.0
+},
+"29": {
+"a": 4.0,
+"gui_position": Vector2(1000, -80),
+"type": "Subtract"
+},
+"3": {
+"gui_position": Vector2(260, -20),
+"type": "InputZ"
+},
+"30": {
+"gui_position": Vector2(1140, -80),
+"max": 4.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"31": {
+"gui_position": Vector2(1140, -180),
+"type": "Multiply"
+},
+"32": {
+"gui_position": Vector2(-60, 160),
+"name": &"offset",
+"type": "Constant",
+"value": -210.0
+},
+"33": {
+"gui_position": Vector2(1380, -60),
+"type": "Add"
+},
+"35": {
+"a": 0.0,
+"b": 1.0,
+"gui_position": Vector2(1000, -180),
+"type": "Add"
+},
+"36": {
+"b": -1.0,
+"gui_position": Vector2(1260, -60),
+"type": "Multiply"
+},
+"39": {
+"gui_position": Vector2(780, -80),
+"type": "Add"
+},
+"4": {
+"auto_connect": true,
+"gui_position": Vector2(2880, -180),
+"type": "OutputSDF"
+},
+"40": {
+"gui_position": Vector2(1380, -180),
+"type": "Subtract"
+},
+"41": {
+"b": 1000.0,
+"gui_position": Vector2(1260, -180),
+"type": "Multiply"
+},
+"42": {
+"gui_position": Vector2(1000, -260),
+"gui_size": Vector2(474.604, 57.175),
+"name": &"Volcano hole",
+"text": "",
+"type": "Comment"
+},
+"43": {
+"gui_position": Vector2(640, -260),
+"gui_size": Vector2(230.234, 55.4257),
+"name": &"Ground noise",
+"text": "",
+"type": "Comment"
+},
+"44": {
+"gui_position": Vector2(680, 160),
+"gui_size": Vector2(536.183, 62.0514),
+"name": &"Overall world shape",
+"text": "",
+"type": "Comment"
+},
+"45": {
+"gui_position": Vector2(-60, -260),
+"gui_size": Vector2(230.234, 55.4257),
+"name": &"Config",
+"text": "",
+"type": "Comment"
+},
+"46": {
+"gui_position": Vector2(260, -260),
+"gui_size": Vector2(230.234, 55.4257),
+"name": &"Vars",
+"text": "",
+"type": "Comment"
+},
+"48": {
+"gui_position": Vector2(2200, -180),
+"type": "Add"
+},
+"50": {
+"gui_position": Vector2(1860, -120),
+"max": 150.0,
+"min": 0.0,
+"type": "Clamp"
+},
+"51": {
+"gui_position": Vector2(1600, -260),
+"gui_size": Vector2(474.604, 57.175),
+"name": &"Volcano spike",
+"text": "",
+"type": "Comment"
+},
+"53": {
+"b": 1.0,
+"gui_position": Vector2(2020, -80),
+"type": "Multiply"
+},
+"55": {
+"b": 0.0,
+"gui_position": Vector2(2320, -180),
+"type": "Add"
+},
+"57": {
+"gui_position": Vector2(1420, 200),
+"gui_size": Vector2(555.67, 58.1538),
+"name": &"Islands",
+"text": "",
+"type": "Comment"
+},
+"6": {
+"auto_connect": true,
+"gui_position": Vector2(380, 20),
+"type": "Distance2D",
+"x0": 0.0,
+"y0": 0.0
+},
+"7": {
+"gui_position": Vector2(-60, -180),
+"name": &"scale",
+"type": "Constant",
+"value": 0.4
+},
+"8": {
+"gui_position": Vector2(400, -180),
+"type": "Multiply"
+},
+"88": {
+"auto_connect": true,
+"gui_position": Vector2(1380, 280),
+"noise": SubResource("ZN_FastNoiseLite_pn0d8"),
+"type": "FastNoise3D",
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"89": {
+"gui_position": Vector2(-60, 240),
+"name": &"island_height",
+"type": "Constant",
+"value": 7.0
+},
+"9": {
+"gui_position": Vector2(400, -80),
+"type": "Multiply"
+},
+"90": {
+"b": 1.0,
+"gui_position": Vector2(1540, 280),
+"type": "Multiply"
+}
+},
+"version": 2
+}
+
+[sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_mdr6i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a873f"]
+render_priority = 0
+shader = ExtResource("1_cktii")
+shader_parameter/noise_scale = 20.0
+shader_parameter/color_noise_scale = 50.0
+shader_parameter/sand_detail_scale = 100.0
+shader_parameter/grass_scale = 8.0
+shader_parameter/texture_blend = 0.6
+
+[node name="planet" type="Node3D"]
+
+[node name="VoxelLodTerrain" type="VoxelLodTerrain" parent="."]
+generator = SubResource("VoxelGeneratorGraph_n66pw")
+mesher = SubResource("VoxelMesherTransvoxel_mdr6i")
+view_distance = 1024
+lod_count = 8
+material = SubResource("ShaderMaterial_a873f")

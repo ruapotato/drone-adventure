@@ -12,8 +12,9 @@ extends Node3D
 
 @onready var UFO = preload("res://entities/ufo.tscn")
 #@onready var point_of_view = $pov
-@onready var dirt_voxels = $VoxelLodTerrain
-@onready var crystal_voxels = $VoxelLodTerrain2
+@onready var planet = $planet
+@onready var dirt_voxels
+@onready var crystal_voxels
 @onready var gui = $gui
 @onready var spawn = $spawn
 @onready var pause_screen = $pause_screen
@@ -64,8 +65,9 @@ var last_mouse_move = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#terrain_chop = city.find_child("terrain_cutout").get_children()
+	dirt_voxels = planet.find_child("VoxelLodTerrain")
 	dirt_vt = dirt_voxels.get_voxel_tool()
-	crystal_vt = crystal_voxels.get_voxel_tool()
+	crystal_vt = dirt_vt
 	
 	
 

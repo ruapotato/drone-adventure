@@ -5,7 +5,7 @@ extends RigidBody3D
 #==============================================================================
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var laser = preload("res://scenes/laser.tscn")
-@onready var animation_tree = get_node("chicken_wings/AnimationTree") # Kept for wings/body?
+@onready var animation_tree = get_node("chicken_wings/AnimationTree")
 @onready var camera = $head_piv/Camera3D
 @onready var head_mesh = $head_piv/chicken_head
 @onready var head_piv = $head_piv
@@ -21,7 +21,7 @@ extends RigidBody3D
 @onready var pause_screen = $"../pause_screen"
 @onready var vt = null
 @onready var skeleton = mesh.find_child("Skeleton3D")
-@onready var legs = $LegsNode # <<< NEW: Reference to your procedural legs node
+@onready var legs = $LegsNode
 
 #==============================================================================
 # --- Export Variables for Tuning ---
@@ -38,6 +38,10 @@ extends RigidBody3D
 @export var ground_detection_ray_length : float = 5.0
 @export var ground_threshold : float = 1.5
 @export var power_gain_on_ground : float = 25.0
+@export var hover_power_cost : float = 0.8 # <<< NEW: Power cost when hovering
+@export var hover_animation_speed : float = 0.2 # <<< NEW: Base wing flap speed
+@export var low_power_threshold : float = 15.0 # <<< NEW: When to start falling
+@export var low_power_fall_force : float = 10.0 # <<< NEW: How fast to fall when low
 
 #==============================================================================
 # --- Game State Variables ---
@@ -48,8 +52,8 @@ var dead_reset_counter = 0.0
 var inventory = {"crystals":0, "using":"gun"}
 var power_cell = 100.0
 var fire_cost = 3.0
-var power_cost = 0.5
-var power_gain = 5.0
+var power_cost = 0.5 # Cost when *moving*
+var power_gain = 5.0 # NOTE: This is now only used if NOT on ground (old fallback)
 var shoot_speed = 34
 var world = null
 var tutorial_mode = false
@@ -72,52 +76,39 @@ var _lerped_velocity = Vector3.ZERO
 #==============================================================================
 # --- Core Godot Functions ---
 #==============================================================================
-
 func _ready():
+	# ... (Keep as before, ensure LegsNode warning is there) ...
 	world = get_parent()
 	global_position = world.find_child("spawn").global_position if world.find_child("spawn") else Vector3.ZERO
 
 	if get_parent().find_child("is_tutorial"):
-		tutorial_mode = true
-		inventory = {"crystals":0, "using":"gun"}
-		print("Tutorial Mode Enabled")
+		tutorial_mode = true; inventory = {"crystals":0, "using":"gun"}; print("Tutorial Mode Enabled")
 	else:
 		var voxel_terrain = world.find_child("VoxelLodTerrain")
 		if voxel_terrain: vt = voxel_terrain.get_voxel_tool()
 		else: print("Warning: VoxelLodTerrain not found!")
-
-		save_index = get_parent().game_index
-		save_file = "user://savegame_" + str(save_index) + ".json"
+		save_index = get_parent().game_index; save_file = "user://savegame_" + str(save_index) + ".json"
 		var loaded_inventory = load_save(save_file)
 		if loaded_inventory: inventory = loaded_inventory; print("Save game loaded.")
 		else: print("No save game found, starting fresh."); inventory = {"crystals":0, "using":"gun"}
 
-	gravity_scale = 0
-	linear_damp = 2.0
-	angular_damp = 10.0
-	axis_lock_angular_z = true
-	axis_lock_angular_x = true
-
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	print("Chicken controller ready!")
+	gravity_scale = 0; linear_damp = 2.0; angular_damp = 10.0
+	axis_lock_angular_z = true; axis_lock_angular_x = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED); print("Chicken controller ready!")
 	last_velocity = linear_velocity
-	
-	# Check if LegsNode exists
-	if not legs:
-		print("WARNING: LegsNode not found at $LegsNode. Leg animations will not work.")
-
+	if not legs: print("WARNING: LegsNode not found at $LegsNode. Leg animations will not work.")
 
 func _input(event):
+	# ... (Keep as before) ...
 	if active and not is_paused() and event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_look_input = event.relative
 
 func _unhandled_input(event):
+	# ... (Keep as before) ...
 	if not active or is_paused() or dead: return
-
 	if event.is_action_pressed("select_gun"): inventory["using"] = "gun"; print("Selected: Gun")
 	if "land_making_gun" in inventory and event.is_action_pressed("select_build"): inventory["using"] = "land_making_gun"; print("Selected: Build Gun")
 	if "laser_gun" in inventory and event.is_action_pressed("select_laser"): inventory["using"] = "laser_gun"; print("Selected: Laser Gun")
-
 	if event.is_action_pressed("fire"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		if power_cell > fire_cost + 1:
@@ -126,8 +117,7 @@ func _unhandled_input(event):
 				"land_making_gun": draw_power(fire_cost); fire_landgun()
 				"laser_gun": fire_laser()
 		else: print("Not enough power to fire!")
-
-	if event.is_action_pressed("fire") and inventory["using"] == "laser_gun" and laser_obj:
+	if event.is_action_released("fire") and inventory["using"] == "laser_gun" and laser_obj:
 		laser_obj.queue_free(); laser_obj = null
 
 func _physics_process(delta):
@@ -135,6 +125,7 @@ func _physics_process(delta):
 	if not active or is_paused(): return
 
 	ground_check(delta)
+	var is_low_power = power_cell < low_power_threshold
 
 	# --- 1. Handle Look / Rotation ---
 	if _look_input != Vector2.ZERO:
@@ -146,6 +137,10 @@ func _physics_process(delta):
 	# --- 2. Handle Movement Input ---
 	var input_vector = Input.get_vector("strafe_left", "strafe_right", "move_forward", "move_backward")
 	var lift_input = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
+
+	# <<< NEW: Prevent going UP if low on power >>>
+	if is_low_power:
+		lift_input = min(0, lift_input) # Cannot go up, only down.
 
 	# --- 3. Calculate Target Velocity ---
 	var head_basis = head_piv.global_transform.basis
@@ -163,13 +158,28 @@ func _physics_process(delta):
 	var force = (_lerped_velocity - linear_velocity) * acceleration * mass
 	if combined_dir.length_squared() < 0.01 and linear_velocity.length_squared() > 0.1:
 		force = -linear_velocity * brake_strength * mass
+	
+	# <<< MODIFIED: Reduce force if low power? Optional >>>
+	# if is_low_power: force *= 0.5 
+
 	apply_central_force(force)
 
+	# <<< NEW: Apply low power fall force >>>
+	if is_low_power and not is_near_ground:
+		apply_central_force(Vector3.DOWN * low_power_fall_force * mass)
+
 	# --- 5. Power Management ---
-	if combined_dir.length_squared() > 0.01: draw_power(power_cost * delta)
-	else:
-		if is_near_ground: add_power(power_gain_on_ground * delta)
-		else: add_power(power_gain * delta)
+	# <<< MODIFIED: Add hover cost >>>
+	var is_moving = combined_dir.length_squared() > 0.01 or abs(lift_input) > 0.01
+
+	if is_near_ground:
+		add_power(power_gain_on_ground * delta) # Charge on ground
+	else: # In Air - Always costs power
+		var cost = hover_power_cost # Base cost for hovering
+		if is_moving:
+			cost = max(cost, power_cost) # Use higher cost if moving
+		draw_power(cost * delta)
+
 	if laser_obj and not draw_power(fire_cost * delta):
 		laser_obj.queue_free(); laser_obj = null
 
@@ -179,52 +189,52 @@ func _physics_process(delta):
 	do_shake(delta)
 	update_collision_size()
 	update_user_settings()
-	
-	# <<< MODIFIED: Call procedural leg animation >>>
-	update_leg_animations(delta)
-	
-	# You might still want wing/body animations here:
-	# animation_tree.set("parameters/SPEED/scale", linear_velocity.length() / move_speed)
+	update_leg_animations(delta) # Legs
+	update_wing_animations() # <<< NEW: Wings/Body
 
 	last_velocity = linear_velocity
 
 #==============================================================================
-# --- Ground Check / Walk (NEW / Adapted) ---
+# --- Ground Check / Walk ---
 #==============================================================================
 func ground_check(delta):
+	# ... (Keep as before) ...
 	var space_state = get_world_3d().direct_space_state
 	if not space_state: print("ERROR: Could not get 3D physics space state."); return
-
 	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * ground_detection_ray_length)
-	query.exclude = [self]
-	query.collision_mask = self.collision_mask
-
+	query.exclude = [self]; query.collision_mask = self.collision_mask
 	var result = space_state.intersect_ray(query)
-
-	if result:
-		_height_from_ground = global_position.distance_to(result.position)
-		is_near_ground = (_height_from_ground > 0 and _height_from_ground < ground_threshold)
-	else:
-		_height_from_ground = -1.0
-		is_near_ground = false
+	if result: _height_from_ground = global_position.distance_to(result.position); is_near_ground = (_height_from_ground > 0 and _height_from_ground < ground_threshold)
+	else: _height_from_ground = -1.0; is_near_ground = false
 
 func update_leg_animations(delta):
-	# <<< NEW: Calls your procedural animation function >>>
-	if not legs: # Check if the node exists
-		return
+	# ... (Keep as before) ...
+	if not legs: return
+	if is_near_ground: legs.animate_legs(delta, linear_velocity.length())
+	else: legs.animate_legs(delta, 0)
+
+func update_wing_animations():
+	# <<< NEW: Handles wing/body animation speed >>>
+	if not animation_tree or not animation_tree.active: return
+
+	var speed = linear_velocity.length()
+	var anim_speed_scale = 0.0
 
 	if is_near_ground:
-		# If near ground, pass current horizontal speed to legs
-		# We use .length() for simplicity, you might want XZ speed only.
-		legs.animate_legs(delta, linear_velocity.length())
-	else:
-		# If flying, tell legs speed is 0 (or whatever makes them retract/idle)
-		legs.animate_legs(delta, 0)
+		anim_speed_scale = 0.0 # Wings idle/folded on ground
+	elif speed < 0.5: # Arbitrary threshold for 'hovering'
+		anim_speed_scale = hover_animation_speed
+	else: # Flying with speed
+		anim_speed_scale = speed / move_speed # Scale 0-1 based on speed
 
-# ... (Keep Save/Load, Weapons, Power/Damage/Shield/Effects, Dead Logic, Visuals/Misc functions as before) ...
+	# Set the parameter - YOU MIGHT NEED TO CHANGE "SPEED/scale"
+	animation_tree.set("parameters/SPEED/scale", anim_speed_scale * 50)
+
+
 #==============================================================================
 # --- Save / Load Functions ---
 #==============================================================================
+# ... (Keep as before) ...
 func save_game():
 	if not save_file: print("Save file path not set."); return
 	var file = FileAccess.open(save_file, FileAccess.WRITE)
@@ -243,6 +253,7 @@ func load_save(path):
 #==============================================================================
 # --- Weapon / Fire Functions ---
 #==============================================================================
+# ... (Keep as before) ...
 func fire_normal():
 	if not unlocked_gun: return
 	var new_bullet = bullet.instantiate()
@@ -274,6 +285,7 @@ func fire_laser():
 #==============================================================================
 # --- Power / Damage / Shield / Effects ---
 #==============================================================================
+# ... (Keep as before) ...
 func figure_damage():
 	var impact_vector = last_velocity - linear_velocity
 	var impact_strength = impact_vector.length()

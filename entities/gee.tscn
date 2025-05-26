@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b83cj8y3wbpiy"]
+[gd_scene load_steps=9 format=3 uid="uid://b83cj8y3wbpiy"]
 
 [ext_resource type="Script" uid="uid://kal1r1iil53a" path="res://entities/gee.gd" id="1_ycbrj"]
 [ext_resource type="AudioStream" uid="uid://d2lcgmlugi1xi" path="res://audio/fart.wav" id="2_0itbt"]
@@ -9,6 +9,23 @@ rough = true
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gwqgu"]
 radius = 0.69
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5cl66"]
+size = Vector3(1.83344, 0.646484, 2.61377)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dq4xh"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0.145098)
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 2.39
+
+[sub_resource type="BoxMesh" id="BoxMesh_kxsoc"]
+size = Vector3(1.735, 0.04, 2.165)
 
 [node name="Gee" type="RigidBody3D"]
 physics_material_override = SubResource("PhysicsMaterial_46inw")
@@ -40,4 +57,23 @@ volume_db = -80.0
 
 [node name="Gee2" parent="." instance=ExtResource("3_5cl66")]
 
+[node name="play_as" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0936035, 0.931539)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0314026, 0.259821, -0.806885)
+shape = SubResource("BoxShape3D_5cl66")
+
+[node name="play_as_mesh" type="MeshInstance3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.182261, -1.04984)
+material_override = SubResource("StandardMaterial3D_dq4xh")
+mesh = SubResource("BoxMesh_kxsoc")
+
+[node name="mount" type="Node3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35521, -0.835564)
+
+[node name="Camera3D" type="Camera3D" parent="play_as"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.16646, -4.42656)
+
 [connection signal="finished" from="fart_sound" to="." method="_on_fart_sound_finished"]
+[connection signal="body_entered" from="play_as" to="." method="_on_play_as_body_entered"]

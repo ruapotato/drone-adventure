@@ -5,6 +5,8 @@ extends RigidBody3D
 @onready var crap_hole = $crap_hole
 # Make sure this path is correct for your scene!
 @onready var camera = $piv/SpringArm3D/Camera3D
+@onready var mount = $play_as/mount
+@onready var play_as_mesh = $play_as/play_as_mesh
 
 # --- Control & Physics Parameters ---
 @export var mouse_sensitivity = 0.004
@@ -13,7 +15,7 @@ extends RigidBody3D
 @export var max_rot_pitch = PI / 2.0
 @export var max_rot_roll = PI / 2.0
 
-var active = true # Start active for M&K
+var active = false
 var gass = 100.0
 var gass_use_rate = 10.0
 
@@ -29,10 +31,12 @@ var _current_yaw = 0.0
 
 # --- World Ref ---
 var world
+var drone
 var beans_found = 0
 
 func _ready():
 	world = get_parent()
+	drone = world.find_child("drone")
 	fart_sound.play()
 	fart_sound.volume_db = -80.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -53,6 +57,9 @@ func _physics_process(delta):
 		angular_velocity = Vector3.ZERO
 		fart_sound.volume_db = lerp(fart_sound.volume_db, -80.0, delta * 5)
 		return
+	
+	if active:
+		drone.global_position = mount.global_position
 
 	# --- 1. Rotation Logic (M&K - Direct Set) ---
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -87,13 +94,13 @@ func _physics_process(delta):
 	# <<< MODIFIED: Added back the call to world.play_as_drone() >>>
 	if gass <= 0 and active: # Check 'active' to ensure it only runs once
 		print("Out of gass! Switching to drone...")
+		#play_as_mesh.visible = true
+		drone.active = true
 		active = false # Deactivate this controller
 		
-		# Safely call the world function if it exists
-		if world and world.has_method("play_as_drone"):
-			world.play_as_drone()
-		else:
-			print("WARNING: World node or play_as_drone() method not found!")
+		#TODO move this to here.
+		world.play_as_drone()
+
 		return # Stop processing this frame after switching
 
 	# --- 5. Sound Logic ---
@@ -116,3 +123,11 @@ func bend_over(delta):
 # Ensures the fart sound loops.
 func _on_fart_sound_finished():
 	fart_sound.play()
+
+
+func _on_play_as_body_entered(body: Node3D) -> void:
+	if body == drone and gass != 0:
+		play_as_mesh.visible = false
+		active = true
+		drone.active = false
+		camera.current = true

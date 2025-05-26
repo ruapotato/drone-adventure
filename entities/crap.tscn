@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bp74fmyat7sox"]
+[gd_scene load_steps=6 format=3 uid="uid://5cuhbuam88xc"]
 
-[ext_resource type="Script" path="res://crap.gd" id="1_hrmwl"]
+[ext_resource type="Script" uid="uid://ddhdvjugkmvsc" path="res://entities/crap.gd" id="1_h2xg5"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_uu2te"]
 radius = 0.1
@@ -20,7 +20,7 @@ height_falloff = 1e+06
 edge_fade = 0.800007
 
 [node name="crap" type="RigidBody3D"]
-script = ExtResource("1_hrmwl")
+script = ExtResource("1_h2xg5")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_uu2te")

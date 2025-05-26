@@ -102,11 +102,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.113, 22.7489, -98.5438)
 visible = false
 
 [node name="city_loader" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 153.437, 80.4136, 238.765)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.996, 75.2189, 230.282)
 script = ExtResource("22_lo355")
 
 [node name="spawn" type="Node3D" parent="."]
-transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, 10.9778, 68.7611, 268.132)
+transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, -31.4633, 63.5664, 259.649)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="spawn"]
 transform = Transform3D(0.917755, 0, -0.397148, 0, 1, 0, 0.397148, 0, 0.917755, 0, -2.15637, 0)
@@ -121,10 +121,11 @@ mesh = SubResource("PlaneMesh_qxhjv")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spawn/MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_2rcxr")
 
-[node name="beans_world" parent="." instance=ExtResource("18_lakw3")]
-
 [node name="Gee" parent="." instance=ExtResource("19_pm21f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0659, 64.7628, 236.564)
 
 [node name="planet" parent="." instance=ExtResource("9_7r4gi")]
+
+[node name="beans_world" parent="." instance=ExtResource("18_lakw3")]
 
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

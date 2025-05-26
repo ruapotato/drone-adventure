@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://csbqpug6w6x1y"]
+[gd_scene load_steps=17 format=3 uid="uid://csbqpug6w6x1y"]
 
 [ext_resource type="Script" uid="uid://dc458u4m5d6io" path="res://entities/vehicle.gd" id="1_6dyft"]
 [ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_micnr"]
@@ -44,9 +44,27 @@ size = Vector3(1.64, 0.715, 0.26)
 [sub_resource type="BoxShape3D" id="BoxShape3D_6u0cd"]
 size = Vector3(0.295, 0.44, 1.92885)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_qi3mh"]
+size = Vector3(1.83344, 0.646484, 2.61377)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n6jve"]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+albedo_color = Color(1, 1, 1, 0.145098)
+metallic = 1.0
+roughness = 0.0
+emission_enabled = true
+emission = Color(1, 1, 0, 1)
+emission_energy_multiplier = 2.39
+
+[sub_resource type="BoxMesh" id="BoxMesh_5b6pp"]
+size = Vector3(1.735, 0.04, 2.165)
+
 [node name="VehicleBody3D" type="VehicleBody3D"]
 center_of_mass_mode = 1
 center_of_mass = Vector3(0, 0, 0.8)
+continuous_cd = true
 script = ExtResource("1_6dyft")
 
 [node name="FR" type="VehicleWheel3D" parent="."]
@@ -136,4 +154,22 @@ shape = SubResource("BoxShape3D_6u0cd")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.816205, 0.378, -1.145)
 shape = SubResource("BoxShape3D_6u0cd")
 
+[node name="play_as" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0314026, 0.259821, -0.806885)
+shape = SubResource("BoxShape3D_qi3mh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.304804, -1.04984)
+material_override = SubResource("StandardMaterial3D_n6jve")
+mesh = SubResource("BoxMesh_5b6pp")
+
+[node name="mount" type="Node3D" parent="play_as"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458429, -1.41546)
+
+[node name="Camera3D" type="Camera3D" parent="play_as"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.16646, -4.42656)
+
 [connection signal="finished" from="eng_sounds" to="." method="_on_eng_sounds_finished"]
+[connection signal="body_entered" from="play_as" to="." method="_on_play_as_body_entered"]

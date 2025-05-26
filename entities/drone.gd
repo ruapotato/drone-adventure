@@ -35,7 +35,7 @@ extends RigidBody3D
 @export var shake_intensity = 0.1
 @export var move_lerp_factor = 10.0
 @export var ground_detection_ray_length : float = 5.0
-@export var ground_threshold : float = 1.5 # How close to be 'on ground'
+@export var ground_threshold : float = 0.5 # How close to be 'on ground'
 @export var power_gain_on_ground : float = 25.0
 @export var hover_power_cost : float = 0.8
 @export var hover_animation_speed : float = 0.2
@@ -126,12 +126,13 @@ func _physics_process(delta):
 	if rotation.x != 0:
 		rotation.x = 0
 	if dead: dead_logic(delta); return
-	if not active:
-		var tmp_cam = get_viewport().get_camera_3d()
+	#if not active:
+		#var tmp_cam = get_viewport().get_camera_3d()
+		#var mount = tmp_cam.get_parent().find_child("mount")
 		
-		global_position = tmp_cam.global_position + Vector3(0,1,0)
-		linear_velocity = tmp_cam.get_parent().get_parent().get_parent().linear_velocity
-	if is_paused(): return
+		#global_position = mount.global_position
+		#linear_velocity = tmp_cam.get_parent().get_parent().get_parent().linear_velocity
+	if is_paused() or not active: return
 
 	ground_check(delta)
 	var is_low_power = power_cell < low_power_threshold

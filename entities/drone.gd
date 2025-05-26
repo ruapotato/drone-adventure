@@ -20,7 +20,6 @@ extends RigidBody3D
 @onready var mesh = $mesh
 @onready var pause_screen = $"../pause_screen"
 @onready var vt = null
-@onready var skeleton = mesh.find_child("Skeleton3D")
 @onready var legs = $LegsNode
 
 #==============================================================================
@@ -36,12 +35,15 @@ extends RigidBody3D
 @export var shake_intensity = 0.1
 @export var move_lerp_factor = 10.0
 @export var ground_detection_ray_length : float = 5.0
-@export var ground_threshold : float = 1.5
+@export var ground_threshold : float = 1.5 # How close to be 'on ground'
 @export var power_gain_on_ground : float = 25.0
-@export var hover_power_cost : float = 0.8 # <<< NEW: Power cost when hovering
-@export var hover_animation_speed : float = 0.2 # <<< NEW: Base wing flap speed
-@export var low_power_threshold : float = 15.0 # <<< NEW: When to start falling
-@export var low_power_fall_force : float = 10.0 # <<< NEW: How fast to fall when low
+@export var hover_power_cost : float = 0.8
+@export var hover_animation_speed : float = 0.2
+@export var low_power_threshold : float = 15.0
+@export var low_power_fall_force : float = 10.0
+@export var ground_hover_strength : float = 100.0 # <<< NEW: Force pushing up from ground
+@export var ground_hover_damping : float = 15.0 # <<< NEW: Force stopping bounce on ground
+@export var ground_friction : float = 5.0 # <<< NEW: How much 'grip' on the ground
 
 #==============================================================================
 # --- Game State Variables ---
@@ -52,8 +54,8 @@ var dead_reset_counter = 0.0
 var inventory = {"crystals":0, "using":"gun"}
 var power_cell = 100.0
 var fire_cost = 3.0
-var power_cost = 0.5 # Cost when *moving*
-var power_gain = 5.0 # NOTE: This is now only used if NOT on ground (old fallback)
+var power_cost = 0.5
+var power_gain = 5.0
 var shoot_speed = 34
 var world = null
 var tutorial_mode = false
@@ -77,10 +79,9 @@ var _lerped_velocity = Vector3.ZERO
 # --- Core Godot Functions ---
 #==============================================================================
 func _ready():
-	# ... (Keep as before, ensure LegsNode warning is there) ...
+	# ... (Keep as before) ...
 	world = get_parent()
 	global_position = world.find_child("spawn").global_position if world.find_child("spawn") else Vector3.ZERO
-
 	if get_parent().find_child("is_tutorial"):
 		tutorial_mode = true; inventory = {"crystals":0, "using":"gun"}; print("Tutorial Mode Enabled")
 	else:
@@ -91,7 +92,6 @@ func _ready():
 		var loaded_inventory = load_save(save_file)
 		if loaded_inventory: inventory = loaded_inventory; print("Save game loaded.")
 		else: print("No save game found, starting fresh."); inventory = {"crystals":0, "using":"gun"}
-
 	gravity_scale = 0; linear_damp = 2.0; angular_damp = 10.0
 	axis_lock_angular_z = true; axis_lock_angular_x = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED); print("Chicken controller ready!")
@@ -121,8 +121,17 @@ func _unhandled_input(event):
 		laser_obj.queue_free(); laser_obj = null
 
 func _physics_process(delta):
+	if rotation.z != 0:
+		rotation.z = 0
+	if rotation.x != 0:
+		rotation.x = 0
 	if dead: dead_logic(delta); return
-	if not active or is_paused(): return
+	if not active:
+		var tmp_cam = get_viewport().get_camera_3d()
+		
+		global_position = tmp_cam.global_position + Vector3(0,1,0)
+		linear_velocity = tmp_cam.get_parent().get_parent().get_parent().linear_velocity
+	if is_paused(): return
 
 	ground_check(delta)
 	var is_low_power = power_cell < low_power_threshold
@@ -137,10 +146,9 @@ func _physics_process(delta):
 	# --- 2. Handle Movement Input ---
 	var input_vector = Input.get_vector("strafe_left", "strafe_right", "move_forward", "move_backward")
 	var lift_input = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
-
-	# <<< NEW: Prevent going UP if low on power >>>
-	if is_low_power:
-		lift_input = min(0, lift_input) # Cannot go up, only down.
+	if is_low_power: lift_input = min(0, lift_input)
+	# <<< NEW: Prevent pushing DOWN if near ground (allow UP for jumping) >>>
+	if is_near_ground: lift_input = max(0, lift_input)
 
 	# --- 3. Calculate Target Velocity ---
 	var head_basis = head_piv.global_transform.basis
@@ -155,31 +163,37 @@ func _physics_process(delta):
 	_lerped_velocity = lerp(_lerped_velocity, target_velocity, delta * move_lerp_factor)
 
 	# --- 4. Apply Forces ---
-	var force = (_lerped_velocity - linear_velocity) * acceleration * mass
+	var move_force = (_lerped_velocity - linear_velocity) * acceleration * mass
 	if combined_dir.length_squared() < 0.01 and linear_velocity.length_squared() > 0.1:
-		force = -linear_velocity * brake_strength * mass
-	
-	# <<< MODIFIED: Reduce force if low power? Optional >>>
-	# if is_low_power: force *= 0.5 
+		move_force = -linear_velocity * brake_strength * mass
 
-	apply_central_force(force)
+	# <<< NEW: Ground Hover & Low Power Fall Logic >>>
+	if is_near_ground:
+		var target_height = ground_threshold * 0.8 # Aim slightly below threshold
+		var height_error = target_height - _height_from_ground
+		var hover_force_y = height_error * ground_hover_strength - linear_velocity.y * ground_hover_damping
+		apply_central_force(Vector3.UP * hover_force_y * mass) # Apply hover force
 
-	# <<< NEW: Apply low power fall force >>>
-	if is_low_power and not is_near_ground:
+		# Apply ground friction
+		var horizontal_velocity = linear_velocity * Vector3(1, 0, 1)
+		apply_central_force(-horizontal_velocity * ground_friction * mass)
+
+		# Prevent input force from pushing down
+		move_force.y = max(0, move_force.y)
+
+	elif is_low_power: # Only apply fall if NOT near ground
 		apply_central_force(Vector3.DOWN * low_power_fall_force * mass)
+		move_force.y = min(0, move_force.y) # Prevent input force from pushing up
+
+	apply_central_force(move_force) # Apply input force
 
 	# --- 5. Power Management ---
-	# <<< MODIFIED: Add hover cost >>>
-	var is_moving = combined_dir.length_squared() > 0.01 or abs(lift_input) > 0.01
-
-	if is_near_ground:
-		add_power(power_gain_on_ground * delta) # Charge on ground
-	else: # In Air - Always costs power
-		var cost = hover_power_cost # Base cost for hovering
-		if is_moving:
-			cost = max(cost, power_cost) # Use higher cost if moving
+	var is_moving = combined_dir.length_squared() > 0.01 or (abs(lift_input) > 0.01 and not is_near_ground)
+	if is_near_ground: add_power(power_gain_on_ground * delta)
+	else:
+		var cost = hover_power_cost
+		if is_moving: cost = max(cost, power_cost)
 		draw_power(cost * delta)
-
 	if laser_obj and not draw_power(fire_cost * delta):
 		laser_obj.queue_free(); laser_obj = null
 
@@ -189,16 +203,15 @@ func _physics_process(delta):
 	do_shake(delta)
 	update_collision_size()
 	update_user_settings()
-	update_leg_animations(delta) # Legs
-	update_wing_animations() # <<< NEW: Wings/Body
-
+	update_leg_animations(delta)
+	update_wing_animations()
 	last_velocity = linear_velocity
 
 #==============================================================================
 # --- Ground Check / Walk ---
 #==============================================================================
+# ... (Keep as before) ...
 func ground_check(delta):
-	# ... (Keep as before) ...
 	var space_state = get_world_3d().direct_space_state
 	if not space_state: print("ERROR: Could not get 3D physics space state."); return
 	var query = PhysicsRayQueryParameters3D.create(global_position, global_position + Vector3.DOWN * ground_detection_ray_length)
@@ -214,22 +227,13 @@ func update_leg_animations(delta):
 	else: legs.animate_legs(delta, 0)
 
 func update_wing_animations():
-	# <<< NEW: Handles wing/body animation speed >>>
+	# ... (Keep as before, ensure param name matches your tree) ...
 	if not animation_tree or not animation_tree.active: return
-
-	var speed = linear_velocity.length()
-	var anim_speed_scale = 0.0
-
-	if is_near_ground:
-		anim_speed_scale = 0.0 # Wings idle/folded on ground
-	elif speed < 0.5: # Arbitrary threshold for 'hovering'
-		anim_speed_scale = hover_animation_speed
-	else: # Flying with speed
-		anim_speed_scale = speed / move_speed # Scale 0-1 based on speed
-
-	# Set the parameter - YOU MIGHT NEED TO CHANGE "SPEED/scale"
+	var speed = linear_velocity.length(); var anim_speed_scale = 0.0
+	if is_near_ground: anim_speed_scale = 0.0
+	elif speed < 0.5: anim_speed_scale = hover_animation_speed
+	else: anim_speed_scale = speed / move_speed
 	animation_tree.set("parameters/SPEED/scale", anim_speed_scale * 50)
-
 
 #==============================================================================
 # --- Save / Load Functions ---
@@ -349,8 +353,9 @@ func dead_logic(delta):
 # --- Visuals / Misc ---
 #==============================================================================
 func update_user_settings():
-	var use_lander = "lander_skin" in inventory and inventory["lander_skin"]
-	ingenuity_mesh.visible = use_lander; mesh.visible = not use_lander
+	pass
+	#var use_lander = "lander_skin" in inventory and inventory["lander_skin"]
+	#ingenuity_mesh.visible = use_lander; mesh.visible = not use_lander
 
 func is_paused():
 	return pause_screen != null and pause_screen.visible

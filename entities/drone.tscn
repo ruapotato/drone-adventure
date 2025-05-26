@@ -1,13 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://5ti8gwrj7tha"]
+[gd_scene load_steps=34 format=3 uid="uid://5ti8gwrj7tha"]
 
 [ext_resource type="Script" uid="uid://f8xifi7wely8" path="res://entities/drone.gd" id="1_qapsr"]
-[ext_resource type="PackedScene" uid="uid://be4q3x2kcbrn0" path="res://import/drone_import.tscn" id="2_ns1cx"]
 [ext_resource type="Script" uid="uid://dfjrm1r376qcq" path="res://scripts/drone_sound.gd" id="3_f4ikt"]
 [ext_resource type="PackedScene" uid="uid://bn01ua1n810ar" path="res://import/chicken_head.glb" id="3_vnpas"]
 [ext_resource type="AudioStream" uid="uid://1e03f26q15tj" path="res://import/drone_loop.wav" id="3_vses7"]
 [ext_resource type="AudioStream" uid="uid://bkwflni7w84lm" path="res://import/Audio/forceField_004.ogg" id="5_pxt4h"]
 [ext_resource type="AudioStream" uid="uid://ul3s6jsd6kwb" path="res://import/Audio/explosionCrunch_001.ogg" id="6_22p5i"]
-[ext_resource type="PackedScene" uid="uid://b7c7w8tl7hh37" path="res://import/ingenuity_import.tscn" id="7_lkp43"]
 [ext_resource type="PackedScene" uid="uid://dmuhcsl8wg0ug" path="res://import/drone_gun_import.tscn" id="8_si1r6"]
 [ext_resource type="Script" uid="uid://bshu4jm72uder" path="res://entities/legs.gd" id="9_812hj"]
 [ext_resource type="PackedScene" uid="uid://cqqtiu3evspok" path="res://import/chicken_body.glb" id="11_jssfm"]
@@ -168,10 +166,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0227404, 0.231466)
 [node name="speedCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_xm54y")
 
-[node name="mesh" parent="." instance=ExtResource("2_ns1cx")]
-transform = Transform3D(0.0314283, 0, 0.999506, 0, 1, 0, -0.999506, 0, 0.0314283, 0.000589579, -0.00212165, 0.00135947)
-visible = false
-
 [node name="drone_sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_vses7")
 autoplay = true
@@ -207,10 +201,6 @@ one_shot = true
 explosiveness = 0.2
 process_material = SubResource("ParticleProcessMaterial_isdd4")
 draw_pass_1 = SubResource("SphereMesh_jvigt")
-
-[node name="ingenuity_mesh" parent="." instance=ExtResource("7_lkp43")]
-transform = Transform3D(0.145, 0, 0, 0, 0.145, 0, 0, 0, 0.145, 0, -0.0380199, 0)
-visible = false
 
 [node name="feet_area" type="Area3D" parent="."]
 

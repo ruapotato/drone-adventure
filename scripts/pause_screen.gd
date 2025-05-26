@@ -64,6 +64,10 @@ func _unhandled_input(event):
 			button_index = 0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if not visible:
+		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
+			print("MOUSE BUG")
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 	if visible:
 		show_selected()
 		if drone.tutorial_mode:

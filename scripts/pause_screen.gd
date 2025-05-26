@@ -38,8 +38,10 @@ func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
 		if visible:
 			Engine.time_scale = 1.0
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 		else:
 			Engine.time_scale = 0.01
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		visible = !visible
 	if visible and not in_sub_menu:
 		if event.is_action_pressed("menu_select"):

@@ -124,6 +124,7 @@ size = Vector3(0.09, 0.035, 0.09)
 
 [node name="drone" type="RigidBody3D"]
 mass = 0.22
+continuous_cd = true
 angular_damp = 100.0
 script = ExtResource("1_qapsr")
 

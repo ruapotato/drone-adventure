@@ -146,6 +146,7 @@ func _on_eng_sounds_finished():
 
 func _on_play_as_body_entered(body: Node3D) -> void:
 	if body == drone and not crashed: # Only allow entry if not crashed
+		reparent(world)
 		drone.active = false
 		camera.current = true
 		play_as = true

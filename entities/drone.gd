@@ -26,7 +26,7 @@ extends RigidBody3D
 # --- Export Variables for Tuning ---
 #==============================================================================
 @export var mouse_sensitivity = 0.003
-@export var move_speed = 20.0
+@export var move_speed = 40.0
 @export var lift_speed = 15.0
 @export var acceleration = 60.0
 @export var brake_strength = 5.0

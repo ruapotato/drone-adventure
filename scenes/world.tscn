@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://gqqkstfosimv"]
+[gd_scene load_steps=21 format=3 uid="uid://gqqkstfosimv"]
 
 [ext_resource type="Script" uid="uid://cjvcaas3hsam7" path="res://scripts/world.gd" id="1_5aupy"]
 [ext_resource type="PackedScene" uid="uid://b2gd4upmu816b" path="res://scenes/planet.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://lmxejmktuun0" path="res://scenes/water.tscn" id="10_w7kh3"]
+[ext_resource type="Script" uid="uid://dsu2smu1bimcd" path="res://scripts/water.gd" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://scenes/spawner.tscn" id="17_1oplg"]
 [ext_resource type="PackedScene" uid="uid://cwswl06gstkdc" path="res://scenes/beans_world.tscn" id="18_lakw3"]
 [ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="18_thmgp"]
@@ -127,5 +129,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0659, 64.7628, 236.564)
 [node name="planet" parent="." instance=ExtResource("9_7r4gi")]
 
 [node name="beans_world" parent="." instance=ExtResource("18_lakw3")]
+
+[node name="water" parent="." instance=ExtResource("10_w7kh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.115, 0)
+script = ExtResource("11_e3hyu")
 
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

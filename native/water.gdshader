@@ -1,92 +1,63 @@
+// Simple Water Shader v3 (Godot 4.x) - No Vertex Displacement
 shader_type spatial;
+// Enable transparency blending
+render_mode blend_mix;
 
-uniform vec3 color : source_color;
-uniform vec3 color2 : source_color;
-uniform float metallic : hint_range(0.0,1.0) = 0;
-uniform float roughness : hint_range(0.0,1.0) = 0.02;
-uniform sampler2D texture_normal;
-uniform sampler2D texture_normal2;
-uniform sampler2D wave;
-uniform vec2 wave_dir = vec2(2.0,0.0);
-uniform vec2 wave_dir2 = vec2(0.0,1.0);
-uniform float time_scale : hint_range(0.0, 0.5) = 0.025;
-uniform float noise_scale = 10.0;
-uniform float height_scale = 0.15;
+// --- Uniforms (Control Panel) ---
+uniform vec4 water_color : source_color = vec4(0.1, 0.3, 0.5, 0.8); // RGBA Color
 
-uniform vec4 color_deep : source_color;
-uniform vec4 color_shallow : source_color;
-uniform float beers_law = 2.0;
-uniform float depth_offset = -0.75;
-uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
+// Normal Distortion (Fragment Shimmer Effect)
+uniform float normal_scale : hint_range(1.0, 50.0) = 15.0;    // Scale for normal shimmer pattern (Lower = larger pattern)
+uniform float normal_speed : hint_range(0.1, 5.0) = 0.7;      // Speed for normal shimmer
+uniform float normal_strength : hint_range(0.0, 0.5) = 0.1;  // Strength of normal shimmer (Controls visual intensity)
 
-uniform float edge_scale = 0.1;
-uniform float near = 1.0;
-uniform float far = 100.0;
-uniform vec3 edge_color : source_color;
+// PBR Surface Properties
+uniform float roughness : hint_range(0.0, 1.0) = 0.08;      // Controls sharpness of reflections/highlights
 
-// Varying vars
-varying float height;
+// --- Varyings ---
+// Pass world position to the fragment shader for wave calculation
 varying vec3 world_pos;
 
-
-float edge(float depth)
-{
-	depth = 2.0 * depth - 1.0;
-	return near * far / (far + depth * (near - far));
-}
-
-float forsnail(float amount, vec3 normal, vec3 view)
-{
-	vec3 norm_norm = normalize(normal);
-	vec3 norm_view = normalize(view);
-	return pow((1.0 - clamp(dot(norm_norm, norm_view), 0.0, 1.0)), amount);
-	//return pow((1.0 - clamp(dot(normalized(normal), normalized(view)), 0.0, 1.0)), amount);
-}
-/*
-void vertex()
-{
+// --- Vertex Shader ---
+// Minimal: Only calculates world position needed by the fragment shader.
+// NO vertex displacement is performed here.
+void vertex() {
+	// Calculate vertex position in world space for consistent wave patterns in fragment shader
 	world_pos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
-	height = texture(wave, world_pos.xz /noise_scale + TIME * time_scale).r;
-	VERTEX.y += height * height_scale;
 }
-*/
-void fragment() 
-{
-	// Depth stuff
-	
-	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).r * 2.0 - 1.0;
-	float depth = PROJECTION_MATRIX[3][2] / (depth_texture + PROJECTION_MATRIX[2][2]);
-	float depth_blend = exp((depth+VERTEX.z + depth_offset) * -beers_law);
-	depth_blend = clamp(1.0 - depth_blend, 0.0, 1.0);
-	float depth_blend_power = clamp(pow(depth_blend, 2.5), 0.0, 1.0);
-	vec3 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, depth_blend_power * 2.5).rgb;
-	vec3 depth_color = mix(color_shallow.rgb, color_deep.rgb, depth_blend_power);
-	vec3 color3 = mix(screen_color * depth_color, depth_color * 0.25, depth_blend_power * 0.5);
-	
-	float z_depth = edge(texture(DEPTH_TEXTURE, SCREEN_UV).x);
-	float z_pos = edge(FRAGCOORD.z);
-	float z_diff = z_depth - z_pos;
-	
-	
-	
-	vec2 time = (TIME * wave_dir) * time_scale;
-	vec2 time2 = (TIME * wave_dir2) * time_scale;
-	
-	vec3 normal_1 = texture(texture_normal, world_pos.xz + time).rgb;
-	vec3 normal_2 = texture(texture_normal2, world_pos.xz + time2).rgb;
-	vec3 normal_blend = mix(normal_1, normal_2, 0.5);
-	
-	float forsnail = forsnail(6.0, NORMAL, VIEW);
-	vec3 surface_color = mix(color, color2, forsnail);
-	//vec3 normal_blend = mix(texture(texture_normal,UV).rgb, texture(texture_normal2,UV).rgb);
-	//vec3 normal = texture(texture_normal, UV).rgb;
 
-	//ALBEDO = mix(surface_color, color3, 0.75);
-	vec3 depth_color_adj = mix(edge_color, color3, step(edge_scale, z_diff));
-	ALBEDO = clamp(surface_color + depth_color_adj, vec3(0.0), vec3(1.0) );
-	METALLIC = metallic;
-	ROUGHNESS = roughness;
-	NORMAL_MAP = normal_blend;
-	// Place fragment code here.
+// --- Fragment Shader ---
+// Calculates final color, applies normal distortion for shimmering surface using combined waves
+void fragment() {
+	// --- Calculate Normal Distortion ---
+	// Use multiple combined waves based on world position and time for a more organic shimmer.
+	float time_factor_norm = TIME * normal_speed;
+
+	// Wave Layer 1 for Normals (using world_pos X & Z)
+	float wave1_n_x = sin(world_pos.x * normal_scale * 1.1 + time_factor_norm * 1.2);
+	float wave1_n_z = cos(world_pos.z * normal_scale * 0.9 + time_factor_norm * 0.8);
+
+	// Wave Layer 2 for Normals (different inputs/speeds)
+	float wave2_n_x = cos(world_pos.z * normal_scale * 1.4 + time_factor_norm * 0.7); // Use Z for X component
+	float wave2_n_z = sin(world_pos.x * normal_scale * 0.6 + time_factor_norm * 1.1); // Use X for Z component
+
+	// Combine normal wave components. Mixing components like this adds complexity vs simple averaging.
+	float offset_x = (wave1_n_x + wave2_n_z) * 0.5; // Mix components from different waves/axes
+	float offset_z = (wave1_n_z + wave2_n_x) * 0.5; // Mix components from different waves/axes
+
+	// Create the final offset vector scaled by normal_strength.
+	// This represents a small push to the normal vector in the X and Z directions (relative to world).
+	vec3 normal_offset = vec3(offset_x * normal_strength, 0.0, offset_z * normal_strength);
+
+	// --- Apply Distortion & Calculate Final Color ---
+	// Add the small offset to the mesh's base normal and re-normalize it.
+	// This modified normal affects how light reflects off the surface.
+	vec3 perturbed_normal = normalize(NORMAL + normal_offset);
+
+	// Assign the final calculated values to the shader outputs
+	NORMAL = perturbed_normal; // Use the perturbed normal for lighting calculations
+	ALBEDO = water_color.rgb;  // Set the base color (from uniform)
+	ALPHA = water_color.a;     // Set the transparency (from uniform)
+	ROUGHNESS = roughness;     // Set the surface roughness (from uniform)
+	METALLIC = 0.0;            // Water is non-metallic
 }

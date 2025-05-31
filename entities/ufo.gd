@@ -17,7 +17,7 @@ var start_life = 84
 var life = start_life
 var last_updated_life = life
 var hurt_counter = 0
-var drone
+var chicken
 var world
 var dead = false
 var dead_reset_counter = 0
@@ -25,10 +25,10 @@ var dead_reset_counter = 0
 func _ready():
 	weak_point.add_collision_exception_with(self)
 	gravity_scale = 0
-	drone = get_drone()
-	world = drone.world
+	chicken = get_chicken()
+	world = chicken.world
 	global_position = spawn_point
-	var parent_pos = drone.global_position
+	var parent_pos = chicken.global_position
 	spawn_point.x = parent_pos.x
 	spawn_point.z = parent_pos.z
 	hover_point.x = parent_pos.x
@@ -37,11 +37,11 @@ func _ready():
 	world.boss_max_life = life
 	world.boss_life = life
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 func spawn_mini():
 	flash_sound.play()
@@ -51,8 +51,8 @@ func spawn_mini():
 	
 	#effects
 	flash_light.light_energy = 50
-	if drone.shake < 0.2:
-		drone.shake += .05
+	if chicken.shake < 0.2:
+		chicken.shake += .05
 
 func process_light(delta):
 	if flash_light.light_energy > 0:
@@ -93,12 +93,12 @@ func _process(delta):
 	if life <= 0:
 		expload_effect.emitting = true
 		dead_reset_counter = 7
-		drone.shake = .5
+		chicken.shake = .5
 		flash_light.light_energy = 50.0
 		dead = true
 		world.boss_max_life = null
 		world.boss_life = null
-		drone.world.add_crystal_to_world(randi_range(100,300),global_position)
+		chicken.world.add_crystal_to_world(randi_range(100,300),global_position)
 		#queue_free()
 
 	if global_position.distance_to(hover_point) < 2:

@@ -31,12 +31,12 @@ var _current_yaw = 0.0
 
 # --- World Ref ---
 var world
-var drone
+var chicken
 var beans_found = 0
 
 func _ready():
 	world = get_parent()
-	drone = world.find_child("drone")
+	chicken = world.find_child("chicken")
 	fart_sound.play()
 	fart_sound.volume_db = -80.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -59,7 +59,7 @@ func _physics_process(delta):
 		return
 	
 	if active:
-		drone.global_position = mount.global_position
+		chicken.global_position = mount.global_position
 
 	# --- 1. Rotation Logic (M&K - Direct Set) ---
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -91,15 +91,15 @@ func _physics_process(delta):
 		crap_timer = crap_every
 
 	# --- 4. Out of Gass Check ---
-	# <<< MODIFIED: Added back the call to world.play_as_drone() >>>
+	# <<< MODIFIED: Added back the call to world.play_as_chicken() >>>
 	if gass <= 0 and active: # Check 'active' to ensure it only runs once
-		print("Out of gass! Switching to drone...")
+		print("Out of gass! Switching to chicken...")
 		#play_as_mesh.visible = true
-		drone.active = true
+		chicken.active = true
 		active = false # Deactivate this controller
 		
 		#TODO move this to here.
-		world.play_as_drone()
+		world.play_as_chicken()
 
 		return # Stop processing this frame after switching
 
@@ -126,8 +126,11 @@ func _on_fart_sound_finished():
 
 
 func _on_play_as_body_entered(body: Node3D) -> void:
-	if body == drone and gass != 0:
+	if body == chicken and gass != 0:
+		return
+		print("Play as Gee")
+		
 		play_as_mesh.visible = false
 		active = true
-		drone.active = false
+		chicken.active = false
 		camera.current = true

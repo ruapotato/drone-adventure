@@ -9,7 +9,7 @@ var crashed = false
 var beeing_helped = false
 var tp_cooldown = 0.0 # Initialize to 0.0
 var time_to_live_crashed = 60
-var drone
+var chicken
 var world
 var play_as = false
 
@@ -23,16 +23,16 @@ var max_brake_force = 10.0 # Added brake force
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
-	world = drone.get_parent()
+	chicken = get_chicken()
+	world = chicken.get_parent()
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	# Safer loop: Check if get_parent() returns null
 	while root_i_hope and root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
 	if root_i_hope:
-		return root_i_hope.find_child("drone")
+		return root_i_hope.find_child("chicken")
 	else:
 		print("Error: Could not find 'world' node.")
 		return null
@@ -63,7 +63,7 @@ func _process(delta):
 	# --- Handle Movement & Control ---
 	if play_as:
 		handle_player_input(delta)
-		drone.global_position = mount.global_position
+		chicken.global_position = mount.global_position
 
 		# Stuck crash detection (only if player is trying to move forward)
 		var forward_input = Input.get_action_strength("move_forward")
@@ -123,9 +123,9 @@ func process_crashed_state(delta):
 
 	if play_as:
 		# Eject player
-		if drone:
-			drone.active = true
-			drone.camera.current = true
+		if chicken:
+			chicken.active = true
+			chicken.camera.current = true
 		camera.current = false # Deactivate car camera
 		play_as = false
 
@@ -145,13 +145,14 @@ func _on_eng_sounds_finished():
 
 
 func _on_play_as_body_entered(body: Node3D) -> void:
-	if body == drone and not crashed: # Only allow entry if not crashed
-		reparent(world)
-		drone.active = false
-		camera.current = true
-		play_as = true
-		stuck_timer = 0.0 # Reset stuck timer on entry
-		# Reset engine/steering when player takes over
-		engine_force = 0.0
-		steering = 0.0
-		brake = 0.0
+	if body == chicken and not crashed: # Only allow entry if not crashed
+		if chicken.active:
+			reparent(world)
+			chicken.active = false
+			camera.current = true
+			play_as = true
+			stuck_timer = 0.0 # Reset stuck timer on entry
+			# Reset engine/steering when player takes over
+			engine_force = 0.0
+			steering = 0.0
+			brake = 0.0

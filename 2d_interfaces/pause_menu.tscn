@@ -1,0 +1,110 @@
+[gd_scene load_steps=12 format=3 uid="uid://d146bwqv6ko3u"]
+
+[ext_resource type="Script" path="res://2d_interfaces/pause_menu.gd" id="1_auh0v"]
+[ext_resource type="StyleBox" path="res://2d_interfaces/back2.tres" id="2_m6o3c"]
+[ext_resource type="StyleBox" path="res://2d_interfaces/back1.tres" id="3_svv4k"]
+[ext_resource type="Texture2D" uid="uid://b26n5qiywwtpg" path="res://images/controls.png" id="4_qfi3h"]
+
+[sub_resource type="Theme" id="Theme_g2yde"]
+Button/font_sizes/font_size = 37
+Button/styles/disabled = ExtResource("2_m6o3c")
+Button/styles/focus = ExtResource("2_m6o3c")
+Button/styles/hover = ExtResource("2_m6o3c")
+Button/styles/normal = ExtResource("3_svv4k")
+Button/styles/pressed = ExtResource("2_m6o3c")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vka5b"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1whbr"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6d3ps"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oy6s3"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xe72u"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_wfab7"]
+Button/font_sizes/font_size = 37
+Button/styles/disabled = SubResource("StyleBoxFlat_vka5b")
+Button/styles/focus = SubResource("StyleBoxFlat_1whbr")
+Button/styles/hover = SubResource("StyleBoxFlat_6d3ps")
+Button/styles/normal = SubResource("StyleBoxFlat_oy6s3")
+Button/styles/pressed = SubResource("StyleBoxFlat_xe72u")
+
+[node name="pause_menu" type="Node2D"]
+script = ExtResource("1_auh0v")
+
+[node name="resume" type="Button" parent="."]
+offset_left = 771.0
+offset_top = 433.0
+offset_right = 956.0
+offset_bottom = 488.0
+theme = SubResource("Theme_g2yde")
+text = "Resume"
+
+[node name="reset_level" type="Button" parent="."]
+offset_left = 777.0
+offset_top = 715.0
+offset_right = 1143.0
+offset_bottom = 781.0
+theme = SubResource("Theme_wfab7")
+text = "restart level"
+
+[node name="reload" type="Button" parent="."]
+offset_left = 777.0
+offset_top = 619.0
+offset_right = 1143.0
+offset_bottom = 685.0
+theme = SubResource("Theme_wfab7")
+text = "reload checkpoint"
+
+[node name="back_to_hub" type="Button" parent="."]
+offset_left = 777.0
+offset_top = 814.0
+offset_right = 1143.0
+offset_bottom = 880.0
+theme = SubResource("Theme_wfab7")
+text = "Back To Hub"
+
+[node name="exit" type="Button" parent="."]
+offset_left = 987.0
+offset_top = 961.0
+offset_right = 1149.0
+offset_bottom = 1016.0
+theme = SubResource("Theme_wfab7")
+text = "exit"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1558, 411)
+texture = ExtResource("4_qfi3h")
+
+[connection signal="pressed" from="resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="reset_level" to="." method="_on_reset_level_pressed"]
+[connection signal="pressed" from="reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="back_to_hub" to="." method="_on_back_to_hub_pressed"]
+[connection signal="pressed" from="exit" to="." method="_on_exit_pressed"]

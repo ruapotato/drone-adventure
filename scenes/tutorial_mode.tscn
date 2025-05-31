@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://brhpowtmjnfh3"]
 
-[ext_resource type="Script" uid="uid://cs5n4jxy7jviy" path="res://tutorial_mode.gd" id="1_suaj1"]
-[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="2_i4lfi"]
-[ext_resource type="PackedScene" uid="uid://c6sueha11ti5r" path="res://player.tscn" id="3_g0ljd"]
-[ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://spawner.tscn" id="5_tj68u"]
-[ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://gui.tscn" id="6_y83ga"]
-[ext_resource type="PackedScene" uid="uid://50tipirf2hql" path="res://city.tscn" id="7_65q51"]
+[ext_resource type="Script" uid="uid://cs5n4jxy7jviy" path="res://scripts/tutorial_mode.gd" id="1_suaj1"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/chicken_spirit.tscn" id="2_i4lfi"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="3_g0ljd"]
+[ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://scenes/spawner.tscn" id="5_tj68u"]
+[ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://scenes/gui.tscn" id="6_y83ga"]
+[ext_resource type="PackedScene" uid="uid://50tipirf2hql" path="res://scenes/city.tscn" id="7_65q51"]
 [ext_resource type="AudioStream" uid="uid://dq8n7qjii8560" path="res://import/Audio/doorClose_002.ogg" id="8_jw10d"]
-[ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://pause_screen.tscn" id="9_5utek"]
-[ext_resource type="PackedScene" uid="uid://dwff7qo2uv252" path="res://controls.tscn" id="9_ngre0"]
+[ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://scenes/pause_screen.tscn" id="9_5utek"]
+[ext_resource type="PackedScene" uid="uid://dwff7qo2uv252" path="res://scenes/controls.tscn" id="9_ngre0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u04vj"]
 

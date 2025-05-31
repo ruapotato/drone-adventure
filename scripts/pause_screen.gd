@@ -7,21 +7,21 @@ extends Node2D
 @onready var button_order = [reuseme_button,settings_button,exit_button]
 var button_index = 0
 
-var drone
+var chicken
 var world
 var startup_screen
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
-	world = drone.world
+	chicken = get_chicken()
+	world = chicken.get_parent()
 	startup_screen = world.get_parent()
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 	
 func show_selected():
 	var selected = button_order[button_index]
@@ -66,14 +66,14 @@ func _unhandled_input(event):
 func _process(delta):
 	if not visible:
 		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
-			print("MOUSE BUG")
+			#print("MOUSE BUG")
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) 
 	if visible:
 		show_selected()
-		if drone.tutorial_mode:
+		if chicken.tutorial_mode:
 			if $contols.visible:
 				$contols.visible = false
-		#if "lander_skin" in drone.inventory:
+		#if "lander_skin" in chicken.inventory:
 		#	if not $settings.visible:
 		#		$settings.visible = true
 
@@ -84,8 +84,8 @@ func _on_reuseme_pressed():
 
 
 #func _on_settings_pressed():
-#	if "lander_skin" in drone.inventory:
-#		drone.inventory["lander_skin"] = !drone.inventory["lander_skin"]
+#	if "lander_skin" in chicken.inventory:
+#		chicken.inventory["lander_skin"] = !chicken.inventory["lander_skin"]
 #		world.pause()
 
 

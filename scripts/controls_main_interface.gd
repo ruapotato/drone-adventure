@@ -1,21 +1,21 @@
 extends Sprite2D
 
-var drone
+var chicken
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
+	chicken = get_chicken()
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 func _process(delta):
 	if not visible:
 		return
-	if drone.unlocked_gun:
-		if drone.inventory["using"] == "gun":
+	if chicken.unlocked_gun:
+		if chicken.inventory["using"] == "gun":
 			for kid in $Gun.get_children():
 				kid.label_settings.font_color = Color(1,0,1)
 		else:
@@ -26,8 +26,8 @@ func _process(delta):
 	else:
 		if $Gun.visible:
 			$Gun.visible = false
-	if "land_making_gun" in drone.inventory:
-		if drone.inventory["using"] == "land_making_gun":
+	if "land_making_gun" in chicken.inventory:
+		if chicken.inventory["using"] == "land_making_gun":
 			for kid in $Build.get_children():
 				kid.label_settings.font_color = Color(1,0,1)
 		else:
@@ -38,8 +38,8 @@ func _process(delta):
 	else:
 		if $Build.visible:
 			$Build.visible = false
-	if "laser_gun" in drone.inventory:
-		if drone.inventory["using"] == "laser_gun":
+	if "laser_gun" in chicken.inventory:
+		if chicken.inventory["using"] == "laser_gun":
 			for kid in $Laser.get_children():
 				kid.label_settings.font_color = Color(1,0,1)
 		else:
@@ -50,8 +50,8 @@ func _process(delta):
 	else:
 		if $Laser.visible:
 			$Laser.visible = false
-	if "weckingball" in drone.inventory:
-		if drone.inventory["using"] == "weckingball":
+	if "weckingball" in chicken.inventory:
+		if chicken.inventory["using"] == "weckingball":
 			for kid in $Ball.get_children():
 				kid.label_settings.font_color = Color(1,0,1)
 		else:

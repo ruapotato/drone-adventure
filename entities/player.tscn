@@ -1,32 +1,127 @@
-[gd_scene load_steps=5 format=3 uid="uid://c6sueha11ti5r"]
+[gd_scene load_steps=15 format=3 uid="uid://bej60nbr21nhf"]
 
-[ext_resource type="Script" uid="uid://corw5feu3v20b" path="res://player.gd" id="1_4lciq"]
+[ext_resource type="Script" uid="uid://corw5feu3v20b" path="res://entities/player.gd" id="2_ivawi"]
+[ext_resource type="PackedScene" uid="uid://6tb66hy6ql75" path="res://import/player2.glb" id="2_tbhwb"]
+[ext_resource type="PackedScene" uid="uid://d1bq84v68elhb" path="res://2d_interfaces/game_interface_3d_props.tscn" id="2_yvaq1"]
+[ext_resource type="PackedScene" uid="uid://bif4c56lalkna" path="res://weapons/sword.tscn" id="4_4lhy3"]
+[ext_resource type="Material" path="res://native/skin.tres" id="4_jvhro"]
+[ext_resource type="AudioStream" uid="uid://h0t44k24ssa4" path="res://audio/player_die.wav" id="6_6xmlh"]
+[ext_resource type="Script" uid="uid://bksdtwe7g06al" path="res://scripts/legs.gd" id="6_kdgjc"]
+[ext_resource type="Material" path="res://native/coin.tres" id="7_owcj2"]
+[ext_resource type="AudioStream" uid="uid://c70jue3ppwvra" path="res://audio/flip.wav" id="7_v8a6e"]
+[ext_resource type="AudioStream" uid="uid://cyfkojsywoyr2" path="res://audio/sword.wav" id="14_bvvis"]
+[ext_resource type="AudioStream" uid="uid://nh5tcl3dr3v8" path="res://audio/player_toe_tip.wav" id="15_jlucp"]
+[ext_resource type="PackedScene" uid="uid://c4wo4mrqxse3l" path="res://weapons/shield.tscn" id="16_8c8h5"]
+[ext_resource type="PackedScene" uid="uid://h5h8ss5xg1yf" path="res://entities/arm.tscn" id="17_iaomg"]
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_ej8ic"]
-radius = 0.335
-height = 1.67
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sya21"]
+margin = 0.0
+radius = 0.09
+height = 1.325
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cmlvi"]
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("2_ivawi")
 
-[sub_resource type="SphereMesh" id="SphereMesh_kujap"]
-radius = 0.25
-height = 0.5
+[node name="piv" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.573678, 0)
 
-[node name="player" type="Node3D"]
-script = ExtResource("1_4lciq")
+[node name="SpringArm3D" type="SpringArm3D" parent="piv"]
+spring_length = 2.0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CapsuleMesh_ej8ic")
+[node name="Camera3D" type="Camera3D" parent="piv/SpringArm3D"]
+current = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+[node name="game_interface_3d_props" parent="piv/SpringArm3D/Camera3D" instance=ExtResource("2_yvaq1")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
-shape = SubResource("CapsuleShape3D_cmlvi")
+[node name="VoxelViewer" type="VoxelViewer" parent="piv/SpringArm3D/Camera3D"]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.266888, 0.644869, -0.35985)
-mesh = SubResource("SphereMesh_kujap")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.424046, -0.0649178)
+shape = SubResource("CapsuleShape3D_sya21")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.27037, 0.644869, -0.371263)
-mesh = SubResource("SphereMesh_kujap")
+[node name="center" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0546767, 0.901171, -0.21055)
+
+[node name="back" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0093879, 0.996495, 0.0745856)
+
+[node name="bot_left" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.120642, 0.871933, 0.0885724)
+
+[node name="bot_right" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105191, 0.871933, 0.0914997)
+
+[node name="mesh" parent="." instance=ExtResource("2_tbhwb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.367852, -0.0646426)
+
+[node name="body" parent="mesh" index="0"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+
+[node name="head" parent="mesh" index="1"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+surface_material_override/0 = ExtResource("4_jvhro")
+
+[node name="hair_001" parent="mesh" index="2"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+
+[node name="eyes" parent="mesh" index="3"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+
+[node name="arm" parent="mesh" index="4"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+visible = false
+
+[node name="hand" parent="mesh" index="5"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+visible = false
+
+[node name="leg" parent="mesh" index="6"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+visible = false
+
+[node name="bag" parent="mesh" index="7"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+
+[node name="crown" parent="mesh" index="8"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.0155454, 0, 0)
+surface_material_override/0 = ExtResource("7_owcj2")
+
+[node name="LegAnimator" type="Node3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.172028, 0)
+script = ExtResource("6_kdgjc")
+
+[node name="sword" parent="mesh" instance=ExtResource("4_4lhy3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0162662, -0.00556868, 0)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="mesh"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506041, 0)
+
+[node name="player_sounds" type="Node3D" parent="mesh"]
+
+[node name="hurt" type="AudioStreamPlayer3D" parent="mesh/player_sounds"]
+stream = ExtResource("6_6xmlh")
+max_db = -5.0
+
+[node name="jump" type="AudioStreamPlayer3D" parent="mesh/player_sounds"]
+stream = ExtResource("7_v8a6e")
+max_db = -15.0
+
+[node name="shield" type="AudioStreamPlayer3D" parent="mesh/player_sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.270659, 0)
+stream = ExtResource("15_jlucp")
+
+[node name="dash" type="AudioStreamPlayer3D" parent="mesh/player_sounds"]
+stream = ExtResource("14_bvvis")
+
+[node name="land" type="AudioStreamPlayer3D" parent="mesh/player_sounds"]
+stream = ExtResource("15_jlucp")
+
+[node name="shield" parent="mesh" instance=ExtResource("16_8c8h5")]
+
+[node name="right_arm" parent="mesh" instance=ExtResource("17_iaomg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0747775, 0.267416, 0)
+
+[node name="left_arm" parent="mesh" instance=ExtResource("17_iaomg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110512, 0.267416, 0)
+
+[editable path="mesh"]

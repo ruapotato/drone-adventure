@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1w3ayk1f424h"]
+
+[ext_resource type="Script" path="res://entities/boss_1.gd" id="1_3ygfd"]
+[ext_resource type="PackedScene" uid="uid://t3gk8w2hlv6q" path="res://import/boss.glb" id="2_g1bq0"]
+[ext_resource type="Material" uid="uid://ctk00ajchcfhg" path="res://native/spike_tip_red.tres" id="3_ufleq"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_anhga"]
+
+[node name="Boss_1" type="Area3D"]
+script = ExtResource("1_3ygfd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_anhga")
+
+[node name="good_mesh" parent="." instance=ExtResource("2_g1bq0")]
+
+[node name="bad_mesh" parent="." instance=ExtResource("2_g1bq0")]
+
+[node name="head" parent="bad_mesh" index="1"]
+surface_material_override/0 = ExtResource("3_ufleq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
+
+[editable path="bad_mesh"]

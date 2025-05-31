@@ -10,7 +10,7 @@ const JUMP_linear_velocity = 4.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
-var drone
+var chicken
 var world
 
 
@@ -38,8 +38,8 @@ var core
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
-	world = drone.get_parent()
+	chicken = get_chicken()
+	world = chicken.get_parent()
 	var core_dist = 0
 	for core_option in world.find_children("core"):
 		if core_option.global_position.distance_to(npc_home_pos) < 100:
@@ -53,11 +53,11 @@ func _ready():
 	print(core)
 	print(bad_core)
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 
 func is_on_floor():
@@ -97,8 +97,8 @@ func goto(where, delta):
 			return false
 	
 func be_pissed(delta):
-	#Run after drone and jump on it
-	nav.target_position = drone.global_position
+	#Run after chicken and jump on it
+	nav.target_position = chicken.global_position
 	
 	look_at(nav.target_position)
 	rotation.x = 0.0

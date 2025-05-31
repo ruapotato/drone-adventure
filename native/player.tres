@@ -1,0 +1,23 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://5by4njtaogfn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wxogv"]
+transparency = 1
+cull_mode = 1
+albedo_color = Color(0, 0.15, 1, 0.286275)
+emission_enabled = true
+emission = Color(0, 0.176349, 0.748898, 1)
+emission_energy_multiplier = 4.6
+grow = true
+grow_amount = 0.011
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43525"]
+next_pass = SubResource("StandardMaterial3D_wxogv")
+cull_mode = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+
+[resource]
+next_pass = SubResource("StandardMaterial3D_43525")
+shading_mode = 0
+albedo_color = Color(0.00131984, 0.147624, 0.613351, 1)

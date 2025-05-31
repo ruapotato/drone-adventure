@@ -1,0 +1,219 @@
+[gd_scene load_steps=25 format=3 uid="uid://c5185tyypqlfx"]
+
+[ext_resource type="Script" path="res://2d_interfaces/title.gd" id="1_hl0xd"]
+[ext_resource type="Texture2D" uid="uid://divknqltj1n7n" path="res://images/night sky.jpg" id="2_bcnpp"]
+[ext_resource type="Texture2D" uid="uid://dgms15233y3xr" path="res://images/castle.png" id="3_3q72r"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b02sr"]
+texture = ExtResource("2_bcnpp")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gubc5"]
+texture = ExtResource("3_3q72r")
+
+[sub_resource type="LabelSettings" id="LabelSettings_q2tnk"]
+font_size = 170
+font_color = Color(0, 0.654902, 0.827451, 1)
+outline_size = 15
+outline_color = Color(0, 0.654902, 0.827451, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3vuc"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13som"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xajfy"]
+bg_color = Color(8.42288e-07, 0.328941, 0.422262, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcoiy"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wss1"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_220c0"]
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 50
+Button/styles/disabled = SubResource("StyleBoxFlat_y3vuc")
+Button/styles/focus = SubResource("StyleBoxFlat_13som")
+Button/styles/hover = SubResource("StyleBoxFlat_xajfy")
+Button/styles/normal = SubResource("StyleBoxFlat_gcoiy")
+Button/styles/pressed = SubResource("StyleBoxFlat_2wss1")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m3d67"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7d8cj"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5hb4k"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xdumv"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp443"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_60622"]
+Button/colors/font_color = Color(0, 0.117647, 0.160784, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = SubResource("StyleBoxFlat_m3d67")
+Button/styles/focus = SubResource("StyleBoxFlat_7d8cj")
+Button/styles/hover = SubResource("StyleBoxFlat_5hb4k")
+Button/styles/normal = SubResource("StyleBoxFlat_xdumv")
+Button/styles/pressed = SubResource("StyleBoxFlat_wp443")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vqvm5"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rlcjt"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcja0"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ppg4n"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gna3g"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_nywsg"]
+Button/colors/font_color = Color(0, 0.117647, 0.160784, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = SubResource("StyleBoxFlat_vqvm5")
+Button/styles/focus = SubResource("StyleBoxFlat_rlcjt")
+Button/styles/hover = SubResource("StyleBoxFlat_gcja0")
+Button/styles/normal = SubResource("StyleBoxFlat_ppg4n")
+Button/styles/pressed = SubResource("StyleBoxFlat_gna3g")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hl0xd")
+
+[node name="BG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -62.0
+offset_top = -41.0
+offset_right = 1611.0
+offset_bottom = 908.0
+scale = Vector2(1.224, 1.224)
+theme_override_styles/panel = SubResource("StyleBoxTexture_b02sr")
+
+[node name="Castle" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 375.0
+offset_top = -608.0
+offset_right = 409.0
+offset_bottom = -568.0
+rotation = 0.531866
+scale = Vector2(65.5288, 37.7607)
+theme_override_styles/panel = SubResource("StyleBoxTexture_gubc5")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 206.0
+offset_top = 283.0
+offset_right = 1679.0
+offset_bottom = 750.0
+text = "Gravity       
+                     Castle"
+label_settings = SubResource("LabelSettings_q2tnk")
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 826.0
+offset_top = 501.0
+offset_right = 985.0
+offset_bottom = 571.0
+scale = Vector2(1.59454, 1.59454)
+theme = SubResource("Theme_220c0")
+text = "Play"
+
+[node name="Options" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1688.0
+offset_top = 893.0
+offset_right = 1870.0
+offset_bottom = 948.0
+theme = SubResource("Theme_60622")
+text = "Options"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1682.0
+offset_top = 973.0
+offset_right = 1864.0
+offset_bottom = 1028.0
+theme = SubResource("Theme_nywsg")
+text = "Quit"
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

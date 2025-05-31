@@ -17,7 +17,7 @@ const REGULAR_FOOT_LENGTH = 0.15
 # Chicken leg dimensions
 const CHICKEN_LEG_SPEED = 35.0
 const CHICKEN_MAX_ANGLE = PI/8 # Slightly larger swing for chicken
-const CHICKEN_LEG_LENGTH = 0.06 # Shorter legs for drone
+const CHICKEN_LEG_LENGTH = 0.06 # Shorter legs for chicken
 const CHICKEN_LEG_RADIUS = 0.01
 const CHICKEN_TOE_LENGTH = 0.06
 const CHICKEN_TOE_RADIUS = 0.008
@@ -32,21 +32,21 @@ const SOUND_THRESHOLD = 0.95 # Play sound when leg reaches 95% of max swing
 const SOUND_COOLDOWN_TIME: float = 0.1 # Min time between footstep sounds
 
 var time: float = 0.0
-var current_speed: float = 0.0 # For animation lerping, based on drone's actual speed
-var gravity_inverted: bool = false # Assume not used unless explicitly set by drone
-var is_chicken: bool = true # Assume chicken legs by default if attached to drone
+var current_speed: float = 0.0 # For animation lerping, based on chicken's actual speed
+var gravity_inverted: bool = false # Assume not used unless explicitly set by chicken
+var is_chicken: bool = true # Assume chicken legs by default if attached to chicken
 
 # Track previous angles for sound triggering
 var prev_left_angle: float = 0.0
 var prev_right_angle: float = 0.0
 var sound_cooldown: float = 0.0
 
-var drone: RigidBody3D # Reference to the drone RigidBody3D
+var chicken: RigidBody3D # Reference to the chicken RigidBody3D
 
 func _ready():
-	drone = get_parent() as RigidBody3D
-	if not drone:
-		print("Legs.gd is not a child of a RigidBody3D (the drone) or type cast failed!")
+	chicken = get_parent() as RigidBody3D
+	if not chicken:
+		print("Legs.gd is not a child of a RigidBody3D (the chicken) or type cast failed!")
 
 	if name == "chicken_legs":
 		is_chicken = true
@@ -185,14 +185,14 @@ func check_leg_extremes(current_angle_rad: float, prev_angle_rad: float) -> bool
 	
 	return crossed_upper or crossed_lower
 
-func animate_legs(delta: float, speed_from_drone: float):
+func animate_legs(delta: float, speed_from_chicken: float):
 	if not left_leg_node or not right_leg_node: return
 
 	sound_cooldown = max(0, sound_cooldown - delta)
 	
-	time += delta * LEG_SPEED * clamp(speed_from_drone, 0.0, 2.0)
+	time += delta * LEG_SPEED * clamp(speed_from_chicken, 0.0, 2.0)
 	
-	current_speed = lerp(current_speed, speed_from_drone, delta * 5.0)
+	current_speed = lerp(current_speed, speed_from_chicken, delta * 5.0)
 	
 	if current_speed > 0.02:
 		var left_phase = time

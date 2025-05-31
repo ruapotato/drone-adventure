@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://ltxh7e20h7ra" path="res://scenes/land_scar.tscn" id="11_c6rem"]
 [ext_resource type="PackedScene" uid="uid://lwg2gntsbop8" path="res://scenes/black_light.tscn" id="12_2r5kh"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://scenes/spawner.tscn" id="13_u0nel"]
-[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="14_u0cqd"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/chicken_spirit.tscn" id="14_u0cqd"]
 [ext_resource type="PackedScene" uid="uid://djnakq8bjlyxs" path="res://scenes/gui.tscn" id="15_h666a"]
 [ext_resource type="PackedScene" uid="uid://cornhcpsobmu1" path="res://scenes/pause_screen.tscn" id="16_lmtuv"]
 [ext_resource type="Script" uid="uid://cg3wef78p48ru" path="res://scripts/city_loader.gd" id="17_s025p"]

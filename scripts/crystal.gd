@@ -4,7 +4,7 @@ var value = null
 var message_range = 3
 var bob_speed = .7
 var timer = 0
-var drone
+var chicken
 var world
 var init_pos
 var collected = false
@@ -12,17 +12,17 @@ var collected_animation = .5
 var shatter_range = 1
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	name += "_crystal"
-	drone = get_drone()
-	world = drone.get_parent()
+	chicken = get_chicken()
+	world = chicken.get_parent()
 	#value = int(name.split("_")[0])
 	if not value:
 		init_pos = global_position + Vector3(0,randi_range(0,3),0)
@@ -98,7 +98,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if not collected:
-		if false:#global_position.distance_to(drone.global_position) < 30:
+		if false:#global_position.distance_to(chicken.global_position) < 30:
 			timer += (delta * bob_speed)
 			var bob_pos
 			if int(timer) % 2 == 0:
@@ -110,7 +110,7 @@ func _process(delta):
 		
 	if collected:
 		collected_animation -= delta
-		global_position = drone.global_position
+		global_position = chicken.global_position
 		rotate_y(-delta * 5)
 		global_position.y += 1.3 + abs(collected_animation - 1)
 		if collected_animation < 0:
@@ -135,11 +135,11 @@ func shatter():
 		world.add_crystal_to_world(int(value/number_to_spit_into),global_position + offset)
 	collected = true
 func _on_body_entered(body):
-	if body == drone:
+	if body == chicken:
 		#print("I'm colleded")
 		$collected_sound.play()
-		drone.inventory["crystals"] += value
-		drone.save_game()
+		chicken.inventory["crystals"] += value
+		chicken.save_game()
 		#print(player.inventory["crystals"])
 		collected = true
 	#else:

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://daxn46nmxbap2"]
+
+[ext_resource type="Script" path="res://2d_interfaces/game_interface.gd" id="1_if8wt"]
+[ext_resource type="LabelSettings" uid="uid://c842ttj4tfr2f" path="res://2d_interfaces/game_interface_text.tres" id="2_6vacn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2to83"]
+line_spacing = 16.84
+font_size = 40
+outline_size = 8
+
+[node name="game_interface" type="Node2D"]
+script = ExtResource("1_if8wt")
+
+[node name="clover" type="Label" parent="."]
+offset_left = 152.0
+offset_top = 70.0
+offset_right = 210.0
+offset_bottom = 207.0
+text = "0"
+label_settings = ExtResource("2_6vacn")
+
+[node name="keys" type="Label" parent="."]
+offset_left = 151.0
+offset_top = 12.0
+offset_right = 219.0
+offset_bottom = 149.0
+text = "0"
+label_settings = ExtResource("2_6vacn")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 107.0
+offset_top = 24.0
+offset_right = 157.0
+offset_bottom = 148.0
+text = "x"
+label_settings = SubResource("LabelSettings_2to83")
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 107.0
+offset_top = 83.0
+offset_right = 157.0
+offset_bottom = 207.0
+text = "x"
+label_settings = SubResource("LabelSettings_2to83")

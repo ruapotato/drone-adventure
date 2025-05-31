@@ -15,7 +15,7 @@ var going_to_kill = null
 var add_mode = false
 
 var boom_color
-var drone
+var chicken
 var world
 var vt
 var damage = 2.0
@@ -31,11 +31,11 @@ func _ready():
 	boom_color.emission = Color(1,0,0)
 	boom_color.emission_energy_multiplier = 50
 	#add_collision_exception_with(area)
-	drone = get_drone()
-	#for child in get_drone().get_children():
+	chicken = get_chicken()
+	#for child in get_chicken().get_children():
 	#	add_collision_exception_with(child)
-	world = drone.world
-	#if not drone.tutorial_mode:
+	world = chicken.world
+	#if not chicken.tutorial_mode:
 		#vt = world.dirt_vt
 	if not add_mode:
 		normal_trail.emitting = true
@@ -55,11 +55,11 @@ func get_player():
 	return(root_i_hope.find_child("player"))
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -74,7 +74,7 @@ func _process(delta):
 			mesh.mesh.height += delta * 20
 		if ttk < 0 and not dead:
 			#var new_decal = Decal.new()
-			if not drone.tutorial_mode:
+			if not chicken.tutorial_mode:
 				if not add_mode:
 					world.dirt_vt.mode = VoxelTool.MODE_REMOVE
 					world.dirt_vt.do_sphere(global_position, 1.5 * 2)
@@ -103,7 +103,7 @@ func _on_area_3d_body_entered(body):
 		$boom.play()
 		return
 	
-	if global_position.distance_to(drone.global_position) < 1.7:
+	if global_position.distance_to(chicken.global_position) < 1.7:
 		return
 	if "ufo" in body.name:
 		world.hurt(body, damage)
@@ -112,10 +112,10 @@ func _on_area_3d_body_entered(body):
 		going_to_kill = body
 		$boom.play()
 		
-	if global_position.distance_to(drone.global_position) < 1.7:
+	if global_position.distance_to(chicken.global_position) < 1.7:
 		return
 	
-	if body.name != "drone" and body.name != "bullet" and body != self:
+	if body.name != "chicken" and body.name != "bullet" and body != self:
 		world.hurt(body, damage)
 		damage = 0
 		going_to_kill = body

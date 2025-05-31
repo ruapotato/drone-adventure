@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4wo4mrqxse3l"]
+
+[ext_resource type="Script" path="res://weapons/shield.gd" id="1_nx1je"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ual3e"]
+size = Vector3(0.56, 0.83, 0.04)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bitm3"]
+size = Vector3(0.525, 0.78, 0.06)
+
+[node name="shield" type="Node3D"]
+script = ExtResource("1_nx1je")
+
+[node name="RigidBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.42276)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("BoxMesh_ual3e")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_bitm3")

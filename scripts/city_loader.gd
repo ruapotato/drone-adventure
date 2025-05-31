@@ -2,19 +2,19 @@ extends Node3D
 
 @onready var city = preload("res://scenes/city.tscn")
 
-var drone
+var chicken
 var range = 400
 var city_loaded = false
 var running_city
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
+	chicken = get_chicken()
 	
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 func load_city():
 	running_city = city.instantiate()
@@ -25,7 +25,7 @@ func unload_city():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if global_position.distance_to(drone.global_position) < range:
+	if global_position.distance_to(chicken.global_position) < range:
 		if not city_loaded:
 			load_city()
 			city_loaded = true

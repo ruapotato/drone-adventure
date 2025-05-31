@@ -16,7 +16,7 @@ extends Node2D
 @onready var boss_bar = $boss_bar
 @onready var system_messages = $system_messages
 
-var drone
+var chicken
 var world
 var added_counter
 var system_messages_counter = 0.0
@@ -24,16 +24,16 @@ var system_messages_counter = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 
-	drone = get_drone()
-	world = drone.get_parent()
+	chicken = get_chicken()
+	world = chicken.get_parent()
 
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 func format_hour(hour):
 	#Spit hours an mins
@@ -53,7 +53,7 @@ func format_hour(hour):
 
 
 func update_target_label():
-	target_label.rotation = drone.global_rotation.z
+	target_label.rotation = chicken.global_rotation.z
 
 func update_time_label():
 	if world.friendly_time_am:
@@ -61,16 +61,16 @@ func update_time_label():
 	else:
 		time_label.text = format_hour(world.friendly_time) + " PM"
 func update_power_cell_label():
-	power_cell.value = drone.power_cell
-	if "extra_power" in drone.inventory:
+	power_cell.value = chicken.power_cell
+	if "extra_power" in chicken.inventory:
 		extra_power_cell.visible = true
-		var max_extra_power = drone.extra_power_per_upgrade * drone.inventory["extra_power"]
-		extra_power_cell.value = (drone.extra_power_cell / max_extra_power) * 100
+		var max_extra_power = chicken.extra_power_per_upgrade * chicken.inventory["extra_power"]
+		extra_power_cell.value = (chicken.extra_power_cell / max_extra_power) * 100
 	else:
 		extra_power_cell.visible = false
 	
 func update_speed_label():
-	speed_label.text = "MPH " + str(int(drone.linear_velocity.length() * 2.23693629))
+	speed_label.text = "MPH " + str(int(chicken.linear_velocity.length() * 2.23693629))
 
 
 func update_chihuahuas():
@@ -80,7 +80,7 @@ func update_chihuahuas():
 		chihuahuas.visible = false
 
 func update_refuel():
-	if drone.power_cell < 30:
+	if chicken.power_cell < 30:
 		refuel_label.visible = true
 	else:
 		refuel_label.visible = false
@@ -116,24 +116,24 @@ func update_system_msg(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if str(drone.inventory["crystals"]) != crystal_label.text:
-		added_label.text = "+" + str(drone.inventory["crystals"] - int(crystal_label.text))
+	if str(chicken.inventory["crystals"]) != crystal_label.text:
+		added_label.text = "+" + str(chicken.inventory["crystals"] - int(crystal_label.text))
 		added_counter = 3
-		crystal_label.text = str(drone.inventory["crystals"])
-	if "bank" in drone.inventory:
-		if str(drone.inventory["bank"]) != bank_label.text:
-			bank_label.text = str(drone.inventory["bank"])
+		crystal_label.text = str(chicken.inventory["crystals"])
+	if "bank" in chicken.inventory:
+		if str(chicken.inventory["bank"]) != bank_label.text:
+			bank_label.text = str(chicken.inventory["bank"])
 			bank_label.visible = true
 	else:
 		if bank_label.visible:
 			bank_label.visible = false
-	#camera.global_position = drone.back_cam_mount.global_position
-	#camera.look_at(drone.global_position)
+	#camera.global_position = chicken.back_cam_mount.global_position
+	#camera.look_at(chicken.global_position)
 	update_added_label(delta)
 	update_speed_label()
 	update_fps()
 	update_system_msg(delta)
-	if not drone.tutorial_mode:
+	if not chicken.tutorial_mode:
 		update_boss_bar()
 		update_time_label()
 		update_target_label()

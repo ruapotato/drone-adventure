@@ -5,7 +5,7 @@ extends Node3D
 @onready var fog =  $FogVolume
 @onready var dist_fog = $dist_fog
 
-var drone
+var chicken
 var world
 var vt
 var init_done = false
@@ -17,8 +17,8 @@ var fog_colors = ["#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#
 var color_index = 0.0
 
 func _ready():
-	drone = get_drone()
-	world = drone.world
+	chicken = get_chicken()
+	world = chicken.world
 	vt = world.dirt_vt
 	
 	#vt.smooth_sphere(global_position - Vector3(0,1,0), 10,200)
@@ -26,11 +26,11 @@ func _ready():
 	#vt.do_sphere(global_position, 10)
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,7 +61,7 @@ func _process(delta):
 	if not init_done:
 		color_index += delta * 5
 		var wanted_color = Color(fog_colors[int(color_index)%len(fog_colors)])
-		var dist = global_position.distance_to(drone.global_position) 
+		var dist = global_position.distance_to(chicken.global_position) 
 		# 3000 = volumetric fog length
 		if dist > 3000:
 			#fog.visible = false
@@ -72,7 +72,7 @@ func _process(delta):
 			fog.material.albedo = fog.material.albedo.lerp(wanted_color, delta * 10)
 			dist_fog.visible = false
 		if dist < 50:
-			var target_density = (global_position.distance_to(drone.global_position)/50)/10
+			var target_density = (global_position.distance_to(chicken.global_position)/50)/10
 			fog.material.density = lerp(fog.material.density,target_density,delta * 10)
 		else:
 			fog.material.density = lerp(fog.material.density, 1.0, delta/10)
@@ -82,7 +82,7 @@ func _process(delta):
 		
 		if init_countdown > 0:
 			init_countdown -= delta
-		if init_countdown < 0 and global_position.distance_to(drone.global_position) < within_range:
+		if init_countdown < 0 and global_position.distance_to(chicken.global_position) < within_range:
 			init_done = true
 			dist_fog.visible = false
 			fog.visible = false

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://h5h8ss5xg1yf"]
+
+[ext_resource type="Script" uid="uid://b82h5g72dhgt5" path="res://scripts/arm.gd" id="1_yylwy"]
+
+[node name="arm" type="Node3D"]
+script = ExtResource("1_yylwy")
+
+[node name="target" type="Node3D" parent="."]

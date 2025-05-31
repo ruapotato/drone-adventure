@@ -8,15 +8,15 @@ extends Node2D
 @onready var button_order = [fullscreen_checkbox, throttle_zero_checkbox, back_button]
 var button_index = 0
 
-var drone
+var chicken
 var world
 var startup_screen
 var loaded = false
 
 
 func _ready():
-	drone = get_drone()
-	world = drone.world
+	chicken = get_chicken()
+	world = chicken.get_parent()
 	startup_screen = world.get_parent()
 
 func _unhandled_input(event):
@@ -43,11 +43,11 @@ func _unhandled_input(event):
 
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 
 func show_selected():
@@ -71,8 +71,8 @@ func _process(delta):
 		show_selected()
 		if not loaded:
 			loaded = true
-			if "throttle_zero_centered" in drone.inventory:
-				if drone.inventory["throttle_zero_centered"]:
+			if "throttle_zero_centered" in chicken.inventory:
+				if chicken.inventory["throttle_zero_centered"]:
 					$throttle_zero_at_center.button_pressed = true
 				else:
 					$throttle_zero_at_center.button_pressed = false
@@ -98,14 +98,14 @@ func _on_fullscreen_toggled(toggled_on):
 
 
 func _on_throttle_zero_at_center_toggled(toggled_on):
-	#print(drone.inventory)
+	#print(chicken.inventory)
 	if toggled_on:
-		drone.inventory["throttle_zero_centered"] = true
+		chicken.inventory["throttle_zero_centered"] = true
 	else:
-		drone.inventory["throttle_zero_centered"] = false
-	drone.save_game()
+		chicken.inventory["throttle_zero_centered"] = false
+	chicken.save_game()
 	loaded = false
-	#print(drone.inventory)
+	#print(chicken.inventory)
 
 
 func _on_control_sensitivity_changed():

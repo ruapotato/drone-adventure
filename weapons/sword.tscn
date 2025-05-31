@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://bif4c56lalkna"]
+
+[ext_resource type="Script" path="res://weapons/sword.gd" id="1_0ll7p"]
+[ext_resource type="AudioStream" uid="uid://cyfkojsywoyr2" path="res://audio/sword.wav" id="2_ca0c4"]
+[ext_resource type="AudioStream" uid="uid://u5l0i52gkx7k" path="res://audio/checkpoint.wav" id="3_imh8y"]
+[ext_resource type="PackedScene" uid="uid://djus6d5djyqs0" path="res://import/sword.glb" id="3_uqfsh"]
+[ext_resource type="Material" uid="uid://dxjk4ve6h5rv3" path="res://native/sword_core.tres" id="4_6p11b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5hnmv"]
+size = Vector3(0.84, 0.225, 0.27)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e8t01"]
+size = Vector3(0.12, 0.34, 0.23)
+
+[sub_resource type="PrismMesh" id="PrismMesh_tu3kn"]
+size = Vector3(0.08, 2.745, 0.375)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ymxtw"]
+size = Vector3(2, 2.705, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asexs"]
+emission_enabled = true
+emission = Color(0, 0.57775, 0.994106, 1)
+emission_energy_multiplier = 8.37
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yiq27"]
+angle_min = 720.0
+angle_max = 720.0
+initial_velocity_min = 0.1
+initial_velocity_max = 2.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_phv16"]
+radius = 0.01
+height = 0.02
+
+[node name="sword" type="Node3D"]
+script = ExtResource("1_0ll7p")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.84757e-09, 0.0687001, 0.148632, 2.81593e-09, -0.16706, 0.0611221, 0.169383, 1.91254e-23, -7.02481e-09, 0.34702, -0.166896, 0)
+visible = false
+mesh = SubResource("BoxMesh_5hnmv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.84757e-09, 0.0687001, 0.148632, 2.81593e-09, -0.16706, 0.0611221, 0.169383, 1.91254e-23, -7.02481e-09, 0.331563, -0.129307, 0)
+visible = false
+mesh = SubResource("BoxMesh_e8t01")
+
+[node name="hand_hold" type="Node3D" parent="MeshInstance3D3"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.148632, 0.0687001, 8.88178e-16, -0.0611221, -0.16706, 0, 0, -3.00884e-16, 0.169383, 0.448397, -0.417175, -1.39472e-15)
+visible = false
+mesh = SubResource("PrismMesh_tu3kn")
+
+[node name="Cutting Edge" type="Area3D" parent="MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/Cutting Edge"]
+shape = SubResource("BoxShape3D_ymxtw")
+
+[node name="swoosh" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041418, -0.863048, 0)
+stream = ExtResource("2_ca0c4")
+
+[node name="charge_sound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041418, -0.863048, 0)
+stream = ExtResource("3_imh8y")
+
+[node name="sword2" parent="." instance=ExtResource("3_uqfsh")]
+transform = Transform3D(-4.26839e-08, -0.308269, 0.40731, -1.90963e-08, 0.75445, 0.166428, -1.155, -1.08145e-09, -1.78041e-08, 0.432418, -0.386, 0)
+
+[node name="sword" parent="sword2" index="0"]
+surface_material_override/0 = ExtResource("4_6p11b")
+
+[node name="ChargeParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.516202, -0.590436, 0)
+material_override = SubResource("StandardMaterial3D_asexs")
+amount = 25
+interp_to_end = 0.76
+preprocess = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_yiq27")
+draw_pass_1 = SubResource("SphereMesh_phv16")
+
+[editable path="sword2"]

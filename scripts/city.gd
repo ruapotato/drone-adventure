@@ -10,10 +10,10 @@ var NPCs = []
 var cars_every = 4
 var car_timer = cars_every
 var city_running = false
-var drone
+var chicken
 
 func _ready():
-	drone = get_drone()
+	chicken = get_chicken()
 	for home_to_fill in find_child("homes").get_children():
 		var new_npc = NPC.instantiate()
 		new_npc.npc_home_pos = home_to_fill.global_position
@@ -30,11 +30,11 @@ func _ready():
 		#print(home_to_fill)
 
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 
 func spawn_car(pos, angle):
 	var new_car = CAR.instantiate()
@@ -66,7 +66,7 @@ func update_cars(delta):
 
 
 func update_city_running():
-	city_running = drone.global_position.distance_to(city_center.global_position) < 250
+	city_running = chicken.global_position.distance_to(city_center.global_position) < 250
 	
 	
 	

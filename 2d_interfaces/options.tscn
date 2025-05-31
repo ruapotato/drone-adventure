@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://b6iqfp0veeyhv"]
+
+[ext_resource type="Script" path="res://2d_interfaces/control.gd" id="1_et4in"]
+[ext_resource type="Texture2D" uid="uid://divknqltj1n7n" path="res://images/night sky.jpg" id="2_y1dvx"]
+[ext_resource type="StyleBox" uid="uid://bwmiyln8wlgh5" path="res://2d_interfaces/back2.tres" id="3_kqp7i"]
+[ext_resource type="StyleBox" uid="uid://bwerkbykfhxxg" path="res://2d_interfaces/back1.tres" id="4_pehyo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fnhmo"]
+texture = ExtResource("2_y1dvx")
+
+[sub_resource type="Theme" id="Theme_1lxm0"]
+Button/colors/font_color = Color(0, 0.117647, 0.160784, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = ExtResource("3_kqp7i")
+Button/styles/focus = ExtResource("3_kqp7i")
+Button/styles/hover = ExtResource("3_kqp7i")
+Button/styles/normal = ExtResource("4_pehyo")
+Button/styles/pressed = ExtResource("3_kqp7i")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_et4in")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -62.0
+offset_top = -41.0
+offset_right = 1611.0
+offset_bottom = 908.0
+scale = Vector2(1.224, 1.224)
+theme_override_styles/panel = SubResource("StyleBoxTexture_fnhmo")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 963.0
+offset_right = 208.0
+offset_bottom = 1018.0
+theme = SubResource("Theme_1lxm0")
+text = "Back"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -11,7 +11,7 @@ var message_options = []
 var exta_power_max = 10
 var exta_power_cost = 300
 
-var drone
+var chicken
 
 
 var message_index = -1
@@ -22,37 +22,37 @@ var world
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	drone = get_drone()
-	world = drone.world
-	gui = drone.get_parent().find_child("gui")
+	chicken = get_chicken()
+	world = chicken.get_parent()
+	gui = chicken.get_parent().find_child("gui")
 	for obj in $items.get_children():
 		var mull_msg = obj.name
 		message.append(mull_msg)
 
-func get_drone():
+func get_chicken():
 	var root_i_hope = get_parent()
 	while root_i_hope.name != "world":
 		root_i_hope = root_i_hope.get_parent()
-	return(root_i_hope.find_child("drone"))
+	return(root_i_hope.find_child("chicken"))
 	
 func has_crystals(needed):
 	var total_crystals = 0
-	if "bank" in drone.inventory:
-		total_crystals += drone.inventory["bank"]
-	total_crystals += drone.inventory["crystals"]
+	if "bank" in chicken.inventory:
+		total_crystals += chicken.inventory["bank"]
+	total_crystals += chicken.inventory["crystals"]
 	if total_crystals >= needed:
 		return true
 	return false
 
 func charge_crystals(needed):
-	if needed <= drone.inventory["crystals"]:
-		drone.inventory["crystals"] -= needed
+	if needed <= chicken.inventory["crystals"]:
+		chicken.inventory["crystals"] -= needed
 		return
 	else:
-		needed -= drone.inventory["crystals"]
-		drone.inventory["crystals"] = 0
+		needed -= chicken.inventory["crystals"]
+		chicken.inventory["crystals"] = 0
 	#charge bank leftovers
-	drone.inventory["bank"] -= needed
+	chicken.inventory["bank"] -= needed
 
 func _unhandled_input(event):
 	if not menu_in_use:
@@ -117,9 +117,9 @@ func _process(delta):
 					if menu_child.text != "":
 						menu_child.text = ""
 		
-	#print(global_position.distance_to(drone.global_position))
+	#print(global_position.distance_to(chicken.global_position))
 	#print(in_menu)
-	if global_position.distance_to(drone.global_position) < message_range:
+	if global_position.distance_to(chicken.global_position) < message_range:
 		menu_in_use = true
 		gui.message_box.visible = true
 		if message:
@@ -128,23 +128,23 @@ func _process(delta):
 			gui.message.text = "Welcome to my shop!"
 		if message_index >= 1:
 			in_menu = true
-			#drone.look_at_override = $items.get_children()[message_index -1]
+			#chicken.look_at_override = $items.get_children()[message_index -1]
 			var this_msg = message[message_index]
 			var price = int(this_msg.split(" for ")[-1])
 			var buy_text = this_msg.split(" for ")[0]
 			
 			
 			if buy_text == "extra_power":
-				if "extra_power" in drone.inventory:
-					price *= drone.inventory["extra_power"] + 1
-					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level " + str(drone.inventory["extra_power"] + 1) + ")"
+				if "extra_power" in chicken.inventory:
+					price *= chicken.inventory["extra_power"] + 1
+					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level " + str(chicken.inventory["extra_power"] + 1) + ")"
 				else:
 					gui.message.text = "Upgrade: " + buy_text + " for " + str(price) + " (Level 1)"
 				"""
-				if buy_text in drone.inventory:
-					drone.inventory["extra_power"] += 1
+				if buy_text in chicken.inventory:
+					chicken.inventory["extra_power"] += 1
 				else:
-					drone.inventory["extra_power"] = 1
+					chicken.inventory["extra_power"] = 1
 				"""
 			elif buy_text == "chihuahua_restitution":
 				if not world.dogs_pissed:
@@ -155,7 +155,7 @@ func _process(delta):
 					return
 			#If we are paying off the chihuahuas
 			#If this item is already in inventory, hide
-			elif buy_text in drone.inventory:
+			elif buy_text in chicken.inventory:
 				message_index += 1
 				if message_index >= len(message):
 					message_index = -1
@@ -174,18 +174,18 @@ func _process(delta):
 						#TODO
 						$sell.play()
 						charge_crystals(price)
-						#drone.inventory["crystals"] -= price
+						#chicken.inventory["crystals"] -= price
 						if buy_text == "extra_power":
-							if "extra_power" in drone.inventory:
-								drone.inventory["extra_power"] += 1
+							if "extra_power" in chicken.inventory:
+								chicken.inventory["extra_power"] += 1
 							else:
-								drone.inventory["extra_power"] = 1
+								chicken.inventory["extra_power"] = 1
 						elif buy_text == "chihuahua_restitution":
-							drone.world.dogs_pissed = false
+							chicken.world.dogs_pissed = false
 						else:
-							drone.inventory[buy_text] = true
+							chicken.inventory[buy_text] = true
 							world.pause()
-						drone.save_game()
+						chicken.save_game()
 						message_index = -1
 					if action == "Quit":
 						message_index = -1
@@ -198,7 +198,7 @@ func _process(delta):
 		else:
 			in_menu = false
 			#message_index = -1
-			#drone.look_at_override = null
+			#chicken.look_at_override = null
 			message_options = null
 	else:
 		if menu_in_use:
@@ -207,7 +207,7 @@ func _process(delta):
 			message_index = -1
 			gui.message.text = ""
 			#message = []
-			#drone.look_at_override = null
+			#chicken.look_at_override = null
 			message_options = null
 	#NPC messages
 	#if not message_ui:

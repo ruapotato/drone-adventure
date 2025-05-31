@@ -186,7 +186,7 @@ func setup_init_save(p_name, index):
 func _on_button_pressed():
 	var new_player_name = $setup/name_picked.text
 	if new_player_name == "":
-		new_player_name = "Tiny Drone"
+		new_player_name = "Tiny chicken"
 	setup_init_save(new_player_name, game_save_index)
 	$setup.visible = false
 	start_game()

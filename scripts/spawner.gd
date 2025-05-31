@@ -19,7 +19,7 @@ extends Node3D
 ## State Variables
 var spawn_counter: float = 0.0
 var spawn_index: int = 0
-var drone: Node3D
+var chicken: Node3D
 var active_spawns: Array = [] # Stores references to all active spawns.
 
 ## Toggles - Control Spawn Conditions (Consider making these export vars or dynamic)
@@ -32,21 +32,21 @@ var night_spawn: bool = false
 
 func _ready():
 	"""Called when the node enters the scene tree."""
-	drone = _get_drone()
-	if not is_instance_valid(drone):
-		printerr("Spawner Error: Drone node not found! Spawner will not function.")
-		set_process(false) # Disable processing if drone isn't found
+	chicken = _get_chicken()
+	if not is_instance_valid(chicken):
+		printerr("Spawner Error: chicken node not found! Spawner will not function.")
+		set_process(false) # Disable processing if chicken isn't found
 		return
 	spawn_counter = spawn_every # Start with an initial delay
 
 func _process(delta: float):
 	"""Called every frame. Handles positioning and spawn timing."""
-	if not is_instance_valid(drone):
-		return # Stop if drone becomes invalid during gameplay
+	if not is_instance_valid(chicken):
+		return # Stop if chicken becomes invalid during gameplay
 
-	# Keep spawner aligned with the drone
-	global_position = drone.global_position
-	rotation.y = drone.rotation.y
+	# Keep spawner aligned with the chicken
+	global_position = chicken.global_position
+	rotation.y = chicken.rotation.y
 	#piv.rotate_y(delta * 10) # Optional pivot rotation
 
 	# Countdown to next spawn attempt
@@ -82,7 +82,7 @@ func _determine_spawn_type() -> Dictionary:
 	Returns a dictionary with 'scene', 'life', and 'next_delay', or null.
 	"""
 	var y_pos = global_position.y
-	var drone_crystals = drone.get("inventory").get("crystals") # Safely get crystals
+	var chicken_crystals = chicken.get("inventory").get("crystals") # Safely get crystals
 
 	# Underground Spawns (Mini UFOs)
 	if y_pos < -99:
@@ -95,7 +95,7 @@ func _determine_spawn_type() -> Dictionary:
 
 	# Ground Spawns (Mini UFOs at night with crystals)
 	if y_pos >= -99 and y_pos <= 200:
-		if drone_crystals > 10 and night_spawn:
+		if chicken_crystals > 10 and night_spawn:
 			return {
 				"scene": mini_ufo,
 				"life": default_max_life,
@@ -201,10 +201,10 @@ func _get_world() -> Node:
 	printerr("Spawner: Could not find 'world' node in parents!")
 	return get_parent() # Fallback to direct parent
 
-func _get_drone() -> Node3D:
-	"""Finds the 'drone' node within the 'world'."""
+func _get_chicken() -> Node3D:
+	"""Finds the 'chicken' node within the 'world'."""
 	var world_node = _get_world()
 	if is_instance_valid(world_node):
 		# Find child recursively, but don't include internal nodes
-		return world_node.find_child("drone", true, false)
+		return world_node.find_child("chicken", true, false)
 	return null

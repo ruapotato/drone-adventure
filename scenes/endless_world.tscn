@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://bfkqbsabxifm4" path="res://scenes/grass.tscn" id="10_j77pl"]
 [ext_resource type="PackedScene" uid="uid://buj1mwfjegmts" path="res://scenes/spawn_crow.tscn" id="11_akk75"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://scenes/spawner.tscn" id="11_xa5hy"]
-[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/drone.tscn" id="12_6rvs0"]
+[ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/chicken_spirit.tscn" id="12_6rvs0"]
 [ext_resource type="PackedScene" uid="uid://dm2rvwhsfq2gy" path="res://scenes/spawn_dog.tscn" id="12_nn0gc"]
 [ext_resource type="PackedScene" uid="uid://ltxh7e20h7ra" path="res://scenes/land_scar.tscn" id="13_6fr0n"]
 [ext_resource type="PackedScene" uid="uid://lwg2gntsbop8" path="res://scenes/black_light.tscn" id="14_fh1wb"]

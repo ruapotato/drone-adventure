@@ -3,7 +3,7 @@ extends Node3D
 @onready var crystal = preload("res://scenes/crystal.tscn")
 @onready var env = $WorldEnvironment
 @onready var music = $music
-@onready var drone = $drone
+@onready var chicken = $chicken
 @onready var gee = $Gee
 @onready var sun = $sun
 #@onready var city = $city
@@ -47,7 +47,7 @@ var control_sensitivity_effector = 0.0
 var time
 var friendly_time
 var friendly_time_am = false
-var controlable = [drone, gee]
+var controlable = [chicken, gee]
 
 
 
@@ -85,7 +85,7 @@ func run_active_tasks(delta):
 	if active_task == "UFO":
 		#print(len(ufos.get_children()))
 		
-		if len(ufos.get_children()) == 0 and drone.global_position.y > -50:
+		if len(ufos.get_children()) == 0 and chicken.global_position.y > -50:
 			print("INIT UFO")
 			var new_ufo = UFO.instantiate()
 			ufos.add_child(new_ufo)
@@ -144,9 +144,9 @@ func _unhandled_input(event):
 
 
 func play_as_gee():
-	var loc = drone.global_position
-	var rot = drone.global_rotation
-	var vol = drone.linear_velocity
+	var loc = chicken.global_position
+	var rot = chicken.global_rotation
+	var vol = chicken.linear_velocity
 	
 
 	gee.active = true
@@ -154,23 +154,23 @@ func play_as_gee():
 	gee.global_position = loc
 	gee.global_rotation = rot
 	gee.linear_velocity = vol
-	drone.active = false
+	chicken.active = false
 	gee.camera.current = true
 
 	
-func play_as_drone():
+func play_as_chicken():
 	var loc = gee.global_position
 	var rot = gee.global_rotation
 	var vol = gee.linear_velocity
 	
 	gee.active = false
-	drone.global_position = loc
-	drone.global_rotation = rot
-	drone.linear_velocity = vol
-	drone.last_velocity =  vol
-	drone.camera.current = true
+	chicken.global_position = loc
+	chicken.global_rotation = rot
+	chicken.linear_velocity = vol
+	chicken.last_velocity =  vol
+	chicken.camera.current = true
 	#gee.camera.current = false
-	drone.active = true
+	chicken.active = true
 	
 
 func pause():
@@ -187,7 +187,7 @@ func add_crystal_to_world(value,pos):
 	new_crystal.init_pos = pos
 	#new_crystal.global_position = body.global_position
 	new_crystal.set_deferred("global_position", pos)
-	drone.get_parent().add_child(new_crystal)
+	chicken.get_parent().add_child(new_crystal)
 
 func hurt(body, how_much):
 	print(body.name)
@@ -231,24 +231,24 @@ func update_sky_energy(delta):
 		env.environment.sky.sky_material.sky_energy_multiplier = lerp(env.environment.sky.sky_material.sky_energy_multiplier, 1.0, delta)
 
 func update_env(delta):
-	#print(drone.global_position.y)
-	if drone.global_position.y > 200:
+	#print(chicken.global_position.y)
+	if chicken.global_position.y > 200:
 		env.environment.volumetric_fog_density = lerp(env.environment.volumetric_fog_density ,0.0, delta / (day_len/15))
-	if drone.global_position.y < -50:
+	if chicken.global_position.y < -50:
 		env.environment.volumetric_fog_albedo = Color("#9e0174")
 	else:
 		env.environment.volumetric_fog_albedo = Color(1,1,1)
 
 func update_music():
-	#print( drone.global_position.y)
+	#print( chicken.global_position.y)
 	var music_pick = ""
-	if drone.global_position.y > 750:
+	if chicken.global_position.y > 750:
 		music_pick = "heighup"
 		music.volume_db = 0
-	elif drone.global_position.y > 430:
+	elif chicken.global_position.y > 430:
 		music_pick = "city"
 		music.volume_db = -5
-	elif drone.global_position.y > -50:
+	elif chicken.global_position.y > -50:
 		music_pick = "meadow"
 		music.volume_db = 0
 	else:

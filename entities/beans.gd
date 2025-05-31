@@ -14,7 +14,7 @@ func _process(delta):
 
 func _on_body_entered(body):
 	if not collected:
-		if body.name == "drone":
+		if body.name == "chicken":
 			body.get_parent().play_as_gee()
 		if body.name == "Gee":
 			collected = true

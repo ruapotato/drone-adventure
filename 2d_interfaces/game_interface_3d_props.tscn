@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1bq84v68elhb"]
+
+[ext_resource type="PackedScene" uid="uid://ln0cvw5hn2i1" path="res://import/Key.glb" id="1_2sl6g"]
+[ext_resource type="Script" path="res://2d_interfaces/game_interface_3d_props.gd" id="1_un81t"]
+[ext_resource type="PackedScene" uid="uid://cf6j1a5esft5m" path="res://import/clover4.glb" id="2_5l73j"]
+[ext_resource type="Material" uid="uid://crvy883wu6c3d" path="res://native/coin.tres" id="3_npcla"]
+
+[node name="game_interface_3d_props" type="Node3D"]
+script = ExtResource("1_un81t")
+
+[node name="Key" parent="." instance=ExtResource("1_2sl6g")]
+transform = Transform3D(0.43, 0, 0, 0, 0.43, 0, 0, 0, 0.43, -0.38, 0.2, -0.3)
+
+[node name="key" parent="Key" index="0"]
+surface_material_override/0 = ExtResource("3_npcla")
+
+[node name="clover4" parent="." instance=ExtResource("2_5l73j")]
+transform = Transform3D(0.0322388, 0.00969408, -0.0012117, 0.0012117, -0.00425405, -0.0344683, -0.0135717, 0.0226479, -0.00595568, -0.385, 0.185, -0.305)
+
+[editable path="Key"]

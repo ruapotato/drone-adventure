@@ -1,0 +1,214 @@
+[gd_scene load_steps=23 format=3 uid="uid://cs1so7yo7rrrp"]
+
+[ext_resource type="Script" path="res://2d_interfaces/main_menu.gd" id="1_dpsd7"]
+[ext_resource type="Texture2D" uid="uid://divknqltj1n7n" path="res://images/night sky.jpg" id="2_vb4yk"]
+[ext_resource type="StyleBox" path="res://2d_interfaces/back2.tres" id="3_oscre"]
+[ext_resource type="StyleBox" path="res://2d_interfaces/back1.tres" id="4_7w6eg"]
+[ext_resource type="Texture2D" uid="uid://b26n5qiywwtpg" path="res://images/controls.png" id="5_b2iqc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8n5ft"]
+texture = ExtResource("2_vb4yk")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2wj75"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fire1"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16fpa"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_5msoq"]
+Button/colors/font_color = Color(0, 0.117647, 0.160784, 1)
+Button/font_sizes/font_size = 40
+Button/styles/disabled = ExtResource("3_oscre")
+Button/styles/focus = SubResource("StyleBoxFlat_2wj75")
+Button/styles/hover = SubResource("StyleBoxFlat_fire1")
+Button/styles/normal = ExtResource("4_7w6eg")
+Button/styles/pressed = SubResource("StyleBoxFlat_16fpa")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ct8w"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+
+[sub_resource type="Theme" id="Theme_k7jct"]
+Button/colors/font_color = Color(0, 0.118659, 0.161177, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_5ct8w")
+
+[sub_resource type="LabelSettings" id="LabelSettings_cqrrr"]
+font_size = 150
+outline_size = 15
+
+[sub_resource type="FontVariation" id="FontVariation_uwvh7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yxkf"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hee28"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lecyo"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_754iv"]
+bg_color = Color(0, 0.654902, 0.827451, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_833s2"]
+bg_color = Color(0, 0.329412, 0.423529, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_vran1"]
+Button/colors/font_color = Color(0, 0.117647, 0.160784, 1)
+Button/font_sizes/font_size = 80
+Button/fonts/font = SubResource("FontVariation_uwvh7")
+Button/styles/disabled = SubResource("StyleBoxFlat_8yxkf")
+Button/styles/focus = SubResource("StyleBoxFlat_hee28")
+Button/styles/hover = SubResource("StyleBoxFlat_lecyo")
+Button/styles/normal = SubResource("StyleBoxFlat_754iv")
+Button/styles/pressed = SubResource("StyleBoxFlat_833s2")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dofut"]
+bg_color = Color(0.568169, 0.0281786, 9.62615e-08, 1)
+corner_radius_top_left = 150
+corner_radius_top_right = 50
+corner_radius_bottom_right = 150
+corner_radius_bottom_left = 50
+
+[sub_resource type="Theme" id="Theme_13mo0"]
+Button/styles/disabled = ExtResource("3_oscre")
+Button/styles/normal = SubResource("StyleBoxFlat_dofut")
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_dpsd7")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = -62.0
+offset_top = -41.0
+offset_right = 1611.0
+offset_bottom = 908.0
+scale = Vector2(1.224, 1.224)
+theme_override_styles/panel = SubResource("StyleBoxTexture_8n5ft")
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 961.0
+offset_right = 203.0
+offset_bottom = 1016.0
+theme = SubResource("Theme_5msoq")
+text = "Back"
+
+[node name="Saved Files" type="Label" parent="."]
+layout_mode = 0
+offset_left = 91.0
+offset_top = 74.0
+offset_right = 941.0
+offset_bottom = 347.0
+theme = SubResource("Theme_k7jct")
+text = "Files
+"
+label_settings = SubResource("LabelSettings_cqrrr")
+
+[node name="Play1" type="Button" parent="Saved Files"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 105.0
+offset_right = 1017.0
+offset_bottom = 248.0
+theme = SubResource("Theme_vran1")
+text = "Save 1"
+
+[node name="Play2" type="Button" parent="Saved Files"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 306.0
+offset_right = 1017.0
+offset_bottom = 449.0
+theme = SubResource("Theme_vran1")
+text = "Save 2"
+
+[node name="Play3" type="Button" parent="Saved Files"]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 504.0
+offset_right = 1017.0
+offset_bottom = 647.0
+theme = SubResource("Theme_vran1")
+text = "Save 3"
+
+[node name="Play4" type="Button" parent="Saved Files"]
+layout_mode = 0
+offset_left = 700.0
+offset_top = 700.0
+offset_right = 1012.0
+offset_bottom = 843.0
+theme = SubResource("Theme_vran1")
+text = "Save 4"
+
+[node name="remove_saves" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1726.0
+offset_top = 995.0
+offset_right = 1846.0
+offset_bottom = 1026.0
+theme = SubResource("Theme_13mo0")
+text = "Clear All Saves"
+
+[node name="kill_it" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 1744.0
+offset_top = 1031.0
+offset_right = 1822.0
+offset_bottom = 1061.0
+theme = SubResource("Theme_13mo0")
+text = "Kill it!"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1558, 411)
+texture = ExtResource("5_b2iqc")
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Saved Files/Play1" to="." method="_on_play_1_pressed"]
+[connection signal="pressed" from="Saved Files/Play2" to="." method="_on_play_2_pressed"]
+[connection signal="pressed" from="Saved Files/Play3" to="." method="_on_play_3_pressed"]
+[connection signal="pressed" from="Saved Files/Play4" to="." method="_on_play_4_pressed"]
+[connection signal="pressed" from="remove_saves" to="." method="_on_remove_saves_pressed"]
+[connection signal="pressed" from="kill_it" to="." method="_on_kill_it_pressed"]

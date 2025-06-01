@@ -188,7 +188,7 @@ func process_crashed_state(delta):
 					world.add_child(chicken)
 					chicken.global_transform = global_transform # Position chicken at crashed car's location
 					chicken.rotation = Vector3.ZERO # Straighten chicken after eject
-					if chicken.has_method("reset_velocity"): chicken.reset_velocity()
+					chicken.reset_velocity()
 				else:
 					printerr("Vehicle crash: 'world' node is null, cannot reparent chicken to world.")
 

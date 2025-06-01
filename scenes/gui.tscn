@@ -132,11 +132,11 @@ ProgressBar/styles/fill = SubResource("StyleBoxFlat_4tctn")
 script = ExtResource("1_2mec0")
 
 [node name="TimeLabel" type="Label" parent="."]
-offset_left = 1674.0
+offset_left = 1590.0
 offset_top = 933.0
-offset_right = 1906.0
+offset_right = 1886.0
 offset_bottom = 997.0
-text = "8:00 AM"
+text = "Sun Angle: 900www"
 label_settings = SubResource("LabelSettings_i7c73")
 horizontal_alignment = 2
 

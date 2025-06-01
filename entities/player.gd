@@ -1,12 +1,15 @@
 extends CharacterBody3D
 
+#==============================================================================
+# --- OnReady Variables ---
+#==============================================================================
 @onready var cam_piv = $piv
 @onready var camera_arm = $piv/SpringArm3D # Corrected path
-@onready var camera = $piv/SpringArm3D/Camera3D      # Path to your player's camera
+@onready var camera = $piv/SpringArm3D/Camera3D     # Path to your player's camera
 @onready var mesh = $mesh
 @onready var leg_animator = $mesh/LegAnimator
 @onready var sword = $mesh/sword
-@onready var shield_node = $mesh/shield  # Renamed from 'shield' to avoid conflict with shield script if any
+@onready var shield_node = $mesh/shield # Renamed from 'shield' to avoid conflict with shield script if any
 @onready var collision_shape = $CollisionShape3D
 @onready var jump_sound = $mesh/player_sounds/jump
 @onready var land_sound = $mesh/player_sounds/land
@@ -15,10 +18,12 @@ extends CharacterBody3D
 @onready var right_arm = $mesh/right_arm
 @onready var left_arm = $mesh/left_arm
 
-# Movement constants
+#==============================================================================
+# --- Constants ---
+#==============================================================================
 const SPEED = 5.0
 const ACCELERATION = 30.0 # Affects how quickly velocity changes, used in move_toward or lerp
-const FRICTION = 60.0      # Affects how quickly player stops, used in move_toward
+const FRICTION = 60.0     # Affects how quickly player stops, used in move_toward
 const ROTATION_SPEED = 20.0
 const AERIAL_STRIKE_GRAVITY_MULT = 1.5
 const AERIAL_STRIKE_INITIAL_VELOCITY_Y = -0.5 # Renamed from AERIAL_STRIKE_SPEED for clarity
@@ -26,7 +31,6 @@ const POSSESSION_TRANSITION_TIME = 0.5 # Not currently used, but kept from your 
 const FLUTE_PLAY_TIME = 1.0
 const MIN_POSSESSION_DISTANCE = 0.0
 const MAX_POSSESSION_DISTANCE = 10.0 # Used to check if chicken is in range to *start* possession
-# const POSSESSION_DURATION = 10.0 # REMOVED
 const POSSESSION_COOLDOWN = 1.0
 
 # Movement States
@@ -47,6 +51,24 @@ const TARGETING_DISTANCE = 10.0
 # Get the gravity from project settings
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+#==============================================================================
+# --- Export Variables ---
+#==============================================================================
+@export var mouse_sensitivity = 0.01 # You added this
+
+@export_group("Inactive Following Chicken")
+@export var player_follow_max_speed: float = 3.5
+@export var player_follow_catch_up_bonus_speed: float = 7.0
+@export var player_follow_min_dist_for_boost: float = 5.0
+@export var player_follow_max_dist_for_boost: float = 18.0
+@export var player_follow_trail_distance: float = 2.0 # How far behind the chicken to target
+@export var player_circle_radius_inactive: float = 1.8 # Radius for circling when chicken is still
+@export var player_follow_lerp_factor: float = 6.0 # How quickly to reach target speed for following
+@export var player_look_slerp_speed_inactive: float = 5.0 # How quickly to turn to look at chicken
+
+#==============================================================================
+# --- Game State Variables ---
+#==============================================================================
 # State handling
 var active = true # Player character is active by default
 var action_state = ActionState.IDLE
@@ -57,12 +79,10 @@ var was_on_floor = false
 # Variables for possession system
 var is_playing_flute = false
 var flute_timer = 0.0
-# var possession_timer = 0.0 # REMOVED
 var possession_cooldown_timer = 0.0
 var is_possessing = false # Player's own state for whether it *intends* to possess
 var chicken_spirit # Reference to the chicken node instance
 var world # Reference to the parent node, assumed to be the game world/level
-var mouse_sensitivity = 0.01 # You added this
 
 # Movement and combat variables
 var input_dir = Vector2.ZERO
@@ -81,15 +101,22 @@ var last_player_position = Vector3.ZERO
 var last_player_rotation = Basis()
 var last_safe_position = Vector3.ZERO
 
+# Internal state for following chicken
+var _player_follow_last_chicken_pos: Vector3 = Vector3.ZERO
+var _player_follow_target_pos: Vector3 = Vector3.ZERO
+var _player_circle_time_inactive: float = 0.0
+var _player_circle_bob_time_inactive: float = 0.0
 
+#==============================================================================
+# --- Initialization ---
+#==============================================================================
 func _ready():
 	world = get_parent()
 	chicken_spirit = world.find_child("chicken") 
-	if is_instance_valid(chicken_spirit) and chicken_spirit.has_method("set_player"):
-		chicken_spirit.set_player(self)
+	if is_instance_valid(chicken_spirit):
+		chicken_spirit.set_player(self) # Direct call, assuming chicken_spirit has set_player
 	else:
 		printerr("Player _ready: Chicken node or set_player method not found!")
-
 
 	camera_arm.add_excluded_object(self)
 	camera_arm.add_excluded_object(mesh)
@@ -98,16 +125,15 @@ func _ready():
 	cam_piv.top_level = true
 	cam_piv.global_position = global_position 
 
-	if camera:
-		camera.current = true
-	else:
-		printerr("Player _ready: Camera node ($piv/SpringArm3D/Camera3D) not found!")
+	camera.current = true # @onready var camera assumed to be valid
 
 	active = true 
 	last_player_position = global_position
 	last_player_rotation = mesh.transform.basis
 
-
+#==============================================================================
+# --- Input Handling ---
+#==============================================================================
 func _unhandled_input(event):
 	if not active: 
 		if is_possessing and event.is_action_pressed("play_flute") and possession_cooldown_timer <= 0:
@@ -124,7 +150,7 @@ func _unhandled_input(event):
 			pass 
 		return 
 
-	if event.is_action_pressed("move_up"):
+	if event.is_action_pressed("move_up"): # Jump
 		if is_on_floor() or coyote_timer > 0:
 			perform_jump()
 		else:
@@ -133,7 +159,7 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("fire"):
 		perform_attack()
 	elif event.is_action_released("fire"):
-		if sword.has_method("release_charge"): sword.release_charge()
+		if sword.has_method("release_charge"): sword.release_charge() # Optional method
 	
 	elif event.is_action_pressed("roll"):
 		start_roll()
@@ -146,12 +172,28 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("target"):
 		toggle_targeting()
 
-
+#==============================================================================
+# --- Physics Processing ---
+#==============================================================================
 func _physics_process(delta):
-	if not active: 
-		# No possession timer logic needed here anymore
-		return 
+	if not active: # Player is inactive (chicken is possessed)
+		if is_possessing and is_instance_valid(chicken_spirit):
+			handle_following_chicken_movement(delta)
+			
+			if not is_on_floor():
+				velocity.y -= gravity * delta
+			
+			move_and_slide()
+			update_inactive_player_animations(delta)
+		else:
+			velocity = velocity.lerp(Vector3.ZERO, delta * FRICTION)
+			if not is_on_floor():
+				velocity.y -= gravity * delta
+			move_and_slide()
+			leg_animator.animate_legs(delta, 0.0) # @onready var assumed valid
+		return
 
+	# --- Active Player Logic ---
 	if possession_cooldown_timer > 0:
 		possession_cooldown_timer -= delta
 	
@@ -166,15 +208,18 @@ func _physics_process(delta):
 		update_timers(delta)
 	elif is_playing_flute and not is_possessing: 
 		velocity = Vector3.ZERO 
-		if leg_animator.has_method("animate_legs"):
-			leg_animator.animate_legs(delta, 0.0)
+		leg_animator.animate_legs(delta, 0.0) # @onready var assumed valid
 
 	if not is_possessing: 
 		move_and_slide()
 
-
+#==============================================================================
+# --- Movement & State Helpers (Active Player) ---
+#==============================================================================
 func handle_basic_physics(delta):
 	if not is_on_floor():
+		# sword.AttackType.AERIAL is an enum, direct access is fine.
+		# has_method for get_current_attack_type is for polymorphism if sword types differ.
 		if is_attacking and sword.has_method("get_current_attack_type") and sword.get_current_attack_type() == sword.AttackType.AERIAL:
 			velocity.y -= gravity * AERIAL_STRIKE_GRAVITY_MULT * delta
 			velocity.x = 0.0
@@ -216,6 +261,7 @@ func handle_movement_controls(delta):
 			direction = direction.normalized()
 
 	var current_speed = SPEED
+	# These has_method checks are for swords with potentially different charging mechanics/APIs
 	if is_attacking and sword.has_method("get_is_charging") and not sword.get_is_charging(): current_speed = 0.0
 	elif sword.has_method("get_is_charging") and sword.get_is_charging() and sword.has_method("get_charge_movement_speed_mult"):
 		current_speed *= sword.get_charge_movement_speed_mult()
@@ -229,12 +275,12 @@ func handle_movement_controls(delta):
 			if look_dir_xz.length_squared() > 0.01:
 				mesh.transform.basis = mesh.transform.basis.slerp(Basis.looking_at(look_dir_xz.normalized(), Vector3.UP), ROTATION_SPEED * delta)
 		if is_on_floor() and action_state != ActionState.ATTACK and action_state != ActionState.ROLL: action_state = ActionState.WALK
-		if leg_animator.has_method("animate_legs"): leg_animator.animate_legs(delta, Vector2(velocity.x, velocity.z).length() / SPEED)
+		leg_animator.animate_legs(delta, Vector2(velocity.x, velocity.z).length() / SPEED) # @onready leg_animator
 	else: 
 		velocity.x = move_toward(velocity.x, 0.0, FRICTION * delta)
 		velocity.z = move_toward(velocity.z, 0.0, FRICTION * delta)
 		if is_on_floor() and action_state != ActionState.ATTACK and action_state != ActionState.ROLL: action_state = ActionState.IDLE
-		if leg_animator.has_method("animate_legs"): leg_animator.animate_legs(delta, 0.0)
+		leg_animator.animate_legs(delta, 0.0) # @onready leg_animator
 
 func handle_possession_input():
 	if Input.is_action_just_pressed("play_flute") and not is_rolling and not is_attacking and not is_blocking:
@@ -254,7 +300,7 @@ func attempt_possession():
 	if not is_instance_valid(chicken_spirit) or not is_playing_flute:
 		cancel_flute(); return
 	var distance = global_position.distance_to(chicken_spirit.global_position)
-	if distance >= MIN_POSSESSION_DISTANCE and distance <= MAX_POSSESSION_DISTANCE: # Range check to START possession
+	if distance >= MIN_POSSESSION_DISTANCE and distance <= MAX_POSSESSION_DISTANCE:
 		start_possession_sequence()
 	else:
 		print("Player: Chicken out of range for possession."); cancel_flute()
@@ -266,15 +312,9 @@ func start_possession_sequence():
 	active = false 
 	is_possessing = true 
 	is_playing_flute = false
-	# possession_timer = POSSESSION_DURATION # REMOVED
 	action_state = ActionState.POSSESSING
-	if camera: camera.current = false
-	if chicken_spirit.has_method("start_possession"):
-		chicken_spirit.start_possession()
-	else:
-		printerr("Player Error: chicken_spirit has no start_possession method!")
-		active = true; is_possessing = false; action_state = ActionState.IDLE
-		if camera: camera.current = true
+	camera.current = false # @onready camera
+	chicken_spirit.start_possession() # Direct call, chicken must implement this
 
 func end_possession_sequence():
 	if not is_possessing and action_state != ActionState.POSSESSING:
@@ -285,11 +325,10 @@ func end_possession_sequence():
 	is_possessing = false 
 	is_playing_flute = false
 	action_state = ActionState.IDLE
-	# possession_timer = 0.0 # REMOVED
 	possession_cooldown_timer = POSSESSION_COOLDOWN
-	if camera: camera.current = true 
-	if is_instance_valid(chicken_spirit) and chicken_spirit.has_method("end_possession"):
-		chicken_spirit.end_possession() 
+	camera.current = true # @onready camera
+	if is_instance_valid(chicken_spirit):
+		chicken_spirit.end_possession() # Direct call, chicken must implement this
 	velocity = Vector3.ZERO
 
 func cancel_flute():
@@ -337,6 +376,7 @@ func perform_attack():
 	if is_attacking or is_rolling or is_blocking: return
 	is_attacking = true; action_state = ActionState.ATTACK
 	if is_on_floor():
+		# These has_method checks allow for different sword types/behaviors
 		if sword.has_method("start_charge"): sword.start_charge()
 		elif sword.has_method("perform_ground_attack"): sword.perform_ground_attack()
 		else: printerr("Player: Sword lacks attack/charge methods!"); is_attacking = false; action_state = ActionState.IDLE
@@ -359,21 +399,21 @@ func start_roll():
 		roll_dir_2d = mesh_fwd_xz.normalized() if mesh_fwd_xz.length_squared() > 0.001 else Vector2(0, -1)
 	velocity.x = roll_dir_2d.x * ROLL_SPEED; velocity.z = roll_dir_2d.y * ROLL_SPEED
 	velocity.y = 0.5 
-	if is_instance_valid(shield_node) and shield_node.has_method("stow"): shield_node.stow()
+	if is_instance_valid(shield_node): shield_node.stow() # shield_node is @onready, stow is expected method
 
 func start_block():
 	if not active or is_possessing or is_playing_flute: return
 	if is_blocking or is_rolling or is_attacking: return
 	is_blocking = true; action_state = ActionState.BLOCK
 	if is_instance_valid(shield_sound): shield_sound.play()
-	if is_instance_valid(shield_node) and shield_node.has_method("shield"): shield_node.shield()
+	if is_instance_valid(shield_node): shield_node.shield() # shield_node is @onready, shield is expected method
 
 func end_block():
 	if not active or is_possessing or is_playing_flute: return
 	if not is_blocking: return
 	is_blocking = false;
 	if action_state == ActionState.BLOCK: action_state = ActionState.IDLE
-	if is_instance_valid(shield_node) and shield_node.has_method("equip"): shield_node.equip()
+	if is_instance_valid(shield_node): shield_node.equip() # shield_node is @onready, equip is expected method
 
 func toggle_targeting():
 	if not active or is_possessing or is_playing_flute: return
@@ -416,3 +456,90 @@ func update_timers(delta):
 		if damage_invulnerability_timer <= 0:
 			is_invulnerable = false
 			if action_state == ActionState.HURT: action_state = ActionState.IDLE
+
+#==============================================================================
+# --- Inactive Player (Following Chicken) Logic ---
+#==============================================================================
+func handle_following_chicken_movement(delta):
+	if not is_instance_valid(chicken_spirit):
+		velocity = velocity.lerp(Vector3.ZERO, delta * FRICTION)
+		return
+
+	var chicken_pos = chicken_spirit.global_position
+	var chicken_global_transform_basis = chicken_spirit.global_transform.basis
+	
+	var chicken_moving_sq = (chicken_pos - _player_follow_last_chicken_pos).length_squared() > 0.001
+	_player_follow_last_chicken_pos = chicken_pos
+	
+	_player_circle_bob_time_inactive += delta * 3.0
+
+	if chicken_moving_sq:
+		var chicken_back_vector = chicken_global_transform_basis.z
+		_player_follow_target_pos = chicken_pos + chicken_back_vector * player_follow_trail_distance
+		_player_follow_target_pos.y = chicken_pos.y 
+	else:
+		_player_circle_time_inactive += delta * (1.0 + sin(_player_circle_bob_time_inactive) * 0.2)
+		var bob_offset_y = sin(_player_circle_bob_time_inactive) * 0.1
+		var circle_offset = Vector3(
+			cos(_player_circle_time_inactive) * player_circle_radius_inactive,
+			bob_offset_y,
+			sin(_player_circle_time_inactive) * player_circle_radius_inactive
+		)
+		_player_follow_target_pos = chicken_pos + circle_offset
+
+	var direction_to_target = _player_follow_target_pos - global_position
+	var dist_sq_to_follow_target = direction_to_target.length_squared()
+	var actual_distance_to_chicken = global_position.distance_to(chicken_pos)
+	
+	var effective_max_speed = player_follow_max_speed
+
+	if actual_distance_to_chicken > player_follow_min_dist_for_boost:
+		var range_val = player_follow_max_dist_for_boost - player_follow_min_dist_for_boost
+		var speed_increase_ratio = 0.0
+		if range_val > 0.001:
+			speed_increase_ratio = (actual_distance_to_chicken - player_follow_min_dist_for_boost) / range_val
+		
+		speed_increase_ratio = clamp(speed_increase_ratio, 0.0, 1.0)
+		effective_max_speed = player_follow_max_speed + speed_increase_ratio * player_follow_catch_up_bonus_speed
+	
+	var current_follow_speed = effective_max_speed
+	
+	var close_proximity_threshold_sq = 0.3 * 0.3 
+	if dist_sq_to_follow_target < close_proximity_threshold_sq and close_proximity_threshold_sq > 0.00001:
+		current_follow_speed = effective_max_speed * (dist_sq_to_follow_target / close_proximity_threshold_sq)
+		current_follow_speed = clamp(current_follow_speed, 0.0, effective_max_speed)
+
+	var target_vel_xz = Vector3.ZERO
+	if direction_to_target.length_squared() > 0.0001:
+		var dir_norm = direction_to_target.normalized()
+		target_vel_xz = Vector3(dir_norm.x, 0, dir_norm.z) * current_follow_speed
+	
+	velocity.x = lerpf(velocity.x, target_vel_xz.x, delta * player_follow_lerp_factor)
+	velocity.z = lerpf(velocity.z, target_vel_xz.z, delta * player_follow_lerp_factor)
+	
+	var y_diff = _player_follow_target_pos.y - global_position.y
+	if not is_on_floor() and abs(y_diff) > 0.5:
+		var target_y_nudge_strength = player_follow_max_speed * 0.2
+		velocity.y = lerpf(velocity.y, velocity.y + sign(y_diff) * min(abs(y_diff), target_y_nudge_strength) , delta * player_follow_lerp_factor * 0.1)
+
+	var look_at_chicken_target_pos = chicken_pos + Vector3.UP * 0.5
+	look_at_chicken_target_pos.y = global_position.y
+	if (look_at_chicken_target_pos - global_position).length_squared() > 0.01:
+		var desired_basis = mesh.global_transform.looking_at(look_at_chicken_target_pos, Vector3.UP).basis
+		mesh.global_transform.basis = mesh.global_transform.basis.slerp(desired_basis, delta * player_look_slerp_speed_inactive)
+
+func update_inactive_player_animations(delta):
+	# leg_animator is @onready, assumed to be valid
+	var current_speed_xz = Vector2(velocity.x, velocity.z).length()
+	var anim_speed_ratio = 0.0
+	if player_follow_max_speed > 0.01:
+		anim_speed_ratio = current_speed_xz / player_follow_max_speed
+	leg_animator.animate_legs(delta, anim_speed_ratio)
+
+#==============================================================================
+# --- Utility Functions ---
+#==============================================================================
+func set_active_true_and_camera_current():
+	active = true
+	camera.current = true # @onready camera
+	print("Player: Became active, camera set to current.")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://e7mgfcp76sj4"]
+
+[ext_resource type="Material" uid="uid://ctk00ajchcfhg" path="res://native/spike_tip_red.tres" id="1_1urvv"]
+[ext_resource type="Script" path="res://level_bits/be_gone.gd" id="1_wggng"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8rnie"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v7d40"]
+size = Vector3(100, 1, 100)
+
+[node name="be_gone" type="Area3D"]
+script = ExtResource("1_wggng")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_8rnie")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_v7d40")
+surface_material_override/0 = ExtResource("1_1urvv")
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

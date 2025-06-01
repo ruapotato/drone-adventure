@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://3eg1mw8e5scb"]
+
+[ext_resource type="Script" path="res://level_bits/clover_timer.gd" id="1_0yxoh"]
+[ext_resource type="AudioStream" uid="uid://bnu8kaafxkjfc" path="res://audio/coin_timer.wav" id="2_u8o30"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jbhl8"]
+size = Vector3(1.165, 0.5, 1.165)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6lqyb"]
+size = Vector3(1.165, 0.5, 1.165)
+
+[node name="clover_timer" type="Node3D"]
+script = ExtResource("1_0yxoh")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_jbhl8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
+mesh = SubResource("BoxMesh_6lqyb")
+
+[node name="timer_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_u8o30")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

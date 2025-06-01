@@ -1,0 +1,47 @@
+[gd_scene load_steps=10 format=3 uid="uid://5v0415em08vj"]
+
+[ext_resource type="Script" path="res://level_bits/level_loader.gd" id="1_fp5wk"]
+[ext_resource type="PackedScene" uid="uid://bej60nbr21nhf" path="res://entities/player.tscn" id="1_wnodb"]
+[ext_resource type="PackedScene" uid="uid://daxn46nmxbap2" path="res://2d_interfaces/game_interface.tscn" id="3_vaupo"]
+[ext_resource type="PackedScene" uid="uid://d146bwqv6ko3u" path="res://2d_interfaces/pause_menu.tscn" id="4_rsgvt"]
+[ext_resource type="PackedScene" uid="uid://dq46s548gc4hy" path="res://level_bits/music.tscn" id="5_6ljx4"]
+[ext_resource type="Script" path="res://input/controller_support.gd" id="6_28hk5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3dajk"]
+sky_top_color = Color(0.19, 0.487, 1, 1)
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_6g3ha"]
+sky_material = SubResource("ProceduralSkyMaterial_3dajk")
+
+[sub_resource type="Environment" id="Environment_8c8l6"]
+background_mode = 2
+sky = SubResource("Sky_6g3ha")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="level_loader" type="Node3D"]
+script = ExtResource("1_fp5wk")
+
+[node name="player" parent="." instance=ExtResource("1_wnodb")]
+
+[node name="ENV" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="ENV"]
+environment = SubResource("Environment_8c8l6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ENV"]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="loaded_level" type="Node3D" parent="."]
+
+[node name="game_interface" parent="." instance=ExtResource("3_vaupo")]
+
+[node name="pause_menu" parent="." instance=ExtResource("4_rsgvt")]
+
+[node name="music" parent="." instance=ExtResource("5_6ljx4")]
+
+[node name="controller_support" type="Node3D" parent="."]
+script = ExtResource("6_28hk5")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhvsiqa1py2gh"]
+
+[ext_resource type="Material" uid="uid://dmqmxlsyb7nhe" path="res://native/stone_wall.tres" id="1_g7n4b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ofeqq"]
+flip_faces = true
+size = Vector3(100, 100, 100)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3ngqk"]
+data = PackedVector3Array(50, 50, 50, -50, 50, 50, -50, -50, 50, 50, -50, 50, 50, 50, 50, -50, -50, 50, -50, 50, -50, 50, 50, -50, 50, -50, -50, -50, -50, -50, -50, 50, -50, 50, -50, -50, 50, 50, -50, 50, 50, 50, 50, -50, 50, 50, -50, -50, 50, 50, -50, 50, -50, 50, -50, 50, 50, -50, 50, -50, -50, -50, -50, -50, -50, 50, -50, 50, 50, -50, -50, -50, -50, 50, 50, 50, 50, 50, 50, 50, -50, -50, 50, -50, -50, 50, 50, 50, 50, -50, 50, -50, 50, -50, -50, 50, -50, -50, -50, 50, -50, -50, 50, -50, 50, -50, -50, -50)
+
+[node name="cube_level_walls" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ofeqq")
+surface_material_override/0 = ExtResource("1_g7n4b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConcavePolygonShape3D_3ngqk")

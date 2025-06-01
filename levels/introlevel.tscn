@@ -1,0 +1,166 @@
+[gd_scene load_steps=8 format=3 uid="uid://dwhdrfmnfe3k8"]
+
+[ext_resource type="PackedScene" uid="uid://du7suu1xfuodc" path="res://level_bits/small_cylinder.tscn" id="1_anpvi"]
+[ext_resource type="PackedScene" uid="uid://b4j60lp5300fi" path="res://level_bits/locked_doors.tscn" id="2_wym8i"]
+[ext_resource type="PackedScene" uid="uid://l8ok6rrbv6vj" path="res://level_bits/clover.tscn" id="3_lqn34"]
+[ext_resource type="PackedScene" uid="uid://bk4crbtc3ibeq" path="res://level_bits/bucket.tscn" id="4_i3d6h"]
+[ext_resource type="PackedScene" uid="uid://cstyfyemvu5hs" path="res://level_bits/spikes_small.tscn" id="5_dscb8"]
+[ext_resource type="PackedScene" uid="uid://3eg1mw8e5scb" path="res://level_bits/clover_timer.tscn" id="6_2wjv5"]
+[ext_resource type="PackedScene" uid="uid://bfplgtblp33ft" path="res://level_bits/clover_x5.tscn" id="7_1dl7b"]
+
+[node name="introlevel" type="Node3D"]
+
+[node name="small_cylinder" parent="." instance=ExtResource("1_anpvi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.08867, 3.57848)
+
+[node name="0_hub" parent="." instance=ExtResource("2_wym8i")]
+transform = Transform3D(-0.0456419, 0, -0.998958, 0, 1, 0, 0.998958, 0, -0.0456419, 0, -1.04918, -1.25153)
+
+[node name="clover_set" type="Node3D" parent="."]
+
+[node name="clover" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.366848, 0.83692)
+
+[node name="clover2" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.366848, 1.83692)
+
+[node name="clover3" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.366848, 2.83692)
+
+[node name="clover4" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.366848, 3.83692)
+
+[node name="clover5" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633152, 3.83692)
+
+[node name="clover6" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63315, 3.83692)
+
+[node name="clover7" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.63315, 3.83692)
+
+[node name="clover8" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.63315, 3.83692)
+
+[node name="clover9" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.63315, 3.83692)
+
+[node name="clover10" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.63315, 3.83692)
+
+[node name="clover11" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.63315, 3.83692)
+
+[node name="clover12" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.63315, 3.83692)
+
+[node name="clover13" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.63315, 3.83692)
+
+[node name="clover14" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.63315, 4.83692)
+
+[node name="clover15" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.63315, 5.83692)
+
+[node name="clover16" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.63315, 6.83692)
+
+[node name="clover17" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.63315, 6.83692)
+
+[node name="clover18" parent="clover_set" instance=ExtResource("3_lqn34")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.63315, 6.83692)
+
+[node name="bucket" parent="." instance=ExtResource("4_i3d6h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70874, 5.64645, 9.98995)
+
+[node name="spikes_small" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.677732, 0.298579, -4.21033)
+
+[node name="spikes_small2" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67773, 0.298579, -4.21033)
+
+[node name="spikes_small3" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67773, 0.298579, -4.21033)
+
+[node name="spikes_small4" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67773, 0.298579, -3.21033)
+
+[node name="spikes_small5" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67773, 0.298579, -2.21033)
+
+[node name="spikes_small6" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.67773, 0.298579, -2.21033)
+
+[node name="spikes_small9" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00812, 0.298579, -4.21033)
+
+[node name="spikes_small10" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00812, 0.298579, -3.21033)
+
+[node name="spikes_small11" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.00812, 0.298579, -2.21033)
+
+[node name="spikes_small12" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.00812, 0.298579, -2.21033)
+
+[node name="spikes_small7" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.677732, 0.298579, -2.21033)
+
+[node name="spikes_small8" parent="bucket" instance=ExtResource("5_dscb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.677732, 0.298579, -3.21033)
+
+[node name="clover_timer" parent="bucket" instance=ExtResource("6_2wjv5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.77929, -2.64329, -3.21202)
+
+[node name="clover_x5" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899714, 0.247188, 0)
+
+[node name="clover_x6" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899714, 0.247188, -1)
+
+[node name="clover_x7" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 0.247188, -1)
+
+[node name="clover_x8" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10029, 0.247188, -1)
+
+[node name="clover_x9" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10029, 0.247188, 0)
+
+[node name="clover_x10" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10029, 0.247188, 1)
+
+[node name="clover_x11" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 0.247188, 1)
+
+[node name="clover_x12" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.899714, 0.247188, 1)
+
+[node name="clover_x13" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 0.247188, 0)
+
+[node name="clover_x14" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 1.24719, 0)
+
+[node name="clover_x15" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 2.24719, 0)
+
+[node name="clover_x16" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 3.24719, 0)
+
+[node name="clover_x17" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 4.24719, 0)
+
+[node name="clover_x18" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 5.24719, 0)
+
+[node name="clover_x19" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 5.24719, -1)
+
+[node name="clover_x20" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 5.24719, -2)
+
+[node name="clover_x21" parent="bucket/clover_timer" instance=ExtResource("7_1dl7b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.100286, 5.24719, -3)

@@ -103,11 +103,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.113, 22.7489, -98.5438)
 visible = false
 
 [node name="city_loader" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.996, 75.2189, 230.282)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.31452, 60.0199, 333.071)
 script = ExtResource("22_lo355")
 
 [node name="spawn" type="Node3D" parent="."]
-transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, -31.4633, 63.5664, 259.649)
+transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, 3.83442, 61.8338, 384.032)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="spawn"]
 transform = Transform3D(0.917755, 0, -0.397148, 0, 1, 0, 0.397148, 0, 0.917755, 0, -2.15637, 0)
@@ -134,7 +134,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.115, 0)
 script = ExtResource("11_e3hyu")
 
 [node name="player" parent="." instance=ExtResource("12_q5onr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.68485, 65.1849, 249.58)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00132, 63.4523, 383.487)
 
 [node name="chicken" parent="." instance=ExtResource("18_thmgp")]
 

@@ -1,6 +1,6 @@
 extends Node3D
 
-@onready var target = $target
+@onready var  target = $target
 var blocks = []
 var num_blocks = 32
 var block_spacing = 0.05

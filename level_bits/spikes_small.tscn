@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://cstyfyemvu5hs"]
+
+[ext_resource type="Script" path="res://level_bits/spikes.gd" id="1_ayig4"]
+[ext_resource type="PackedScene" uid="uid://bm7no2dwsftuw" path="res://import/spikes.glb" id="2_tk012"]
+[ext_resource type="Material" uid="uid://dmqmxlsyb7nhe" path="res://native/stone_wall.tres" id="3_08bse"]
+[ext_resource type="Material" uid="uid://bisyed0wtinom" path="res://native/spike_tip.tres" id="3_xgcis"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v4mwh"]
+size = Vector3(0.8, 0.79, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tomiu"]
+size = Vector3(1, 0.175, 1)
+
+[node name="spikes_small" type="Area3D"]
+script = ExtResource("1_ayig4")
+
+[node name="die" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.114499, 0)
+shape = SubResource("BoxShape3D_v4mwh")
+
+[node name="spikes2" parent="." instance=ExtResource("2_tk012")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45289, 0)
+
+[node name="Cone_003" parent="spikes2" index="0"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_003" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.508925, 0, 0.374108)
+
+[node name="Cone_004" parent="spikes2" index="1"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_004" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.392983, 0, -0.0467297)
+
+[node name="Cone_005" parent="spikes2" index="2"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_005" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.447487, 0, -0.548838)
+
+[node name="Cone_006" parent="spikes2" index="3"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_006" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.426198, 0, -0.438985)
+
+[node name="Cone_007" parent="spikes2" index="4"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_007" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.474639, 0, -0.0696793)
+
+[node name="Cone_008" parent="spikes2" index="5"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_008" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.439953, 0, 0.374108)
+
+[node name="Cube" parent="spikes2" index="6"]
+surface_material_override/0 = ExtResource("3_08bse")
+
+[node name="Cone_001" parent="spikes2" index="7"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_001" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.374108)
+
+[node name="Cone_002" parent="spikes2" index="8"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_002" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0664238)
+
+[node name="Cone_009" parent="spikes2" index="9"]
+material_override = ExtResource("3_xgcis")
+
+[node name="pos" type="Node3D" parent="spikes2/Cone_009" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.53254)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="spikes2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spikes2/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0998077, 0)
+shape = SubResource("BoxShape3D_tomiu")
+
+[editable path="spikes2"]

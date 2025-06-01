@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsl58gebtwki8"]
+
+[ext_resource type="Script" path="res://level_bits/key.gd" id="1_2vfdl"]
+[ext_resource type="PackedScene" uid="uid://ln0cvw5hn2i1" path="res://import/Key.glb" id="2_suipd"]
+[ext_resource type="Material" uid="uid://crvy883wu6c3d" path="res://native/coin.tres" id="3_6ejmb"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_aphv7"]
+
+[node name="key" type="Area3D"]
+script = ExtResource("1_2vfdl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_aphv7")
+
+[node name="Key" parent="." instance=ExtResource("2_suipd")]
+transform = Transform3D(12.49, 0, 0, 0, 12.49, 0, 0, 0, 12.49, 0, -0.135304, 0)
+
+[node name="key" parent="Key" index="0"]
+surface_material_override/0 = ExtResource("3_6ejmb")
+
+[editable path="Key"]

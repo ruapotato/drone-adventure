@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bulcnw1rff4gl"]
+
+[ext_resource type="Material" uid="uid://dmqmxlsyb7nhe" path="res://native/stone_wall.tres" id="1_6j0s2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_axvh2"]
+size = Vector3(3, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_opesj"]
+size = Vector3(3, 1, 3)
+
+[node name="ground_medium" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_axvh2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_6j0s2")
+mesh = SubResource("BoxMesh_opesj")
+skeleton = NodePath("../CollisionShape3D")

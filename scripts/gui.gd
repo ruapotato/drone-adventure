@@ -60,14 +60,7 @@ func update_time_label():
 		time_label.text = format_hour(world.friendly_time) + " AM"
 	else:
 		time_label.text = format_hour(world.friendly_time) + " PM"
-func update_power_cell_label():
-	power_cell.value = chicken.power_cell
-	if "extra_power" in chicken.inventory:
-		extra_power_cell.visible = true
-		var max_extra_power = chicken.extra_power_per_upgrade * chicken.inventory["extra_power"]
-		extra_power_cell.value = (chicken.extra_power_cell / max_extra_power) * 100
-	else:
-		extra_power_cell.visible = false
+
 	
 func update_speed_label():
 	speed_label.text = "MPH " + str(int(chicken.linear_velocity.length() * 2.23693629))
@@ -79,11 +72,6 @@ func update_chihuahuas():
 	else:
 		chihuahuas.visible = false
 
-func update_refuel():
-	if chicken.power_cell < 30:
-		refuel_label.visible = true
-	else:
-		refuel_label.visible = false
 
 func update_added_label(delta):
 	if added_counter <= 0:
@@ -137,6 +125,4 @@ func _process(delta):
 		update_boss_bar()
 		update_time_label()
 		update_target_label()
-		update_power_cell_label()
-		update_refuel()
 		update_chihuahuas()

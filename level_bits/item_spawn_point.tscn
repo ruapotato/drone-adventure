@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cketbrkvdkpji"]
+
+[ext_resource type="Script" uid="uid://dx4sny115i01s" path="res://scripts/item_spawn_point.gd" id="1_xuh1a"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_pxsyu"]
+
+[node name="item_spawn_point" type="Node3D"]
+script = ExtResource("1_xuh1a")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_pxsyu")

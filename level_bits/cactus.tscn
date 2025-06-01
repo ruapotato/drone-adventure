@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dykwn0hkqxt7a"]
+
+[ext_resource type="Material" uid="uid://dre6s5d3uk2i3" path="res://native/cactus.tres" id="1_xibey"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_w84s8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_36ctd"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e8jnn"]
+radius = 0.295
+height = 1.395
+
+[node name="cactus" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.955938, 0)
+material_override = ExtResource("1_xibey")
+mesh = SubResource("CylinderMesh_w84s8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.93832, 0)
+material_override = ExtResource("1_xibey")
+mesh = SubResource("SphereMesh_36ctd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.680519, 0.955938, 0)
+material_override = ExtResource("1_xibey")
+mesh = SubResource("CapsuleMesh_e8jnn")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.12191, 1.35643, 0)
+material_override = ExtResource("1_xibey")
+mesh = SubResource("CapsuleMesh_e8jnn")

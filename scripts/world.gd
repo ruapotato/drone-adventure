@@ -167,7 +167,7 @@ func play_as_chicken():
 	chicken.global_position = loc
 	chicken.global_rotation = rot
 	chicken.linear_velocity = vol
-	chicken.last_velocity =  vol
+	#chicken.last_velocity =  vol
 	chicken.camera.current = true
 	#gee.camera.current = false
 	chicken.active = true

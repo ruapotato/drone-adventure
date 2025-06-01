@@ -178,7 +178,7 @@ func _play_intro_animation() -> void:
 	rise_tween.set_ease(Tween.EASE_OUT)
 
 func find_root(node=get_tree().root) -> Node:
-	if node.name.to_lower() == "level_loader":
+	if node.name.to_lower() == "world":
 		return node
 	for child in node.get_children():
 		var found = find_root(child)

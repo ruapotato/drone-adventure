@@ -5,12 +5,16 @@ extends Area3D
 @export var reflection_distance := 2.0  # Distance at which boss attempts reflection
 
 var speed := 0.0
-var boss = null
+var boss
 var sword_edge = null
 var reflected := false
 var sword 
 
 func _physics_process(delta: float) -> void:
+	
+	if boss == null:
+		queue_free()
+		return
 	# Get direction to current target
 	var direction
 	if reflected:
@@ -79,6 +83,7 @@ func _on_area_entered(area: Area3D) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body == boss.player and not reflected:
 		print("boss.player hit!")
-		boss.player.flip_gravity()
+		var knockback_direction = boss.player.global_position - global_position
+		boss.player.take_damage(1, knockback_direction)
 		boss._on_energy_ball_hit_player()  # Notify boss about hit
 		queue_free()

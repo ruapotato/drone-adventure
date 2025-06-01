@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @onready var cam_piv = $piv
 @onready var camera_arm = $piv/SpringArm3D # Corrected path
-@onready var camera = $piv/SpringArm3D/Camera3D       # Path to your player's camera
+@onready var camera = $piv/SpringArm3D/Camera3D      # Path to your player's camera
 @onready var mesh = $mesh
 @onready var leg_animator = $mesh/LegAnimator
 @onready var sword = $mesh/sword
@@ -16,17 +16,17 @@ extends CharacterBody3D
 @onready var left_arm = $mesh/left_arm
 
 # Movement constants
-const SPEED = 4.0
+const SPEED = 5.0
 const ACCELERATION = 30.0 # Affects how quickly velocity changes, used in move_toward or lerp
-const FRICTION = 60.0     # Affects how quickly player stops, used in move_toward
+const FRICTION = 60.0      # Affects how quickly player stops, used in move_toward
 const ROTATION_SPEED = 20.0
 const AERIAL_STRIKE_GRAVITY_MULT = 1.5
 const AERIAL_STRIKE_INITIAL_VELOCITY_Y = -0.5 # Renamed from AERIAL_STRIKE_SPEED for clarity
 const POSSESSION_TRANSITION_TIME = 0.5 # Not currently used, but kept from your script
 const FLUTE_PLAY_TIME = 1.0
 const MIN_POSSESSION_DISTANCE = 0.0
-const MAX_POSSESSION_DISTANCE = 10.0
-const POSSESSION_DURATION = 10.0
+const MAX_POSSESSION_DISTANCE = 10.0 # Used to check if chicken is in range to *start* possession
+# const POSSESSION_DURATION = 10.0 # REMOVED
 const POSSESSION_COOLDOWN = 1.0
 
 # Movement States
@@ -57,7 +57,7 @@ var was_on_floor = false
 # Variables for possession system
 var is_playing_flute = false
 var flute_timer = 0.0
-var possession_timer = 0.0
+# var possession_timer = 0.0 # REMOVED
 var possession_cooldown_timer = 0.0
 var is_possessing = false # Player's own state for whether it *intends* to possess
 var chicken_spirit # Reference to the chicken node instance
@@ -84,47 +84,43 @@ var last_safe_position = Vector3.ZERO
 
 func _ready():
 	world = get_parent()
-	# These lines will cause a runtime error if 'world' is null,
-	# or if 'chicken' is not found, or if 'chicken_spirit' is null when set_player is called,
-	# or if 'set_player' does not exist on the chicken_spirit node.
-	# This is per your request to let it crash for debugging if setup is wrong.
-	chicken_spirit = world.find_child("chicken") # Assumes your chicken node is named "chicken"
-	chicken_spirit.set_player(self) # Call the chicken's method to set its player reference
+	chicken_spirit = world.find_child("chicken") 
+	if is_instance_valid(chicken_spirit) and chicken_spirit.has_method("set_player"):
+		chicken_spirit.set_player(self)
+	else:
+		printerr("Player _ready: Chicken node or set_player method not found!")
+
 
 	camera_arm.add_excluded_object(self)
 	camera_arm.add_excluded_object(mesh)
 	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cam_piv.top_level = true
-	cam_piv.global_position = global_position # Start camera pivot at player's initial position
+	cam_piv.global_position = global_position 
 
 	if camera:
 		camera.current = true
 	else:
 		printerr("Player _ready: Camera node ($piv/SpringArm3D/Camera3D) not found!")
 
-	active = true # Explicitly set player as active on ready
+	active = true 
 	last_player_position = global_position
 	last_player_rotation = mesh.transform.basis
 
 
 func _unhandled_input(event):
-	if not active: # If player is not active (e.g. possessing, or disabled by other means)
-		# Allow "play_flute" action if possessing, to call end_possession_sequence
+	if not active: 
 		if is_possessing and event.is_action_pressed("play_flute") and possession_cooldown_timer <= 0:
-			end_possession_sequence() # Player initiated end
-		return # Block other inputs
+			end_possession_sequence() 
+		return 
 
-	# --- Player is Active ---
 	if event is InputEventMouseMotion and not is_targeting:
 		cam_piv.rotate_y(-event.relative.x * mouse_sensitivity)
 		var new_pitch = camera_arm.rotation.x - event.relative.y * mouse_sensitivity
 		camera_arm.rotation.x = clamp(new_pitch, -PI/2.1, PI/2.1)
 
-	# Block game actions if playing flute (flute start/stop is handled in physics_process via handle_possession_input)
 	if is_playing_flute:
 		if event.is_action_released("play_flute"): 
-			# This will be picked up by handle_possession_input in _physics_process
 			pass 
 		return 
 
@@ -137,7 +133,7 @@ func _unhandled_input(event):
 	elif event.is_action_pressed("fire"):
 		perform_attack()
 	elif event.is_action_released("fire"):
-		sword.release_charge()
+		if sword.has_method("release_charge"): sword.release_charge()
 	
 	elif event.is_action_pressed("roll"):
 		start_roll()
@@ -152,42 +148,32 @@ func _unhandled_input(event):
 
 
 func _physics_process(delta):
-	if not active: # Player character itself is not active (e.g., possessing chicken)
-		if is_possessing: # Still process possession timer if player thinks it's possessing
-			possession_timer -= delta
-			if possession_timer <= 0:
-				print("Player: Possession timer ended.")
-				end_possession_sequence() # This will make player active = true
-		return # Early exit
+	if not active: 
+		# No possession timer logic needed here anymore
+		return 
 
-	# --- Player is Active ---
 	if possession_cooldown_timer > 0:
 		possession_cooldown_timer -= delta
 	
-	# Handle input for starting flute play or attempting possession if conditions met
-	# (active, not possessing, cooldown over)
 	if possession_cooldown_timer <= 0 and not is_possessing:
 		handle_possession_input()
 
-	# Core game logic only if player is active AND not currently possessing AND not just playing flute
-	if not is_playing_flute and not is_possessing: # Implicitly 'active' is true here
+	if not is_playing_flute and not is_possessing: 
 		handle_basic_physics(delta)
 		handle_movement_controls(delta)
 		handle_targeting(delta)
 		handle_combat(delta)
 		update_timers(delta)
-	elif is_playing_flute and not is_possessing: # Player is active but dedicated to playing flute
+	elif is_playing_flute and not is_possessing: 
 		velocity = Vector3.ZERO 
 		if leg_animator.has_method("animate_legs"):
 			leg_animator.animate_legs(delta, 0.0)
 
-	if not is_possessing: # Apply movement if player is not possessing
+	if not is_possessing: 
 		move_and_slide()
 
 
 func handle_basic_physics(delta):
-	# This function should only execute if player is active and not possessing.
-	# The 'active' check is handled by the caller (_physics_process)
 	if not is_on_floor():
 		if is_attacking and sword.has_method("get_current_attack_type") and sword.get_current_attack_type() == sword.AttackType.AERIAL:
 			velocity.y -= gravity * AERIAL_STRIKE_GRAVITY_MULT * delta
@@ -210,8 +196,6 @@ func handle_basic_physics(delta):
 	was_on_floor = is_on_floor()
 
 func handle_movement_controls(delta):
-	# This function should only execute if player is active, not possessing, and not playing flute.
-	# The 'active' check is handled by the caller (_physics_process)
 	if is_rolling: return
 
 	input_dir = Input.get_vector("strafe_left", "strafe_right", "move_backward", "move_forward")
@@ -253,7 +237,6 @@ func handle_movement_controls(delta):
 		if leg_animator.has_method("animate_legs"): leg_animator.animate_legs(delta, 0.0)
 
 func handle_possession_input():
-	# Called when active, not possessing, cooldown <= 0
 	if Input.is_action_just_pressed("play_flute") and not is_rolling and not is_attacking and not is_blocking:
 		start_playing_flute()
 	elif Input.is_action_just_released("play_flute") and is_playing_flute:
@@ -271,7 +254,7 @@ func attempt_possession():
 	if not is_instance_valid(chicken_spirit) or not is_playing_flute:
 		cancel_flute(); return
 	var distance = global_position.distance_to(chicken_spirit.global_position)
-	if distance >= MIN_POSSESSION_DISTANCE and distance <= MAX_POSSESSION_DISTANCE:
+	if distance >= MIN_POSSESSION_DISTANCE and distance <= MAX_POSSESSION_DISTANCE: # Range check to START possession
 		start_possession_sequence()
 	else:
 		print("Player: Chicken out of range for possession."); cancel_flute()
@@ -280,10 +263,10 @@ func start_possession_sequence():
 	if not is_instance_valid(chicken_spirit):
 		printerr("Player: Cannot start possession, chicken_spirit is not valid."); cancel_flute(); return
 	print("Player: Starting possession of chicken.")
-	active = false # Player character becomes inactive
+	active = false 
 	is_possessing = true 
 	is_playing_flute = false
-	possession_timer = POSSESSION_DURATION
+	# possession_timer = POSSESSION_DURATION # REMOVED
 	action_state = ActionState.POSSESSING
 	if camera: camera.current = false
 	if chicken_spirit.has_method("start_possession"):
@@ -298,15 +281,15 @@ func end_possession_sequence():
 		if is_playing_flute: cancel_flute()
 		return
 	print("Player: Ending possession of chicken.")
-	active = true # Player character becomes active again
+	active = true 
 	is_possessing = false 
 	is_playing_flute = false
 	action_state = ActionState.IDLE
-	possession_timer = 0.0
+	# possession_timer = 0.0 # REMOVED
 	possession_cooldown_timer = POSSESSION_COOLDOWN
-	if camera: camera.current = true # Player takes back camera control
+	if camera: camera.current = true 
 	if is_instance_valid(chicken_spirit) and chicken_spirit.has_method("end_possession"):
-		chicken_spirit.end_possession() # Tell chicken its possession has ended
+		chicken_spirit.end_possession() 
 	velocity = Vector3.ZERO
 
 func cancel_flute():
@@ -314,9 +297,7 @@ func cancel_flute():
 	is_playing_flute = false
 	flute_timer = 0.0
 	if action_state == ActionState.PLAYING_FLUTE: action_state = ActionState.IDLE
-	if not is_possessing: active = true # If not possessing, ensure player is active
-
-# --- Other Gameplay Functions (gated by 'active' at their start) ---
+	if not is_possessing: active = true
 
 func start_aerial_strike():
 	if not active or is_possessing: return
@@ -329,13 +310,13 @@ func handle_targeting(delta):
 		look_dir.y = 0
 		if look_dir.length_squared() > 0.01 and not is_attacking and not is_rolling:
 			mesh.transform.basis = mesh.transform.basis.slerp(Basis.looking_at(look_dir.normalized(), Vector3.UP), ROTATION_SPEED * delta)
-		var target_cam_pos = global_position + Vector3(0, 0.44, 0) # Adjust Y offset as needed
-		cam_piv.global_position = cam_piv.global_position.lerp(target_cam_pos, delta * 10.0) # Faster lerp for targeting camera
+		var target_cam_pos = global_position + Vector3(0, 0.44, 0) 
+		cam_piv.global_position = cam_piv.global_position.lerp(target_cam_pos, delta * 10.0) 
 	else:
 		var target_cam_pos = global_position + Vector3(0, 0.44, 0)
-		cam_piv.global_position = cam_piv.global_position.lerp(target_cam_pos, delta * 5.0) # Smoother default follow
+		cam_piv.global_position = cam_piv.global_position.lerp(target_cam_pos, delta * 5.0)
 
-func handle_combat(delta): # Primarily for roll state
+func handle_combat(delta): 
 	if not active or is_possessing or is_playing_flute: return
 	if is_rolling:
 		roll_timer -= delta
@@ -377,7 +358,7 @@ func start_roll():
 		var mesh_fwd_xz = Vector2(-mesh.global_transform.basis.z.x, -mesh.global_transform.basis.z.z)
 		roll_dir_2d = mesh_fwd_xz.normalized() if mesh_fwd_xz.length_squared() > 0.001 else Vector2(0, -1)
 	velocity.x = roll_dir_2d.x * ROLL_SPEED; velocity.z = roll_dir_2d.y * ROLL_SPEED
-	velocity.y = 0.5 # Small hop
+	velocity.y = 0.5 
 	if is_instance_valid(shield_node) and shield_node.has_method("stow"): shield_node.stow()
 
 func start_block():

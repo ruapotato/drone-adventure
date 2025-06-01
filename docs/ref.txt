@@ -2,6 +2,7 @@ By David Hamner
 Code is GPL3
 Assets I made are also gpl3, all other assets are open and are listed here:
 Eng Based on: https://github.com/Zylann/godot_voxel under: https://github.com/Zylann/godot_voxel/blob/master/LICENSE.md
+CC0 JEEP: https://opengameart.org/content/low-poly-vehicles-pack
 CC0 1.0 Universal addon: portals
 CC 0 by https://github.com/Donitzo/godot-simple-portal-system/tree/main/src
 CC-by 4.0 migfus20 https://opengameart.org/content/field-orchestra

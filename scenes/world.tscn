@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://gqqkstfosimv"]
+[gd_scene load_steps=23 format=3 uid="uid://gqqkstfosimv"]
 
 [ext_resource type="Script" uid="uid://cjvcaas3hsam7" path="res://scripts/world.gd" id="1_5aupy"]
 [ext_resource type="PackedScene" uid="uid://b2gd4upmu816b" path="res://scenes/planet.tscn" id="9_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://lmxejmktuun0" path="res://scenes/water.tscn" id="10_w7kh3"]
 [ext_resource type="Script" uid="uid://dsu2smu1bimcd" path="res://scripts/water.gd" id="11_e3hyu"]
 [ext_resource type="PackedScene" uid="uid://bej60nbr21nhf" path="res://entities/player.tscn" id="12_q5onr"]
+[ext_resource type="Script" uid="uid://jx1o3ibsad72" path="res://scripts/load_boss_1.gd" id="13_jhx03"]
 [ext_resource type="PackedScene" uid="uid://cbgvjgg45bjww" path="res://scenes/spawner.tscn" id="17_1oplg"]
 [ext_resource type="PackedScene" uid="uid://cwswl06gstkdc" path="res://scenes/beans_world.tscn" id="18_lakw3"]
 [ext_resource type="PackedScene" uid="uid://5ti8gwrj7tha" path="res://entities/chicken_spirit.tscn" id="18_thmgp"]
@@ -103,11 +104,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -126.113, 22.7489, -98.5438)
 visible = false
 
 [node name="city_loader" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.31452, 60.0199, 333.071)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.31452, 61.0199, 333.071)
 script = ExtResource("22_lo355")
 
 [node name="spawn" type="Node3D" parent="."]
-transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, 3.83442, 61.8338, 384.032)
+transform = Transform3D(0.920798, 0, 0.39004, 0, 1, 0, -0.39004, 0, 0.920798, 3.83442, 62.8338, 384.032)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="spawn"]
 transform = Transform3D(0.917755, 0, -0.397148, 0, 1, 0, 0.397148, 0, 0.917755, 0, -2.15637, 0)
@@ -134,8 +135,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.115, 0)
 script = ExtResource("11_e3hyu")
 
 [node name="player" parent="." instance=ExtResource("12_q5onr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00132, 63.4523, 383.487)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00132, 64.4523, 383.487)
 
 [node name="chicken" parent="." instance=ExtResource("18_thmgp")]
+
+[node name="load_boss_1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.31452, 72.1725, 333.071)
+script = ExtResource("13_jhx03")
 
 [connection signal="finished" from="music" to="." method="_on_music_finished"]

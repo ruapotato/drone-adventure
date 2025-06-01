@@ -103,13 +103,13 @@ data = PackedVector3Array(-5.0659, 10.8628, 4.7881, -5.0468, 10.8911, 4.7825, -5
 transform = Transform3D(-0.999793, 0, 0.0203491, 0, 1, 0, -0.0203491, 0, -0.999793, 0.0340145, 0.844095, -18.0158)
 
 [node name="blob" parent="." instance=ExtResource("3_lbq5w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7431, 0.308648, -11.0462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7431, 2.02309, -11.0462)
 
 [node name="blob2" parent="." instance=ExtResource("3_lbq5w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105628, 0.308648, -11.0462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.105628, 2.02309, -11.0462)
 
 [node name="blob3" parent="." instance=ExtResource("3_lbq5w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99013, 0.308648, -11.0462)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.99013, 2.02309, -11.0462)
 
 [node name="clover_kingdom" parent="." instance=ExtResource("4_3iuo8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.869471, -25.2362)

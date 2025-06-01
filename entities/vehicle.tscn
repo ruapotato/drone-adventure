@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://csbqpug6w6x1y"]
+[gd_scene load_steps=18 format=3 uid="uid://csbqpug6w6x1y"]
 
 [ext_resource type="Script" uid="uid://dc458u4m5d6io" path="res://entities/vehicle.gd" id="1_6dyft"]
-[ext_resource type="PackedScene" uid="uid://mcf1wgldf4dl" path="res://native/pickup_import.tscn" id="2_micnr"]
 [ext_resource type="AudioStream" uid="uid://dk3278hkecnww" path="res://import/Audio/engineCircular_001.ogg" id="3_k3may"]
+[ext_resource type="PackedScene" uid="uid://bb2cpq657mxsr" path="res://import/jeep.glb" id="3_qi3mh"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ejn7c"]
 height = 0.205
@@ -17,7 +17,10 @@ size = Vector3(1.785, 0.425, 4.35)
 size = Vector3(1.97, 0.855, 1.225)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_och00"]
-size = Vector3(1.97, 0.675, 1.225)
+size = Vector3(1.97, 0.675, 1.51743)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n6jve"]
+size = Vector3(1.97, 0.148535, 1.17522)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qjd6u"]
 inherit_velocity_ratio = 0.008
@@ -114,15 +117,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.132334, 0)
 shape = SubResource("BoxShape3D_os3fw")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.786, 0.523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3378, 1.21232)
 shape = SubResource("BoxShape3D_weji8")
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.283298, 1.7027)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.498108, 1.33463)
 shape = SubResource("BoxShape3D_och00")
 
-[node name="pickup" parent="." instance=ExtResource("2_micnr")]
-transform = Transform3D(1.465, 0, 0, 0, 1.465, 0, 0, 0, 1.465, 0, -0.397098, 0)
+[node name="CollisionShape3D7" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38782, -0.134004)
+shape = SubResource("BoxShape3D_n6jve")
 
 [node name="eng_sounds" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20226, 1.80629)
@@ -143,7 +147,7 @@ process_material = SubResource("ParticleProcessMaterial_qjd6u")
 draw_pass_1 = SubResource("SphereMesh_xgoe6")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377844, -2.1841)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.377844, -1.84433)
 shape = SubResource("BoxShape3D_64cnp")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
@@ -155,6 +159,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.816205, 0.378, -1.145)
 shape = SubResource("BoxShape3D_6u0cd")
 
 [node name="play_as" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.255359, 0.443933)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="play_as"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0314026, 0.259821, -0.806885)
@@ -170,6 +175,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.458429, -1.41546)
 
 [node name="Camera3D" type="Camera3D" parent="play_as"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 2.16646, -4.42656)
+
+[node name="jeep" parent="." instance=ExtResource("3_qi3mh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.559411, 0.139016)
 
 [connection signal="finished" from="eng_sounds" to="." method="_on_eng_sounds_finished"]
 [connection signal="body_entered" from="play_as" to="." method="_on_play_as_body_entered"]

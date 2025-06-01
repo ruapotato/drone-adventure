@@ -28,6 +28,7 @@ extends RigidBody3D
 # --- Export Variables for Tuning ---
 #==============================================================================
 @export var mouse_sensitivity = 0.003
+@export var active_flight_speed = 12.0 # Max speed when player is actively controlling
 # Note: The following physics properties are mostly for the old force-based system.
 # They will not have an effect on the new kinematic active movement unless you re-integrate them.
 @export var acceleration_force = 60.0
@@ -276,7 +277,7 @@ func _physics_process(delta):
 
 		var combined_movement_direction = (fwd_dir + strafe_dir + explicit_lift_dir)
 		var target_active_vel = Vector3.ZERO
-		var speed_for_active_mode = follow_max_speed # Default to base follow_max_speed
+		var speed_for_active_mode = active_flight_speed # Use the new active_flight_speed
 
 		if combined_movement_direction.length_squared() > 0.01:
 			combined_movement_direction = combined_movement_direction.normalized()
@@ -371,7 +372,7 @@ func update_chicken_wing_animations():
 	elif speed < 0.5: 
 		anim_speed_scale = hover_animation_speed
 	else: 
-		var reference_speed = follow_max_speed 
+		var reference_speed = active_flight_speed if active else follow_max_speed # Use active_flight_speed if active
 		anim_speed_scale = speed / reference_speed if reference_speed > 0 else 0 
 	animation_tree.set("parameters/SPEED/scale", anim_speed_scale * 50)
 
@@ -587,4 +588,4 @@ func update_simple_wing_flap(delta):
 	simple_wing_time += delta * simple_wing_flap_speed
 	var wing_rotation_angle = sin(simple_wing_time) * simple_wing_flap_amplitude
 	old_wing_left.rotation.z = wing_rotation_angle
-	old_wing_right.rotation.z = -wing_rotation_angle
+	old_wing_right.rotation.z = -wing_rotation_angle    

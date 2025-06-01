@@ -24,6 +24,7 @@ extends RigidBody3D
 @onready var pause_screen = $"../pause_screen" # User's path
 @onready var legs_node = $LegsNode
 
+
 #==============================================================================
 # --- Export Variables for Tuning ---
 #==============================================================================
@@ -41,8 +42,8 @@ extends RigidBody3D
 # The following were for the old force-based system and power mechanics.
 # @export var low_power_fall_force : float = 10.0 # Removed
 @export var ground_hover_strength : float = 100.0 # Old force-based system
-@export var ground_hover_damping : float = 15.0   # Old force-based system
-@export var ground_friction : float = 5.0         # Old force-based system
+@export var ground_hover_damping : float = 15.0    # Old force-based system
+@export var ground_friction : float = 5.0          # Old force-based system
 
 #==============================================================================
 # --- Game State Variables ---
@@ -50,6 +51,7 @@ extends RigidBody3D
 var active = false # True if player is actively controlling the chicken
 var player # Reference to the main player character, set by player script
 var world # Set in _ready to get_parent()
+var dist_ctl # Control node for distance, expected to have 'dist' and 'range' properties
 
 var inventory = {"crystals":0, "using":"gun"}
 var shoot_speed = 34
@@ -93,27 +95,27 @@ var simple_wing_flap_amplitude = 0.5
 #==============================================================================
 func _ready():
 	world = get_parent()
-	if not world:
-		printerr("Chicken CRITICAL ERROR: world (get_parent()) is null. Chicken needs a parent.")
-		return
 
-	var initial_player_node_by_name = world.find_child("player")
-	if is_instance_valid(initial_player_node_by_name):
-		global_position = initial_player_node_by_name.global_position
+	# Note: 'player' here is a local variable for initialization purposes.
+	# The member 'self.player' is set by set_player() and used for ongoing logic.
+	var player_node_for_init = world.find_child("player") 
+	if is_instance_valid(player_node_for_init):
+		dist_ctl = player_node_for_init.find_child("chicken_range")
+		if not is_instance_valid(dist_ctl):
+			print("Chicken WARNING: 'chicken_range' node not found as a child of 'player' node during init. Range limit might not function correctly.")
+		
+		global_position = player_node_for_init.global_position
 		print("Chicken: Initial position set near 'player' node found by name.")
-	elif is_instance_valid(player):
-		global_position = player.global_position
-		print("Chicken: Initial position set near 'player'.")
 	else:
 		var spawn_node = world.find_child("spawn")
 		if is_instance_valid(spawn_node):
 			global_position = spawn_node.global_position
 		else:
 			global_position = Vector3.ZERO
-		print("Chicken: 'player' node not found for initial pos, and ref not set. Using spawn/origin.")
+		print("Chicken: 'player' node not found for initial pos or dist_ctl. Using spawn/origin.")
 
-	if not is_instance_valid(player):
-		print("Chicken WARNING: player not set in _ready(). Player script should call set_player().")
+	if not is_instance_valid(self.player): # Check the member variable 'self.player'
+		print("Chicken WARNING: self.player not set in _ready(). Player script should call set_player().")
 		
 	if world.find_child("is_tutorial"):
 		tutorial_mode = true
@@ -146,7 +148,7 @@ func _ready():
 	active = false
 
 func set_player(p_ref):
-	player = p_ref
+	player = p_ref # Sets the member variable self.player
 	print("Chicken: Player reference set.")
 	if not active and is_instance_valid(player):
 		var offset_behind = -player.global_transform.basis.z * 2.5
@@ -167,27 +169,26 @@ func start_possession():
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	is_being_destroyed = false # Reset destruction flag
-	# No power_cell or extra_power_cell to reset
+	is_being_destroyed = false 
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
-	if expload_effect: expload_effect.emitting = false # Ensure effect is off
+	if expload_effect: expload_effect.emitting = false
 
 func end_possession():
 	print("Chicken: End Possession sequence.")
 	active = false
 	camera.current = false
 	
-	if is_instance_valid(laser_obj): # Ensure laser is off when possession ends
+	if is_instance_valid(laser_obj): 
 		laser_obj.queue_free()
 		laser_obj = null
 		
 	if is_instance_valid(player):
-		if player.has_method("set_active_true_and_camera_current"): # More robust check
-			player.set_active_true_and_camera_current() # Call a specific method on player
-		else: # Fallback to direct property setting if method doesn't exist
+		if player.has_method("set_active_true_and_camera_current"): 
+			player.set_active_true_and_camera_current() 
+		else: 
 			player.active = true
-			if is_instance_valid(player.camera): # Check if player.camera is valid
+			if is_instance_valid(player.camera): 
 				player.camera.current = true
 			else:
 				printerr("Chicken: Player camera node is invalid during end_possession!")
@@ -204,7 +205,6 @@ func end_possession():
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	head_piv.rotation.x = 0
-	# is_being_destroyed will be reset on next start_possession
 
 #==============================================================================
 # --- Godot Core Loop Functions ---
@@ -223,12 +223,10 @@ func _unhandled_input(event):
 	if event.is_action_pressed("fire"):
 		if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		# No power check needed
 		match inventory["using"]:
 			"gun": fire_normal_weapon()
 			"land_making_gun": fire_landgun_weapon()
 			"laser_gun": fire_laser_weapon()
-			# Removed: else: print("Chicken: Not enough power to fire!") (or similar message)
 	if event.is_action_released("fire") and inventory["using"] == "laser_gun" and is_instance_valid(laser_obj):
 		laser_obj.queue_free(); laser_obj = null
 
@@ -238,7 +236,7 @@ func _physics_process(delta):
 		return
 
 	if active:
-		if is_game_paused() or is_being_destroyed: # Also halt if being destroyed
+		if is_game_paused() or is_being_destroyed: 
 			linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * 10.0)
 			angular_velocity = angular_velocity.lerp(Vector3.ZERO, delta * 10.0)
 			return
@@ -247,7 +245,6 @@ func _physics_process(delta):
 		if rotation.x != 0: rotation.x = lerpf(rotation.x, 0, delta * 10.0)
 		
 		perform_ground_check(delta)
-		# Removed is_low_power logic
 
 		if _look_input_vector != Vector2.ZERO:
 			rotate_y(-_look_input_vector.x * mouse_sensitivity)
@@ -258,8 +255,7 @@ func _physics_process(delta):
 		var input_movement_vector = Input.get_vector("strafe_left", "strafe_right", "move_backward", "move_forward")
 		var lift_input_strength = Input.get_action_strength("move_up") - Input.get_action_strength("move_down")
 		
-		# Removed low_power lift restriction
-		if is_near_ground: lift_input_strength = max(0, lift_input_strength) # Cannot move down into ground
+		if is_near_ground: lift_input_strength = max(0, lift_input_strength) 
 
 		var head_global_basis = head_piv.global_transform.basis
 		var body_global_basis = global_transform.basis
@@ -276,20 +272,41 @@ func _physics_process(delta):
 			combined_movement_direction = combined_movement_direction.normalized()
 			target_active_vel = combined_movement_direction * speed_for_active_mode
 		
+		# MODIFICATION: Range limit logic
+		if is_instance_valid(player) and is_instance_valid(dist_ctl):
+			# Ensure dist_ctl has 'dist' and 'range' properties.
+			if ("dist" in dist_ctl) and ("range" in dist_ctl):
+				if dist_ctl.dist > dist_ctl.range/2:
+					# Chicken is too far from the player.
+					# Prevent movement that would increase the distance further.
+					var vector_from_player_to_chicken = global_position - player.global_position
+					
+					if vector_from_player_to_chicken.length_squared() > 0.0001: # Avoid division by zero if chicken is on player
+						var direction_away_from_player = vector_from_player_to_chicken.normalized()
+						
+						# Calculate the component of the target velocity that is moving away from the player.
+						var speed_component_away = target_active_vel.dot(direction_away_from_player)
+						
+						if speed_component_away > 0:
+							# If the chicken is trying to move further away, subtract this component.
+							target_active_vel -= direction_away_from_player * speed_component_away
+							# This allows tangential movement or movement towards the player, but stops further outward movement.
+			else:
+				# Optional: Warn if properties are missing, but only once to avoid spamming console.
+				if not has_meta("dist_ctl_prop_warning"): # Check if we've warned before
+					printerr("Chicken: 'dist_ctl' node is missing 'dist' or 'range' properties. Range limit inactive.")
+					set_meta("dist_ctl_prop_warning", true) # Mark that we've warned
+		# END OF MODIFICATION
+
 		if is_near_ground:
 			if target_active_vel.y < 0 and _height_from_ground < (ground_threshold * 0.5) and _height_from_ground != -1.0:
 				target_active_vel.y = 0
 		
-		# Removed low_power drift logic
-
 		var active_control_lerp_factor = 10.0
 		linear_velocity = linear_velocity.lerp(target_active_vel, delta * active_control_lerp_factor)
 
-		# Removed power gain/cost logic for flight/ground
-		# Removed laser power drain check, laser now stops on button release or end_possession
-
-		process_damage_logic() # This will call hurt() which calls end_possession() if needed
-		if not active: return # process_damage_logic might have made chicken inactive
+		process_damage_logic() 
+		if not active: return 
 
 		update_shield_visuals()
 		apply_camera_shake(delta)
@@ -360,7 +377,7 @@ func save_game_data():
 	if not save_file_path: print("Chicken: Save file path not set."); return
 	var file = FileAccess.open(save_file_path, FileAccess.WRITE)
 	if file:
-		file.store_line(JSON.stringify(inventory)) # Inventory is still saved
+		file.store_line(JSON.stringify(inventory)) 
 		file.close()
 		print("Chicken: Game saved to " + save_file_path)
 	else: print("Chicken: Error saving game.")
@@ -376,7 +393,7 @@ func load_save_data(path):
 		if err == OK:
 			var data = json_parser.get_data()
 			if data is Dictionary:
-				data["using"] = "gun" # Default to gun on load
+				data["using"] = "gun" 
 				return data
 			else:
 				print("Chicken: Loaded data is not a dictionary."); return null
@@ -409,7 +426,6 @@ func fire_landgun_weapon():
 
 func fire_laser_weapon():
 	if not "laser_gun" in inventory: return
-	# No power check needed to start laser
 	if not is_instance_valid(laser_obj):
 		laser_obj = laser_scene.instantiate()
 		laser_obj.name = "laser_beam"
@@ -417,38 +433,34 @@ func fire_laser_weapon():
 		laser_obj.global_rotation = head_piv.global_rotation
 
 func process_damage_logic():
-	if is_being_destroyed: return # Don't process damage if already being destroyed
+	if is_being_destroyed: return 
 
 	var impact_vector = last_velocity_vector - linear_velocity
 	var impact_strength = impact_vector.length()
 
-	if impact_strength > 15: # Threshold for significant impact
-		# Check if impact is somewhat opposing current significant movement (not just a tap)
+	if impact_strength > 15: 
 		if last_velocity_vector.length() > 1.0 and impact_vector.normalized().dot(last_velocity_vector.normalized()) < -0.5:
 			print("Chicken Smacked! Strength: " + str(impact_strength))
-			camera_shake_amount = 0.3 # Small shake
-			if shield_sound_player: shield_sound_player.play() # Play shield hit sound
+			camera_shake_amount = 0.3 
+			if shield_sound_player: shield_sound_player.play() 
 			
-			hurt() # Call the new hurt function
+			hurt() 
 
-# NEW Hurt function
 func hurt():
-	if is_being_destroyed or not active: # Prevent multiple calls or calling if not active
+	if is_being_destroyed or not active: 
 		return
 
 	print("Chicken: Hurt! Switching back to player.")
-	is_being_destroyed = true # Set flag
+	is_being_destroyed = true 
 
 	if expload_sound_player: 
 		expload_sound_player.play()
 	if expload_effect: 
 		expload_effect.emitting = true
 
-	# Stop current movement abruptly
 	linear_velocity = Vector3.ZERO
 	angular_velocity = Vector3.ZERO
 	
-	# End possession, which will switch control back to the player
 	end_possession()
 
 
@@ -462,8 +474,6 @@ func apply_camera_shake(delta):
 
 func update_shield_visuals():
 	if shield_mesh and shield_sound_player:
-		# Shield visual might now just be for show or tied to a different mechanic
-		# For now, let's keep it tied to the sound player playing (e.g., after an impact)
 		var is_shield_active = shield_sound_player.playing 
 		shield_mesh.visible = is_shield_active
 		if shield_cam: shield_cam.visible = is_shield_active
@@ -474,10 +484,6 @@ func update_dynamic_collision_size():
 	var new_radius = collision_size_at_rest * ((speed / 5.0) + 1.0) if speed > 5 else collision_size_at_rest
 	if speed_collision.shape is SphereShape3D:
 		speed_collision.shape.radius = new_radius
-
-# Removed attempt_add_power and attempt_draw_power functions
-
-# Removed handle_dead_logic function, its functionality is replaced by hurt() and end_possession()
 
 func is_game_paused():
 	return is_instance_valid(pause_screen) and pause_screen.visible
@@ -520,7 +526,7 @@ func handle_following_player_movement(delta):
 	var effective_max_speed = follow_max_speed
 
 	if actual_distance_to_player > follow_min_dist_for_boost:
-		var range_val = follow_max_dist_for_boost - follow_min_dist_for_boost # Renamed 'range' to 'range_val'
+		var range_val = follow_max_dist_for_boost - follow_min_dist_for_boost 
 		var speed_increase_ratio = 0.0
 		if range_val > 0.001:
 			speed_increase_ratio = (actual_distance_to_player - follow_min_dist_for_boost) / range_val

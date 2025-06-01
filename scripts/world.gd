@@ -60,8 +60,8 @@ var active_task: String = ""
 var tasks_today: Dictionary = day_workflow.duplicate()
 
 var dogs_pissed: bool = false
-var boss_life: float = 0.0 
-var boss_max_life: float = 0.0
+var boss_life = 0.0 
+var boss_max_life = 0.0
 
 var last_mouse_move: float = 0.0
 var sky_material # Cached in _ready

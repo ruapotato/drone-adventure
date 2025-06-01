@@ -30,7 +30,7 @@ const AERIAL_STRIKE_INITIAL_VELOCITY_Y = -0.5 # Renamed from AERIAL_STRIKE_SPEED
 const POSSESSION_TRANSITION_TIME = 0.5 # Not currently used, but kept from your script
 const FLUTE_PLAY_TIME = 1.0
 const MIN_POSSESSION_DISTANCE = 0.0
-const MAX_POSSESSION_DISTANCE = 10.0 # Used to check if chicken is in range to *start* possession
+const MAX_POSSESSION_DISTANCE = 50.0 # Used to check if chicken is in range to *start* possession
 const POSSESSION_COOLDOWN = 1.0
 
 # Movement States
@@ -57,9 +57,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @export var mouse_sensitivity = 0.01 # You added this
 
 @export_group("Inactive Following Chicken")
-@export var player_follow_max_speed: float = 3.5
-@export var player_follow_catch_up_bonus_speed: float = 7.0
-@export var player_follow_min_dist_for_boost: float = 5.0
+@export var player_follow_max_speed: float = 5
+@export var player_follow_catch_up_bonus_speed: float = 9.0
+@export var player_follow_min_dist_for_boost: float = 3.0
 @export var player_follow_max_dist_for_boost: float = 18.0
 @export var player_follow_trail_distance: float = 2.0 # How far behind the chicken to target
 @export var player_circle_radius_inactive: float = 1.8 # Radius for circling when chicken is still

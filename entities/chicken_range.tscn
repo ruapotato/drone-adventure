@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvw6uogeke0tr"]
+
+[ext_resource type="Material" uid="uid://d0xhsjydm5cgi" path="res://native/range.tres" id="1_24ncd"]
+[ext_resource type="Script" uid="uid://bnawxyi8vkbr7" path="res://scripts/chicken_range.gd" id="1_b2mls"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_b2mls"]
+radius = 25.0
+height = 50.0
+
+[node name="chicken_range" type="Node3D"]
+script = ExtResource("1_b2mls")
+
+[node name="mesh" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_24ncd")
+mesh = SubResource("SphereMesh_b2mls")

@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://d0xhsjydm5cgi"]
+
+[resource]
+transparency = 3
+alpha_hash_scale = 1.0
+alpha_antialiasing_mode = 0
+cull_mode = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(1, 0.8, 0, 0.6)
+metallic = 1.0
+roughness = 0.2
+emission_enabled = true
+emission = Color(1, 0.816667, 0, 1)
+emission_energy_multiplier = 0.1

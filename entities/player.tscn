@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bej60nbr21nhf"]
+[gd_scene load_steps=16 format=3 uid="uid://bej60nbr21nhf"]
 
 [ext_resource type="Script" uid="uid://corw5feu3v20b" path="res://entities/player.gd" id="2_ivawi"]
 [ext_resource type="PackedScene" uid="uid://6tb66hy6ql75" path="res://import/player2.glb" id="2_tbhwb"]
@@ -10,6 +10,7 @@
 [ext_resource type="Material" path="res://native/coin.tres" id="7_owcj2"]
 [ext_resource type="AudioStream" uid="uid://c70jue3ppwvra" path="res://audio/flip.wav" id="7_v8a6e"]
 [ext_resource type="AudioStream" uid="uid://cyfkojsywoyr2" path="res://audio/sword.wav" id="14_bvvis"]
+[ext_resource type="PackedScene" uid="uid://bvw6uogeke0tr" path="res://entities/chicken_range.tscn" id="14_q0i8f"]
 [ext_resource type="AudioStream" uid="uid://nh5tcl3dr3v8" path="res://audio/player_toe_tip.wav" id="15_jlucp"]
 [ext_resource type="PackedScene" uid="uid://c4wo4mrqxse3l" path="res://weapons/shield.tscn" id="16_8c8h5"]
 [ext_resource type="PackedScene" uid="uid://h5h8ss5xg1yf" path="res://entities/arm.tscn" id="17_iaomg"]
@@ -123,5 +124,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0747775, 0.267416, 0)
 
 [node name="left_arm" parent="mesh" instance=ExtResource("17_iaomg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.110512, 0.267416, 0)
+
+[node name="chicken_range" parent="." instance=ExtResource("14_q0i8f")]
 
 [editable path="mesh"]

@@ -36,9 +36,9 @@ const vec3 VOLCANO_GLOW = vec3(1.0, 0.3, 0.1);
 const vec3 DESERT_COLOR_A = vec3(0.35, 0.28, 0.15);
 const vec3 DESERT_COLOR_B = vec3(0.28, 0.22, 0.12);
 const vec3 DESERT_SPARKLE = vec3(1.8, 1.7, 1.4);
-const vec3 GREEN_COLOR_A = vec3(0.04, 0.012, 0.4);
-const vec3 GREEN_COLOR_B = vec3(0.01, 0.1, 0.01);
-const vec3 NIGHT_COLOR_A = vec3(0.02, 0.1, 0.02);
+const vec3 GREEN_COLOR_A = vec3(0.04, 0.2, 0.1);
+const vec3 GREEN_COLOR_B = vec3(0.004, 0.01, 0.1);
+const vec3 NIGHT_COLOR_A = vec3(0.02, 0.01, 0.02);
 const vec3 NIGHT_COLOR_B = vec3(0.005, 0.03, 0.005);
 
 // Material parameters (these define texture tiling density for the 1:1 world scale)

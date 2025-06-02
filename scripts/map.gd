@@ -1,50 +1,110 @@
 extends Node2D
 
-@onready var player_onmap_pos = $player_pos
+# Path to the 3D node in your SubViewport that represents the player/camera on the minimap
+@onready var player_onmap_pos: Node3D = $SubViewportContainer/SubViewport/player_pos
+# Path to the Camera3D node that views your minimap scene within the SubViewport
+@onready var minimap_camera: Camera3D = $SubViewportContainer/SubViewport/Camera3D
 
-var map_scale = .015
-var world
-var player
-var chicken
+var map_scale = 0.15
+var world: Node 
+var player: Node3D # Reference to the main player node in the game world
+var chicken: Node3D # Reference to a chicken node in the game world (example)
+
+# Zoom limits for the minimap camera's Y position
+var camera_max_zoom_out: float = 3309.0 # Camera further away (zoomed out)
+var camera_min_zoom_in: float = 50.0    # Camera closer (zoomed in) - adjusted from 1 for practical use
+
+# Icon scale properties
+var min_icon_scale_at_min_zoom: float = 0.05 # Icon is smaller when camera is zoomed IN (min_zoom_in Y value)
+var max_icon_scale_at_max_zoom: float = 1.5 # Icon is bigger when camera is zoomed OUT (max_zoom_out Y value)
+
 
 func _ready() -> void:
-	world = get_parent()
-	# It's generally safer to check if find_child returned a valid node
-	# but per your instructions, we'll assume they exist.
-	player = world.find_child("player")
-	chicken = world.find_child("chicken")
+	world = get_parent() # Assuming this Node2D (minimap controller) is a child of the main world root
+
+	# Get references to nodes in the main game world.
+	player = world.find_child("player") as Node3D
+	chicken = world.find_child("chicken") as Node3D
+
+	# Initialize camera position if needed, e.g., start zoomed out
+	if is_instance_valid(minimap_camera):
+		minimap_camera.position.y = camera_max_zoom_out 
+		# This ensures it starts at a known zoom level, triggering correct initial icon scale.
+	
+	# Initial update to set correct scale based on starting camera zoom
+	update_map_pos()
 
 
-func get_camera_transform_2d() -> Dictionary:
-	var camera_3d = get_viewport().get_camera_3d()
-	var camera_3d_global_transform: Transform3D = camera_3d.global_transform
+func _unhandled_input(event: InputEvent) -> void:
+	if not is_instance_valid(minimap_camera):
+		return
 
-	# Position on the XZ plane
-	var pos_2d = Vector2(camera_3d_global_transform.origin.x, camera_3d_global_transform.origin.z)
+	var y_change = 0.0
+	if event.is_action_pressed("zoom_out"):
+		y_change = 33.0
+	if event.is_action_pressed("zoom_in"):
+		y_change = -33.0
 
-	# Get the forward vector of the camera in global space
-	var forward_vector_3d = -camera_3d_global_transform.basis.z
-	# Calculate the angle of this vector on the XZ plane
-	# atan2 usually takes (y, x), so for XZ plane with Z as "forward" in 3D mapping to "up" or "forward" in 2D:
-	# If you want 0 degrees to be +X and 90 degrees to be +Z:
-	# var angle_2d = atan2(forward_vector_3d.z, forward_vector_3d.x)
-	# If you want 0 degrees to be +Z (forward) and 90 degrees to be +X (right):
-	var angle_2d = atan2(forward_vector_3d.x, forward_vector_3d.z)
-	# Godot's 2D rotation is typically such that 0 is along the positive X-axis.
-	# If -Z in 3D (forward) should map to +Y in 2D (up), you might need to adjust.
-	# For now, let's stick to the angle of the projection on the XZ plane.
+	if y_change != 0.0:
+		minimap_camera.position.y += y_change
+		# Clamp the camera's Y position to the defined zoom limits
+		minimap_camera.position.y = clampf(minimap_camera.position.y, camera_min_zoom_in, camera_max_zoom_out)
+		# The scale will be updated in _process via update_map_pos
 
+
+# Gets the main game world camera's current 2D position (on XZ plane) and Y-axis rotation.
+func get_main_camera_transform_for_map() -> Dictionary:
+	var main_game_camera: Camera3D = get_viewport().get_camera_3d()
+	var main_camera_global_transform: Transform3D = main_game_camera.global_transform
+	var pos_2d = Vector2(main_camera_global_transform.origin.x, main_camera_global_transform.origin.z)
+	var forward_vector_3d = -main_camera_global_transform.basis.z
+	var angle_2d = -atan2(forward_vector_3d.z, forward_vector_3d.x) - (PI/2)
 	return {"position": pos_2d, "rotation": angle_2d}
 
-func update_map_pos():
-	var cam_transform_2d = get_camera_transform_2d()
-	player_onmap_pos.position = cam_transform_2d.position * map_scale
-	player_onmap_pos.rotation = cam_transform_2d.rotation
-	# If your map icon points "up" by default (along its local -Y axis in Godot 2D)
-	# and you want it to align with the camera's forward direction which we calculated
-	# relative to the global +Z axis (or +X depending on atan2 variant), you might need an offset.
-	# For example, if the icon points upwards (negative Y) and 0 rotation is right (positive X):
-	# player_onmap_pos.rotation = cam_transform_2d.rotation + PI/2
+
+# Updates the position, rotation, and scale of the 3D marker on the minimap.
+func update_map_pos() -> void:
+	if not is_instance_valid(player_onmap_pos):
+		# print_debug("Minimap Error: player_onmap_pos is not valid.") # Optional debug
+		return
+	if not is_instance_valid(minimap_camera):
+		# print_debug("Minimap Error: minimap_camera is not valid.") # Optional debug
+		return
+
+	var main_cam_map_transform: Dictionary = get_main_camera_transform_for_map()
+
+	# --- Update player_onmap_pos position ---
+	var target_map_x: float = main_cam_map_transform.position.x * map_scale
+	var target_map_z: float = main_cam_map_transform.position.y * map_scale 
+	var marker_y_in_minimap_scene: float = 0.0
+	player_onmap_pos.position = Vector3(target_map_x, marker_y_in_minimap_scene, target_map_z)
+
+	# --- Update player_onmap_pos rotation ---
+	var target_map_yaw: float = main_cam_map_transform.rotation
+	player_onmap_pos.rotation = Vector3(0.0, target_map_yaw, 0.0)
+	
+	# --- Update player_onmap_pos scale based on minimap_camera zoom ---
+	var current_cam_y = minimap_camera.position.y 
+	# current_cam_y is already clamped by _unhandled_input when zoom changes via input.
+
+	var new_scale_factor: float
+	var zoom_range = camera_max_zoom_out - camera_min_zoom_in
+	
+	if zoom_range <= 0.001: # Check for very small or non-positive range to avoid issues
+		# If range is negligible, pick one of the scales, e.g., the one for min_zoom
+		new_scale_factor = min_icon_scale_at_min_zoom 
+	else:
+		# Remap camera_y from [min_zoom_y, max_zoom_y] to [min_icon_scale, max_icon_scale]
+		new_scale_factor = remap(current_cam_y,
+								   camera_min_zoom_in, camera_max_zoom_out,
+								   min_icon_scale_at_min_zoom, max_icon_scale_at_max_zoom)
+	
+	# Clamp the final scale factor to ensure it's within the desired bounds,
+	# as remap can extrapolate if current_cam_y somehow goes out of its clamped range
+	# (e.g. if set directly by other code).
+	new_scale_factor = clampf(new_scale_factor, min_icon_scale_at_min_zoom, max_icon_scale_at_max_zoom)
+
+	player_onmap_pos.scale = Vector3(new_scale_factor,1,new_scale_factor)
 
 
 func _process(delta: float) -> void:

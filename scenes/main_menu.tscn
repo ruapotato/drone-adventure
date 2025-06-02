@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://cylcq7n7yuc8s" path="res://scripts/main_menu.gd" id="1_8rasr"]
 [ext_resource type="PackedScene" uid="uid://bux6jg8v62006" path="res://scenes/credit.tscn" id="2_58kwt"]
-[ext_resource type="Texture2D" uid="uid://cer8ofc6rtlo1" path="res://assets/textures/Hero.png" id="2_jied5"]
 [ext_resource type="Texture2D" uid="uid://bt74fouxpvede" path="res://assets/textures/finns_studio.png" id="3_6ql65"]
+[ext_resource type="PackedScene" uid="uid://bvtip6j5ue3cd" path="res://scenes/main_menu_backdrop.tscn" id="5_8ln24"]
 [ext_resource type="Texture2D" uid="uid://css62a7b5oonx" path="res://assets/textures/logo.png" id="6_1q1py"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_827c2"]
@@ -17,10 +17,18 @@ Button/colors/icon_normal_color = Color(0, 0, 1, 1)
 [node name="main_menu" type="Node2D"]
 script = ExtResource("1_8rasr")
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(870, 568)
-scale = Vector2(0.761198, 0.975807)
-texture = ExtResource("2_jied5")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 139.753)
+
+[node name="menu_background" parent="SubViewportContainer/SubViewport" instance=ExtResource("5_8ln24")]
 
 [node name="Label" type="Label" parent="."]
 offset_left = 48.0
@@ -28,16 +36,16 @@ offset_top = 21.0
 offset_right = 1293.0
 offset_bottom = 226.0
 scale = Vector2(1.45923, 1.25021)
-text = "Drone Adventure"
+text = "Chicken Centauri"
 label_settings = SubResource("LabelSettings_827c2")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="play" type="Button" parent="."]
-offset_left = 801.0
-offset_top = 464.0
-offset_right = 1094.0
-offset_bottom = 666.0
+offset_left = 782.0
+offset_top = 421.0
+offset_right = 1075.0
+offset_bottom = 623.0
 scale = Vector2(1.22893, 0.845984)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 142
@@ -51,10 +59,10 @@ texture = ExtResource("3_6ql65")
 metadata/_edit_use_anchors_ = true
 
 [node name="quit" type="Button" parent="."]
-offset_left = 846.0
-offset_top = 650.0
-offset_right = 983.0
-offset_bottom = 700.0
+offset_left = 827.0
+offset_top = 607.0
+offset_right = 964.0
+offset_bottom = 657.0
 scale = Vector2(1.90032, 1.72781)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
@@ -62,10 +70,10 @@ text = "Quit"
 metadata/_edit_use_anchors_ = true
 
 [node name="help" type="Button" parent="."]
-offset_left = 1383.0
-offset_top = 951.0
-offset_right = 1520.0
-offset_bottom = 1001.0
+offset_left = 1617.0
+offset_top = 956.0
+offset_right = 1754.0
+offset_bottom = 1006.0
 scale = Vector2(1.91612, 1.71842)
 theme = SubResource("Theme_3einr")
 theme_override_font_sizes/font_size = 30
@@ -76,6 +84,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1778.25, 969.5)
 scale = Vector2(0.434236, 0.399554)
 texture = ExtResource("6_1q1py")

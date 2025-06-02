@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cddy7yf3m042s"]
+
+[ext_resource type="PackedScene" uid="uid://ddw72n31yki2" path="res://import/EyeLand.glb" id="1_pf5fv"]
+
+[sub_resource type="Gradient" id="Gradient_dt23c"]
+colors = PackedColorArray(0.662452, 0.662452, 0.662452, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nj8vk"]
+noise_type = 2
+frequency = 0.0691
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kxfiq"]
+width = 1000
+height = 1000
+color_ramp = SubResource("Gradient_dt23c")
+noise = SubResource("FastNoiseLite_nj8vk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_573we"]
+albedo_color = Color(1, 1, 0.509804, 1)
+albedo_texture = SubResource("NoiseTexture2D_kxfiq")
+
+[sub_resource type="SphereMesh" id="SphereMesh_dst1k"]
+radius = 101.0
+height = 202.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jv5iq"]
+cull_mode = 1
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.992157, 0.654902, 0.54902, 1)
+
+[node name="EyeLand2" instance=ExtResource("1_pf5fv")]
+
+[node name="EyeLand" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_573we")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012722, 0.217819)
+cast_shadow = 0
+mesh = SubResource("SphereMesh_dst1k")
+surface_material_override/0 = SubResource("StandardMaterial3D_jv5iq")

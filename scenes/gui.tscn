@@ -136,7 +136,7 @@ offset_left = 1590.0
 offset_top = 933.0
 offset_right = 1886.0
 offset_bottom = 997.0
-text = "Sun Angle: 900www"
+text = "Sun Angle: 900"
 label_settings = SubResource("LabelSettings_i7c73")
 horizontal_alignment = 2
 

@@ -160,8 +160,8 @@ func _handle_defeated_state(delta: float) -> void:
 	elif time_in_state >= 5.0:
 		bad_mesh.queue_free()  # Remove just the evil spirit mesh
 		current_state = BossState.INTRO  # This prevents further state updates
-		level_loader.load_level('end')
-
+		#TODO get soemthing for killing the bad guy
+		
 func _play_intro_animation() -> void:
 	# Start with a small scale and grow
 	bad_mesh.scale = Vector3.ZERO

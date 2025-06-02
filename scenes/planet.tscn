@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b2gd4upmu816b"]
+[gd_scene load_steps=13 format=3 uid="uid://b2gd4upmu816b"]
 
 [ext_resource type="Shader" uid="uid://d1ye0bp20oylf" path="res://native/eyeball_world3.gdshader" id="1_cktii"]
 [ext_resource type="PackedScene" uid="uid://cketbrkvdkpji" path="res://level_bits/item_spawn_point.tscn" id="2_h8ms6"]
@@ -438,33 +438,10 @@ graph_data = {
 
 [sub_resource type="VoxelMesherTransvoxel" id="VoxelMesherTransvoxel_mdr6i"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_h8ms6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ggt7d"]
-noise = SubResource("FastNoiseLite_h8ms6")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0k1rn"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_48b8c"]
-noise = SubResource("FastNoiseLite_0k1rn")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_3s4jt"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1wmcx"]
-noise = SubResource("FastNoiseLite_3s4jt")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_m5dqw"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8dfcq"]
-noise = SubResource("FastNoiseLite_m5dqw")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_a873f"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h8ms6"]
 render_priority = 0
 shader = ExtResource("1_cktii")
-shader_parameter/u_noise = SubResource("NoiseTexture2D_48b8c")
-shader_parameter/u_noise2 = SubResource("NoiseTexture2D_1wmcx")
-shader_parameter/u_noise3 = SubResource("NoiseTexture2D_8dfcq")
-shader_parameter/u_grass_texture = SubResource("NoiseTexture2D_ggt7d")
+shader_parameter/u_world_scale = 1.0
 shader_parameter/noise_scale = 20.0
 shader_parameter/color_noise_scale = 50.0
 shader_parameter/sand_detail_scale = 100.0
@@ -489,7 +466,7 @@ generator = SubResource("VoxelGeneratorGraph_n66pw")
 mesher = SubResource("VoxelMesherTransvoxel_mdr6i")
 view_distance = 1024
 lod_count = 8
-material = SubResource("ShaderMaterial_a873f")
+material = SubResource("ShaderMaterial_h8ms6")
 
 [node name="VoxelInstancer" type="VoxelInstancer" parent="VoxelLodTerrain"]
 library = SubResource("VoxelInstanceLibrary_48b8c")

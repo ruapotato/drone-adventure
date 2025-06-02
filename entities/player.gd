@@ -58,7 +58,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @export_group("Inactive Following Chicken")
 @export var player_follow_max_speed: float = 5
-@export var player_follow_catch_up_bonus_speed: float = 9.0
+@export var player_follow_catch_up_bonus_speed: float = 90.0
 @export var player_follow_min_dist_for_boost: float = 3.0
 @export var player_follow_max_dist_for_boost: float = 18.0
 @export var player_follow_trail_distance: float = 2.0 # How far behind the chicken to target

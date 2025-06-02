@@ -1,0 +1,82 @@
+[gd_scene load_steps=13 format=3 uid="uid://cxl0rvna1mujo"]
+
+[ext_resource type="Shader" uid="uid://c7e3fxomgn000" path="res://native/eyeball_world3_map.gdshader" id="1_7cahm"]
+[ext_resource type="Script" uid="uid://dv4f0wbxm7kbd" path="res://scripts/map.gd" id="1_gliaa"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gliaa"]
+
+[sub_resource type="Environment" id="Environment_50d0n"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 2.9
+
+[sub_resource type="World3D" id="World3D_a7kdn"]
+environment = SubResource("Environment_50d0n")
+camera_attributes = SubResource("CameraAttributesPractical_gliaa")
+
+[sub_resource type="SphereMesh" id="SphereMesh_gliaa"]
+radius = 2500.0
+height = 39.275
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gliaa"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_50d0n"]
+noise = SubResource("FastNoiseLite_gliaa")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_a7kdn"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_204ow"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50d0n"]
+render_priority = 0
+shader = ExtResource("1_7cahm")
+shader_parameter/u_world_scale = 0.15
+shader_parameter/u_noise = SubResource("NoiseTexture2D_50d0n")
+shader_parameter/u_noise2 = SubResource("NoiseTexture2D_a7kdn")
+shader_parameter/u_noise3 = SubResource("NoiseTexture2D_204ow")
+shader_parameter/noise_scale = 20.0
+shader_parameter/color_noise_scale = 0.009
+shader_parameter/sand_detail_scale = 100.0
+shader_parameter/grass_scale = 8.0
+shader_parameter/texture_blend = 0.6
+
+[sub_resource type="LabelSettings" id="LabelSettings_gliaa"]
+font_size = 41
+font_color = Color(0, 0, 0, 1)
+outline_size = 25
+
+[node name="map" type="Node2D"]
+script = ExtResource("1_gliaa")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+own_world_3d = true
+world_3d = SubResource("World3D_a7kdn")
+handle_input_locally = false
+size_2d_override_stretch = true
+render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+mesh = SubResource("SphereMesh_gliaa")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("ShaderMaterial_50d0n")
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3309.01, 0)
+current = true
+
+[node name="player_pos" type="Node2D" parent="."]
+
+[node name="icon" type="Label" parent="player_pos"]
+offset_left = -2.0
+offset_top = -4.0
+offset_right = 20.0
+offset_bottom = 53.0
+scale = Vector2(0.171455, 0.152107)
+text = "^"
+label_settings = SubResource("LabelSettings_gliaa")

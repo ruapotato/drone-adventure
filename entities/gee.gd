@@ -10,14 +10,14 @@ extends RigidBody3D
 
 # --- Control & Physics Parameters ---
 @export var mouse_sensitivity = 0.004
-@export var fart_power = 50.0
-@export var yaw_speed = 3.0
+@export var fart_power = 250
+@export var yaw_speed = 1.5
 @export var max_rot_pitch = PI / 2.0
 @export var max_rot_roll = PI / 2.0
 
 var active = false
 var gass = 100.0
-var gass_use_rate = 10.0
+var gass_use_rate = 5.0
 
 # --- Crap Parameters ---
 var crap_every = 0.05
@@ -52,9 +52,6 @@ func _input(event):
 
 func _physics_process(delta):
 	if not active:
-		# Slow down and stop when inactive
-		linear_velocity = linear_velocity.lerp(Vector3.ZERO, delta * 2.0)
-		angular_velocity = Vector3.ZERO
 		fart_sound.volume_db = lerp(fart_sound.volume_db, -80.0, delta * 5)
 		return
 	
@@ -127,7 +124,6 @@ func _on_fart_sound_finished():
 
 func _on_play_as_body_entered(body: Node3D) -> void:
 	if body == chicken and gass != 0:
-		return
 		print("Play as Gee")
 		
 		play_as_mesh.visible = false

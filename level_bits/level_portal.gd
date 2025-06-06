@@ -24,4 +24,6 @@ func find_root(node=get_tree().root) -> Node:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if player in get_overlapping_bodies():
-		level_loader.load_level(name.split("_")[-1])
+		print("Not a system in use anymore... Yo:")
+		print(name)
+		#level_loader.load_level(name.split("_")[-1])

@@ -37,6 +37,7 @@ ssr_depth_tolerance = 26.91
 ssao_enabled = true
 ssao_power = 9.74704
 glow_enabled = true
+volumetric_fog_enabled = true
 volumetric_fog_density = 0.002
 volumetric_fog_emission = Color(0.629675, 0.629675, 0.629675, 1)
 volumetric_fog_emission_energy = 0.0
@@ -121,7 +122,7 @@ mesh = SubResource("PlaneMesh_qxhjv")
 shape = SubResource("ConcavePolygonShape3D_2rcxr")
 
 [node name="Gee" parent="." instance=ExtResource("19_pm21f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0659, 64.7628, 236.564)
+transform = Transform3D(-0.786827, 0, -0.617173, 0, 1, 0, 0.617173, 0, -0.786827, 6.36131, 95.7683, 311.207)
 
 [node name="planet" parent="." instance=ExtResource("9_7r4gi")]
 

@@ -177,7 +177,7 @@ func play_as_gee():
 	gee.linear_velocity = vol 
 	
 	chicken.active = false
-	(gee.get_node("Camera3D") as Camera3D).current = true
+	gee.camera.current = true
 
 
 func play_as_chicken():
@@ -186,12 +186,12 @@ func play_as_chicken():
 	var vol = gee.linear_velocity
 	
 	gee.active = false
-	(gee.get_node("Camera3D") as Camera3D).current = false
+	gee.camera.current = false
 
 	chicken.global_position = loc
 	chicken.global_rotation = rot
 	chicken.linear_velocity = vol 
-	(chicken.get_node("Camera3D") as Camera3D).current = true 
+	chicken.camera.current = true 
 	chicken.active = true
 	
 

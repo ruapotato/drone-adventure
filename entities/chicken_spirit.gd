@@ -29,7 +29,7 @@ extends RigidBody3D
 # --- Export Variables for Tuning ---
 #==============================================================================
 @export var mouse_sensitivity = 0.003
-@export var active_flight_speed = 10.0 # Max speed when player is actively controlling
+@export var active_flight_speed = 1000.0 # 10 Starting
 @export var acceleration_force = 60.0 # Old force-based system
 @export var brake_strength = 5.0      # Old force-based system
 @export var pitch_limit_up = deg_to_rad(85.0)

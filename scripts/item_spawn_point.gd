@@ -1,11 +1,11 @@
 extends Node3D
 
 # Biome parameters
-const OUTER_RIM_START: float = 9000.0
-const OUTER_RIM_BLEND: float = 8900.0
-const OCEAN_RING_START: float = 2450.0
-const OCEAN_RING_BLEND: float = 2200.0
-const DESERT_CENTER_RADIUS: float = 1800.0
+const OUTER_RIM_START: float = 16000.0
+const OUTER_RIM_BLEND: float = 15000.0
+const OCEAN_RING_START: float = 6000.0
+const OCEAN_RING_BLEND: float = 5573.0
+const DESERT_CENTER_RADIUS: float = 5673.0
 const DESERT_BLEND: float = 100.0
 const VOLCANO_RADIUS: float = 120.0
 const VOLCANO_BLEND: float = 100.0

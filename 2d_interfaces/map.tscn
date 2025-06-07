@@ -18,7 +18,7 @@ camera_attributes = SubResource("CameraAttributesPractical_gliaa")
 size = Vector3(200, 200, 78.895)
 
 [sub_resource type="SphereMesh" id="SphereMesh_gliaa"]
-radius = 2500.0
+radius = 7000.0
 height = 39.275
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gliaa"]
@@ -87,5 +87,5 @@ skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_50d0n")
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3309, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4013, 0)
 current = true

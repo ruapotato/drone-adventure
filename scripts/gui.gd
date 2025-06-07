@@ -124,7 +124,7 @@ func update_added_label(delta):
 
 func update_fps():
 	if stats_node.visible:
-		fps_label.text = str(Engine.get_frames_per_second())
+		fps_label.text = str(Engine.get_frames_per_second()) + " " + str(chicken.global_position)
 
 
 func update_boss_bar():

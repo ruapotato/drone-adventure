@@ -11,7 +11,7 @@ var player: Node3D # Reference to the main player node in the game world
 var chicken: Node3D # Reference to a chicken node in the game world (example)
 
 # Zoom limits for the minimap camera's Y position
-var camera_max_zoom_out: float = 3309.0 # Camera further away (zoomed out)
+var camera_max_zoom_out: float = 4013.0 # Camera further away (zoomed out)
 var camera_min_zoom_in: float = 50.0    # Camera closer (zoomed in) - adjusted from 1 for practical use
 
 # Icon scale properties
@@ -107,5 +107,11 @@ func update_map_pos() -> void:
 	player_onmap_pos.scale = Vector3(new_scale_factor,1,new_scale_factor)
 
 
+func update_map_cam():
+	minimap_camera.global_position.x = player_onmap_pos.global_position.x
+	minimap_camera.global_position.z = player_onmap_pos.global_position.z
+
+
 func _process(delta: float) -> void:
+	update_map_cam()
 	update_map_pos()

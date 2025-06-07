@@ -16,18 +16,19 @@ varying vec3 v_pos; // This will be the world position of the vertex, affected b
 varying vec3 v_view_dir;
 
 // Biome parameters (these remain defined for the 1:1 world scale)
-const float outer_rim_start = 9000.0;
-const float outer_rim_blend = 8900.0; // Note: This might be a typo and intended to be a width like other blends.
+const float outer_rim_start = 16000.0;
+const float outer_rim_blend = 15000.0; // Note: This might be a typo and intended to be a width like other blends.
                                      // If so, it should be added to outer_rim_start for the second smoothstep edge.
                                      // Current code uses it as the blend region's start.
-const float ocean_ring_start = 2450.0;
-const float ocean_ring_blend = 2200.0;
-const float desert_center_radius = 1800.0;
+const float ocean_ring_start = 6000.0;
+const float ocean_ring_blend = 5573.0;
+const float desert_center_radius = 5673.0;
 const float desert_blend = 100.0;
 const float volcano_radius = 120.0;
 const float volcano_blend = 100.0;
 const float volcano_core_radius = 5.0;
 const float volcano_height = 1.0; // This is a relative height within the volcano model
+
 
 // Base colors with variations
 const vec3 VOLCANO_DARK = vec3(0.05, 0.02, 0.01);
